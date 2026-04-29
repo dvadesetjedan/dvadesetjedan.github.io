@@ -23,6 +23,8 @@ import {
   EVENTS_URL,
   YOUTUBE_URL,
   aboutCards,
+  articleCategories,
+  articleCurations,
   audienceItems,
   beginnerHighlights,
   beginnerTopics,
@@ -123,10 +125,25 @@ function articleHref(slug: string) {
   return `#/clanci/${slug}`
 }
 
-function findArticleByPhrase(entries: ArticleEntry[], phrase: string) {
-  const normalized = phrase.toLowerCase()
-  return entries.find((article) =>
-    article.title.toLowerCase().includes(normalized),
+function getArticleCuration(slug: string) {
+  return articleCurations.find((item) => item.slug === slug)
+}
+
+function sortArticles(entries: ArticleEntry[]) {
+  return [...entries].sort((left, right) => {
+    const leftOrder = getArticleCuration(left.slug)?.order ?? 999
+    const rightOrder = getArticleCuration(right.slug)?.order ?? 999
+
+    if (leftOrder !== rightOrder) return leftOrder - rightOrder
+    return new Date(right.date).getTime() - new Date(left.date).getTime()
+  })
+}
+
+function isTranslatedArticle(article: ArticleEntry) {
+  return (
+    article.categories.some(
+      (category) => category.toLowerCase() === "prevodi",
+    ) || article.tags.some((tag) => tag.toLowerCase() === "prevod")
   )
 }
 
@@ -861,6 +878,8 @@ function ArticlesLoadingView() {
 }
 
 function ArticlesView({ articles }: { articles: ArticleEntry[] }) {
+  const orderedArticles = sortArticles(articles)
+
   return (
     <>
       <main className="mx-auto max-w-7xl px-5 pb-16 pt-12 sm:px-8 sm:pt-16">
@@ -872,9 +891,31 @@ function ArticlesView({ articles }: { articles: ArticleEntry[] }) {
             Pisani signal za ljude koji žele razumjeti Bitcoin mirnije i dublje.
           </h1>
           <p className="mt-6 max-w-3xl text-lg leading-8 text-muted-foreground">
-            Pisani dio projekta raste postupno. Ovdje je početni redoslijed tema
-            i pregled smjerova koji čine jezgru DvadesetJedan sadržaja.
+            Pisani dio projekta raste postupno. Ovdje su početni redoslijed
+            čitanja, tematski putokazi i arhiva tekstova koji čine jezgru
+            DvadesetJedan sadržaja.
           </p>
+        </section>
+
+        <section className="mt-10">
+          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+            {articleCategories.map((category) => (
+              <div
+                key={category.title}
+                className="rounded-[1.5rem] border border-border/80 bg-card px-5 py-5"
+              >
+                <p className="text-xs uppercase tracking-[0.22em] text-primary">
+                  {category.label}
+                </p>
+                <h2 className="mt-3 text-2xl font-semibold tracking-[-0.03em] text-foreground">
+                  {category.title}
+                </h2>
+                <p className="mt-3 text-sm leading-7 text-muted-foreground">
+                  {category.text}
+                </p>
+              </div>
+            ))}
+          </div>
         </section>
 
         <section className="mt-10 grid gap-6 lg:grid-cols-[22rem_minmax(0,1fr)]">
@@ -887,22 +928,36 @@ function ArticlesView({ articles }: { articles: ArticleEntry[] }) {
             </h2>
             <ol className="mt-5 space-y-3 text-sm leading-7 text-muted-foreground">
               {readingOrder.map((item, index) => {
-                const article = findArticleByPhrase(articles, item)
+                const article = articles.find(
+                  (entry) => entry.slug === item.slug,
+                )
 
                 return (
-                  <li key={item} className="flex gap-3">
+                  <li key={item.slug} className="flex gap-3">
                     <span className="inline-flex size-6 shrink-0 items-center justify-center rounded-full bg-primary/12 text-xs font-semibold text-primary">
                       {index + 1}
                     </span>
                     {article ? (
-                      <a
-                        className="hover:text-foreground"
-                        href={articleHref(article.slug)}
-                      >
-                        {item}
-                      </a>
+                      <div>
+                        <a
+                          className="font-medium text-foreground hover:text-primary"
+                          href={articleHref(article.slug)}
+                        >
+                          {item.label}
+                        </a>
+                        <p className="mt-1 text-xs leading-6 text-muted-foreground">
+                          {item.description}
+                        </p>
+                      </div>
                     ) : (
-                      <span>{item}</span>
+                      <div>
+                        <span className="font-medium text-foreground">
+                          {item.label}
+                        </span>
+                        <p className="mt-1 text-xs leading-6 text-muted-foreground">
+                          {item.description}
+                        </p>
+                      </div>
                     )}
                   </li>
                 )
@@ -927,46 +982,57 @@ function ArticlesView({ articles }: { articles: ArticleEntry[] }) {
           </div>
 
           <div className="grid gap-4 md:grid-cols-2">
-            {articles.map((article) => (
-              <div
-                key={article.slug}
-                className="rounded-[1.6rem] border border-border/80 bg-card px-5 py-6"
-              >
-                <div className="flex flex-wrap gap-2">
-                  {article.categories.map((category) => (
-                    <span
-                      key={`${article.slug}-${category}`}
-                      className="inline-flex rounded-full bg-primary/12 px-3 py-1 text-xs font-medium text-primary"
-                    >
-                      {category}
-                    </span>
-                  ))}
-                </div>
-                <h3 className="mt-4 text-2xl font-semibold tracking-[-0.04em] text-foreground">
-                  <a
-                    className="hover:text-primary"
-                    href={articleHref(article.slug)}
-                  >
-                    {article.title}
-                  </a>
-                </h3>
-                <p className="mt-2 text-xs uppercase tracking-[0.18em] text-muted-foreground">
-                  {formatArticleDate(article.date)}
-                </p>
+            {orderedArticles.map((article) => {
+              const curation = getArticleCuration(article.slug)
+
+              return (
                 <div
-                  className="mt-3 text-sm leading-7 text-muted-foreground"
-                  dangerouslySetInnerHTML={{ __html: article.excerpt }}
-                />
-                <div className="mt-5">
-                  <ActionButton
-                    href={articleHref(article.slug)}
-                    icon={<ArrowUpRight className="size-4" />}
-                  >
-                    Čitaj članak
-                  </ActionButton>
+                  key={article.slug}
+                  className="rounded-[1.6rem] border border-border/80 bg-card px-5 py-6"
+                >
+                  <div className="flex flex-wrap gap-2">
+                    {curation ? (
+                      <span className="inline-flex rounded-full bg-primary/12 px-3 py-1 text-xs font-medium text-primary">
+                        {curation.topic}
+                      </span>
+                    ) : null}
+                    {isTranslatedArticle(article) ? (
+                      <span className="inline-flex rounded-full bg-foreground/6 px-3 py-1 text-xs font-medium text-muted-foreground">
+                        Prijevod
+                      </span>
+                    ) : null}
+                  </div>
+                  <h3 className="mt-4 text-2xl font-semibold tracking-[-0.04em] text-foreground">
+                    <a
+                      className="hover:text-primary"
+                      href={articleHref(article.slug)}
+                    >
+                      {article.title}
+                    </a>
+                  </h3>
+                  <p className="mt-2 text-xs uppercase tracking-[0.18em] text-muted-foreground">
+                    {formatArticleDate(article.date)}
+                  </p>
+                  <div
+                    className="mt-3 text-sm leading-7 text-muted-foreground"
+                    dangerouslySetInnerHTML={{ __html: article.excerpt }}
+                  />
+                  {curation ? (
+                    <p className="mt-3 text-sm leading-7 text-foreground/80">
+                      {curation.blurb}
+                    </p>
+                  ) : null}
+                  <div className="mt-5">
+                    <ActionButton
+                      href={articleHref(article.slug)}
+                      icon={<ArrowUpRight className="size-4" />}
+                    >
+                      Čitaj članak
+                    </ActionButton>
+                  </div>
                 </div>
-              </div>
-            ))}
+              )
+            })}
           </div>
         </section>
       </main>
@@ -1015,6 +1081,8 @@ function ArticleNotFoundView() {
 }
 
 function ArticleDetailView({ article }: { article: ArticleEntry }) {
+  const curation = getArticleCuration(article.slug)
+
   return (
     <>
       <main className="mx-auto max-w-5xl px-5 pb-16 pt-12 sm:px-8 sm:pt-16">
@@ -1033,19 +1101,26 @@ function ArticleDetailView({ article }: { article: ArticleEntry }) {
 
           <div className="px-6 py-8 sm:px-10 sm:py-12">
             <div className="flex flex-wrap gap-2">
-              {article.categories.map((category) => (
-                <span
-                  key={`${article.slug}-${category}`}
-                  className="inline-flex rounded-full bg-primary/12 px-3 py-1 text-xs font-medium text-primary"
-                >
-                  {category}
+              {curation ? (
+                <span className="inline-flex rounded-full bg-primary/12 px-3 py-1 text-xs font-medium text-primary">
+                  {curation.topic}
                 </span>
-              ))}
+              ) : null}
+              {isTranslatedArticle(article) ? (
+                <span className="inline-flex rounded-full bg-foreground/6 px-3 py-1 text-xs font-medium text-muted-foreground">
+                  Prijevod
+                </span>
+              ) : null}
             </div>
 
             <h1 className="mt-5 text-5xl font-semibold tracking-[-0.05em] text-foreground sm:text-6xl">
               {article.title}
             </h1>
+            {curation ? (
+              <p className="mt-4 max-w-3xl text-base leading-8 text-foreground/80">
+                {curation.blurb}
+              </p>
+            ) : null}
 
             <div className="mt-6 flex flex-wrap gap-x-6 gap-y-3 text-sm text-muted-foreground">
               <span>{formatArticleDate(article.date)}</span>
@@ -1071,12 +1146,9 @@ function ArticleDetailView({ article }: { article: ArticleEntry }) {
 }
 
 function BeginnersView({ articles }: { articles: ArticleEntry[] }) {
-  const beginnerLinks = [
-    findArticleByPhrase(articles, "što je bitcoin"),
-    findArticleByPhrase(articles, "niko ne može zabraniti bitcoin"),
-    findArticleByPhrase(articles, "bitcoin privatnost"),
-    findArticleByPhrase(articles, "zašto je važna decentralizacija"),
-  ].filter(Boolean) as ArticleEntry[]
+  const beginnerLinks = readingOrder
+    .map((item) => articles.find((article) => article.slug === item.slug))
+    .filter(Boolean) as ArticleEntry[]
 
   return (
     <>

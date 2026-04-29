@@ -232,11 +232,109 @@ export const articleCategories = [
 ] as const
 
 export const readingOrder = [
-  "Što je Bitcoin?",
-  "Zašto Bitcoin nije crypto?",
-  "Kako čuvati bitcoin?",
-  "Privatnost i odgovornost",
-  "Dugoročno razmišljanje",
+  {
+    slug: "niko-ne-moze-zabraniti-bitcoin",
+    label: "Što Bitcoin omogućuje",
+    description:
+      "Dobar prvi tekst za razumijevanje zašto je Bitcoin otvorena monetarna mreža.",
+  },
+  {
+    slug: "zasto-je-vazna-decentralizacija-bitcoina",
+    label: "Zašto je decentralizacija važna",
+    description:
+      "Nastavak koji objašnjava zašto je decentralizacija temelj Bitcoin vrijednosti.",
+  },
+  {
+    slug: "bitcoin-privatnost-najbolje-prakse",
+    label: "Privatnost i odgovornost",
+    description:
+      "Praktičan korak za ljude koji žele razumjeti sigurnost, tragove i zaštitu privatnosti.",
+  },
+  {
+    slug: "bitcoin-je-vrijeme",
+    label: "Dugoročno razmišljanje",
+    description:
+      "Tekst koji povezuje Bitcoin s vremenom, štednjom i promjenom horizonta razmišljanja.",
+  },
+  {
+    slug: "never-stop-learning",
+    label: "Učenje kao dio puta",
+    description:
+      "Podsjetnik da se razumijevanje Bitcoina gradi polako, kroz stalno učenje i provjeru pretpostavki.",
+  },
+] as const
+
+export const articleCurations = [
+  {
+    slug: "niko-ne-moze-zabraniti-bitcoin",
+    order: 1,
+    topic: "Osnove",
+    blurb:
+      "Početni tekst o otvorenom pristupu, otpornosti i osnovnoj prirodi Bitcoin mreže.",
+  },
+  {
+    slug: "zasto-je-vazna-decentralizacija-bitcoina",
+    order: 2,
+    topic: "Svojstva",
+    blurb:
+      "Zašto decentralizacija nije tehnički ukras, nego temelj vrijednosti i otpornosti.",
+  },
+  {
+    slug: "bitcoin-privatnost-najbolje-prakse",
+    order: 3,
+    topic: "Privatnost",
+    blurb:
+      "Najvažnije prakse za privatnost, sigurnost i odgovoran odnos prema vlastitim tragovima.",
+  },
+  {
+    slug: "bitcoin-je-vrijeme",
+    order: 4,
+    topic: "Vrijeme",
+    blurb:
+      "Bitcoin kao alat za drukčiji odnos prema vremenu, štednji i dugoročnom planiranju.",
+  },
+  {
+    slug: "never-stop-learning",
+    order: 5,
+    topic: "Učenje",
+    blurb:
+      "Zašto je mirno, trajno učenje važnije od brzih zaključaka i površnog samopouzdanja.",
+  },
+  {
+    slug: "btc-scenarij-uspjeha",
+    order: 6,
+    topic: "Perspektiva",
+    blurb:
+      "Tekst za širi pogled na to kako bi uspjeh Bitcoina mogao izgledati kroz vrijeme.",
+  },
+  {
+    slug: "bitcoin-daje-ti-krila",
+    order: 7,
+    topic: "Kultura",
+    blurb:
+      "Bitcoin kao prostor slobode, inicijative i drukčijeg načina gledanja na osobnu odgovornost.",
+  },
+  {
+    slug: "latin-american-bitcoin-perspective",
+    order: 8,
+    topic: "Regionalni kontekst",
+    blurb:
+      "Pogled iz Latinske Amerike koji pomaže prevesti globalni Bitcoin signal u lokalne okolnosti.",
+  },
+  {
+    slug: "borba-protiv-monetarnog-kolonijalizma-pomocu-otvorenog-koda",
+    order: 9,
+    topic: "Sloboda",
+    blurb:
+      "Bitcoin kao alat monetarne emancipacije i otpora kolonijalnim obrascima kontrole.",
+  },
+  {
+    slug: "selo-i-mocnik",
+    order: 10,
+    topic: "Društvo",
+    blurb:
+      "Dublji reportažni pogled na napetost između lokalne nade, države i stvarnih posljedica usvajanja.",
+  },
 ] as const
 
 export const openCommunityItems = [
