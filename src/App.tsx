@@ -14,6 +14,7 @@ import {
 
 import { Separator } from "@/components/ui/separator"
 import { events, type EventEntry } from "@/data/events"
+import type { ArticleEntry } from "@/data/articles"
 import {
   ARTICLES_URL,
   BEGINNERS_URL,
@@ -22,7 +23,6 @@ import {
   EVENTS_URL,
   YOUTUBE_URL,
   aboutCards,
-  articleCategories,
   audienceItems,
   beginnerHighlights,
   beginnerTopics,
@@ -46,6 +46,7 @@ import {
 type Route =
   | { type: "home" }
   | { type: "articles" }
+  | { type: "article"; slug: string }
   | { type: "beginners" }
   | { type: "contribute" }
   | { type: "events" }
@@ -56,6 +57,9 @@ function parseRoute(hash: string): Route {
 
   if (cleanHash === "/" || cleanHash === "") return { type: "home" }
   if (cleanHash === "/clanci") return { type: "articles" }
+  if (cleanHash.startsWith("/clanci/")) {
+    return { type: "article", slug: cleanHash.replace("/clanci/", "") }
+  }
   if (cleanHash === "/pocetnici") return { type: "beginners" }
   if (cleanHash === "/doprinesi") return { type: "contribute" }
   if (cleanHash === "/dogadaji" || cleanHash === "/eventi") {
@@ -107,6 +111,25 @@ function formatEventTimeRange(event: EventEntry) {
   return `${formatter.format(start)} – ${formatter.format(end)}`
 }
 
+function formatArticleDate(value: string) {
+  return new Intl.DateTimeFormat("hr-HR", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  }).format(new Date(value))
+}
+
+function articleHref(slug: string) {
+  return `#/clanci/${slug}`
+}
+
+function findArticleByPhrase(entries: ArticleEntry[], phrase: string) {
+  const normalized = phrase.toLowerCase()
+  return entries.find((article) =>
+    article.title.toLowerCase().includes(normalized),
+  )
+}
+
 function makeGoogleCalendarUrl(event: EventEntry) {
   const toCalendarStamp = (value: string) =>
     new Date(value).toISOString().replace(/[-:]/g, "").replace(".000", "")
@@ -153,6 +176,9 @@ function App() {
   const [route, setRoute] = useState<Route>(() =>
     parseRoute(window.location.hash),
   )
+  const [articleEntries, setArticleEntries] = useState<ArticleEntry[] | null>(
+    null,
+  )
 
   useEffect(() => {
     const onHashChange = () => {
@@ -164,10 +190,38 @@ function App() {
     return () => window.removeEventListener("hashchange", onHashChange)
   }, [])
 
+  useEffect(() => {
+    if (
+      route.type !== "articles" &&
+      route.type !== "article" &&
+      route.type !== "beginners"
+    ) {
+      return
+    }
+
+    if (articleEntries) return
+
+    import("@/data/articles").then((module) => {
+      setArticleEntries(module.articles)
+    })
+  }, [articleEntries, route.type])
+
   const selectedEvent = useMemo(() => {
     if (route.type !== "event") return undefined
     return events.find((event) => event.slug === route.slug)
   }, [route])
+
+  const selectedArticle = useMemo(() => {
+    if (!articleEntries || route.type !== "article") return undefined
+    return articleEntries.find((article) => article.slug === route.slug)
+  }, [articleEntries, route])
+
+  const articleRoutesReady =
+    route.type !== "articles" &&
+    route.type !== "article" &&
+    route.type !== "beginners"
+      ? true
+      : Boolean(articleEntries)
 
   return (
     <div className="min-h-screen">
@@ -230,13 +284,24 @@ function App() {
       </header>
 
       {route.type === "home" && <HomeView />}
-      {route.type === "articles" && <ArticlesView />}
-      {route.type === "beginners" && <BeginnersView />}
+      {route.type === "articles" && articleEntries && (
+        <ArticlesView articles={articleEntries} />
+      )}
+      {route.type === "article" && selectedArticle && (
+        <ArticleDetailView article={selectedArticle} />
+      )}
+      {route.type === "article" && articleEntries && !selectedArticle && (
+        <ArticleNotFoundView />
+      )}
+      {route.type === "beginners" && articleEntries && (
+        <BeginnersView articles={articleEntries} />
+      )}
       {route.type === "contribute" && <ContributeView />}
       {route.type === "events" && <EventsView />}
       {route.type === "event" && selectedEvent && (
         <EventDetailView event={selectedEvent} />
       )}
+      {!articleRoutesReady ? <ArticlesLoadingView /> : null}
     </div>
   )
 }
@@ -773,7 +838,29 @@ function ActionButton({
   )
 }
 
-function ArticlesView() {
+function ArticlesLoadingView() {
+  return (
+    <>
+      <main className="mx-auto max-w-7xl px-5 pb-16 pt-12 sm:px-8 sm:pt-16">
+        <section className="rounded-[2.2rem] border border-border/80 bg-card/70 px-6 py-8 sm:px-10 sm:py-12">
+          <p className="text-sm uppercase tracking-[0.24em] text-muted-foreground">
+            Članci
+          </p>
+          <h1 className="mt-4 max-w-4xl text-5xl font-semibold tracking-[-0.05em] text-foreground sm:text-7xl">
+            Učitavamo pisani signal.
+          </h1>
+          <p className="mt-6 max-w-3xl text-lg leading-8 text-muted-foreground">
+            Pripremamo statične članke i početni redoslijed za čitanje.
+          </p>
+        </section>
+      </main>
+
+      <Footer />
+    </>
+  )
+}
+
+function ArticlesView({ articles }: { articles: ArticleEntry[] }) {
   return (
     <>
       <main className="mx-auto max-w-7xl px-5 pb-16 pt-12 sm:px-8 sm:pt-16">
@@ -799,14 +886,27 @@ function ArticlesView() {
               Čitaj ovim redom
             </h2>
             <ol className="mt-5 space-y-3 text-sm leading-7 text-muted-foreground">
-              {readingOrder.map((item, index) => (
-                <li key={item} className="flex gap-3">
-                  <span className="inline-flex size-6 shrink-0 items-center justify-center rounded-full bg-primary/12 text-xs font-semibold text-primary">
-                    {index + 1}
-                  </span>
-                  <span>{item}</span>
-                </li>
-              ))}
+              {readingOrder.map((item, index) => {
+                const article = findArticleByPhrase(articles, item)
+
+                return (
+                  <li key={item} className="flex gap-3">
+                    <span className="inline-flex size-6 shrink-0 items-center justify-center rounded-full bg-primary/12 text-xs font-semibold text-primary">
+                      {index + 1}
+                    </span>
+                    {article ? (
+                      <a
+                        className="hover:text-foreground"
+                        href={articleHref(article.slug)}
+                      >
+                        {item}
+                      </a>
+                    ) : (
+                      <span>{item}</span>
+                    )}
+                  </li>
+                )
+              })}
             </ol>
             <div className="mt-6 flex flex-wrap gap-3">
               <ActionButton
@@ -827,20 +927,44 @@ function ArticlesView() {
           </div>
 
           <div className="grid gap-4 md:grid-cols-2">
-            {articleCategories.map((item) => (
+            {articles.map((article) => (
               <div
-                key={item.title}
+                key={article.slug}
                 className="rounded-[1.6rem] border border-border/80 bg-card px-5 py-6"
               >
-                <span className="inline-flex rounded-full bg-primary/12 px-3 py-1 text-xs font-medium text-primary">
-                  {item.label}
-                </span>
+                <div className="flex flex-wrap gap-2">
+                  {article.categories.map((category) => (
+                    <span
+                      key={`${article.slug}-${category}`}
+                      className="inline-flex rounded-full bg-primary/12 px-3 py-1 text-xs font-medium text-primary"
+                    >
+                      {category}
+                    </span>
+                  ))}
+                </div>
                 <h3 className="mt-4 text-2xl font-semibold tracking-[-0.04em] text-foreground">
-                  {item.title}
+                  <a
+                    className="hover:text-primary"
+                    href={articleHref(article.slug)}
+                  >
+                    {article.title}
+                  </a>
                 </h3>
-                <p className="mt-3 text-sm leading-7 text-muted-foreground">
-                  {item.text}
+                <p className="mt-2 text-xs uppercase tracking-[0.18em] text-muted-foreground">
+                  {formatArticleDate(article.date)}
                 </p>
+                <div
+                  className="mt-3 text-sm leading-7 text-muted-foreground"
+                  dangerouslySetInnerHTML={{ __html: article.excerpt }}
+                />
+                <div className="mt-5">
+                  <ActionButton
+                    href={articleHref(article.slug)}
+                    icon={<ArrowUpRight className="size-4" />}
+                  >
+                    Čitaj članak
+                  </ActionButton>
+                </div>
               </div>
             ))}
           </div>
@@ -852,7 +976,108 @@ function ArticlesView() {
   )
 }
 
-function BeginnersView() {
+function ArticleNotFoundView() {
+  return (
+    <>
+      <main className="mx-auto max-w-5xl px-5 pb-16 pt-12 sm:px-8 sm:pt-16">
+        <section className="rounded-[2.2rem] border border-border/80 bg-card/70 px-6 py-8 sm:px-10 sm:py-12">
+          <p className="text-sm uppercase tracking-[0.24em] text-muted-foreground">
+            Članci
+          </p>
+          <h1 className="mt-4 text-4xl font-semibold tracking-[-0.05em] text-foreground sm:text-6xl">
+            Ovaj članak nije pronađen.
+          </h1>
+          <p className="mt-6 max-w-3xl text-lg leading-8 text-muted-foreground">
+            Vrati se na pregled svih članaka ili otvori početni put za
+            preporučeni redoslijed čitanja.
+          </p>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <ActionButton
+              href={ARTICLES_URL}
+              icon={<ArrowUpRight className="size-4" />}
+              primary
+            >
+              Natrag na članke
+            </ActionButton>
+            <ActionButton
+              href={BEGINNERS_URL}
+              icon={<ArrowUpRight className="size-4" />}
+            >
+              Početni put
+            </ActionButton>
+          </div>
+        </section>
+      </main>
+
+      <Footer />
+    </>
+  )
+}
+
+function ArticleDetailView({ article }: { article: ArticleEntry }) {
+  return (
+    <>
+      <main className="mx-auto max-w-5xl px-5 pb-16 pt-12 sm:px-8 sm:pt-16">
+        <div className="mb-6 text-sm text-muted-foreground">
+          <a href={ARTICLES_URL}>← Natrag na članke</a>
+        </div>
+
+        <article className="overflow-hidden rounded-[2.2rem] border border-border/80 bg-card/75">
+          {article.image ? (
+            <img
+              alt={article.title}
+              className="h-[20rem] w-full object-cover sm:h-[24rem]"
+              src={article.image}
+            />
+          ) : null}
+
+          <div className="px-6 py-8 sm:px-10 sm:py-12">
+            <div className="flex flex-wrap gap-2">
+              {article.categories.map((category) => (
+                <span
+                  key={`${article.slug}-${category}`}
+                  className="inline-flex rounded-full bg-primary/12 px-3 py-1 text-xs font-medium text-primary"
+                >
+                  {category}
+                </span>
+              ))}
+            </div>
+
+            <h1 className="mt-5 text-5xl font-semibold tracking-[-0.05em] text-foreground sm:text-6xl">
+              {article.title}
+            </h1>
+
+            <div className="mt-6 flex flex-wrap gap-x-6 gap-y-3 text-sm text-muted-foreground">
+              <span>{formatArticleDate(article.date)}</span>
+              {article.tags.length ? (
+                <span>{article.tags.join(" • ")}</span>
+              ) : null}
+              <a href={article.originalUrl} rel="noreferrer" target="_blank">
+                Originalna objava
+              </a>
+            </div>
+
+            <div
+              className="wp-content mt-10 text-base leading-8 text-foreground"
+              dangerouslySetInnerHTML={{ __html: article.contentHtml }}
+            />
+          </div>
+        </article>
+      </main>
+
+      <Footer />
+    </>
+  )
+}
+
+function BeginnersView({ articles }: { articles: ArticleEntry[] }) {
+  const beginnerLinks = [
+    findArticleByPhrase(articles, "što je bitcoin"),
+    findArticleByPhrase(articles, "niko ne može zabraniti bitcoin"),
+    findArticleByPhrase(articles, "bitcoin privatnost"),
+    findArticleByPhrase(articles, "zašto je važna decentralizacija"),
+  ].filter(Boolean) as ArticleEntry[]
+
   return (
     <>
       <main className="mx-auto max-w-7xl px-5 pb-16 pt-12 sm:px-8 sm:pt-16">
@@ -881,7 +1106,11 @@ function BeginnersView() {
             </ul>
             <div className="mt-6 flex flex-wrap gap-3">
               <ActionButton
-                href={ARTICLES_URL}
+                href={
+                  beginnerLinks[0]
+                    ? articleHref(beginnerLinks[0].slug)
+                    : ARTICLES_URL
+                }
                 icon={<ArrowUpRight className="size-4" />}
                 primary
               >
@@ -913,6 +1142,36 @@ function BeginnersView() {
             ))}
           </div>
         </section>
+
+        {beginnerLinks.length ? (
+          <section className="mt-10">
+            <div className="rounded-[1.8rem] border border-border/80 bg-card px-6 py-6">
+              <h2 className="text-3xl font-semibold tracking-[-0.04em] text-foreground">
+                Preporučeni prvi tekstovi
+              </h2>
+              <div className="mt-6 grid gap-4 md:grid-cols-2">
+                {beginnerLinks.map((article) => (
+                  <a
+                    key={article.slug}
+                    className="rounded-[1.4rem] border border-border/70 bg-background/70 px-5 py-5 hover:border-primary/40"
+                    href={articleHref(article.slug)}
+                  >
+                    <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
+                      {formatArticleDate(article.date)}
+                    </p>
+                    <h3 className="mt-3 text-xl font-semibold tracking-[-0.03em] text-foreground">
+                      {article.title}
+                    </h3>
+                    <div
+                      className="mt-3 text-sm leading-7 text-muted-foreground"
+                      dangerouslySetInnerHTML={{ __html: article.excerpt }}
+                    />
+                  </a>
+                ))}
+              </div>
+            </div>
+          </section>
+        ) : null}
       </main>
 
       <Footer />
