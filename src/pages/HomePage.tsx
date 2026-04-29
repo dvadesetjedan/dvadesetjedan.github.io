@@ -1,29 +1,28 @@
-import type { ReactNode } from "react"
-
 import { ArrowUpRight, PlayCircle, Send, ShieldCheck } from "lucide-react"
 
 import { ActionButton } from "@/components/ActionButton"
+import { ActionCardGrid } from "@/components/ActionCardGrid"
+import { BulletedPanel } from "@/components/BulletedPanel"
+import { CardGrid } from "@/components/CardGrid"
 import { EventsIcon, TelegramIcon } from "@/components/Icons"
+import { InlineLink } from "@/components/InlineLink"
 import { Layout } from "@/components/Layout"
 import { Section } from "@/components/Section"
 import {
+  ABOUT_URL,
   ARTICLES_URL,
   BEGINNERS_URL,
+  CONTRIBUTE_URL,
   EVENTS_URL,
+  FAQ_URL,
   LIVESTREAM_URL,
-  aboutCards,
-  audienceItems,
+  TOPICS_URL,
   beginnerHighlights,
   beginnerTopics,
-  conceptCards,
-  faqItems,
   heroContent,
   involvementCards,
   media,
-  notItems,
   openCommunityItems,
-  principles,
-  startSteps,
   topics,
   trustItems,
 } from "@/data/site"
@@ -135,56 +134,32 @@ export function HomePage() {
         </Section>
 
         <Section
-          id="o-projektu"
-          title="Dio otvorenog twentyone koncepta"
-          intro="TwentyOne.World nastao je kao otvoreni nacrt za lokalne Bitcoin zajednice: stvoriti javan digitalni signal, govoriti lokalnim jezikom, okupiti otvorenu skupinu ljudi i ostati dosljedan. DvadesetJedan je regionalni izraz te ideje za ljude koji govore i razumiju srodne jezike našeg prostora."
+          title="O projektu"
+          intro="DvadesetJedan je regionalni Bitcoin-only signal na našem jeziku: mjesto za članke, livestream, događaje i zajednicu ljudi koji žele razumjeti Bitcoin mirnije i dublje."
         >
-          <CardGrid items={conceptCards} />
-          <div className="mt-6">
+          <div className="rounded-[1.6rem] border border-border/80 bg-card px-6 py-6">
+            <p className="text-base leading-8 text-foreground">
+              Projekt je dio otvorenog TwentyOne.World koncepta i gradi javan
+              prostor za lokalni jezik, regionalni kontekst i globalno povezanu
+              Bitcoin zajednicu.
+            </p>
+          </div>
+          <div className="mt-6 flex flex-wrap gap-3">
+            <ActionButton
+              href={ABOUT_URL}
+              icon={<ArrowUpRight className="size-4" />}
+              primary
+            >
+              Saznaj više
+            </ActionButton>
             <ActionButton
               href={media.twentyOneUrl}
               icon={<ArrowUpRight className="size-4" />}
               external
             >
-              Pogledaj TwentyOne.World
+              TwentyOne.World
             </ActionButton>
           </div>
-        </Section>
-
-        <Section
-          title="Zašto DvadesetJedan postoji?"
-          intro="Većina ljudi prvi put čuje za Bitcoin kroz cijenu, medijske naslove, cikluse rasta i pada ili površne rasprave o kriptovalutama. Takav ulaz često stvara više buke nego razumijevanja."
-          introTwo="DvadesetJedan postoji kako bi se Bitcoin promatrao mirnije i dublje: kroz pitanje što je novac, zašto je štednja važna, kako inflacija mijenja društvo, zašto je osobna odgovornost važna i kako se dugoročno razmišljanje razlikuje od kratkoročne špekulacije."
-        >
-          <div className="rounded-[1.6rem] border border-border/80 bg-card px-6 py-6">
-            <p className="text-lg leading-8 text-foreground">
-              Problem nije samo u tome da ljudi ne znaju dovoljno o Bitcoinu.
-              Problem je u tome što o novcu često nikada nisu imali priliku
-              razmišljati iz prvih načela.
-            </p>
-          </div>
-        </Section>
-
-        <Section title="Što je DvadesetJedan?">
-          <CardGrid items={aboutCards} />
-        </Section>
-
-        <Section
-          title="Za koga je DvadesetJedan?"
-          intro="DvadesetJedan je namijenjen ljudima iz regije koji žele ozbiljnije razumjeti Bitcoin, bez potrebe da odmah prihvate gotove zaključke ili sudjeluju u buci tržišta."
-        >
-          <BulletedPanel items={audienceItems} />
-        </Section>
-
-        <Section
-          title="Što DvadesetJedan nije?"
-          intro="Jasne granice su važne jer se Bitcoin često miješa s potpuno drukčijim pojavama. DvadesetJedan nije prostor za kratkoročnu špekulaciju, trgovanje ni obećanja prinosa."
-        >
-          <BulletedPanel items={notItems} />
-          <p className="mt-6 text-base leading-8 text-foreground">
-            Cilj nije reći ljudima što da misle, nego pomoći im da bolje
-            razumiju Bitcoin.
-          </p>
         </Section>
 
         <Section title="Novi si u Bitcoinu?">
@@ -231,12 +206,23 @@ export function HomePage() {
           </div>
         </Section>
 
-        <Section id="teme" title="Teme koje obrađujemo">
-          <CardGrid items={topics} />
+        <Section
+          title="Teme koje obrađujemo"
+          intro="Novac, sigurnost, štednja, samostalno skrbništvo, regionalni kontekst i dugoročno razmišljanje čine jezgru DvadesetJedan sadržaja."
+        >
+          <CardGrid items={topics.slice(0, 6)} />
+          <div className="mt-6">
+            <ActionButton
+              href={TOPICS_URL}
+              icon={<ArrowUpRight className="size-4" />}
+              primary
+            >
+              Pogledaj sve teme
+            </ActionButton>
+          </div>
         </Section>
 
         <Section
-          id="emisije"
           title="Emisije i razgovori"
           intro="Redovito objavljujemo razgovore i prijenose uživo o Bitcoinu, novcu, društvu, poduzetništvu i dugoročnom razmišljanju. To je naš javni signal: sadržaj koji se može pronaći, dijeliti i pratiti kroz vrijeme."
         >
@@ -250,7 +236,6 @@ export function HomePage() {
         </Section>
 
         <Section
-          id="ukljucite-se"
           title="Otvorena zajednica"
           intro="Twentyone koncept naglašava da se zajednice ne grade samo kroz sadržaj, nego i kroz otvoren prostor u kojem se ljudi mogu povezati. DvadesetJedan treba biti mjesto za pitanja, suradnju, prijevode, razgovore, nove ideje i projekte koji nastaju iz zajednice."
         >
@@ -263,49 +248,34 @@ export function HomePage() {
             >
               Uključite se
             </ActionButton>
+            <ActionButton
+              href={CONTRIBUTE_URL}
+              icon={<ArrowUpRight className="size-4" />}
+            >
+              Doprinesi
+            </ActionButton>
           </div>
         </Section>
 
-        <Section title="Kako krenuti?">
-          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-            {startSteps.map((step, index) => (
-              <div
-                key={step.title}
-                className="rounded-[1.5rem] border border-border/80 bg-card px-5 py-6"
-              >
-                <p className="text-sm text-muted-foreground">
-                  Korak {index + 1}
-                </p>
-                <h3 className="mt-3 text-xl font-semibold tracking-[-0.03em] text-foreground">
-                  {step.title}
-                </h3>
-                <p className="mt-3 text-sm leading-7 text-muted-foreground">
-                  {step.text}
-                </p>
-              </div>
-            ))}
-          </div>
-        </Section>
-
-        <Section title="Načela DvadesetJedan">
-          <CardGrid items={principles} />
-        </Section>
-
-        <Section id="pitanja" title="Česta pitanja">
-          <div className="space-y-4">
-            {faqItems.map((item) => (
-              <details
-                key={item.question}
-                className="rounded-[1.5rem] border border-border/80 bg-card px-5 py-5"
-              >
-                <summary className="cursor-pointer list-none text-lg font-medium text-foreground">
-                  {item.question}
-                </summary>
-                <p className="mt-4 max-w-3xl text-sm leading-7 text-muted-foreground">
-                  {item.answer}
-                </p>
-              </details>
-            ))}
+        <Section
+          title="Imaš pitanje?"
+          intro="Pogledaj česta pitanja ili postavi pitanje u Telegram grupi."
+        >
+          <div className="flex flex-wrap gap-3">
+            <ActionButton
+              href={FAQ_URL}
+              icon={<ArrowUpRight className="size-4" />}
+              primary
+            >
+              Česta pitanja
+            </ActionButton>
+            <ActionButton
+              href={communityHref()}
+              icon={<Send className="size-4" />}
+              external
+            >
+              Telegram
+            </ActionButton>
           </div>
         </Section>
 
@@ -339,108 +309,5 @@ export function HomePage() {
         </section>
       </main>
     </Layout>
-  )
-}
-
-function CardGrid({
-  items,
-}: {
-  items: ReadonlyArray<{ title: string; text: string }>
-}) {
-  return (
-    <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-      {items.map((item) => (
-        <div
-          key={item.title}
-          className="rounded-[1.5rem] border border-border/80 bg-card px-5 py-6"
-        >
-          <h3 className="text-xl font-semibold tracking-[-0.03em] text-foreground">
-            {item.title}
-          </h3>
-          <p className="mt-3 text-sm leading-7 text-muted-foreground">
-            {item.text}
-          </p>
-        </div>
-      ))}
-    </div>
-  )
-}
-
-function ActionCardGrid({
-  items,
-}: {
-  items: ReadonlyArray<{
-    title: string
-    text: string
-    buttonLabel: string
-    href: string
-    external: boolean
-  }>
-}) {
-  return (
-    <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-      {items.map((item) => (
-        <div
-          key={item.title}
-          className="rounded-[1.6rem] border border-border/80 bg-card px-5 py-6"
-        >
-          <h3 className="text-xl font-semibold tracking-[-0.03em] text-foreground">
-            {item.title}
-          </h3>
-          <p className="mt-3 text-sm leading-7 text-muted-foreground">
-            {item.text}
-          </p>
-          <div className="mt-5">
-            <ActionButton
-              href={item.href}
-              icon={<ArrowUpRight className="size-4" />}
-              external={item.external}
-              primary
-            >
-              {item.buttonLabel}
-            </ActionButton>
-          </div>
-        </div>
-      ))}
-    </div>
-  )
-}
-
-function BulletedPanel({ items }: { items: ReadonlyArray<string> }) {
-  return (
-    <div className="rounded-[1.6rem] border border-border/80 bg-card px-6 py-6">
-      <ul className="grid gap-3 text-base leading-8 text-muted-foreground md:grid-cols-2">
-        {items.map((item) => (
-          <li key={item} className="flex gap-3">
-            <ShieldCheck className="mt-1 size-4 shrink-0 text-primary" />
-            <span>{item}</span>
-          </li>
-        ))}
-      </ul>
-    </div>
-  )
-}
-
-function InlineLink({
-  href,
-  icon,
-  label,
-  external = false,
-}: {
-  href: string
-  icon: ReactNode
-  label: string
-  external?: boolean
-}) {
-  return (
-    <a
-      className="inline-flex items-center gap-2 text-sm font-medium text-foreground hover:text-primary"
-      href={href}
-      rel={external ? "noreferrer" : undefined}
-      target={external ? "_blank" : undefined}
-    >
-      {icon}
-      {label}
-    </a>
   )
 }

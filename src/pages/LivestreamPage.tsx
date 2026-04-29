@@ -78,8 +78,8 @@ export function LivestreamPage() {
                 </h2>
                 <p className="mt-4 text-sm leading-7 text-muted-foreground">
                   Trenutno nema ručno dodanih epizoda u arhivi. Najnovije
-                  livestreamove možeš pronaći na YouTube kanalu DvadesetJedan,
-                  a pitanja i prijedloge tema možeš poslati u Telegram grupi.
+                  livestreamove možeš pronaći na YouTube kanalu DvadesetJedan, a
+                  pitanja i prijedloge tema možeš poslati u Telegram grupi.
                 </p>
                 <div className="mt-6 flex flex-wrap gap-3">
                   <ActionButton
@@ -147,8 +147,8 @@ export function LivestreamPage() {
               <div className="mt-4">
                 <p className="max-w-3xl text-sm leading-7 text-muted-foreground">
                   Trenutno nema ručno dodanih epizoda u arhivi. Najnovije
-                  livestreamove možeš pronaći na YouTube kanalu DvadesetJedan,
-                  a pitanja i prijedloge tema možeš poslati u Telegram grupi.
+                  livestreamove možeš pronaći na YouTube kanalu DvadesetJedan, a
+                  pitanja i prijedloge tema možeš poslati u Telegram grupi.
                 </p>
                 <div className="mt-6 flex flex-wrap gap-3">
                   <ActionButton

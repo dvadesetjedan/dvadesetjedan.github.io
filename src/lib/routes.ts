@@ -1,5 +1,8 @@
 export type Route =
   | { type: "home" }
+  | { type: "about" }
+  | { type: "topics" }
+  | { type: "faq" }
   | { type: "livestream" }
   | { type: "articles" }
   | { type: "article"; slug: string }
@@ -13,6 +16,9 @@ export function parseRoute(hash: string): Route {
   const cleanHash = hash.replace(/^#/, "") || "/"
 
   if (cleanHash === "/" || cleanHash === "") return { type: "home" }
+  if (cleanHash === "/o-projektu") return { type: "about" }
+  if (cleanHash === "/teme") return { type: "topics" }
+  if (cleanHash === "/faq") return { type: "faq" }
   if (cleanHash === "/livestream") return { type: "livestream" }
   if (cleanHash === "/clanci") return { type: "articles" }
   if (cleanHash.startsWith("/clanci/")) {

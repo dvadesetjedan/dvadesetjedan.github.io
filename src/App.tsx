@@ -2,16 +2,19 @@ import { useEffect, useMemo, useState } from "react"
 
 import type { ArticleEntry } from "@/data/articles"
 import { events } from "@/data/events"
+import { AboutPage } from "@/pages/AboutPage"
 import { ArticlesPage } from "@/pages/ArticlesPage"
 import { ArticlePage } from "@/pages/ArticlePage"
 import { BeginnersPage } from "@/pages/BeginnersPage"
 import { ContributePage } from "@/pages/ContributePage"
 import { EventsPage } from "@/pages/EventsPage"
 import { EventPage } from "@/pages/EventPage"
+import { FaqPage } from "@/pages/FaqPage"
 import { HomePage } from "@/pages/HomePage"
 import { LivestreamPage } from "@/pages/LivestreamPage"
 import { LoadingPage } from "@/pages/LoadingPage"
 import { NotFoundPage } from "@/pages/NotFoundPage"
+import { TopicsPage } from "@/pages/TopicsPage"
 import { parseRoute, type Route } from "@/lib/routes"
 
 function App() {
@@ -61,6 +64,12 @@ function App() {
   switch (route.type) {
     case "home":
       return <HomePage />
+    case "about":
+      return <AboutPage />
+    case "topics":
+      return <TopicsPage />
+    case "faq":
+      return <FaqPage />
     case "livestream":
       return <LivestreamPage />
     case "articles":

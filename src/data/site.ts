@@ -1,5 +1,8 @@
 export const YOUTUBE_URL = "https://www.youtube.com/@dvadesetjedan/streams"
 export const COMMUNITY_URL = "https://t.me/+ud6ARwb7rX5lZjU0"
+export const ABOUT_URL = "#/o-projektu"
+export const TOPICS_URL = "#/teme"
+export const FAQ_URL = "#/faq"
 export const ARTICLES_URL = "#/clanci"
 export const BEGINNERS_URL = "#/pocetnici"
 export const EVENTS_URL = "#/dogadaji"
@@ -12,13 +15,13 @@ export const BITCOIN_CORE_URL = "https://bitcoincore.org/"
 export const MEMPOOL_URL = "https://mempool.space/"
 
 export const navigation = [
-  { label: "O projektu", href: "#o-projektu" },
+  { label: "O projektu", href: ABOUT_URL },
   { label: "Članci", href: ARTICLES_URL },
-  { label: "Teme", href: "#teme" },
+  { label: "Teme", href: TOPICS_URL },
   { label: "Livestream", href: LIVESTREAM_URL },
   { label: "Događaji", href: EVENTS_URL },
   { label: "Doprinesi", href: CONTRIBUTE_URL },
-  { label: "FAQ", href: "#pitanja" },
+  { label: "FAQ", href: FAQ_URL },
 ] as const
 
 export const media = {
@@ -445,11 +448,61 @@ export const faqItems = [
   {
     question: "Gdje mogu pratiti sadržaj?",
     answer:
-      "Najvažnije mjesto je YouTube kanal DvadesetJedan, a dodatne poveznice i materijali mogu biti dodani na ovu stranicu.",
+      "Sadržaj možeš pratiti kroz Livestream stranicu, YouTube kanal, članke i Telegram grupu. Stranica služi kao središnje mjesto za arhivu i korisne poveznice.",
   },
   {
     question: "Kako se mogu uključiti?",
     answer:
       "Najjednostavnije je pratiti emisije, dijeliti korisne sadržaje, predlagati teme, postavljati pitanja i uključiti se u otvoreni prostor zajednice kroz Telegram grupu.",
+  },
+  {
+    question: "Kako da počnem ako ne znam ništa o Bitcoinu?",
+    answer:
+      "Kreni od stranice Počni ovdje, pročitaj preporučene početne tekstove i postavljaj pitanja u Telegram grupi. Nije potrebno žuriti s kupnjom prije nego što razumiješ osnovne pojmove i sigurnost.",
+  },
+  {
+    question: "Koji je prvi tekst koji trebam pročitati?",
+    answer:
+      "Najbolje je krenuti od početnog redoslijeda čitanja na stranici Članci ili Počni ovdje. Cilj nije proći što više tekstova, nego izgraditi jasnije razumijevanje korak po korak.",
+  },
+  {
+    question: "Trebam li kupiti bitcoin prije nego što razumijem sigurnost?",
+    answer:
+      "Ne moraš. Prije bilo kakve kupnje važno je razumjeti osnove: što je Bitcoin, što znači samostalno skrbništvo, što je seed phrase i koje su najčešće početničke greške.",
+  },
+  {
+    question: "Zašto ne pričate o altcoinima?",
+    answer:
+      "DvadesetJedan je Bitcoin-only projekt. Fokus je na Bitcoinu kao jedinstvenom monetarnom i tehnološkom fenomenu, a ne na tokenima, tradingu ili širem crypto tržištu.",
+  },
+  {
+    question: "Kako mogu predložiti temu za livestream?",
+    answer:
+      "Najjednostavnije je javiti se u Telegram grupi i predložiti temu, pitanje ili gosta. Dobre teme su one koje pomažu ljudima razumjeti Bitcoin, novac, sigurnost, štednju i dugoročno razmišljanje.",
+  },
+  {
+    question: "Kako mogu organizirati meetup u svom gradu?",
+    answer:
+      "Javi se u Telegram grupi, napiši grad i okvirnu ideju druženja. Meetup ne mora biti velik ni formalan; dovoljno je nekoliko ljudi, jasno vrijeme, jednostavna lokacija i Bitcoin-only fokus.",
+  },
+  {
+    question: "Mogu li poslati prijevod ili članak?",
+    answer:
+      "Da. DvadesetJedan raste kroz doprinos zajednice. Možeš predložiti članak, prijevod, ispravak, temu ili tehničku promjenu kroz Telegram grupu ili GitHub repozitorij.",
+  },
+  {
+    question: "Na kojem jeziku mogu pisati?",
+    answer:
+      "Piši na jeziku koji ljudi iz regije mogu prirodno razumjeti. Nije cilj jezična policija, nego jasnoća, ozbiljnost i regionalna razumljivost.",
+  },
+  {
+    question: "Zašto Telegram, a ne samo web stranica?",
+    answer:
+      "Web stranica služi kao javni signal i arhiva, a Telegram kao otvoreni prostor za razgovor, pitanja, koordinaciju i povezivanje ljudi iz zajednice.",
+  },
+  {
+    question: "Kako prijaviti grešku na stranici?",
+    answer:
+      "Grešku možeš prijaviti u Telegram grupi ili otvoriti issue odnosno pull request na GitHub repozitoriju.",
   },
 ] as const
