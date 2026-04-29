@@ -2,7 +2,7 @@ import { ArrowUpRight, PlayCircle, Send } from "lucide-react"
 
 import { ActionButton } from "@/components/ActionButton"
 import { Layout } from "@/components/Layout"
-import { COMMUNITY_URL, YOUTUBE_URL } from "@/data/site"
+import { YOUTUBE_URL } from "@/data/site"
 import { episodes } from "@/data/episodes"
 import { communityHref } from "@/lib/content"
 
@@ -35,7 +35,7 @@ export function LivestreamPage() {
             <ActionButton
               href={communityHref()}
               icon={<Send className="size-4" />}
-              external={Boolean(COMMUNITY_URL)}
+              external
             >
               Postavi pitanje u Telegram grupi
             </ActionButton>
@@ -73,8 +73,26 @@ export function LivestreamPage() {
                 </h2>
                 <p className="mt-4 text-sm leading-7 text-muted-foreground">
                   Trenutno nema ručno dodanih epizoda u arhivi. Najnovije
-                  livestreamove možeš pronaći na YouTube kanalu DvadesetJedan.
+                  livestreamove možeš pronaći na YouTube kanalu DvadesetJedan,
+                  a pitanja i prijedloge tema možeš poslati u Telegram grupi.
                 </p>
+                <div className="mt-6 flex flex-wrap gap-3">
+                  <ActionButton
+                    href={YOUTUBE_URL}
+                    icon={<PlayCircle className="size-4" />}
+                    external={Boolean(YOUTUBE_URL)}
+                    primary
+                  >
+                    Otvori YouTube kanal
+                  </ActionButton>
+                  <ActionButton
+                    href={communityHref()}
+                    icon={<Send className="size-4" />}
+                    external
+                  >
+                    Predloži temu u Telegram grupi
+                  </ActionButton>
+                </div>
               </>
             )}
           </div>
@@ -116,10 +134,30 @@ export function LivestreamPage() {
                 ))}
               </div>
             ) : (
-              <p className="mt-4 max-w-3xl text-sm leading-7 text-muted-foreground">
-                Trenutno nema ručno dodanih epizoda u arhivi. Najnovije
-                livestreamove možeš pronaći na YouTube kanalu DvadesetJedan.
-              </p>
+              <div className="mt-4">
+                <p className="max-w-3xl text-sm leading-7 text-muted-foreground">
+                  Trenutno nema ručno dodanih epizoda u arhivi. Najnovije
+                  livestreamove možeš pronaći na YouTube kanalu DvadesetJedan,
+                  a pitanja i prijedloge tema možeš poslati u Telegram grupi.
+                </p>
+                <div className="mt-6 flex flex-wrap gap-3">
+                  <ActionButton
+                    href={YOUTUBE_URL}
+                    icon={<PlayCircle className="size-4" />}
+                    external={Boolean(YOUTUBE_URL)}
+                    primary
+                  >
+                    Otvori YouTube kanal
+                  </ActionButton>
+                  <ActionButton
+                    href={communityHref()}
+                    icon={<Send className="size-4" />}
+                    external
+                  >
+                    Predloži temu u Telegram grupi
+                  </ActionButton>
+                </div>
+              </div>
             )}
           </div>
         </section>

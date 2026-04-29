@@ -27,7 +27,6 @@ export const media = {
     "https://dvadesetjedan.com/wp-content/uploads/2025/07/BY_-_DJ_logo_crno-2.png",
   heroUrl:
     "https://dvadesetjedan.com/wp-content/uploads/2025/06/DJ_-_YT_background_01.jpg",
-  telegramUrl: "https://t.me/dvadesetjedan21",
   twentyOneUrl: "https://twentyone.world/",
 }
 
