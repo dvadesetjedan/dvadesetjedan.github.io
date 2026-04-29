@@ -1,0 +1,14 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#F4EDE2"/>
+  <rect x="36" y="36" width="1128" height="558" rx="30" fill="#FBF7F0" stroke="#E3D6C3" stroke-width="2"/>
+  <circle cx="1022" cy="150" r="78" fill="#F7931A"/>
+  <circle cx="1022" cy="150" r="60" fill="#FBF7F0" fill-opacity="0.15"/>
+  <text x="1022" y="166" text-anchor="middle" fill="white" font-family="Arial, Helvetica, sans-serif" font-size="62" font-weight="700">21</text>
+  <text x="96" y="220" fill="#121212" font-family="Arial, Helvetica, sans-serif" font-size="96" font-weight="700" letter-spacing="-2">DvadesetJedan</text>
+  <text x="96" y="304" fill="#6E6253" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="600">Regionalni Bitcoin signal</text>
+  <rect x="96" y="352" width="446" height="54" rx="27" fill="#F7931A" fill-opacity="0.12" stroke="#F7931A" stroke-opacity="0.24"/>
+  <text x="128" y="387" fill="#B86C0C" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700">Bitcoin-only zajednica za Balkan</text>
+  <path d="M98 476H474" stroke="#D8C8B2" stroke-width="3" stroke-linecap="round"/>
+  <text x="96" y="516" fill="#4C4339" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="500">Clanci, livestream, događaji i otvorena zajednica</text>
+  <text x="96" y="558" fill="#7D6F60" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="500">Bitcoin. Lokalni jezik. Regionalni kontekst.</text>
+</svg>

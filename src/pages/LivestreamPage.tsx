@@ -4,7 +4,7 @@ import { ActionButton } from "@/components/ActionButton"
 import { Layout } from "@/components/Layout"
 import { YOUTUBE_URL } from "@/data/site"
 import { episodes } from "@/data/episodes"
-import { communityHref } from "@/lib/content"
+import { communityHref, formatEpisodeDate } from "@/lib/content"
 
 export function LivestreamPage() {
   const [latestEpisode, ...archive] = episodes
@@ -52,6 +52,11 @@ export function LivestreamPage() {
                 <h2 className="mt-3 text-3xl font-semibold tracking-[-0.04em] text-foreground">
                   {latestEpisode.title}
                 </h2>
+                {latestEpisode.publishedAt ? (
+                  <p className="mt-3 text-xs uppercase tracking-[0.18em] text-muted-foreground">
+                    {formatEpisodeDate(latestEpisode.publishedAt)}
+                  </p>
+                ) : null}
                 <p className="mt-4 text-sm leading-7 text-muted-foreground">
                   {latestEpisode.summary}
                 </p>
@@ -124,6 +129,11 @@ export function LivestreamPage() {
                     rel="noreferrer"
                     target="_blank"
                   >
+                    {episode.publishedAt ? (
+                      <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
+                        {formatEpisodeDate(episode.publishedAt)}
+                      </p>
+                    ) : null}
                     <h3 className="text-xl font-semibold tracking-[-0.03em] text-foreground">
                       {episode.title}
                     </h3>

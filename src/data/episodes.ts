@@ -3,7 +3,7 @@ export type EpisodeEntry = {
   title: string
   summary: string
   youtubeUrl: string
-  publishedAt: string
+  publishedAt?: string
 }
 
 export const episodes: EpisodeEntry[] = []

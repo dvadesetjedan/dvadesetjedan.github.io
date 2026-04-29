@@ -22,6 +22,14 @@ export function formatArticleDate(value: string) {
   }).format(new Date(value))
 }
 
+export function formatEpisodeDate(value: string) {
+  return new Intl.DateTimeFormat("hr-HR", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  }).format(new Date(value))
+}
+
 export function formatEventDate(event: EventEntry) {
   const start = new Date(event.start)
   const end = new Date(event.end)

@@ -1,5 +1,5 @@
 import { Separator } from "@/components/ui/separator"
-import { CONTACT_EMAIL, footerLinks } from "@/data/site"
+import { footerLinks } from "@/data/site"
 
 export function Footer() {
   const midpoint = Math.ceil(footerLinks.length / 2)
@@ -40,11 +40,6 @@ export function Footer() {
                     </a>
                   </li>
                 ))}
-                {index === 1 && CONTACT_EMAIL ? (
-                  <li id="kontakt">
-                    <a href={`mailto:${CONTACT_EMAIL}`}>Kontakt</a>
-                  </li>
-                ) : null}
               </ul>
             ),
           )}

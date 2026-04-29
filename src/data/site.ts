@@ -1,6 +1,5 @@
 export const YOUTUBE_URL = "https://www.youtube.com/@dvadesetjedan/streams"
 export const COMMUNITY_URL = "https://t.me/+ud6ARwb7rX5lZjU0"
-export const CONTACT_EMAIL = ""
 export const ARTICLES_URL = "#/clanci"
 export const BEGINNERS_URL = "#/pocetnici"
 export const EVENTS_URL = "#/dogadaji"

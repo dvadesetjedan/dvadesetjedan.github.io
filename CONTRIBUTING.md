@@ -11,7 +11,13 @@ npm install
 npm run dev
 ```
 
-Prije slanja promjena provjeri i produkcijski build:
+Prije slanja promjena primarno pokreni:
+
+```bash
+npm run check
+```
+
+Po potrebi možeš pokrenuti i pojedinačne komande:
 
 ```bash
 npm run lint
@@ -55,6 +61,6 @@ npm run format
 ## Otvaranje pull requesta
 
 - Radi manje, jasne promjene koje je lako pregledati.
-- Prije slanja obavezno pokreni `npm run lint` i `npm run build`.
+- Prije slanja obavezno pokreni `npm run check`.
 - Provjeri da nema mrtvih linkova, praznih placeholdera ni izmišljenih podataka.
 - U opisu pull requesta ukratko napiši što si promijenio i koje si komande pokrenuo.
