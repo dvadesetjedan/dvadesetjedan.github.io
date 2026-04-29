@@ -5,6 +5,9 @@ export const ARTICLES_URL = "#/clanci"
 export const BEGINNERS_URL = "#/pocetnici"
 export const EVENTS_URL = "#/dogadaji"
 export const CONTRIBUTE_URL = "#/doprinesi"
+export const LIVESTREAM_URL = "#/livestream"
+export const GITHUB_URL =
+  "https://github.com/dvadesetjedan/dvadesetjedan.github.io"
 export const WHITEPAPER_URL = "https://bitcoin.org/bitcoin.pdf"
 export const BITCOIN_CORE_URL = "https://bitcoincore.org/"
 export const MEMPOOL_URL = "https://mempool.space/"
@@ -13,7 +16,7 @@ export const navigation = [
   { label: "O projektu", href: "#o-projektu" },
   { label: "Članci", href: ARTICLES_URL },
   { label: "Teme", href: "#teme" },
-  { label: "Uživo", href: "#emisije" },
+  { label: "Livestream", href: LIVESTREAM_URL },
   { label: "Događaji", href: EVENTS_URL },
   { label: "Doprinesi", href: CONTRIBUTE_URL },
   { label: "FAQ", href: "#pitanja" },
@@ -53,11 +56,11 @@ export const involvementCards = [
     external: true,
   },
   {
-    title: "Prati tjedni livestream",
+    title: "Prati livestream",
     text: "Komentari Bitcoin vijesti, razgovori, pitanja uživo i regionalna perspektiva.",
-    buttonLabel: "Otvori YouTube",
-    href: YOUTUBE_URL,
-    external: true,
+    buttonLabel: "Otvori livestream",
+    href: LIVESTREAM_URL,
+    external: false,
   },
   {
     title: "Dođi na meetup ili ga predloži",
@@ -403,10 +406,12 @@ export const contributionItems = [
 
 export const footerLinks = [
   { label: "Telegram", href: COMMUNITY_URL, external: true },
-  { label: "YouTube / Livestream", href: YOUTUBE_URL, external: true },
+  { label: "Livestream", href: LIVESTREAM_URL, external: false },
+  { label: "YouTube kanal", href: YOUTUBE_URL, external: true },
   { label: "Članci", href: ARTICLES_URL, external: false },
   { label: "Događaji", href: EVENTS_URL, external: false },
   { label: "Doprinesi", href: CONTRIBUTE_URL, external: false },
+  { label: "GitHub", href: GITHUB_URL, external: true },
   { label: "TwentyOne.World", href: media.twentyOneUrl, external: true },
   { label: "Whitepaper", href: WHITEPAPER_URL, external: true },
   { label: "Bitcoin Core", href: BITCOIN_CORE_URL, external: true },
@@ -447,6 +452,6 @@ export const faqItems = [
   {
     question: "Kako se mogu uključiti?",
     answer:
-      "Najjednostavnije je pratiti emisije, dijeliti korisne sadržaje, predlagati teme, postavljati pitanja i uključiti se u otvoreni prostor zajednice ako je poveznica dostupna.",
+      "Najjednostavnije je pratiti emisije, dijeliti korisne sadržaje, predlagati teme, postavljati pitanja i uključiti se u otvoreni prostor zajednice kroz Telegram grupu.",
   },
 ] as const

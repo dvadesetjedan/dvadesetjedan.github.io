@@ -21,10 +21,10 @@ export const events: EventEntry[] = [
     summary:
       "Pozivamo sve bitcoinere na neformalno druženje na otoku Rabu! Dio ekipe stiže već 13. kolovoza i ostaje do 15. kolovoza – planiramo kupanje, druženje, možda ribolov, kajak... sve ovisi o vremenu i raspoloženju. Pridruži se kad možeš i koliko možeš.",
     description: [
-      "Bitcoin meetup na Rabu – u organizaciji DvadesetJedan i Bull Bitcoin",
-      "Pozivamo sve bitcoinere na neformalno druženje na otoku Rabu! Dio ekipe stiže već 13. kolovoza i ostaje do 15. kolovoza – planiramo kupanje, druženje, možda ribolov, kajak... sve ovisi o vremenu i raspoloženju. Pridruži se kad možeš i koliko možeš.",
-      "Glavni meetup održat će se 14.8. u 19:30 u restoranu Santa Maria, u starom gradu Rabu (adresa: Dinka Dokule 6). Lokaciju i detalje još ćemo potvrditi unutar grupe ukoliko se promijeni.",
-      "Vidimo se na moru, u opuštenoj atmosferi i uz dobar razgovor o Bitcoinu.",
+      "Bitcoin meetup na Rabu u organizaciji DvadesetJedan i Bull Bitcoin.",
+      "Pridruži se DvadesetJedan meetup druženju na Rabu uz opušten razgovor o Bitcoinu, zajednici i lokalnom povezivanju.",
+      "Dio ekipe stiže već 13. kolovoza i ostaje do 15. kolovoza, pa su planirani kupanje, druženje i spontana okupljanja ovisno o vremenu i raspoloženju.",
+      "Glavno druženje održava se 14. kolovoza u 19:30 na lokaciji navedenoj u detaljima događaja. Za eventualne zadnje promjene i koordinaciju prati Telegram grupu događaja.",
       "Telegram grupa za koordinaciju: https://t.me/+EFNsWuB8lV1mODlk",
     ],
     coverImage:
