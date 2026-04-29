@@ -1,12 +1,21 @@
 export const YOUTUBE_URL = "https://www.youtube.com/@dvadesetjedan/streams"
 export const COMMUNITY_URL = "https://t.me/+ud6ARwb7rX5lZjU0"
 export const CONTACT_EMAIL = ""
+export const ARTICLES_URL = "#/clanci"
+export const BEGINNERS_URL = "#/pocetnici"
+export const EVENTS_URL = "#/dogadaji"
+export const CONTRIBUTE_URL = "#/doprinesi"
+export const WHITEPAPER_URL = "https://bitcoin.org/bitcoin.pdf"
+export const BITCOIN_CORE_URL = "https://bitcoincore.org/"
+export const MEMPOOL_URL = "https://mempool.space/"
 
 export const navigation = [
   { label: "O projektu", href: "#o-projektu" },
+  { label: "Članci", href: ARTICLES_URL },
   { label: "Teme", href: "#teme" },
-  { label: "Emisije", href: "#emisije" },
-  { label: "Eventi", href: "#/eventi" },
+  { label: "Uživo", href: "#emisije" },
+  { label: "Događaji", href: EVENTS_URL },
+  { label: "Doprinesi", href: CONTRIBUTE_URL },
   { label: "FAQ", href: "#pitanja" },
 ] as const
 
@@ -20,11 +29,12 @@ export const media = {
 }
 
 export const heroContent = {
-  title: "DvadesetJedan",
-  subtitle: "Regionalni Bitcoin signal. Lokalni jezik. Otvorena zajednica.",
-  body: "DvadesetJedan je regionalni dio otvorenog twentyone koncepta: stvaramo kvalitetan Bitcoin sadržaj na jezicima regije i otvoren prostor za ljude koji žele razumjeti novac, štednju, slobodu, odgovornost i dugoročno razmišljanje bez buke, špekulacija i kripto žargona.",
+  title: "Regionalni Bitcoin signal na našem jeziku",
+  subtitle:
+    "DvadesetJedan okuplja bitcoinere s Balkana kroz livestream, članke, prijevode, Telegram grupu i lokalna okupljanja — bez shitcoina, bez hypea, samo Bitcoin.",
+  body: "DvadesetJedan je regionalna verzija otvorene twentyone.world mreže: gradimo javan Bitcoin signal, otvoren prostor za razgovor i sadržaj na jeziku koji ljudima iz naše regije dolazi prirodno.",
   highlight:
-    "Bitcoin, ne kriptovalute. Lokalni jezik, regionalni kontekst, globalno povezana zajednica.",
+    "Bitcoin-only zajednica za Balkan: lokalni jezik, regionalni kontekst i globalno povezana mreža.",
 }
 
 export const trustItems = [
@@ -32,6 +42,30 @@ export const trustItems = [
   "Jezici regije i lokalni kontekst",
   "Otvorena zajednica",
   "Bitcoin, ne kriptovalute",
+] as const
+
+export const involvementCards = [
+  {
+    title: "Uđi u Telegram grupu",
+    text: "Postavi pitanje, upoznaj druge bitcoinere i prati najave zajednice.",
+    buttonLabel: "Otvori Telegram",
+    href: COMMUNITY_URL,
+    external: true,
+  },
+  {
+    title: "Prati tjedni livestream",
+    text: "Komentari Bitcoin vijesti, razgovori, pitanja uživo i regionalna perspektiva.",
+    buttonLabel: "Otvori YouTube",
+    href: YOUTUBE_URL,
+    external: true,
+  },
+  {
+    title: "Dođi na meetup ili ga predloži",
+    text: "Lokalna druženja rastu iz online zajednice. Predloži okupljanje u svom gradu.",
+    buttonLabel: "Pogledaj događaje",
+    href: EVENTS_URL,
+    external: false,
+  },
 ] as const
 
 export const conceptCards = [
@@ -65,6 +99,31 @@ export const aboutCards = [
   {
     title: "Globalno povezan lokalni projekt",
     text: "DvadesetJedan je regionalni projekt, ali dio je šire mreže ljudi i zajednica koje grade Bitcoin sadržaj na vlastitim jezicima.",
+  },
+] as const
+
+export const beginnerTopics = [
+  "Što je Bitcoin?",
+  "Zašto Bitcoin, a ne crypto?",
+  "Kako kupiti prvi bitcoin?",
+  "Kako čuvati bitcoin?",
+  "Što je seed phrase?",
+  "Što je Lightning?",
+  "Najčešće greške početnika",
+] as const
+
+export const beginnerHighlights = [
+  {
+    title: "Počni od temelja",
+    text: "Kreni od pitanja što je novac, zašto Bitcoin postoji i po čemu se razlikuje od šire crypto priče.",
+  },
+  {
+    title: "Zaštiti sebe od početničkih grešaka",
+    text: "Uči polako: sigurnost, samostalno skrbništvo i odgovornost dolaze prije bilo kakve kupnje.",
+  },
+  {
+    title: "Koristi zajednicu kao filter",
+    text: "Pitaj, provjeri i usporedi iskustva drugih prije nego što doneseš prve praktične odluke.",
   },
 ] as const
 
@@ -139,6 +198,47 @@ export const topics = [
   },
 ] as const
 
+export const articleCategories = [
+  {
+    label: "Osnove",
+    title: "Što je Bitcoin?",
+    text: "Temelji za ljude koji žele razumjeti Bitcoin bez buke i kratkoročnog tržišnog narativa.",
+  },
+  {
+    label: "Bitcoin-only",
+    title: "Zašto Bitcoin nije crypto?",
+    text: "Jasno odvajanje Bitcoina od tokena, hype ciklusa i obećanja brze zarade.",
+  },
+  {
+    label: "Sigurnost",
+    title: "Kako čuvati bitcoin?",
+    text: "Osnove samostalnog skrbništva, seed phrasea i odgovornosti koja dolazi s kontrolom nad vlastitim sredstvima.",
+  },
+  {
+    label: "Praksa",
+    title: "Kako krenuti bez žurbe",
+    text: "Koraci za prve kupnje, prve novčanike i smiren početak bez prečaca i improvizacije.",
+  },
+  {
+    label: "Kontekst",
+    title: "Privatnost i odgovornost",
+    text: "Zašto su privatnost, samostalnost i dugoročno razmišljanje sastavni dio Bitcoin puta.",
+  },
+  {
+    label: "Perspektiva",
+    title: "Bitcoin za Balkan",
+    text: "Lokalni jezik, regionalne okolnosti i razgovori koji prevode globalnu temu u naš svakodnevni kontekst.",
+  },
+] as const
+
+export const readingOrder = [
+  "Što je Bitcoin?",
+  "Zašto Bitcoin nije crypto?",
+  "Kako čuvati bitcoin?",
+  "Privatnost i odgovornost",
+  "Dugoročno razmišljanje",
+] as const
+
 export const openCommunityItems = [
   "pratite emisije i dijelite ih ljudima kojima mogu pomoći",
   "postavljajte pitanja i predlažite teme",
@@ -192,6 +292,27 @@ export const principles = [
     title: "Suradnja",
     text: "Nitko ne treba graditi sam. Najbolje stvari nastaju kada se povežu ljudi koji dijele vrijednosti i različite sposobnosti.",
   },
+] as const
+
+export const contributionItems = [
+  "Predloži ili napiši članak",
+  "Prevedi kvalitetan Bitcoin tekst",
+  "Organiziraj meetup u svom gradu",
+  "Prijavi grešku na stranici",
+  "Pomozi oko dizajna ili koda",
+  "Podijeli korisne resurse za početnike",
+] as const
+
+export const footerLinks = [
+  { label: "Telegram", href: COMMUNITY_URL, external: true },
+  { label: "YouTube / Livestream", href: YOUTUBE_URL, external: true },
+  { label: "Članci", href: ARTICLES_URL, external: false },
+  { label: "Događaji", href: EVENTS_URL, external: false },
+  { label: "Doprinesi", href: CONTRIBUTE_URL, external: false },
+  { label: "TwentyOne.World", href: media.twentyOneUrl, external: true },
+  { label: "Whitepaper", href: WHITEPAPER_URL, external: true },
+  { label: "Bitcoin Core", href: BITCOIN_CORE_URL, external: true },
+  { label: "Mempool", href: MEMPOOL_URL, external: true },
 ] as const
 
 export const faqItems = [

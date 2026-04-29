@@ -15,19 +15,29 @@ import {
 import { Separator } from "@/components/ui/separator"
 import { events, type EventEntry } from "@/data/events"
 import {
+  ARTICLES_URL,
+  BEGINNERS_URL,
   COMMUNITY_URL,
   CONTACT_EMAIL,
+  EVENTS_URL,
   YOUTUBE_URL,
   aboutCards,
+  articleCategories,
   audienceItems,
+  beginnerHighlights,
+  beginnerTopics,
   conceptCards,
+  contributionItems,
   faqItems,
+  footerLinks,
   heroContent,
+  involvementCards,
   media,
   navigation,
   notItems,
   openCommunityItems,
   principles,
+  readingOrder,
   startSteps,
   topics,
   trustItems,
@@ -35,6 +45,9 @@ import {
 
 type Route =
   | { type: "home" }
+  | { type: "articles" }
+  | { type: "beginners" }
+  | { type: "contribute" }
   | { type: "events" }
   | { type: "event"; slug: string }
 
@@ -42,9 +55,17 @@ function parseRoute(hash: string): Route {
   const cleanHash = hash.replace(/^#/, "") || "/"
 
   if (cleanHash === "/" || cleanHash === "") return { type: "home" }
-  if (cleanHash === "/eventi") return { type: "events" }
-  if (cleanHash.startsWith("/eventi/")) {
-    return { type: "event", slug: cleanHash.replace("/eventi/", "") }
+  if (cleanHash === "/clanci") return { type: "articles" }
+  if (cleanHash === "/pocetnici") return { type: "beginners" }
+  if (cleanHash === "/doprinesi") return { type: "contribute" }
+  if (cleanHash === "/dogadaji" || cleanHash === "/eventi") {
+    return { type: "events" }
+  }
+  if (cleanHash.startsWith("/dogadaji/") || cleanHash.startsWith("/eventi/")) {
+    return {
+      type: "event",
+      slug: cleanHash.replace(/^\/(dogadaji|eventi)\//, ""),
+    }
   }
 
   return { type: "home" }
@@ -186,13 +207,32 @@ function App() {
             rel={COMMUNITY_URL ? "noreferrer" : undefined}
             target={COMMUNITY_URL ? "_blank" : undefined}
           >
-            <span className="hidden sm:inline">Uključite se</span>
-            <span className="sm:hidden">Zajednica</span>
+            <span className="hidden sm:inline">Uđi u Telegram</span>
+            <span className="sm:hidden">Telegram</span>
           </a>
+        </div>
+
+        <div className="border-t border-border/60 md:hidden">
+          <nav className="mx-auto flex max-w-7xl gap-5 overflow-x-auto px-5 py-3 text-sm text-muted-foreground sm:px-8">
+            {navigation.map((item) => (
+              <a
+                key={item.label}
+                className="shrink-0 whitespace-nowrap hover:text-foreground"
+                href={item.href}
+                rel={item.href.startsWith("http") ? "noreferrer" : undefined}
+                target={item.href.startsWith("http") ? "_blank" : undefined}
+              >
+                {item.label}
+              </a>
+            ))}
+          </nav>
         </div>
       </header>
 
       {route.type === "home" && <HomeView />}
+      {route.type === "articles" && <ArticlesView />}
+      {route.type === "beginners" && <BeginnersView />}
+      {route.type === "contribute" && <ContributeView />}
       {route.type === "events" && <EventsView />}
       {route.type === "event" && selectedEvent && (
         <EventDetailView event={selectedEvent} />
@@ -249,7 +289,7 @@ function HomeView() {
           <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_26rem] lg:items-center">
             <div className="max-w-4xl">
               <p className="text-sm uppercase tracking-[0.24em] text-muted-foreground">
-                Regionalni Bitcoin projekt u duhu twentyone.world
+                DvadesetJedan / Balkan / TwentyOne.World
               </p>
               <h1 className="mt-5 text-5xl font-semibold tracking-[-0.06em] text-foreground sm:text-7xl">
                 {heroContent.title}
@@ -266,28 +306,34 @@ function HomeView() {
 
               <div className="mt-8 flex flex-wrap gap-3">
                 <ActionButton
-                  href={YOUTUBE_URL || "#emisije"}
-                  icon={<PlayCircle className="size-4" />}
-                  external={Boolean(YOUTUBE_URL)}
-                  primary
-                >
-                  Pogledajte najnovije emisije
-                </ActionButton>
-                <ActionButton
                   href={communityHref()}
                   icon={<Send className="size-4" />}
                   external={Boolean(COMMUNITY_URL)}
+                  primary
                 >
-                  Uključite se u zajednicu
+                  Uđi u Telegram grupu
+                </ActionButton>
+                <ActionButton
+                  href={YOUTUBE_URL || "#emisije"}
+                  icon={<PlayCircle className="size-4" />}
+                  external={Boolean(YOUTUBE_URL)}
+                >
+                  Prati livestream
+                </ActionButton>
+                <ActionButton
+                  href={ARTICLES_URL}
+                  icon={<ArrowUpRight className="size-4" />}
+                >
+                  Čitaj članke
                 </ActionButton>
               </div>
 
               <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-muted-foreground">
                 <InlineLink
-                  href={media.telegramUrl}
+                  href={communityHref()}
                   icon={<TelegramIcon />}
                   label="Telegram"
-                  external
+                  external={Boolean(COMMUNITY_URL)}
                 />
                 <InlineLink
                   href={YOUTUBE_URL || "#emisije"}
@@ -296,9 +342,9 @@ function HomeView() {
                   external={Boolean(YOUTUBE_URL)}
                 />
                 <InlineLink
-                  href="#/eventi"
+                  href={EVENTS_URL}
                   icon={<EventsIcon />}
-                  label="Eventi"
+                  label="Događaji"
                 />
               </div>
             </div>
@@ -326,10 +372,26 @@ function HomeView() {
           </div>
         </section>
 
+        <Section title="Kako se uključiti">
+          <ActionCardGrid items={involvementCards} />
+        </Section>
+
+        <Section
+          title="Zašto Bitcoin-only?"
+          intro="DvadesetJedan nije crypto grupa. Ne promoviramo tokene, altcoine, trading signale ni brzu zaradu. Fokus je Bitcoin: novac, sloboda, odgovornost, tehnologija i dugoročno razmišljanje."
+        >
+          <div className="rounded-[1.6rem] border border-border/80 bg-card px-6 py-6">
+            <p className="text-base leading-8 text-foreground">
+              Naš signal je namjerno uzak: Bitcoin prije hypea, razumijevanje
+              prije šuma i dugoročna perspektiva prije kratkoročnih impulsa.
+            </p>
+          </div>
+        </Section>
+
         <Section
           id="o-projektu"
           title="Dio otvorenog twentyone koncepta"
-          intro="Twentyone.world nastao je kao otvoreni nacrt za lokalne Bitcoin zajednice: stvoriti javan digitalni signal, govoriti lokalnim jezikom, okupiti otvorenu skupinu ljudi i ostati dosljedan. DvadesetJedan je regionalni izraz te ideje za ljude koji govore i razumiju srodne jezike našeg prostora."
+          intro="Twentyone.World nastao je kao otvoreni nacrt za lokalne Bitcoin zajednice: stvoriti javan digitalni signal, govoriti lokalnim jezikom, okupiti otvorenu skupinu ljudi i ostati dosljedan. DvadesetJedan je regionalni izraz te ideje za ljude koji govore i razumiju srodne jezike našeg prostora."
         >
           <CardGrid
             items={conceptCards.map((item) => ({
@@ -337,6 +399,15 @@ function HomeView() {
               text: item.text,
             }))}
           />
+          <div className="mt-6">
+            <ActionButton
+              href={media.twentyOneUrl}
+              icon={<ArrowUpRight className="size-4" />}
+              external
+            >
+              Pogledaj TwentyOne.World
+            </ActionButton>
+          </div>
         </Section>
 
         <Section
@@ -373,6 +444,50 @@ function HomeView() {
             Cilj nije reći ljudima što da misle, nego pomoći im da bolje
             razumiju Bitcoin.
           </p>
+        </Section>
+
+        <Section title="Novi si u Bitcoinu?">
+          <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_22rem]">
+            <div className="rounded-[1.8rem] border border-border/80 bg-card px-6 py-6">
+              <p className="max-w-2xl text-base leading-8 text-muted-foreground">
+                Kreni od osnova i izbjegni najčešće greške. Pripremili smo
+                početni put kroz najvažnije teme.
+              </p>
+              <ul className="mt-6 grid gap-3 text-base leading-8 text-foreground sm:grid-cols-2">
+                {beginnerTopics.map((topic) => (
+                  <li key={topic} className="flex gap-3">
+                    <ShieldCheck className="mt-1 size-4 shrink-0 text-primary" />
+                    <span>{topic}</span>
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-6">
+                <ActionButton
+                  href={BEGINNERS_URL}
+                  icon={<ArrowUpRight className="size-4" />}
+                  primary
+                >
+                  Počni ovdje
+                </ActionButton>
+              </div>
+            </div>
+
+            <div className="grid gap-4">
+              {beginnerHighlights.map((item) => (
+                <div
+                  key={item.title}
+                  className="rounded-[1.5rem] border border-border/80 bg-card px-5 py-5"
+                >
+                  <h3 className="text-xl font-semibold tracking-[-0.03em] text-foreground">
+                    {item.title}
+                  </h3>
+                  <p className="mt-3 text-sm leading-7 text-muted-foreground">
+                    {item.text}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
         </Section>
 
         <Section id="teme" title="Teme koje obrađujemo">
@@ -478,7 +593,7 @@ function HomeView() {
                 icon={<Send className="size-4" />}
                 external={Boolean(COMMUNITY_URL)}
               >
-                Uključite se u zajednicu
+                Uđi u Telegram grupu
               </ActionButton>
             </div>
           </div>
@@ -543,6 +658,46 @@ function CardGrid({
           <p className="mt-3 text-sm leading-7 text-muted-foreground">
             {item.text}
           </p>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+function ActionCardGrid({
+  items,
+}: {
+  items: ReadonlyArray<{
+    title: string
+    text: string
+    buttonLabel: string
+    href: string
+    external: boolean
+  }>
+}) {
+  return (
+    <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+      {items.map((item) => (
+        <div
+          key={item.title}
+          className="rounded-[1.6rem] border border-border/80 bg-card px-5 py-6"
+        >
+          <h3 className="text-xl font-semibold tracking-[-0.03em] text-foreground">
+            {item.title}
+          </h3>
+          <p className="mt-3 text-sm leading-7 text-muted-foreground">
+            {item.text}
+          </p>
+          <div className="mt-5">
+            <ActionButton
+              href={item.href}
+              icon={<ArrowUpRight className="size-4" />}
+              external={item.external}
+              primary
+            >
+              {item.buttonLabel}
+            </ActionButton>
+          </div>
         </div>
       ))}
     </div>
@@ -618,6 +773,192 @@ function ActionButton({
   )
 }
 
+function ArticlesView() {
+  return (
+    <>
+      <main className="mx-auto max-w-7xl px-5 pb-16 pt-12 sm:px-8 sm:pt-16">
+        <section className="rounded-[2.2rem] border border-border/80 bg-card/70 px-6 py-8 sm:px-10 sm:py-12">
+          <p className="text-sm uppercase tracking-[0.24em] text-muted-foreground">
+            Članci
+          </p>
+          <h1 className="mt-4 max-w-4xl text-5xl font-semibold tracking-[-0.05em] text-foreground sm:text-7xl">
+            Pisani signal za ljude koji žele razumjeti Bitcoin mirnije i dublje.
+          </h1>
+          <p className="mt-6 max-w-3xl text-lg leading-8 text-muted-foreground">
+            Pisani dio projekta raste postupno. Ovdje je početni redoslijed tema
+            i pregled smjerova koji čine jezgru DvadesetJedan sadržaja.
+          </p>
+        </section>
+
+        <section className="mt-10 grid gap-6 lg:grid-cols-[22rem_minmax(0,1fr)]">
+          <div className="rounded-[1.8rem] border border-border/80 bg-card px-6 py-6">
+            <p className="text-sm uppercase tracking-[0.22em] text-muted-foreground">
+              Ako si nov u Bitcoinu
+            </p>
+            <h2 className="mt-3 text-3xl font-semibold tracking-[-0.04em] text-foreground">
+              Čitaj ovim redom
+            </h2>
+            <ol className="mt-5 space-y-3 text-sm leading-7 text-muted-foreground">
+              {readingOrder.map((item, index) => (
+                <li key={item} className="flex gap-3">
+                  <span className="inline-flex size-6 shrink-0 items-center justify-center rounded-full bg-primary/12 text-xs font-semibold text-primary">
+                    {index + 1}
+                  </span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ol>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <ActionButton
+                href={BEGINNERS_URL}
+                icon={<ArrowUpRight className="size-4" />}
+                primary
+              >
+                Početni put
+              </ActionButton>
+              <ActionButton
+                href={communityHref()}
+                icon={<Send className="size-4" />}
+                external={Boolean(COMMUNITY_URL)}
+              >
+                Pitaj u Telegramu
+              </ActionButton>
+            </div>
+          </div>
+
+          <div className="grid gap-4 md:grid-cols-2">
+            {articleCategories.map((item) => (
+              <div
+                key={item.title}
+                className="rounded-[1.6rem] border border-border/80 bg-card px-5 py-6"
+              >
+                <span className="inline-flex rounded-full bg-primary/12 px-3 py-1 text-xs font-medium text-primary">
+                  {item.label}
+                </span>
+                <h3 className="mt-4 text-2xl font-semibold tracking-[-0.04em] text-foreground">
+                  {item.title}
+                </h3>
+                <p className="mt-3 text-sm leading-7 text-muted-foreground">
+                  {item.text}
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
+      </main>
+
+      <Footer />
+    </>
+  )
+}
+
+function BeginnersView() {
+  return (
+    <>
+      <main className="mx-auto max-w-7xl px-5 pb-16 pt-12 sm:px-8 sm:pt-16">
+        <section className="rounded-[2.2rem] border border-border/80 bg-card/70 px-6 py-8 sm:px-10 sm:py-12">
+          <p className="text-sm uppercase tracking-[0.24em] text-muted-foreground">
+            Početnici
+          </p>
+          <h1 className="mt-4 max-w-4xl text-5xl font-semibold tracking-[-0.05em] text-foreground sm:text-7xl">
+            Novi si u Bitcoinu?
+          </h1>
+          <p className="mt-6 max-w-3xl text-lg leading-8 text-muted-foreground">
+            Kreni od osnova i izbjegni najčešće greške. Ovo je početni put kroz
+            najvažnije teme za prvi smiren ulazak u Bitcoin.
+          </p>
+        </section>
+
+        <section className="mt-10 grid gap-6 lg:grid-cols-[minmax(0,1fr)_24rem]">
+          <div className="rounded-[1.8rem] border border-border/80 bg-card px-6 py-6">
+            <ul className="grid gap-3 text-base leading-8 text-foreground sm:grid-cols-2">
+              {beginnerTopics.map((topic) => (
+                <li key={topic} className="flex gap-3">
+                  <ShieldCheck className="mt-1 size-4 shrink-0 text-primary" />
+                  <span>{topic}</span>
+                </li>
+              ))}
+            </ul>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <ActionButton
+                href={ARTICLES_URL}
+                icon={<ArrowUpRight className="size-4" />}
+                primary
+              >
+                Počni ovdje
+              </ActionButton>
+              <ActionButton
+                href={YOUTUBE_URL || "#emisije"}
+                icon={<PlayCircle className="size-4" />}
+                external={Boolean(YOUTUBE_URL)}
+              >
+                Prati livestream
+              </ActionButton>
+            </div>
+          </div>
+
+          <div className="grid gap-4">
+            {beginnerHighlights.map((item) => (
+              <div
+                key={item.title}
+                className="rounded-[1.5rem] border border-border/80 bg-card px-5 py-5"
+              >
+                <h3 className="text-xl font-semibold tracking-[-0.03em] text-foreground">
+                  {item.title}
+                </h3>
+                <p className="mt-3 text-sm leading-7 text-muted-foreground">
+                  {item.text}
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
+      </main>
+
+      <Footer />
+    </>
+  )
+}
+
+function ContributeView() {
+  return (
+    <>
+      <main className="mx-auto max-w-7xl px-5 pb-16 pt-12 sm:px-8 sm:pt-16">
+        <section className="rounded-[2.2rem] border border-border/80 bg-card/70 px-6 py-8 sm:px-10 sm:py-12">
+          <p className="text-sm uppercase tracking-[0.24em] text-muted-foreground">
+            Doprinesi
+          </p>
+          <h1 className="mt-4 max-w-4xl text-5xl font-semibold tracking-[-0.05em] text-foreground sm:text-7xl">
+            Doprinesi DvadesetJedan
+          </h1>
+          <p className="mt-6 max-w-3xl text-lg leading-8 text-muted-foreground">
+            DvadesetJedan raste kroz doprinos zajednice. Možeš pomoći pisanjem
+            članaka, prijevodima, organizacijom lokalnih druženja, prijavom
+            grešaka, dizajnom, tehničkim poboljšanjima ili dijeljenjem
+            kvalitetnih Bitcoin resursa.
+          </p>
+        </section>
+
+        <section className="mt-10">
+          <BulletedPanel items={contributionItems} />
+          <div className="mt-6">
+            <ActionButton
+              href={communityHref()}
+              icon={<Send className="size-4" />}
+              external={Boolean(COMMUNITY_URL)}
+              primary
+            >
+              Javi se u Telegram grupi
+            </ActionButton>
+          </div>
+        </section>
+      </main>
+
+      <Footer />
+    </>
+  )
+}
+
 function EventsView() {
   const now = new Date()
   const upcomingEvents = events.filter((event) => new Date(event.end) >= now)
@@ -630,15 +971,15 @@ function EventsView() {
           <div className="grid gap-0 lg:grid-cols-[minmax(0,1fr)_24rem]">
             <div className="px-6 py-8 sm:px-10 sm:py-12">
               <p className="text-sm uppercase tracking-[0.24em] text-muted-foreground">
-                Eventi
+                Događaji
               </p>
               <h1 className="mt-4 max-w-3xl text-5xl font-semibold tracking-[-0.05em] text-foreground sm:text-7xl">
                 Pregled svih meetupova na jednom mjestu.
               </h1>
               <p className="mt-6 max-w-2xl text-lg leading-8 text-muted-foreground">
-                Nadolazeći događaji i arhiva prethodnih susreta, sa zasebnim
+                Nadolazeći događaji i arhiva prethodnih druženja, sa zasebnim
                 pageom za svaki meetup, Meetup prijavom, kartom i kalendar
-                exportom.
+                izvozom.
               </p>
             </div>
 
@@ -653,7 +994,7 @@ function EventsView() {
         <section className="mt-14">
           <div className="flex items-end justify-between gap-4">
             <h2 className="text-4xl font-semibold tracking-[-0.04em] text-foreground">
-              Nadolazeći eventi
+              Nadolazeći događaji
             </h2>
             <p className="text-sm text-muted-foreground">
               {upcomingEvents.length} događaja
@@ -661,8 +1002,31 @@ function EventsView() {
           </div>
 
           {upcomingEvents.length === 0 ? (
-            <div className="mt-6 rounded-[1.8rem] border border-dashed border-border/80 px-6 py-10 text-base leading-8 text-muted-foreground">
-              Trenutno nema nadolazećih događaja.
+            <div className="mt-6 rounded-[1.8rem] border border-dashed border-border/80 bg-card/60 px-6 py-10">
+              <p className="text-base leading-8 text-foreground">
+                Trenutno nema javno najavljenih događaja.
+              </p>
+              <p className="mt-2 max-w-2xl text-sm leading-7 text-muted-foreground">
+                Najave se prvo pojavljuju u Telegram grupi. Ako želiš
+                organizirati meetup u svom gradu, javi se zajednici.
+              </p>
+              <div className="mt-6 flex flex-wrap gap-3">
+                <ActionButton
+                  href={communityHref()}
+                  icon={<Send className="size-4" />}
+                  external={Boolean(COMMUNITY_URL)}
+                  primary
+                >
+                  Uđi u Telegram grupu
+                </ActionButton>
+                <ActionButton
+                  href={communityHref()}
+                  icon={<ArrowUpRight className="size-4" />}
+                  external={Boolean(COMMUNITY_URL)}
+                >
+                  Predloži meetup
+                </ActionButton>
+              </div>
             </div>
           ) : (
             <div className="mt-6 grid gap-5 md:grid-cols-2">
@@ -676,18 +1040,25 @@ function EventsView() {
         <section className="mt-16">
           <div className="flex items-end justify-between gap-4">
             <h2 className="text-4xl font-semibold tracking-[-0.04em] text-foreground">
-              Prošli eventi
+              Arhiva druženja
             </h2>
             <p className="text-sm text-muted-foreground">
               {pastEvents.length} događaja
             </p>
           </div>
 
-          <div className="mt-6 grid gap-5 md:grid-cols-2">
-            {pastEvents.map((event) => (
-              <EventCard key={event.slug} event={event} />
-            ))}
-          </div>
+          {pastEvents.length > 0 ? (
+            <div className="mt-6 grid gap-5 md:grid-cols-2">
+              {pastEvents.map((event) => (
+                <EventCard key={event.slug} event={event} />
+              ))}
+            </div>
+          ) : (
+            <div className="mt-6 rounded-[1.8rem] border border-dashed border-border/80 px-6 py-10 text-base leading-8 text-muted-foreground">
+              Arhiva će se pojaviti ovdje kako budemo dodavali prethodna
+              okupljanja.
+            </div>
+          )}
         </section>
       </main>
 
@@ -700,7 +1071,7 @@ function EventCard({ event }: { event: EventEntry }) {
   return (
     <a
       className="group overflow-hidden rounded-[1.8rem] border border-border/80 bg-card/70 transition-transform hover:-translate-y-0.5"
-      href={`#/eventi/${event.slug}`}
+      href={`${EVENTS_URL}/${event.slug}`}
     >
       <img alt="" className="h-60 w-full object-cover" src={event.coverImage} />
       <div className="space-y-5 px-5 py-5">
@@ -741,7 +1112,7 @@ function EventDetailView({ event }: { event: EventEntry }) {
     <>
       <main className="mx-auto max-w-5xl px-5 pb-16 pt-12 sm:px-8 sm:pt-16">
         <div className="mb-6 text-sm text-muted-foreground">
-          <a href="#/eventi">← Natrag na evente</a>
+          <a href={EVENTS_URL}>← Natrag na događaje</a>
         </div>
 
         <article className="overflow-hidden rounded-[2.2rem] border border-border/80 bg-card/75">
@@ -778,8 +1149,8 @@ function EventDetailView({ event }: { event: EventEntry }) {
                   label="Status"
                   value={
                     new Date(event.end) >= new Date()
-                      ? "Nadolazeći event"
-                      : "Prošli event"
+                      ? "Nadolazeći događaj"
+                      : "Prošli događaj"
                   }
                 />
               </div>
@@ -812,7 +1183,7 @@ function EventDetailView({ event }: { event: EventEntry }) {
                 icon={<CalendarDays className="size-4" />}
                 external
               >
-                Dodaj u Google Calendar
+                Dodaj u Google kalendar
               </ActionButton>
               <a
                 className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-border/80 bg-card px-5 py-3 text-sm font-medium text-foreground"
@@ -856,13 +1227,14 @@ function Footer() {
   return (
     <footer className="mx-auto max-w-7xl px-5 pb-12 sm:px-8">
       <Separator className="mb-8" />
-      <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_20rem]">
+      <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_24rem]">
         <div>
           <h2 className="text-xl font-semibold tracking-[-0.03em] text-foreground">
             DvadesetJedan
           </h2>
           <p className="mt-3 max-w-3xl text-sm leading-7 text-muted-foreground">
-            Regionalni Bitcoin signal. Lokalni jezik. Otvorena zajednica.
+            Regionalni Bitcoin-only signal za Balkan. Lokalni jezik. Otvorena
+            zajednica.
           </p>
           <p className="mt-6 max-w-3xl text-sm leading-7 text-muted-foreground">
             Sadržaj je obrazovne naravi i ne predstavlja financijsko, porezno ni
@@ -870,27 +1242,33 @@ function Footer() {
           </p>
         </div>
 
-        <div>
+        <div className="grid gap-8 sm:grid-cols-2">
           <ul className="space-y-3 text-sm text-muted-foreground">
-            {YOUTUBE_URL ? (
-              <li>
-                <a href={YOUTUBE_URL} rel="noreferrer" target="_blank">
-                  YouTube
+            {footerLinks.slice(0, 5).map((item) => (
+              <li key={item.label}>
+                <a
+                  href={item.href}
+                  rel={item.external ? "noreferrer" : undefined}
+                  target={item.external ? "_blank" : undefined}
+                >
+                  {item.label}
                 </a>
               </li>
-            ) : null}
-            <li>
-              <a href={media.twentyOneUrl} rel="noreferrer" target="_blank">
-                twentyone.world
-              </a>
-            </li>
-            {COMMUNITY_URL ? (
-              <li>
-                <a href={COMMUNITY_URL} rel="noreferrer" target="_blank">
-                  Zajednica
+            ))}
+          </ul>
+
+          <ul className="space-y-3 text-sm text-muted-foreground">
+            {footerLinks.slice(5).map((item) => (
+              <li key={item.label}>
+                <a
+                  href={item.href}
+                  rel={item.external ? "noreferrer" : undefined}
+                  target={item.external ? "_blank" : undefined}
+                >
+                  {item.label}
                 </a>
               </li>
-            ) : null}
+            ))}
             {CONTACT_EMAIL ? (
               <li id="kontakt">
                 <a href={`mailto:${CONTACT_EMAIL}`}>Kontakt</a>
