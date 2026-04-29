@@ -1,0 +1,239 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@import "@fontsource-variable/geist";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --color-background: #fbf6ef;
+  --color-foreground: #1e1811;
+  --color-card: #fffaf4;
+  --color-card-foreground: #1e1811;
+  --color-popover: #fbf6ee;
+  --color-popover-foreground: #1e1811;
+  --color-primary: #f7931a;
+  --color-primary-foreground: #20150a;
+  --color-secondary: #efe5d6;
+  --color-secondary-foreground: #433526;
+  --color-muted: #ebe0d0;
+  --color-muted-foreground: #6d5b4a;
+  --color-accent: #ffd7a6;
+  --color-accent-foreground: #5e3513;
+  --color-destructive: #9f2d22;
+  --color-border: rgba(73, 55, 35, 0.18);
+  --color-input: rgba(73, 55, 35, 0.15);
+  --color-ring: rgba(247, 147, 26, 0.35);
+  --color-chart-1: #f7931a;
+  --color-chart-2: #2a7e78;
+  --color-chart-3: #624527;
+  --color-chart-4: #d7ad6c;
+  --color-chart-5: #453a30;
+  --radius: 1.25rem;
+  --font-sans: "Geist Variable", "Instrument Sans", "Inter", sans-serif;
+  --font-serif: "Geist Variable", "Instrument Sans", "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+  --shadow-soft: 0 16px 40px rgba(52, 35, 14, 0.08);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    @apply font-sans;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+    background-image:
+      radial-gradient(
+        circle at top left,
+        rgba(247, 147, 26, 0.1),
+        transparent 32%
+      ),
+      radial-gradient(
+        circle at 85% 15%,
+        rgba(107, 78, 42, 0.04),
+        transparent 28%
+      ),
+      linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.62),
+        rgba(255, 255, 255, 0.22)
+      );
+    min-height: 100vh;
+  }
+
+  a {
+    @apply transition-colors;
+  }
+
+  button,
+  a {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background;
+  }
+
+  ::selection {
+    background: rgba(247, 147, 26, 0.28);
+  }
+}
+
+#root {
+  min-height: 100vh;
+}
+
+.wp-content h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(1.9rem, 3vw, 2.6rem);
+  letter-spacing: -0.04em;
+  line-height: 1;
+  margin-top: 2.75rem;
+}
+
+.wp-content p,
+.wp-content blockquote,
+.wp-content li {
+  color: var(--foreground);
+}
+
+.wp-content p {
+  margin: 1.1rem 0;
+}
+
+.wp-content a {
+  color: var(--foreground);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.wp-content blockquote {
+  border-left: 1px solid var(--border);
+  margin: 1.5rem 0;
+  padding-left: 1rem;
+}
+
+.wp-content figure {
+  margin: 1.8rem 0;
+}
+
+.wp-content img {
+  border: 1px solid var(--border);
+  border-radius: calc(var(--radius) * 1.2);
+  display: block;
+  width: 100%;
+}
+
+@theme inline {
+  --font-heading: "Geist Variable", "Instrument Sans", "Inter", sans-serif;
+  --font-sans: "Geist Variable", sans-serif;
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+:root {
+  --background: #fbf6ef;
+  --foreground: #1e1811;
+  --card: #fffaf4;
+  --card-foreground: #1e1811;
+  --popover: #fbf6ee;
+  --popover-foreground: #1e1811;
+  --primary: #f7931a;
+  --primary-foreground: #20150a;
+  --secondary: #efe5d6;
+  --secondary-foreground: #433526;
+  --muted: #ebe0d0;
+  --muted-foreground: #6d5b4a;
+  --accent: #ffd7a6;
+  --accent-foreground: #5e3513;
+  --destructive: #9f2d22;
+  --border: rgba(73, 55, 35, 0.18);
+  --input: rgba(73, 55, 35, 0.15);
+  --ring: rgba(247, 147, 26, 0.35);
+  --chart-1: #f7931a;
+  --chart-2: #2a7e78;
+  --chart-3: #624527;
+  --chart-4: #d7ad6c;
+  --chart-5: #453a30;
+  --radius: 1.25rem;
+  --sidebar: #fbf6ee;
+  --sidebar-foreground: #1e1811;
+  --sidebar-primary: #f7931a;
+  --sidebar-primary-foreground: #20150a;
+  --sidebar-accent: #efe5d6;
+  --sidebar-accent-foreground: #433526;
+  --sidebar-border: rgba(73, 55, 35, 0.18);
+  --sidebar-ring: rgba(247, 147, 26, 0.35);
+}
+
+.dark {
+  --background: #19130f;
+  --foreground: #f8ecdc;
+  --card: #241b15;
+  --card-foreground: #f8ecdc;
+  --popover: #241b15;
+  --popover-foreground: #f8ecdc;
+  --primary: #f7a53c;
+  --primary-foreground: #1e1409;
+  --secondary: #34281f;
+  --secondary-foreground: #f1dcc3;
+  --muted: #2d241d;
+  --muted-foreground: #c9b197;
+  --accent: #3f2f21;
+  --accent-foreground: #ffd9a9;
+  --destructive: #c25b4d;
+  --border: rgba(255, 234, 208, 0.12);
+  --input: rgba(255, 234, 208, 0.12);
+  --ring: rgba(247, 165, 60, 0.35);
+  --chart-1: #f7a53c;
+  --chart-2: #73bcb6;
+  --chart-3: #f3d199;
+  --chart-4: #a77840;
+  --chart-5: #fff0dd;
+  --sidebar: #241b15;
+  --sidebar-foreground: #f8ecdc;
+  --sidebar-primary: #f7a53c;
+  --sidebar-primary-foreground: #1e1409;
+  --sidebar-accent: #34281f;
+  --sidebar-accent-foreground: #f1dcc3;
+  --sidebar-border: rgba(255, 234, 208, 0.12);
+  --sidebar-ring: rgba(247, 165, 60, 0.35);
+}
