@@ -3,6 +3,7 @@ import type { EventEntry } from "@/data/events"
 import { ArrowUpRight, Send } from "lucide-react"
 
 import { ActionButton } from "@/components/ActionButton"
+import { BackLink } from "@/components/BackLink"
 import { EventCard } from "@/components/EventCard"
 import { Layout } from "@/components/Layout"
 import { CONTRIBUTE_URL, media } from "@/data/site"
@@ -30,6 +31,7 @@ export function EventsPage({ events }: { events: EventEntry[] }) {
   return (
     <Layout>
       <main className="mx-auto max-w-7xl px-5 pb-16 pt-12 sm:px-8 sm:pt-16">
+        <BackLink href="#/">Početna</BackLink>
         <section className="overflow-hidden rounded-[2.4rem] border border-border/80 bg-card/70">
           <div className="grid gap-0 lg:grid-cols-[minmax(0,1fr)_24rem]">
             <div className="px-6 py-8 sm:px-10 sm:py-12">

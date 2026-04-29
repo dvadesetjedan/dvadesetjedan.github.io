@@ -1,4 +1,5 @@
 import type { ArticleEntry } from "@/data/articles"
+import { BackLink } from "@/components/BackLink"
 import { Layout } from "@/components/Layout"
 import { ARTICLES_URL } from "@/data/site"
 import {
@@ -6,19 +7,21 @@ import {
   getArticleCuration,
   isTranslatedArticle,
 } from "@/lib/content"
+import { stripHtml, truncateText } from "@/lib/text"
 import { usePageMeta } from "@/lib/usePageMeta"
 
 export function ArticlePage({ article }: { article: ArticleEntry }) {
-  usePageMeta(`${article.title} | DvadesetJedan`)
+  usePageMeta(
+    `${article.title} | DvadesetJedan`,
+    truncateText(stripHtml(article.excerpt)),
+  )
 
   const curation = getArticleCuration(article.slug)
 
   return (
     <Layout>
       <main className="mx-auto max-w-5xl px-5 pb-16 pt-12 sm:px-8 sm:pt-16">
-        <div className="mb-6 text-sm text-muted-foreground">
-          <a href={ARTICLES_URL}>← Natrag na članke</a>
-        </div>
+        <BackLink href={ARTICLES_URL}>Svi članci</BackLink>
 
         <article className="overflow-hidden rounded-[2.2rem] border border-border/80 bg-card/75">
           {article.image ? (

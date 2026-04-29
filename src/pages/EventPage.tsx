@@ -2,6 +2,7 @@ import { ArrowUpRight, CalendarDays, Clock3, MapPinned } from "lucide-react"
 
 import type { EventEntry } from "@/data/events"
 import { ActionButton } from "@/components/ActionButton"
+import { BackLink } from "@/components/BackLink"
 import { InfoTile } from "@/components/InfoTile"
 import { Layout } from "@/components/Layout"
 import { EVENTS_URL } from "@/data/site"
@@ -10,20 +11,19 @@ import {
   makeGoogleCalendarUrl,
   makeIcsUrl,
 } from "@/lib/content"
+import { truncateText } from "@/lib/text"
 import { usePageMeta } from "@/lib/usePageMeta"
 
 export function EventPage({ event }: { event: EventEntry }) {
   usePageMeta(
     `${event.title} | DvadesetJedan`,
-    `${event.title}: ${event.venue}, ${event.city}. Bitcoin-only događaj DvadesetJedan zajednice.`,
+    truncateText(event.summary),
   )
 
   return (
     <Layout>
       <main className="mx-auto max-w-5xl px-5 pb-16 pt-12 sm:px-8 sm:pt-16">
-        <div className="mb-6 text-sm text-muted-foreground">
-          <a href={EVENTS_URL}>← Natrag na događaje</a>
-        </div>
+        <BackLink href={EVENTS_URL}>Svi događaji</BackLink>
 
         <article className="overflow-hidden rounded-[2.2rem] border border-border/80 bg-card/75">
           <img

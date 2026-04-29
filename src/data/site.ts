@@ -17,13 +17,11 @@ export const MEMPOOL_URL = "https://mempool.space/"
 
 export const navigation = [
   { label: "O projektu", href: ABOUT_URL },
+  { label: "Počni ovdje", href: BEGINNERS_URL },
   { label: "Članci", href: ARTICLES_URL },
-  { label: "Teme", href: TOPICS_URL },
-  { label: "Resursi", href: RESOURCES_URL },
   { label: "Livestream", href: LIVESTREAM_URL },
   { label: "Događaji", href: EVENTS_URL },
   { label: "Doprinesi", href: CONTRIBUTE_URL },
-  { label: "FAQ", href: FAQ_URL },
 ] as const
 
 export const media = {
@@ -409,12 +407,15 @@ export const contributionItems = [
 
 export const footerLinks = [
   { label: "Telegram", href: COMMUNITY_URL, external: true },
+  { label: "Počni ovdje", href: BEGINNERS_URL, external: false },
+  { label: "Članci", href: ARTICLES_URL, external: false },
+  { label: "Teme", href: TOPICS_URL, external: false },
+  { label: "Resursi", href: RESOURCES_URL, external: false },
   { label: "Livestream", href: LIVESTREAM_URL, external: false },
   { label: "YouTube kanal", href: YOUTUBE_URL, external: true },
-  { label: "Članci", href: ARTICLES_URL, external: false },
-  { label: "Resursi", href: RESOURCES_URL, external: false },
   { label: "Događaji", href: EVENTS_URL, external: false },
   { label: "Doprinesi", href: CONTRIBUTE_URL, external: false },
+  { label: "FAQ", href: FAQ_URL, external: false },
   { label: "GitHub", href: GITHUB_URL, external: true },
   { label: "TwentyOne.World", href: media.twentyOneUrl, external: true },
   { label: "Whitepaper", href: WHITEPAPER_URL, external: true },

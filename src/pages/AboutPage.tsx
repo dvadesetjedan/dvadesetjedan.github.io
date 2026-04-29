@@ -1,6 +1,7 @@
 import { ArrowUpRight, Send } from "lucide-react"
 
 import { ActionButton } from "@/components/ActionButton"
+import { BackLink } from "@/components/BackLink"
 import { CardGrid } from "@/components/CardGrid"
 import { Layout } from "@/components/Layout"
 import { PageHero } from "@/components/PageHero"
@@ -18,6 +19,7 @@ export function AboutPage() {
   return (
     <Layout>
       <main className="mx-auto max-w-7xl px-5 pb-16 pt-12 sm:px-8 sm:pt-16">
+        <BackLink href="#/">Početna</BackLink>
         <PageHero
           eyebrow="O projektu"
           title="O projektu"

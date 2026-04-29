@@ -1,6 +1,7 @@
 import { ArrowUpRight, Send } from "lucide-react"
 
 import { ActionButton } from "@/components/ActionButton"
+import { BackLink } from "@/components/BackLink"
 import { Layout } from "@/components/Layout"
 import { PageHero } from "@/components/PageHero"
 import { BEGINNERS_URL, CONTRIBUTE_URL, faqGroups } from "@/data/site"
@@ -16,6 +17,7 @@ export function FaqPage() {
   return (
     <Layout>
       <main className="mx-auto max-w-7xl px-5 pb-16 pt-12 sm:px-8 sm:pt-16">
+        <BackLink href="#/">Početna</BackLink>
         <PageHero
           eyebrow="FAQ"
           title="Česta pitanja"

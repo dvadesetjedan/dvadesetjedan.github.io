@@ -1,6 +1,7 @@
 import { ArrowUpRight, PlayCircle, Send } from "lucide-react"
 
 import { ActionButton } from "@/components/ActionButton"
+import { BackLink } from "@/components/BackLink"
 import { Layout } from "@/components/Layout"
 import { PageHero } from "@/components/PageHero"
 import { ARTICLES_URL, LIVESTREAM_URL, topics } from "@/data/site"
@@ -51,6 +52,7 @@ export function TopicsPage() {
   return (
     <Layout>
       <main className="mx-auto max-w-7xl px-5 pb-16 pt-12 sm:px-8 sm:pt-16">
+        <BackLink href="#/">Početna</BackLink>
         <PageHero
           eyebrow="Teme"
           title="Teme"
