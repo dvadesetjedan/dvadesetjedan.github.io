@@ -65,7 +65,7 @@ export const resourceGroups: ResourceGroup[] = [
       },
       {
         title: "Članci",
-        text: "Pisani Bitcoin signal i tekstovi za mirnije razumijevanje.",
+        text: "Pisani Bitcoin signal i tekstovi za dublje razumijevanje.",
         href: ARTICLES_URL,
         external: false,
       },

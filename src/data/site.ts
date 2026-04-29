@@ -365,7 +365,7 @@ export const startSteps = [
   },
   {
     title: "Gradite vlastito razumijevanje",
-    text: "DvadesetJedan nije zamjena za vlastito razmišljanje. Cilj je pomoći vam da dođete do jasnijih pitanja, boljih izvora i mirnijeg odnosa prema Bitcoinu.",
+    text: "DvadesetJedan nije zamjena za vlastito razmišljanje. Cilj je pomoći vam da dođete do jasnijih pitanja, boljih izvora i odgovornijeg odnosa prema Bitcoinu.",
   },
 ] as const
 

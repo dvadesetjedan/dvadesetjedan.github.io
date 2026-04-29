@@ -21,7 +21,7 @@ export function ActionButton({
     <a
       className={`inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-medium transition-colors ${
         primary
-          ? "bg-primary text-primary-foreground"
+          ? "bg-primary text-white"
           : "border border-border/80 bg-card text-foreground"
       } ${className}`.trim()}
       href={href}

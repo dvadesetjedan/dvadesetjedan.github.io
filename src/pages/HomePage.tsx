@@ -142,7 +142,7 @@ export function HomePage() {
 
         <Section
           title="O projektu"
-          intro="DvadesetJedan je regionalni Bitcoin-only signal na našem jeziku: mjesto za članke, livestream, događaje i zajednicu ljudi koji žele razumjeti Bitcoin mirnije i dublje."
+          intro="DvadesetJedan je regionalni Bitcoin-only signal na našem jeziku: mjesto za članke, livestream, događaje i zajednicu ljudi koji žele razumjeti Bitcoin dublje i odgovornije."
         >
           <div className="rounded-[1.6rem] border border-border/80 bg-card px-6 py-6">
             <p className="text-base leading-8 text-foreground">
