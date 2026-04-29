@@ -3,6 +3,7 @@ export const COMMUNITY_URL = "https://t.me/+ud6ARwb7rX5lZjU0"
 export const ABOUT_URL = "#/o-projektu"
 export const TOPICS_URL = "#/teme"
 export const FAQ_URL = "#/faq"
+export const RESOURCES_URL = "#/resursi"
 export const ARTICLES_URL = "#/clanci"
 export const BEGINNERS_URL = "#/pocetnici"
 export const EVENTS_URL = "#/dogadaji"
@@ -18,6 +19,7 @@ export const navigation = [
   { label: "O projektu", href: ABOUT_URL },
   { label: "Članci", href: ARTICLES_URL },
   { label: "Teme", href: TOPICS_URL },
+  { label: "Resursi", href: RESOURCES_URL },
   { label: "Livestream", href: LIVESTREAM_URL },
   { label: "Događaji", href: EVENTS_URL },
   { label: "Doprinesi", href: CONTRIBUTE_URL },
@@ -410,6 +412,7 @@ export const footerLinks = [
   { label: "Livestream", href: LIVESTREAM_URL, external: false },
   { label: "YouTube kanal", href: YOUTUBE_URL, external: true },
   { label: "Članci", href: ARTICLES_URL, external: false },
+  { label: "Resursi", href: RESOURCES_URL, external: false },
   { label: "Događaji", href: EVENTS_URL, external: false },
   { label: "Doprinesi", href: CONTRIBUTE_URL, external: false },
   { label: "GitHub", href: GITHUB_URL, external: true },
@@ -504,5 +507,56 @@ export const faqItems = [
     question: "Kako prijaviti grešku na stranici?",
     answer:
       "Grešku možeš prijaviti u Telegram grupi ili otvoriti issue odnosno pull request na GitHub repozitoriju.",
+  },
+] as const
+
+function pickFaqItems(questions: readonly string[]) {
+  return questions
+    .map((question) => faqItems.find((item) => item.question === question))
+    .filter((item): item is (typeof faqItems)[number] => Boolean(item))
+}
+
+export const faqGroups = [
+  {
+    title: "O projektu",
+    items: pickFaqItems([
+      "Je li DvadesetJedan dio twentyone.world?",
+      "Zašto se projekt zove DvadesetJedan?",
+      "Gdje mogu pratiti sadržaj?",
+    ]),
+  },
+  {
+    title: "Početnici",
+    items: pickFaqItems([
+      "Moram li već imati Bitcoin da bih pratio DvadesetJedan?",
+      "Kako da počnem ako ne znam ništa o Bitcoinu?",
+      "Koji je prvi tekst koji trebam pročitati?",
+      "Trebam li kupiti bitcoin prije nego što razumijem sigurnost?",
+    ]),
+  },
+  {
+    title: "Bitcoin-only",
+    items: pickFaqItems([
+      "Je li DvadesetJedan projekt o kriptovalutama?",
+      "Zašto ne pričate o altcoinima?",
+      "Je li ovo mjesto za investicijske savjete?",
+    ]),
+  },
+  {
+    title: "Zajednica i doprinos",
+    items: pickFaqItems([
+      "Kako se mogu uključiti?",
+      "Mogu li poslati prijevod ili članak?",
+      "Na kojem jeziku mogu pisati?",
+      "Kako prijaviti grešku na stranici?",
+      "Zašto Telegram, a ne samo web stranica?",
+    ]),
+  },
+  {
+    title: "Događaji i livestream",
+    items: pickFaqItems([
+      "Kako mogu predložiti temu za livestream?",
+      "Kako mogu organizirati meetup u svom gradu?",
+    ]),
   },
 ] as const

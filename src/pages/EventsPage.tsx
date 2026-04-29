@@ -5,10 +5,24 @@ import { ArrowUpRight, Send } from "lucide-react"
 import { ActionButton } from "@/components/ActionButton"
 import { EventCard } from "@/components/EventCard"
 import { Layout } from "@/components/Layout"
-import { media } from "@/data/site"
+import { CONTRIBUTE_URL, media } from "@/data/site"
 import { communityHref } from "@/lib/content"
+import { usePageMeta } from "@/lib/usePageMeta"
+
+const meetupSteps = [
+  "Odaberi grad i okvirni datum",
+  "Nađi jednostavnu lokaciju za razgovor",
+  "Javi se u Telegram grupi",
+  "Zadrži Bitcoin-only fokus",
+  "Počni malim druženjem, ne velikim eventom",
+] as const
 
 export function EventsPage({ events }: { events: EventEntry[] }) {
+  usePageMeta(
+    "Događaji | DvadesetJedan",
+    "Nadolazeći Bitcoin meetupovi, arhiva druženja i način kako predložiti lokalni meetup kroz DvadesetJedan zajednicu.",
+  )
+
   const now = new Date()
   const upcomingEvents = events.filter((event) => new Date(event.end) >= now)
   const pastEvents = events.filter((event) => new Date(event.end) < now)
@@ -84,6 +98,42 @@ export function EventsPage({ events }: { events: EventEntry[] }) {
               ))}
             </div>
           )}
+        </section>
+
+        <section className="mt-14 rounded-[1.8rem] border border-border/80 bg-card px-6 py-8 sm:px-10">
+          <h2 className="text-4xl font-semibold tracking-[-0.04em] text-foreground">
+            Kako organizirati mali Bitcoin meetup
+          </h2>
+          <p className="mt-4 max-w-3xl text-base leading-8 text-muted-foreground">
+            Meetup ne mora biti velik ni formalan. Dovoljno je nekoliko ljudi,
+            jasna lokacija, vrijeme i Bitcoin-only fokus.
+          </p>
+          <ol className="mt-6 grid gap-3 text-base leading-8 text-foreground md:grid-cols-2">
+            {meetupSteps.map((step, index) => (
+              <li key={step} className="flex gap-3">
+                <span className="mt-1 inline-flex size-6 shrink-0 items-center justify-center rounded-full bg-primary/12 text-xs font-semibold text-primary">
+                  {index + 1}
+                </span>
+                <span>{step}</span>
+              </li>
+            ))}
+          </ol>
+          <div className="mt-6 flex flex-wrap gap-3">
+            <ActionButton
+              href={communityHref()}
+              icon={<Send className="size-4" />}
+              external
+              primary
+            >
+              Predloži meetup
+            </ActionButton>
+            <ActionButton
+              href={CONTRIBUTE_URL}
+              icon={<ArrowUpRight className="size-4" />}
+            >
+              Doprinesi
+            </ActionButton>
+          </div>
         </section>
 
         <section className="mt-16">

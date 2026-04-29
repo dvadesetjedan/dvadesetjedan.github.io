@@ -7,8 +7,14 @@ import { PageHero } from "@/components/PageHero"
 import { Section } from "@/components/Section"
 import { CONTRIBUTE_URL, media, principles } from "@/data/site"
 import { communityHref } from "@/lib/content"
+import { usePageMeta } from "@/lib/usePageMeta"
 
 export function AboutPage() {
+  usePageMeta(
+    "O projektu | DvadesetJedan",
+    "DvadesetJedan je regionalni Bitcoin-only signal na našem jeziku i dio otvorenog TwentyOne.World koncepta.",
+  )
+
   return (
     <Layout>
       <main className="mx-auto max-w-7xl px-5 pb-16 pt-12 sm:px-8 sm:pt-16">

@@ -6,8 +6,11 @@ import {
   getArticleCuration,
   isTranslatedArticle,
 } from "@/lib/content"
+import { usePageMeta } from "@/lib/usePageMeta"
 
 export function ArticlePage({ article }: { article: ArticleEntry }) {
+  usePageMeta(`${article.title} | DvadesetJedan`)
+
   const curation = getArticleCuration(article.slug)
 
   return (

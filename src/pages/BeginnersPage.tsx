@@ -11,8 +11,14 @@ import {
   readingOrder,
 } from "@/data/site"
 import { articleHref, formatArticleDate } from "@/lib/content"
+import { usePageMeta } from "@/lib/usePageMeta"
 
 export function BeginnersPage({ articles }: { articles: ArticleEntry[] }) {
+  usePageMeta(
+    "Počni ovdje | DvadesetJedan",
+    "Početni put za ljude koji žele razumjeti Bitcoin bez žurbe, hypea i početničkih sigurnosnih grešaka.",
+  )
+
   const beginnerLinks = readingOrder
     .map((item) => articles.find((article) => article.slug === item.slug))
     .filter(Boolean) as ArticleEntry[]

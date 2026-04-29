@@ -5,8 +5,14 @@ import { Layout } from "@/components/Layout"
 import { YOUTUBE_URL } from "@/data/site"
 import { episodes } from "@/data/episodes"
 import { communityHref, formatEpisodeDate } from "@/lib/content"
+import { usePageMeta } from "@/lib/usePageMeta"
 
 export function LivestreamPage() {
+  usePageMeta(
+    "Livestream | DvadesetJedan",
+    "Bitcoin livestream DvadesetJedan zajednice: vijesti, komentari, razgovori, pitanja uživo i regionalna perspektiva.",
+  )
+
   const [latestEpisode, ...archive] = episodes
 
   return (

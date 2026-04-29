@@ -1,9 +1,14 @@
 import type { ArticleEntry } from "@/data/articles"
 import type { EventEntry } from "@/data/events"
-import { COMMUNITY_URL, EVENTS_URL, articleCurations } from "@/data/site"
+import {
+  COMMUNITY_URL,
+  CONTRIBUTE_URL,
+  EVENTS_URL,
+  articleCurations,
+} from "@/data/site"
 
 export function communityHref() {
-  return COMMUNITY_URL || "#ukljucite-se"
+  return COMMUNITY_URL || CONTRIBUTE_URL
 }
 
 export function articleHref(slug: string) {

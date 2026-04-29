@@ -1,7 +1,45 @@
+import { useEffect, useState } from "react"
+
 import { navigation, media } from "@/data/site"
 import { communityHref } from "@/lib/content"
+import { parseRoute, type Route } from "@/lib/routes"
+
+function isActiveNavigationItem(route: Route, href: string) {
+  if (href.startsWith("http")) return false
+
+  if (href === "#/clanci") {
+    return route.type === "articles" || route.type === "article"
+  }
+
+  if (href === "#/dogadaji") {
+    return route.type === "events" || route.type === "event"
+  }
+
+  const routeByHref: Record<string, Route["type"]> = {
+    "#/o-projektu": "about",
+    "#/teme": "topics",
+    "#/faq": "faq",
+    "#/resursi": "resources",
+    "#/livestream": "livestream",
+    "#/pocetnici": "beginners",
+    "#/doprinesi": "contribute",
+  }
+
+  return routeByHref[href] === route.type
+}
 
 export function Header() {
+  const [route, setRoute] = useState<Route>(() =>
+    parseRoute(window.location.hash),
+  )
+
+  useEffect(() => {
+    const onHashChange = () => setRoute(parseRoute(window.location.hash))
+
+    window.addEventListener("hashchange", onHashChange)
+    return () => window.removeEventListener("hashchange", onHashChange)
+  }, [])
+
   return (
     <header className="sticky top-0 z-40 border-b border-border/70 bg-background/88 backdrop-blur-xl">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-5 py-4 sm:gap-4 sm:px-8">
@@ -20,17 +58,26 @@ export function Header() {
         </a>
 
         <nav className="hidden items-center gap-6 text-sm text-muted-foreground md:flex">
-          {navigation.map((item) => (
-            <a
-              key={item.label}
-              className="whitespace-nowrap hover:text-foreground"
-              href={item.href}
-              rel={item.href.startsWith("http") ? "noreferrer" : undefined}
-              target={item.href.startsWith("http") ? "_blank" : undefined}
-            >
-              {item.label}
-            </a>
-          ))}
+          {navigation.map((item) => {
+            const isActive = isActiveNavigationItem(route, item.href)
+
+            return (
+              <a
+                key={item.label}
+                aria-current={isActive ? "page" : undefined}
+                className={`whitespace-nowrap border-b transition-colors ${
+                  isActive
+                    ? "border-primary text-foreground"
+                    : "border-transparent hover:text-foreground"
+                }`}
+                href={item.href}
+                rel={item.href.startsWith("http") ? "noreferrer" : undefined}
+                target={item.href.startsWith("http") ? "_blank" : undefined}
+              >
+                {item.label}
+              </a>
+            )
+          })}
         </nav>
 
         <a
@@ -46,17 +93,26 @@ export function Header() {
 
       <div className="border-t border-border/60 md:hidden">
         <nav className="mx-auto flex max-w-7xl gap-5 overflow-x-auto px-5 py-3 text-sm text-muted-foreground sm:px-8">
-          {navigation.map((item) => (
-            <a
-              key={item.label}
-              className="shrink-0 whitespace-nowrap hover:text-foreground"
-              href={item.href}
-              rel={item.href.startsWith("http") ? "noreferrer" : undefined}
-              target={item.href.startsWith("http") ? "_blank" : undefined}
-            >
-              {item.label}
-            </a>
-          ))}
+          {navigation.map((item) => {
+            const isActive = isActiveNavigationItem(route, item.href)
+
+            return (
+              <a
+                key={item.label}
+                aria-current={isActive ? "page" : undefined}
+                className={`shrink-0 whitespace-nowrap border-b transition-colors ${
+                  isActive
+                    ? "border-primary text-foreground"
+                    : "border-transparent hover:text-foreground"
+                }`}
+                href={item.href}
+                rel={item.href.startsWith("http") ? "noreferrer" : undefined}
+                target={item.href.startsWith("http") ? "_blank" : undefined}
+              >
+                {item.label}
+              </a>
+            )
+          })}
         </nav>
       </div>
     </header>

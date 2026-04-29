@@ -4,8 +4,14 @@ import { ActionButton } from "@/components/ActionButton"
 import { Layout } from "@/components/Layout"
 import { GITHUB_URL, contributionItems } from "@/data/site"
 import { communityHref } from "@/lib/content"
+import { usePageMeta } from "@/lib/usePageMeta"
 
 export function ContributePage() {
+  usePageMeta(
+    "Doprinesi | DvadesetJedan",
+    "Načini kako doprinijeti DvadesetJedan zajednici kroz članke, prijevode, događaje, kod i kvalitetne Bitcoin resurse.",
+  )
+
   return (
     <Layout>
       <main className="mx-auto max-w-7xl px-5 pb-16 pt-12 sm:px-8 sm:pt-16">
@@ -44,6 +50,27 @@ export function ContributePage() {
             </ActionButton>
             <ActionButton href={GITHUB_URL} icon={<GitHubIcon />} external>
               Otvori GitHub repozitorij
+            </ActionButton>
+          </div>
+        </section>
+
+        <section className="mt-10 rounded-[1.8rem] border border-border/80 bg-card px-6 py-8 sm:px-10">
+          <h2 className="text-3xl font-semibold tracking-[-0.04em] text-foreground">
+            Pokreni lokalno druženje
+          </h2>
+          <p className="mt-4 max-w-3xl text-base leading-8 text-muted-foreground">
+            Ako u tvom gradu postoji nekoliko ljudi koji žele mirno razgovarati
+            o Bitcoinu, to je dovoljno za početak. Javi se u Telegram grupi s
+            gradom, okvirnim datumom i jednostavnom lokacijom.
+          </p>
+          <div className="mt-6">
+            <ActionButton
+              href={communityHref()}
+              icon={<Send className="size-4" />}
+              external
+              primary
+            >
+              Predloži meetup
             </ActionButton>
           </div>
         </section>

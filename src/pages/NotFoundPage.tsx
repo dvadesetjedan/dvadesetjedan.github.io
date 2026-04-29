@@ -3,8 +3,14 @@ import { ArrowUpRight, House } from "lucide-react"
 import { ActionButton } from "@/components/ActionButton"
 import { Layout } from "@/components/Layout"
 import { ARTICLES_URL, BEGINNERS_URL } from "@/data/site"
+import { usePageMeta } from "@/lib/usePageMeta"
 
 export function NotFoundPage() {
+  usePageMeta(
+    "Stranica nije pronađena | DvadesetJedan",
+    "Poveznica je možda promijenjena ili stranica više ne postoji.",
+  )
+
   return (
     <Layout>
       <main className="mx-auto max-w-5xl px-5 pb-16 pt-12 sm:px-8 sm:pt-16">

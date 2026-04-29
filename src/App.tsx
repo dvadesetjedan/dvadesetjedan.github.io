@@ -14,6 +14,7 @@ import { HomePage } from "@/pages/HomePage"
 import { LivestreamPage } from "@/pages/LivestreamPage"
 import { LoadingPage } from "@/pages/LoadingPage"
 import { NotFoundPage } from "@/pages/NotFoundPage"
+import { ResourcesPage } from "@/pages/ResourcesPage"
 import { TopicsPage } from "@/pages/TopicsPage"
 import { parseRoute, type Route } from "@/lib/routes"
 
@@ -70,6 +71,8 @@ function App() {
       return <TopicsPage />
     case "faq":
       return <FaqPage />
+    case "resources":
+      return <ResourcesPage />
     case "livestream":
       return <LivestreamPage />
     case "articles":

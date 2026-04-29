@@ -8,6 +8,7 @@ import { EventsIcon, TelegramIcon } from "@/components/Icons"
 import { InlineLink } from "@/components/InlineLink"
 import { Layout } from "@/components/Layout"
 import { Section } from "@/components/Section"
+import { featuredArticles } from "@/data/featuredArticles"
 import {
   ABOUT_URL,
   ARTICLES_URL,
@@ -26,9 +27,15 @@ import {
   topics,
   trustItems,
 } from "@/data/site"
-import { communityHref } from "@/lib/content"
+import { articleHref, communityHref } from "@/lib/content"
+import { usePageMeta } from "@/lib/usePageMeta"
 
 export function HomePage() {
+  usePageMeta(
+    "DvadesetJedan | Regionalni Bitcoin signal",
+    "DvadesetJedan je regionalni Bitcoin-only signal na našem jeziku: članci, livestream, događaji i zajednica za bitcoinere s Balkana.",
+  )
+
   return (
     <Layout>
       <main>
@@ -203,6 +210,46 @@ export function HomePage() {
                 </div>
               ))}
             </div>
+          </div>
+        </Section>
+
+        <Section
+          title="Počni s ovim tekstovima"
+          intro="Ako si nov u Bitcoinu, kreni od nekoliko tekstova koji objašnjavaju otvorenost mreže, decentralizaciju i osobnu odgovornost."
+        >
+          <div className="grid gap-4 md:grid-cols-3">
+            {featuredArticles.map((article) => (
+              <a
+                key={article.slug}
+                className="rounded-[1.5rem] border border-border/80 bg-card px-5 py-5 transition-colors hover:border-primary/40"
+                href={articleHref(article.slug)}
+              >
+                <h3 className="text-xl font-semibold tracking-[-0.03em] text-foreground">
+                  {article.title}
+                </h3>
+                <p className="mt-3 text-sm leading-7 text-muted-foreground">
+                  {article.description}
+                </p>
+                <span className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-primary">
+                  Čitaj tekst <ArrowUpRight className="size-4" />
+                </span>
+              </a>
+            ))}
+          </div>
+          <div className="mt-6 flex flex-wrap gap-3">
+            <ActionButton
+              href={ARTICLES_URL}
+              icon={<ArrowUpRight className="size-4" />}
+              primary
+            >
+              Svi članci
+            </ActionButton>
+            <ActionButton
+              href={BEGINNERS_URL}
+              icon={<ArrowUpRight className="size-4" />}
+            >
+              Počni ovdje
+            </ActionButton>
           </div>
         </Section>
 

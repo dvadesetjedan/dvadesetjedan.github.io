@@ -3,6 +3,7 @@ export type Route =
   | { type: "about" }
   | { type: "topics" }
   | { type: "faq" }
+  | { type: "resources" }
   | { type: "livestream" }
   | { type: "articles" }
   | { type: "article"; slug: string }
@@ -19,6 +20,7 @@ export function parseRoute(hash: string): Route {
   if (cleanHash === "/o-projektu") return { type: "about" }
   if (cleanHash === "/teme") return { type: "topics" }
   if (cleanHash === "/faq") return { type: "faq" }
+  if (cleanHash === "/resursi") return { type: "resources" }
   if (cleanHash === "/livestream") return { type: "livestream" }
   if (cleanHash === "/clanci") return { type: "articles" }
   if (cleanHash.startsWith("/clanci/")) {

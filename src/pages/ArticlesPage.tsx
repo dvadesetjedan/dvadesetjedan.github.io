@@ -6,8 +6,14 @@ import { communityHref, sortArticles } from "@/lib/content"
 import { ActionButton } from "@/components/ActionButton"
 import { ArticleCard } from "@/components/ArticleCard"
 import { Layout } from "@/components/Layout"
+import { usePageMeta } from "@/lib/usePageMeta"
 
 export function ArticlesPage({ articles }: { articles: ArticleEntry[] }) {
+  usePageMeta(
+    "Članci | DvadesetJedan",
+    "Pisani Bitcoin signal DvadesetJedan zajednice: početni redoslijed čitanja, tematski putokazi i arhiva tekstova.",
+  )
+
   const orderedArticles = sortArticles(articles)
 
   return (

@@ -5,6 +5,7 @@ import { Layout } from "@/components/Layout"
 import { PageHero } from "@/components/PageHero"
 import { ARTICLES_URL, LIVESTREAM_URL, topics } from "@/data/site"
 import { communityHref } from "@/lib/content"
+import { usePageMeta } from "@/lib/usePageMeta"
 
 const topicGroups = [
   {
@@ -42,6 +43,11 @@ const topicGroups = [
 ] as const
 
 export function TopicsPage() {
+  usePageMeta(
+    "Teme | DvadesetJedan",
+    "Teme kroz koje DvadesetJedan obrađuje Bitcoin: novac, sigurnost, štednja, zajednica i dugoročno razmišljanje.",
+  )
+
   return (
     <Layout>
       <main className="mx-auto max-w-7xl px-5 pb-16 pt-12 sm:px-8 sm:pt-16">

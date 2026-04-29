@@ -3,10 +3,16 @@ import { ArrowUpRight, Send } from "lucide-react"
 import { ActionButton } from "@/components/ActionButton"
 import { Layout } from "@/components/Layout"
 import { PageHero } from "@/components/PageHero"
-import { BEGINNERS_URL, CONTRIBUTE_URL, faqItems } from "@/data/site"
+import { BEGINNERS_URL, CONTRIBUTE_URL, faqGroups } from "@/data/site"
 import { communityHref } from "@/lib/content"
+import { usePageMeta } from "@/lib/usePageMeta"
 
 export function FaqPage() {
+  usePageMeta(
+    "Česta pitanja | DvadesetJedan",
+    "Kratki odgovori za ljude koji upoznaju DvadesetJedan, Bitcoin-only pristup i načine uključivanja u zajednicu.",
+  )
+
   return (
     <Layout>
       <main className="mx-auto max-w-7xl px-5 pb-16 pt-12 sm:px-8 sm:pt-16">
@@ -16,19 +22,28 @@ export function FaqPage() {
           intro="Kratki odgovori za ljude koji tek upoznaju DvadesetJedan, Bitcoin-only pristup i načine uključivanja u zajednicu."
         />
 
-        <section className="mt-10 space-y-4">
-          {faqItems.map((item) => (
-            <details
-              key={item.question}
-              className="rounded-[1.5rem] border border-border/80 bg-card px-5 py-5"
-            >
-              <summary className="cursor-pointer list-none text-lg font-medium text-foreground">
-                {item.question}
-              </summary>
-              <p className="mt-4 max-w-3xl text-sm leading-7 text-muted-foreground">
-                {item.answer}
-              </p>
-            </details>
+        <section className="mt-10 space-y-8">
+          {faqGroups.map((group) => (
+            <div key={group.title}>
+              <h2 className="text-3xl font-semibold tracking-[-0.04em] text-foreground">
+                {group.title}
+              </h2>
+              <div className="mt-5 space-y-4">
+                {group.items.map((item) => (
+                  <details
+                    key={item.question}
+                    className="rounded-[1.5rem] border border-border/80 bg-card px-5 py-5"
+                  >
+                    <summary className="cursor-pointer list-none text-lg font-medium text-foreground">
+                      {item.question}
+                    </summary>
+                    <p className="mt-4 max-w-3xl text-sm leading-7 text-muted-foreground">
+                      {item.answer}
+                    </p>
+                  </details>
+                ))}
+              </div>
+            </div>
           ))}
         </section>
 

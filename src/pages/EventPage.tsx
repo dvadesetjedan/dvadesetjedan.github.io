@@ -10,8 +10,14 @@ import {
   makeGoogleCalendarUrl,
   makeIcsUrl,
 } from "@/lib/content"
+import { usePageMeta } from "@/lib/usePageMeta"
 
 export function EventPage({ event }: { event: EventEntry }) {
+  usePageMeta(
+    `${event.title} | DvadesetJedan`,
+    `${event.title}: ${event.venue}, ${event.city}. Bitcoin-only događaj DvadesetJedan zajednice.`,
+  )
+
   return (
     <Layout>
       <main className="mx-auto max-w-5xl px-5 pb-16 pt-12 sm:px-8 sm:pt-16">
