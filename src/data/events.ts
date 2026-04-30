@@ -55,7 +55,7 @@ export const events: EventEntry[] = [
       "Telegram grupa za koordinaciju: https://t.me/+EFNsWuB8lV1mODlk",
     ],
     coverImage:
-      "https://dvadesetjedan.com/wp-content/uploads/2025/06/DJ_-_YT_background_01.jpg",
+      "https://secure.meetupstatic.com/photos/event/e/1/7/8/highres_529317720.jpeg",
     start: "2025-08-14T19:30:00+02:00",
     end: "2025-08-15T23:00:00+02:00",
     venue: "Žal Beach Bar",
