@@ -64,7 +64,7 @@ export const involvementCards = [
     external: false,
   },
   {
-    title: "Dođi na meetup ili ga predloži",
+    title: "Dođi na događaj ili ga predloži",
     text: "Lokalna druženja rastu iz online zajednice. Predloži okupljanje u svom gradu.",
     buttonLabel: "Pogledaj događaje",
     href: EVENTS_URL,
@@ -399,7 +399,7 @@ export const principles = [
 export const contributionItems = [
   "Predloži ili napiši članak",
   "Prevedi kvalitetan Bitcoin tekst",
-  "Organiziraj meetup u svom gradu",
+  "Organiziraj događaj u svom gradu",
   "Prijavi grešku na stranici",
   "Pomozi oko dizajna ili koda",
   "Podijeli korisne resurse za početnike",
@@ -485,9 +485,9 @@ export const faqItems = [
       "Najjednostavnije je javiti se u Telegram grupi i predložiti temu, pitanje ili gosta. Dobre teme su one koje pomažu ljudima razumjeti Bitcoin, novac, sigurnost, štednju i dugoročno razmišljanje.",
   },
   {
-    question: "Kako mogu organizirati meetup u svom gradu?",
+    question: "Kako mogu organizirati događaj u svom gradu?",
     answer:
-      "Javi se u Telegram grupi, napiši grad i okvirnu ideju druženja. Meetup ne mora biti velik ni formalan; dovoljno je nekoliko ljudi, jasno vrijeme, jednostavna lokacija i Bitcoin-only fokus.",
+      "Javi se u Telegram grupi, napiši grad i okvirnu ideju druženja. Događaj ne mora biti velik ni formalan; dovoljno je nekoliko ljudi, jasno vrijeme, jednostavna lokacija i Bitcoin-only fokus.",
   },
   {
     question: "Mogu li poslati prijevod ili članak?",
@@ -557,7 +557,7 @@ export const faqGroups = [
     title: "Događaji i livestream",
     items: pickFaqItems([
       "Kako mogu predložiti temu za livestream?",
-      "Kako mogu organizirati meetup u svom gradu?",
+      "Kako mogu organizirati događaj u svom gradu?",
     ]),
   },
 ] as const

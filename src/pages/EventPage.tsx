@@ -74,13 +74,13 @@ export function EventPage({ event }: { event: EventEntry }) {
 
             <aside className="space-y-4">
               <ActionButton
-                href={event.meetupUrl}
+                href={event.registrationUrl}
                 icon={<ArrowUpRight className="size-4" />}
                 external
                 primary
                 className="w-full justify-center"
               >
-                Otvori Meetup prijavu
+                Otvori prijavu
               </ActionButton>
               <ActionButton
                 href={event.mapUrl}

@@ -72,7 +72,7 @@ export function ContributePage() {
               external
               primary
             >
-              Predloži meetup
+              Predloži događaj
             </ActionButton>
           </div>
         </section>

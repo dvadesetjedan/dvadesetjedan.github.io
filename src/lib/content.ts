@@ -36,6 +36,8 @@ export function formatEpisodeDate(value: string) {
 }
 
 export function formatEventDate(event: EventEntry) {
+  if (event.displayDate) return event.displayDate
+
   const start = new Date(event.start)
   const end = new Date(event.end)
 
@@ -58,6 +60,8 @@ export function formatEventDate(event: EventEntry) {
 }
 
 export function formatEventTimeRange(event: EventEntry) {
+  if (event.displayDate) return event.displayDate
+
   const start = new Date(event.start)
   const end = new Date(event.end)
   const formatter = new Intl.DateTimeFormat("hr-HR", {
@@ -96,9 +100,15 @@ export function isTranslatedArticle(article: ArticleEntry) {
 export function makeGoogleCalendarUrl(event: EventEntry) {
   const toCalendarStamp = (value: string) =>
     new Date(value).toISOString().replace(/[-:]/g, "").replace(".000", "")
+  const toAllDayStamp = (value: string) =>
+    value.slice(0, 10).replace(/-/g, "")
 
-  const start = toCalendarStamp(event.start)
-  const end = toCalendarStamp(event.end)
+  const start = event.allDay
+    ? toAllDayStamp(event.start)
+    : toCalendarStamp(event.start)
+  const end = event.allDay
+    ? toAllDayStamp(event.end)
+    : toCalendarStamp(event.end)
   const details = encodeURIComponent(event.description.join("\n\n"))
   const location = encodeURIComponent(
     `${event.venue}, ${event.address}, ${event.city}, ${event.country}`,
@@ -110,6 +120,15 @@ export function makeGoogleCalendarUrl(event: EventEntry) {
 export function makeIcsUrl(event: EventEntry) {
   const toUtcStamp = (value: string) =>
     new Date(value).toISOString().replace(/[-:]/g, "").replace(".000", "")
+  const toAllDayStamp = (value: string) =>
+    value.slice(0, 10).replace(/-/g, "")
+
+  const dtStart = event.allDay
+    ? `DTSTART;VALUE=DATE:${toAllDayStamp(event.start)}`
+    : `DTSTART:${toUtcStamp(event.start)}`
+  const dtEnd = event.allDay
+    ? `DTEND;VALUE=DATE:${toAllDayStamp(event.end)}`
+    : `DTEND:${toUtcStamp(event.end)}`
 
   const ics = [
     "BEGIN:VCALENDAR",
@@ -118,12 +137,12 @@ export function makeIcsUrl(event: EventEntry) {
     "BEGIN:VEVENT",
     `UID:${event.slug}@dvadesetjedan.com`,
     `DTSTAMP:${toUtcStamp(new Date().toISOString())}`,
-    `DTSTART:${toUtcStamp(event.start)}`,
-    `DTEND:${toUtcStamp(event.end)}`,
+    dtStart,
+    dtEnd,
     `SUMMARY:${event.title}`,
     `DESCRIPTION:${event.description.join("\\n\\n")}`,
     `LOCATION:${event.venue}, ${event.address}, ${event.city}, ${event.country}`,
-    `URL:${event.meetupUrl}`,
+    `URL:${event.registrationUrl}`,
     "END:VEVENT",
     "END:VCALENDAR",
   ].join("\n")

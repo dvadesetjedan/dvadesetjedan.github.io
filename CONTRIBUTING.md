@@ -35,7 +35,7 @@ npm run format
 ## Kako dodati događaj
 
 - Događaji se nalaze u `src/data/events.ts`.
-- Svaki događaj treba imati točne metapodatke: naslov, vrijeme, lokaciju, adresu, grad, državu, Meetup poveznicu i kartu.
+- Svaki događaj treba imati točne metapodatke: naslov, vrijeme, lokaciju, adresu, grad, državu, poveznicu za prijavu i kartu.
 - Ne izmišljaj događaje, datume, lokacije ili RSVP poveznice.
 - Ako informacija nije potvrđena, radije koristi neutralnu formulaciju nego kontradiktoran opis.
 

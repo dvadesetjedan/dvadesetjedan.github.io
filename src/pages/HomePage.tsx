@@ -212,11 +212,11 @@ export function HomePage() {
             />
             <LatestCard
               eyebrow="Događaji"
-              title={upcomingEvent ? upcomingEvent.title : "Događaji i meetupi"}
+              title={upcomingEvent ? upcomingEvent.title : "Događaji"}
               text={
                 upcomingEvent
                   ? `${formatEventDate(upcomingEvent)} • ${upcomingEvent.city}`
-                  : "Trenutno nema javno najavljenih događaja. Pogledaj arhivu ili predloži meetup u svom gradu."
+                  : "Trenutno nema javno najavljenih događaja. Pogledaj arhivu ili predloži događaj u svom gradu."
               }
               href={upcomingEvent ? eventHref(upcomingEvent.slug) : EVENTS_URL}
               cta={upcomingEvent ? "Pogledaj događaj" : "Otvori događaje"}
