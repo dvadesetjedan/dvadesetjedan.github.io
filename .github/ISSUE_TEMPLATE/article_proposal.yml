@@ -1,0 +1,25 @@
+name: Prijedlog članka
+description: Predloži originalni Bitcoin-only članak.
+title: "[Članak]: "
+labels: ["content", "article"]
+body:
+  - type: textarea
+    id: idea
+    attributes:
+      label: Ideja članka
+      description: Koje pitanje članak pomaže riješiti?
+    validations:
+      required: true
+  - type: textarea
+    id: sources
+    attributes:
+      label: Izvori
+      description: Dodaj javne izvore ako postoje. Ne izmišljaj autore ili datume.
+  - type: dropdown
+    id: difficulty
+    attributes:
+      label: Za koga je članak?
+      options:
+        - početnici
+        - srednja razina
+        - napredno

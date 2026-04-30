@@ -7,6 +7,7 @@ import { InfoTile } from "@/components/InfoTile"
 import { Layout } from "@/components/Layout"
 import { EVENTS_URL } from "@/data/site"
 import {
+  cityHref,
   formatEventTimeRange,
   makeGoogleCalendarUrl,
   makeIcsUrl,
@@ -70,6 +71,11 @@ export function EventPage({ event }: { event: EventEntry }) {
                   <p key={paragraph}>{paragraph}</p>
                 ))}
               </div>
+              <p className="mt-8 rounded-[1.4rem] border border-primary/20 bg-primary/8 px-5 py-4 text-sm leading-7 text-foreground">
+                Početnici su dobrodošli gdje je to u skladu s najavom događaja.
+                Zadnje promjene provjeri kroz službenu prijavu ili Telegram
+                koordinaciju navedenu u opisu događaja.
+              </p>
             </div>
 
             <aside className="space-y-4">
@@ -106,6 +112,25 @@ export function EventPage({ event }: { event: EventEntry }) {
                 <CalendarDays className="size-4" />
                 Preuzmi ICS
               </a>
+              {event.citySlug ? (
+                <ActionButton
+                  href={cityHref(event.citySlug)}
+                  icon={<MapPinned className="size-4" />}
+                  className="w-full justify-center"
+                >
+                  Stranica grada
+                </ActionButton>
+              ) : null}
+              {event.sourceUrl ? (
+                <ActionButton
+                  href={event.sourceUrl}
+                  icon={<ArrowUpRight className="size-4" />}
+                  external
+                  className="w-full justify-center"
+                >
+                  {event.sourceName ?? "Izvor"}
+                </ActionButton>
+              ) : null}
             </aside>
           </div>
         </article>

@@ -8,6 +8,22 @@ export type ArticleEntry = {
   tags: string[]
   image: string
   originalUrl: string
+  author?: string
+  translator?: string
+  originalTitle?: string
+  sourceName?: string
+  type?: "original" | "translation" | "curated" | "guide"
+  difficulty?: "beginner" | "intermediate" | "advanced"
+  languageVariant?: "regional" | "hr" | "sr-latn" | "bs" | "me" | "en"
+  readingTimeMinutes?: number
+  topics?: string[]
+  recommendedNextSlugs?: string[]
+  permissionStatus?:
+    | "confirmed"
+    | "public-domain"
+    | "open-license"
+    | "unknown"
+    | "not-needed"
 }
 
 export const articles: ArticleEntry[] = [

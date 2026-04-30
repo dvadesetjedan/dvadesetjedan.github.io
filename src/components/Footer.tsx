@@ -33,7 +33,7 @@ export function Footer() {
                   <li key={item.label}>
                     <a
                       href={item.href}
-                      rel={item.external ? "noreferrer" : undefined}
+                      rel={item.external ? "noopener noreferrer" : undefined}
                       target={item.external ? "_blank" : undefined}
                     >
                       {item.label}

@@ -14,6 +14,16 @@ export type EventEntry = {
   country: string
   registrationUrl: string
   mapUrl: string
+  sourceName?: string
+  sourceUrl?: string
+  meetupUrl?: string
+  organizer?: string
+  language?: string
+  capacityNote?: string
+  status?: "upcoming" | "past" | "cancelled"
+  citySlug?: string
+  tags?: string[]
+  relatedLinks?: { label: string; href: string }[]
 }
 
 export const events: EventEntry[] = [
@@ -40,6 +50,10 @@ export const events: EventEntry[] = [
     country: "Croatia",
     registrationUrl: "https://villabtc.net/#tickets",
     mapUrl: "https://www.google.com/maps/search/?api=1&query=Split+Croatia",
+    sourceName: "Villa BTC",
+    sourceUrl: "https://villabtc.net/",
+    citySlug: "split",
+    tags: ["Bitcoin-only", "Split"],
   },
   {
     slug: "bitcoin-only-meetup-belgrade-2026-05-23",
@@ -67,6 +81,14 @@ export const events: EventEntry[] = [
       "https://www.meetup.com/dvadeset-jedan/events/314211199/?utm_medium=referral&utm_campaign=share-btn_savedevents_share_modal&utm_source=link&utm_version=v2&member_id=60579322",
     mapUrl:
       "https://www.google.com/maps/search/?api=1&query=Restaurant+Druga+Kuca+Ada+Ciganlija+2+Belgrade+Serbia",
+    sourceName: "Meetup",
+    sourceUrl:
+      "https://www.meetup.com/dvadeset-jedan/events/314211199/?utm_medium=referral&utm_campaign=share-btn_savedevents_share_modal&utm_source=link&utm_version=v2&member_id=60579322",
+    meetupUrl:
+      "https://www.meetup.com/dvadeset-jedan/events/314211199/?utm_medium=referral&utm_campaign=share-btn_savedevents_share_modal&utm_source=link&utm_version=v2&member_id=60579322",
+    language: "srpski i engleski",
+    citySlug: "beograd",
+    tags: ["Bitcoin-only", "Meetup", "Beograd"],
   },
   {
     slug: "meetup-rab",
@@ -92,5 +114,12 @@ export const events: EventEntry[] = [
       "https://www.meetup.com/dvadeset-jedan/events/310212249/?recId=b3b4279a-a2d9-4141-a319-38545eb81020&recSource=ml-popular-events-nearby-offline&searchId=bc533620-1f0c-4eac-a1fe-2092a5845a10&eventOrigin=find_page%24all",
     mapUrl:
       "https://www.google.com/maps/search/?api=1&query=%C5%BDal+Beach+Bar+Frkanj+Rab+Croatia",
+    sourceName: "Meetup",
+    sourceUrl:
+      "https://www.meetup.com/dvadeset-jedan/events/310212249/?recId=b3b4279a-a2d9-4141-a319-38545eb81020&recSource=ml-popular-events-nearby-offline&searchId=bc533620-1f0c-4eac-a1fe-2092a5845a10&eventOrigin=find_page%24all",
+    meetupUrl:
+      "https://www.meetup.com/dvadeset-jedan/events/310212249/?recId=b3b4279a-a2d9-4141-a319-38545eb81020&recSource=ml-popular-events-nearby-offline&searchId=bc533620-1f0c-4eac-a1fe-2092a5845a10&eventOrigin=find_page%24all",
+    citySlug: "rab",
+    tags: ["Bitcoin-only", "Meetup", "Rab"],
   },
 ]

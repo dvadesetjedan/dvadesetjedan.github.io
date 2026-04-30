@@ -2,7 +2,7 @@ import { ArrowUpRight, Send } from "lucide-react"
 
 import type { ArticleEntry } from "@/data/articles"
 import { BEGINNERS_URL, articleCategories, readingOrder } from "@/data/site"
-import { communityHref, sortArticles } from "@/lib/content"
+import { articleHref, communityHref, sortArticles } from "@/lib/content"
 import { ActionButton } from "@/components/ActionButton"
 import { ArticleCard } from "@/components/ArticleCard"
 import { BackLink } from "@/components/BackLink"
@@ -16,11 +16,13 @@ export function ArticlesPage({ articles }: { articles: ArticleEntry[] }) {
   )
 
   const orderedArticles = sortArticles(articles)
+  const topics = [...new Set(articles.flatMap((article) => article.categories))]
+  const tags = [...new Set(articles.flatMap((article) => article.tags))]
 
   return (
     <Layout>
       <main className="mx-auto max-w-7xl px-5 pb-16 pt-12 sm:px-8 sm:pt-16">
-        <BackLink href="#/">Početna</BackLink>
+        <BackLink href="/">Početna</BackLink>
         <section className="rounded-[2.2rem] border border-border/80 bg-card/70 px-6 py-8 sm:px-10 sm:py-12">
           <p className="text-sm uppercase tracking-[0.24em] text-muted-foreground">
             Članci
@@ -33,6 +35,22 @@ export function ArticlesPage({ articles }: { articles: ArticleEntry[] }) {
             čitanja, tematski putokazi i arhiva tekstova koji čine jezgru
             DvadesetJedan sadržaja.
           </p>
+        </section>
+
+        <section className="mt-10 rounded-[1.8rem] border border-border/80 bg-card px-6 py-6">
+          <h2 className="text-3xl font-semibold tracking-[-0.04em] text-foreground">
+            Filteri za održavatelje i čitatelje
+          </h2>
+          <div className="mt-5 flex flex-wrap gap-2">
+            {[...topics, ...tags, "original", "translation", "guide", "beginner", "intermediate", "advanced"].map((item) => (
+              <span
+                key={item}
+                className="rounded-full border border-border/80 px-3 py-1 text-xs font-medium text-muted-foreground"
+              >
+                {item}
+              </span>
+            ))}
+          </div>
         </section>
 
         <section className="mt-10">
@@ -79,7 +97,7 @@ export function ArticlesPage({ articles }: { articles: ArticleEntry[] }) {
                       <div>
                         <a
                           className="font-medium text-foreground hover:text-primary"
-                          href={`#/clanci/${article.slug}`}
+                          href={articleHref(article.slug)}
                         >
                           {item.label}
                         </a>

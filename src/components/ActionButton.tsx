@@ -25,7 +25,7 @@ export function ActionButton({
           : "border border-border/80 bg-card text-foreground"
       } ${className}`.trim()}
       href={href}
-      rel={external ? "noreferrer" : undefined}
+      rel={external ? "noopener noreferrer" : undefined}
       target={external ? "_blank" : undefined}
     >
       {icon}

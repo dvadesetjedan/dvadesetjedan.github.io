@@ -1,0 +1,30 @@
+name: Prijedlog prijevoda
+description: Predloži prijevod Bitcoin-only teksta.
+title: "[Prijevod]: "
+labels: ["content", "translation"]
+body:
+  - type: input
+    id: original_url
+    attributes:
+      label: Originalni URL
+    validations:
+      required: true
+  - type: input
+    id: author
+    attributes:
+      label: Autor originala
+  - type: dropdown
+    id: permission
+    attributes:
+      label: Status dopuštenja
+      options:
+        - potvrđeno
+        - otvorena licenca
+        - javna domena
+        - nepoznato
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Zašto je tekst koristan regiji?

@@ -12,11 +12,19 @@ export function communityHref() {
 }
 
 export function articleHref(slug: string) {
-  return `#/clanci/${slug}`
+  return `/clanci/${slug}/`
 }
 
 export function eventHref(slug: string) {
-  return `${EVENTS_URL}/${slug}`
+  return `${EVENTS_URL}${slug}/`
+}
+
+export function episodeHref(slug: string) {
+  return `/livestream/${slug}/`
+}
+
+export function cityHref(slug: string) {
+  return `/gradovi/${slug}/`
 }
 
 export function formatArticleDate(value: string) {

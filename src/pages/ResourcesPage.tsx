@@ -18,7 +18,7 @@ export function ResourcesPage() {
   return (
     <Layout>
       <main className="mx-auto max-w-7xl px-5 pb-16 pt-12 sm:px-8 sm:pt-16">
-        <BackLink href="#/">Početna</BackLink>
+        <BackLink href="/">Početna</BackLink>
         <PageHero
           eyebrow="Resursi"
           title="Resursi"
@@ -37,7 +37,7 @@ export function ResourcesPage() {
                     key={item.title}
                     className="rounded-[1.5rem] border border-border/80 bg-card px-5 py-5 transition-colors hover:border-primary/40"
                     href={item.href}
-                    rel={item.external ? "noreferrer" : undefined}
+                    rel={item.external ? "noopener noreferrer" : undefined}
                     target={item.external ? "_blank" : undefined}
                   >
                     <h3 className="text-xl font-semibold tracking-[-0.03em] text-foreground">

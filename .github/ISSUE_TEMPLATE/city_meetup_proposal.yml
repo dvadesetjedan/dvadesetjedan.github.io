@@ -1,0 +1,23 @@
+name: Lokalni susret
+description: Predloži lokalni Bitcoin-only susret.
+title: "[Grad]: "
+labels: ["city", "event"]
+body:
+  - type: input
+    id: city
+    attributes:
+      label: Grad
+    validations:
+      required: true
+  - type: textarea
+    id: plan
+    attributes:
+      label: Ideja
+      description: Opiši mali, siguran i javan format susreta.
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Privatnost
+      options:
+        - label: Ne objavljujem privatne kontakte ili osjetljive lokacijske detalje.
+          required: true

@@ -5,7 +5,7 @@ import { BackLink } from "@/components/BackLink"
 import { Layout } from "@/components/Layout"
 import { YOUTUBE_URL } from "@/data/site"
 import { episodes } from "@/data/episodes"
-import { communityHref, formatEpisodeDate } from "@/lib/content"
+import { communityHref, episodeHref, formatEpisodeDate } from "@/lib/content"
 import { usePageMeta } from "@/lib/usePageMeta"
 
 export function LivestreamPage() {
@@ -19,7 +19,7 @@ export function LivestreamPage() {
   return (
     <Layout>
       <main className="mx-auto max-w-7xl px-5 pb-16 pt-12 sm:px-8 sm:pt-16">
-        <BackLink href="#/">Početna</BackLink>
+        <BackLink href="/">Početna</BackLink>
         <section className="rounded-[2.2rem] border border-border/80 bg-card/70 px-6 py-8 sm:px-10 sm:py-12">
           <p className="text-sm uppercase tracking-[0.24em] text-muted-foreground">
             Livestream
@@ -70,9 +70,8 @@ export function LivestreamPage() {
                 </p>
                 <div className="mt-6">
                   <ActionButton
-                    href={latestEpisode.youtubeUrl}
+                    href={episodeHref(latestEpisode.slug)}
                     icon={<ArrowUpRight className="size-4" />}
-                    external
                     primary
                   >
                     Pogledaj epizodu
@@ -133,9 +132,7 @@ export function LivestreamPage() {
                   <a
                     key={episode.slug}
                     className="rounded-[1.4rem] border border-border/70 bg-background/70 px-5 py-5 hover:border-primary/40"
-                    href={episode.youtubeUrl}
-                    rel="noreferrer"
-                    target="_blank"
+                    href={episodeHref(episode.slug)}
                   >
                     {episode.publishedAt ? (
                       <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">

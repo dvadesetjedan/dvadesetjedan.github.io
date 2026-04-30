@@ -1,0 +1,32 @@
+# Arhitektura
+
+DvadesetJedan je statični Vite + React + TypeScript web hub za regionalnu Bitcoin-only zajednicu.
+
+## Audit Phase 1
+
+- Routing je prije Phase 1 koristio hash URL-ove kroz `src/lib/routes.ts` i `window.location.hash`.
+- Sadržaj je već bio koncentriran u `src/data/articles.ts`, `src/data/events.ts`, `src/data/episodes.ts` i `src/data/site.ts`.
+- Postojale su stranice za home, o projektu, početnike, članke, događaje, livestream, resurse, teme, FAQ i doprinos.
+- Postojale su osnovne validacije za rute i livestream sadržaj.
+- Projekt je već imao GitHub Pages workflow i CI workflow.
+
+## Phase 1 odluka
+
+Zadržan je Vite + React + TypeScript. Nije uveden backend, baza, CMS ni framework migracija.
+
+Canonical routing sada koristi path URL-ove:
+
+- `/pocni-ovdje/`
+- `/clanci/:slug/`
+- `/dogadaji/:slug/`
+- `/livestream/:slug/`
+- `/gradovi/:slug/`
+
+Legacy hash URL-ovi se preusmjeravaju na početnom učitavanju. Nakon `vite build`, skripta `scripts/generate-site-artifacts.mjs` generira route-specific HTML, `sitemap.xml`, `robots.txt`, `rss.xml`, `feed.json` i `404.html`.
+
+## Održavateljska pravila
+
+- Ne izmišljati događaje, autore, datume, linkove ili kontakte.
+- Sadržaj ostaje Bitcoin-only.
+- Runtime ne smije ovisiti o vanjskim API-jima.
+- Vanjska sinkronizacija može biti skripta, ali ne runtime uvjet.

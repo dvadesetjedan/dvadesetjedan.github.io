@@ -32,6 +32,7 @@ import {
 import {
   articleHref,
   communityHref,
+  episodeHref,
   eventHref,
   formatEpisodeDate,
   formatEventDate,
@@ -59,7 +60,7 @@ function LatestCard({
     <a
       className="rounded-[1.5rem] border border-border/80 bg-card px-5 py-5 transition-colors hover:border-primary/40"
       href={href}
-      rel={external ? "noreferrer" : undefined}
+      rel={external ? "noopener noreferrer" : undefined}
       target={external ? "_blank" : undefined}
     >
       <p className="text-xs uppercase tracking-[0.2em] text-primary">
@@ -114,24 +115,24 @@ export function HomePage() {
 
               <div className="mt-8 flex flex-wrap gap-3">
                 <ActionButton
+                  href={BEGINNERS_URL}
+                  icon={<ArrowUpRight className="size-4" />}
+                  primary
+                >
+                  Počni ovdje
+                </ActionButton>
+                <ActionButton
                   href={communityHref()}
                   icon={<Send className="size-4" />}
                   external
-                  primary
                 >
-                  Uđi u Telegram grupu
+                  Uđi u zajednicu
                 </ActionButton>
                 <ActionButton
                   href={LIVESTREAM_URL}
                   icon={<PlayCircle className="size-4" />}
                 >
-                  Prati livestream
-                </ActionButton>
-                <ActionButton
-                  href={ARTICLES_URL}
-                  icon={<ArrowUpRight className="size-4" />}
-                >
-                  Čitaj članke
+                  Pogledaj livestream
                 </ActionButton>
               </div>
 
@@ -199,9 +200,8 @@ export function HomePage() {
                     }`
                   : "Najnovije livestreamove možeš pronaći na Livestream stranici."
               }
-              href={latestEpisode?.youtubeUrl ?? LIVESTREAM_URL}
+              href={latestEpisode ? episodeHref(latestEpisode.slug) : LIVESTREAM_URL}
               cta={latestEpisode ? "Pogledaj epizodu" : "Otvori livestream"}
-              external={Boolean(latestEpisode)}
             />
             <LatestCard
               eyebrow="Članci"

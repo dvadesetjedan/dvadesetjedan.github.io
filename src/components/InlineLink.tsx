@@ -15,7 +15,7 @@ export function InlineLink({
     <a
       className="inline-flex items-center gap-2 text-sm font-medium text-foreground hover:text-primary"
       href={href}
-      rel={external ? "noreferrer" : undefined}
+      rel={external ? "noopener noreferrer" : undefined}
       target={external ? "_blank" : undefined}
     >
       {icon}

@@ -1,0 +1,21 @@
+name: Livestream shownotes
+description: Predloži sažetak, poglavlja ili linkove za epizodu.
+title: "[Shownotes]: "
+labels: ["livestream", "content"]
+body:
+  - type: input
+    id: episode
+    attributes:
+      label: Epizoda ili YouTube URL
+    validations:
+      required: true
+  - type: textarea
+    id: bullets
+    attributes:
+      label: Sažetak
+      description: Kratke točke bez izmišljanja izjava.
+  - type: textarea
+    id: chapters
+    attributes:
+      label: Poglavlja
+      description: Format primjerice 00:12:34 Tema.

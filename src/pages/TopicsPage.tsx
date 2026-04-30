@@ -52,7 +52,7 @@ export function TopicsPage() {
   return (
     <Layout>
       <main className="mx-auto max-w-7xl px-5 pb-16 pt-12 sm:px-8 sm:pt-16">
-        <BackLink href="#/">Početna</BackLink>
+        <BackLink href="/">Početna</BackLink>
         <PageHero
           eyebrow="Teme"
           title="Teme"

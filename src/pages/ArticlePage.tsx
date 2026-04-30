@@ -3,6 +3,7 @@ import { BackLink } from "@/components/BackLink"
 import { Layout } from "@/components/Layout"
 import { ARTICLES_URL } from "@/data/site"
 import {
+  articleHref,
   formatArticleDate,
   getArticleCuration,
   isTranslatedArticle,
@@ -17,6 +18,7 @@ export function ArticlePage({ article }: { article: ArticleEntry }) {
   )
 
   const curation = getArticleCuration(article.slug)
+  const recommendedNext = article.recommendedNextSlugs ?? []
 
   return (
     <Layout>
@@ -57,18 +59,48 @@ export function ArticlePage({ article }: { article: ArticleEntry }) {
 
             <div className="mt-6 flex flex-wrap gap-x-6 gap-y-3 text-sm text-muted-foreground">
               <span>{formatArticleDate(article.date)}</span>
+              {article.author ? <span>Autor: {article.author}</span> : null}
+              {article.translator ? (
+                <span>Prijevod: {article.translator}</span>
+              ) : null}
+              {article.difficulty ? <span>{article.difficulty}</span> : null}
+              {article.readingTimeMinutes ? (
+                <span>{article.readingTimeMinutes} min čitanja</span>
+              ) : null}
               {article.tags.length ? (
                 <span>{article.tags.join(" • ")}</span>
               ) : null}
-              <a href={article.originalUrl} rel="noreferrer" target="_blank">
-                Originalna objava
-              </a>
+              {article.originalUrl ? (
+                <a href={article.originalUrl} rel="noopener noreferrer" target="_blank">
+                  Originalna objava
+                </a>
+              ) : null}
             </div>
 
+            {/* contentHtml is generated from repository-controlled article data. */}
             <div
               className="wp-content mt-10 text-base leading-8 text-foreground"
               dangerouslySetInnerHTML={{ __html: article.contentHtml }}
             />
+
+            {recommendedNext.length ? (
+              <section className="mt-10 rounded-[1.5rem] border border-border/80 bg-background/70 px-5 py-5">
+                <h2 className="text-2xl font-semibold tracking-[-0.04em] text-foreground">
+                  Preporučeno dalje
+                </h2>
+                <div className="mt-4 flex flex-wrap gap-3">
+                  {recommendedNext.map((slug) => (
+                    <a
+                      key={slug}
+                      className="rounded-full border border-border/80 px-4 py-2 text-sm font-medium text-foreground hover:border-primary/40"
+                      href={articleHref(slug)}
+                    >
+                      {slug}
+                    </a>
+                  ))}
+                </div>
+              </section>
+            ) : null}
           </div>
         </article>
       </main>

@@ -1,16 +1,19 @@
-export const YOUTUBE_URL = "https://www.youtube.com/@dvadesetjedan/streams"
-export const COMMUNITY_URL = "https://t.me/+ud6ARwb7rX5lZjU0"
-export const ABOUT_URL = "#/o-projektu"
-export const TOPICS_URL = "#/teme"
-export const FAQ_URL = "#/faq"
-export const RESOURCES_URL = "#/resursi"
-export const ARTICLES_URL = "#/clanci"
-export const BEGINNERS_URL = "#/pocetnici"
-export const EVENTS_URL = "#/dogadaji"
-export const CONTRIBUTE_URL = "#/doprinesi"
-export const LIVESTREAM_URL = "#/livestream"
-export const GITHUB_URL =
-  "https://github.com/dvadesetjedan/dvadesetjedan.github.io"
+import { siteConfig } from "@/data/siteConfig"
+
+export const YOUTUBE_URL = siteConfig.socials.youtube
+export const COMMUNITY_URL = siteConfig.socials.telegram
+export const ABOUT_URL = "/o-projektu/"
+export const TOPICS_URL = "/teme/"
+export const FAQ_URL = "/faq/"
+export const RESOURCES_URL = "/resursi/"
+export const ARTICLES_URL = "/clanci/"
+export const BEGINNERS_URL = "/pocni-ovdje/"
+export const EVENTS_URL = "/dogadaji/"
+export const CITIES_URL = "/gradovi/"
+export const COMMUNITY_PAGE_URL = "/zajednica/"
+export const CONTRIBUTE_URL = "/doprinesi/"
+export const LIVESTREAM_URL = "/livestream/"
+export const GITHUB_URL = siteConfig.socials.github
 export const WHITEPAPER_URL = "https://bitcoin.org/bitcoin.pdf"
 export const BITCOIN_CORE_URL = "https://bitcoincore.org/"
 export const MEMPOOL_URL = "https://mempool.space/"
@@ -21,6 +24,8 @@ export const navigation = [
   { label: "Članci", href: ARTICLES_URL },
   { label: "Livestream", href: LIVESTREAM_URL },
   { label: "Događaji", href: EVENTS_URL },
+  { label: "Gradovi", href: CITIES_URL },
+  { label: "Zajednica", href: COMMUNITY_PAGE_URL },
   { label: "Doprinesi", href: CONTRIBUTE_URL },
 ] as const
 
@@ -33,9 +38,9 @@ export const media = {
 }
 
 export const heroContent = {
-  title: "Regionalni Bitcoin signal na našem jeziku",
+  title: "Bitcoin signal za ljude koji govore našim jezicima.",
   subtitle:
-    "DvadesetJedan okuplja bitcoinere s Balkana kroz livestream, članke, prijevode, Telegram grupu i lokalna okupljanja — bez shitcoina, bez hypea, samo Bitcoin.",
+    "Uči, pitaj i poveži se s bitcoinerima iz regije — bez tradinga, bez tokena, bez obećanja zarade.",
   body: "DvadesetJedan je regionalna verzija otvorene twentyone.world mreže: gradimo javan Bitcoin signal, otvoren prostor za razgovor i sadržaj na jeziku koji ljudima iz naše regije dolazi prirodno.",
   highlight:
     "Bitcoin-only zajednica za Balkan: lokalni jezik, regionalni kontekst i globalno povezana mreža.",
@@ -414,6 +419,8 @@ export const footerLinks = [
   { label: "Livestream", href: LIVESTREAM_URL, external: false },
   { label: "YouTube kanal", href: YOUTUBE_URL, external: true },
   { label: "Događaji", href: EVENTS_URL, external: false },
+  { label: "Gradovi", href: CITIES_URL, external: false },
+  { label: "Zajednica", href: COMMUNITY_PAGE_URL, external: false },
   { label: "Doprinesi", href: CONTRIBUTE_URL, external: false },
   { label: "FAQ", href: FAQ_URL, external: false },
   { label: "GitHub", href: GITHUB_URL, external: true },

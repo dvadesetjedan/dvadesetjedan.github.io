@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && vite build && node scripts/generate-site-artifacts.mjs",
     "lint": "eslint .",
     "check:routes": "node scripts/check-routes.mjs",
     "check:content": "node scripts/check-content.mjs",

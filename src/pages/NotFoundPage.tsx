@@ -15,7 +15,7 @@ export function NotFoundPage() {
   return (
     <Layout>
       <main className="mx-auto max-w-5xl px-5 pb-16 pt-12 sm:px-8 sm:pt-16">
-        <BackLink href="#/">Početna</BackLink>
+        <BackLink href="/">Početna</BackLink>
         <section className="rounded-[2.2rem] border border-border/80 bg-card/70 px-6 py-8 sm:px-10 sm:py-12">
           <p className="text-sm uppercase tracking-[0.24em] text-muted-foreground">
             404
@@ -27,7 +27,7 @@ export function NotFoundPage() {
             Poveznica je možda promijenjena ili stranica više ne postoji.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <ActionButton href="#/" icon={<House className="size-4" />} primary>
+            <ActionButton href="/" icon={<House className="size-4" />} primary>
               Početna
             </ActionButton>
             <ActionButton

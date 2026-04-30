@@ -45,8 +45,38 @@
       name="twitter:image"
       content="https://dvadesetjedan.github.io/social-preview.svg"
     />
+    <script>
+      ;(() => {
+        const hash = window.location.hash
+        if (!hash.startsWith("#/")) return
+
+        let nextPath = hash.slice(1)
+        if (nextPath === "/pocetnici") nextPath = "/pocni-ovdje/"
+        if (nextPath === "/eventi") nextPath = "/dogadaji/"
+        if (nextPath.startsWith("/eventi/")) {
+          nextPath = nextPath.replace(/^\/eventi\//, "/dogadaji/")
+        }
+        if (!nextPath.endsWith("/")) nextPath = `${nextPath}/`
+        window.location.replace(nextPath)
+      })()
+    </script>
   </head>
   <body>
+    <noscript>
+      <main>
+        <h1>DvadesetJedan</h1>
+        <p>
+          Bitcoin-only zajednica za Balkan: lokalni jezik, regionalni kontekst
+          i javni signal bez tradinga, tokena i obećanja zarade.
+        </p>
+        <p>
+          <a href="https://t.me/+ud6ARwb7rX5lZjU0">Telegram</a>
+          <a href="https://www.youtube.com/@dvadesetjedan/streams">YouTube</a>
+          <a href="/clanci/">Članci</a>
+          <a href="/dogadaji/">Događaji</a>
+        </p>
+      </main>
+    </noscript>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

@@ -2,40 +2,21 @@ import fs from "node:fs"
 import path from "node:path"
 
 const sourceRoot = "src"
-const sitePath = "src/data/site.ts"
-const routesPath = "src/lib/routes.ts"
+const failures = []
 
-const forbiddenAnchors = [
-  '"#o-projektu"',
-  '"#teme"',
-  '"#pitanja"',
-  '"#emisije"',
-  'href="#"',
-  'href: "#"',
-]
-
-const requiredHashRoutes = [
-  "#/o-projektu",
-  "#/pocetnici",
-  "#/clanci",
-  "#/teme",
-  "#/resursi",
-  "#/faq",
-  "#/livestream",
-  "#/dogadaji",
-  "#/doprinesi",
-]
-
-const requiredRoutePaths = [
-  "/o-projektu",
-  "/pocetnici",
-  "/clanci",
-  "/teme",
-  "/resursi",
-  "/faq",
-  "/livestream",
-  "/dogadaji",
-  "/doprinesi",
+const validInternalPrefixes = [
+  "/",
+  "/o-projektu/",
+  "/pocni-ovdje/",
+  "/teme/",
+  "/faq/",
+  "/resursi/",
+  "/clanci/",
+  "/livestream/",
+  "/dogadaji/",
+  "/gradovi/",
+  "/zajednica/",
+  "/doprinesi/",
 ]
 
 function listSourceFiles(directory) {
@@ -49,29 +30,31 @@ function listSourceFiles(directory) {
   })
 }
 
-const failures = []
-
 for (const filePath of listSourceFiles(sourceRoot)) {
   const source = fs.readFileSync(filePath, "utf8")
 
-  for (const pattern of forbiddenAnchors) {
-    if (source.includes(pattern)) {
-      failures.push(`Zabranjen goli anchor u ${filePath}: ${pattern}`)
-    }
+  if (filePath !== "src/lib/routes.ts" && source.includes("#/")) {
+    failures.push(`Canonical source must not use hash route in ${filePath}.`)
   }
 }
 
-const siteSource = fs.readFileSync(sitePath, "utf8")
-for (const route of requiredHashRoutes) {
+const siteSource = fs.readFileSync("src/data/site.ts", "utf8")
+for (const route of validInternalPrefixes.slice(1)) {
   if (!siteSource.includes(route)) {
-    failures.push(`Nedostaje poznata interna ruta u ${sitePath}: ${route}`)
+    failures.push(`Missing clean internal route in src/data/site.ts: ${route}`)
   }
 }
 
-const routesSource = fs.readFileSync(routesPath, "utf8")
-for (const routePath of requiredRoutePaths) {
-  if (!routesSource.includes(routePath)) {
-    failures.push(`Ruta nije podržana u ${routesPath}: ${routePath}`)
+const routeSource = fs.readFileSync("src/lib/routes.ts", "utf8")
+for (const route of validInternalPrefixes) {
+  if (!routeSource.includes(route)) {
+    failures.push(`Route parser does not mention ${route}`)
+  }
+}
+
+for (const alias of ["/pocetnici/", "/eventi/"]) {
+  if (!routeSource.includes(alias)) {
+    failures.push(`Route parser is missing legacy alias ${alias}`)
   }
 }
 

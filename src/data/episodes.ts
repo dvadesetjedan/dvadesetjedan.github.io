@@ -4,6 +4,13 @@ export type EpisodeEntry = {
   summary: string
   youtubeUrl: string
   publishedAt?: string
+  summaryBullets?: string[]
+  chapters?: { time: string; title: string }[]
+  links?: { label: string; href: string }[]
+  clips?: { label: string; href: string }[]
+  transcriptUrl?: string
+  relatedArticleSlugs?: string[]
+  relatedEventSlugs?: string[]
 }
 
 export const episodes: EpisodeEntry[] = [

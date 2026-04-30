@@ -2,27 +2,35 @@ import { useEffect, useState } from "react"
 
 import { navigation, media } from "@/data/site"
 import { communityHref } from "@/lib/content"
-import { parseRoute, type Route } from "@/lib/routes"
+import { parseRouteFromPath, type Route } from "@/lib/routes"
 
 function isActiveNavigationItem(route: Route, href: string) {
   if (href.startsWith("http")) return false
 
-  if (href === "#/clanci") {
+  if (href === "/clanci/") {
     return route.type === "articles" || route.type === "article"
   }
 
-  if (href === "#/dogadaji") {
+  if (href === "/dogadaji/") {
     return route.type === "events" || route.type === "event"
   }
 
+  if (href === "/livestream/") {
+    return route.type === "livestream" || route.type === "livestreamEpisode"
+  }
+
+  if (href === "/gradovi/") {
+    return route.type === "cities" || route.type === "city"
+  }
+
   const routeByHref: Record<string, Route["type"]> = {
-    "#/o-projektu": "about",
-    "#/teme": "topics",
-    "#/faq": "faq",
-    "#/resursi": "resources",
-    "#/livestream": "livestream",
-    "#/pocetnici": "beginners",
-    "#/doprinesi": "contribute",
+    "/o-projektu/": "about",
+    "/teme/": "topics",
+    "/faq/": "faq",
+    "/resursi/": "resources",
+    "/pocni-ovdje/": "beginners",
+    "/zajednica/": "community",
+    "/doprinesi/": "contribute",
   }
 
   return routeByHref[href] === route.type
@@ -30,20 +38,24 @@ function isActiveNavigationItem(route: Route, href: string) {
 
 export function Header() {
   const [route, setRoute] = useState<Route>(() =>
-    parseRoute(window.location.hash),
+    parseRouteFromPath(window.location.pathname),
   )
 
   useEffect(() => {
-    const onHashChange = () => setRoute(parseRoute(window.location.hash))
+    const onPopState = () => setRoute(parseRouteFromPath(window.location.pathname))
 
-    window.addEventListener("hashchange", onHashChange)
-    return () => window.removeEventListener("hashchange", onHashChange)
+    window.addEventListener("popstate", onPopState)
+    window.addEventListener("dvadesetjedan:navigation", onPopState)
+    return () => {
+      window.removeEventListener("popstate", onPopState)
+      window.removeEventListener("dvadesetjedan:navigation", onPopState)
+    }
   }, [])
 
   return (
     <header className="sticky top-0 z-40 border-b border-border/70 bg-background/88 backdrop-blur-xl">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-5 py-4 sm:gap-4 sm:px-8">
-        <a className="min-w-0 shrink-0 grow-0" href="#/">
+        <a className="min-w-0 shrink-0 grow-0" href="/">
           {media.logoUrl ? (
             <img
               alt="DvadesetJedan"
@@ -71,7 +83,7 @@ export function Header() {
                     : "border-transparent hover:text-foreground"
                 }`}
                 href={item.href}
-                rel={item.href.startsWith("http") ? "noreferrer" : undefined}
+                rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
                 target={item.href.startsWith("http") ? "_blank" : undefined}
               >
                 {item.label}
@@ -83,7 +95,7 @@ export function Header() {
         <a
           className="inline-flex shrink-0 items-center gap-2 rounded-full border border-border/80 bg-card px-3 py-2 text-sm font-medium text-foreground sm:px-4"
           href={communityHref()}
-          rel="noreferrer"
+          rel="noopener noreferrer"
           target="_blank"
         >
           <span className="hidden sm:inline">Uđi u Telegram</span>
@@ -106,7 +118,7 @@ export function Header() {
                     : "border-transparent hover:text-foreground"
                 }`}
                 href={item.href}
-                rel={item.href.startsWith("http") ? "noreferrer" : undefined}
+                rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
                 target={item.href.startsWith("http") ? "_blank" : undefined}
               >
                 {item.label}

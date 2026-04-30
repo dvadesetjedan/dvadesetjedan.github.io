@@ -1,30 +1,43 @@
 # DvadesetJedan
 
-DvadesetJedan – regionalni Bitcoin signal, lokalni jezik i otvorena zajednica u duhu twentyone.world koncepta.
+DvadesetJedan je regionalni Bitcoin-only hub: lokalni jezik, javni signal, livestream, članci, događaji, gradovi i otvorena zajednica u duhu twentyone.world koncepta.
+
+Canonical URL:
+
+```text
+https://dvadesetjedan.com
+```
 
 ## Naredbe
 
 ```bash
 npm install
 npm run dev
+npm run lint
+npm run check
 npm run build
 ```
 
-## Održavanje sadržaja
+`npm run build` generira Vite build i statičke artefakte: route-specific HTML, `sitemap.xml`, `robots.txt`, `rss.xml`, `feed.json` i `404.html`.
 
-- članci se održavaju u `src/data/articles.ts`
-- događaji se održavaju u `src/data/events.ts`
-- livestream epizode se održavaju u `src/data/episodes.ts`
-- glavni tekstovi, navigacija i linkovi su u `src/data/site.ts`
-- prije slanja promjene pokrenuti `npm run check`
-- ne izmišljati događaje, epizode, autore, linkove ili datume
+## Sadržaj
+
+- članci: `src/data/articles.ts`
+- događaji: `src/data/events.ts`
+- livestream epizode: `src/data/episodes.ts`
+- gradovi: `src/data/cities.ts`
+- 21-step onboarding: `src/data/onboarding.ts`
+- site copy i navigacija: `src/data/site.ts`
+- canonical config: `src/data/siteConfig.ts`
+
+## Pravila
+
+- ne izmišljati događaje, epizode, autore, linkove, datume, lokacije ili kontakte
 - zadržati Bitcoin-only fokus
+- bez trading signala, tokena, leveragea i obećanja zarade
+- sadržaj je obrazovni i nije financijski, porezni ili pravni savjet
+- pisati latinicom i regionalno razumljivo
 
-### Livestream epizode
+## Dokumentacija
 
-- epizode se održavaju u `src/data/episodes.ts`
-- najnovija epizoda mora biti prva
-- ne dodavati epizode bez potvrđenog YouTube URL-a
-- ako nema stvarnog naslova, koristi neutralni naslov s datumom
-- `publishedAt` koristiti u `YYYY-MM-DD` formatu
-- nakon izmjena pokrenuti `npm run check`
+Pogledaj `docs/architecture.md`, `docs/content-model.md`, `docs/editorial-policy.md`, `docs/deployment.md` i `CONTRIBUTING.md`.

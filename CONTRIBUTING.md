@@ -1,76 +1,60 @@
 # Kako doprinijeti DvadesetJedan stranici
 
-Hvala na interesu za doprinos DvadesetJedan stranici. Ovaj projekt je statični Vite + React + TypeScript hub za regionalnu Bitcoin-only zajednicu.
+Hvala na interesu za doprinos. Projekt je statični Vite + React + TypeScript hub za regionalnu Bitcoin-only zajednicu.
 
 ## Pokretanje lokalno
-
-Pokreni projekt lokalno ovim redom:
 
 ```bash
 npm install
 npm run dev
 ```
 
-Prije slanja promjena primarno pokreni:
-
-```bash
-npm run check
-```
-
-Po potrebi možeš pokrenuti i pojedinačne komande:
+Prije slanja promjena pokreni:
 
 ```bash
 npm run lint
+npm run check
 npm run build
-npm run format
 ```
 
-## Kako dodati ili urediti članak
+## Članci
 
-- Popis i sadržaj članaka nalazi se u `src/data/articles.ts`.
-- Za manje tekstualne ispravke ili kuratorske oznake koristi i `src/data/site.ts`.
-- Ne izmišljaj nove članke, autore, prijevode ili vanjske poveznice ako nisu potvrđeni.
-- Provjeri da članak nema mrtvih linkova i da se ispravno otvara kroz `#/clanci/<slug>`.
+- Sadržaj je u `src/data/articles.ts`.
+- Ne izmišljaj autore, izvore, prijevode, datume ili vanjske poveznice.
+- Ako je tekst prijevod, prati `originalUrl`, autora originala i `permissionStatus` kad je poznato.
+- Canonical ruta je `/clanci/<slug>/`.
 
-## Kako dodati događaj
+## Događaji
 
-- Događaji se nalaze u `src/data/events.ts`.
-- Svaki događaj treba imati točne metapodatke: naslov, vrijeme, lokaciju, adresu, grad, državu, poveznicu za prijavu i kartu.
-- Ne izmišljaj događaje, datume, lokacije ili RSVP poveznice.
-- Ako informacija nije potvrđena, radije koristi neutralnu formulaciju nego kontradiktoran opis.
+- Događaji su u `src/data/events.ts`.
+- Potrebni su potvrđeni naslov, vrijeme, lokacija, grad, država, prijava i karta.
+- Ne izmišljaj venue, vrijeme, program, city leadove ili RSVP linkove.
+- Ako događaj pripada postojećem gradu, koristi `citySlug`.
 
-## Kako dodati livestream epizodu
+## Livestream epizode
 
-- Dodaj epizodu u `src/data/episodes.ts`.
+- Epizode su u `src/data/episodes.ts`.
 - Najnovija epizoda ide prva.
 - Koristi potvrđeni YouTube URL.
-- Ne izmišljaj specifične teme ako nisu potvrđene.
-- Ako nema stvarnog naslova, koristi neutralni naslov s datumom.
-- `publishedAt` format je `YYYY-MM-DD`.
-- Pokreni `npm run check`.
+- Shownotes, poglavlja i povezane linkove dodaj samo kad su provjereni.
 
-## Kako predložiti promjenu teksta
+## Gradovi
 
-- Većina sadržaja za stranicu nalazi se u `src/data/site.ts`.
-- Predlaži promjene koje poboljšavaju jasnoću, regionalnu razumljivost i Bitcoin-only ton.
-- Provjeri da nova formulacija ne zvuči previše usko lokalno i da ne uvodi nepotrebne anglizme.
+- Gradovi su u `src/data/cities.ts`.
+- Grad se dodaje kada postoji javni događaj ili siguran javni kontekst.
+- Ne dodavati privatne kontakte, city leadove ili neprovjerene lokalne tvrdnje.
 
-## Jezične smjernice
+## Jezična politika
 
-- Koristi hrvatski jezik u latinici.
-- Piši regionalno razumljivo, bez usko administrativnog ili institucionalnog tona.
-- Održavaj miran, ozbiljan i jasan stil.
-- Prevedi preostale engleske UI fraze kada je to jednostavno i smisleno.
+Piši regionalno razumljivo na latinici. Prihvatljive su hrvatska, srpska, bosanska i crnogorska varijanta; cilj je jasnoća, ne jezična uniformnost.
 
-## Bitcoin-only smjernice
+## Bitcoin-only editorial policy
 
-- Ne dodavaj shitcoin, token, trading ili signal sadržaj.
-- Ne uvodi hype, obećanja zarade ni tržišni žargon.
-- Fokus treba ostati na Bitcoinu, obrazovanju, zajednici, dugoročnom razmišljanju i osobnoj odgovornosti.
+DvadesetJedan nije investicijski savjet, trading grupa ni projekt o kriptovalutama općenito. Ne dodavati altcoin, token, leverage, price prediction, “get rich quick” ili porezno-pravno savjetovanje.
 
-## Otvaranje pull requesta
+## Pull request
 
 - Radi manje, jasne promjene koje je lako pregledati.
-- Prije slanja obavezno pokreni `npm run check`.
-- Provjeri da nema mrtvih linkova, praznih placeholdera ni izmišljenih podataka.
-- U opisu pull requesta ukratko napiši što si promijenio i koje si komande pokrenuo.
+- U PR opisu napiši što si promijenio i koje si komande pokrenuo.
+- Provjeri da nema hash URL-ova za canonical internu navigaciju.
+- Provjeri da nema izmišljenih činjenica.

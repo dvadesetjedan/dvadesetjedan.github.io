@@ -11,6 +11,7 @@ import {
   beginnerTopics,
   readingOrder,
 } from "@/data/site"
+import { beginnerSafetyWarnings, onboardingSteps } from "@/data/onboarding"
 import { articleHref, formatArticleDate } from "@/lib/content"
 import { usePageMeta } from "@/lib/usePageMeta"
 
@@ -27,17 +28,18 @@ export function BeginnersPage({ articles }: { articles: ArticleEntry[] }) {
   return (
     <Layout>
       <main className="mx-auto max-w-7xl px-5 pb-16 pt-12 sm:px-8 sm:pt-16">
-        <BackLink href="#/">Početna</BackLink>
+        <BackLink href="/">Početna</BackLink>
         <section className="rounded-[2.2rem] border border-border/80 bg-card/70 px-6 py-8 sm:px-10 sm:py-12">
           <p className="text-sm uppercase tracking-[0.24em] text-muted-foreground">
             Početnici
           </p>
           <h1 className="mt-4 max-w-4xl text-5xl font-semibold tracking-[-0.05em] text-foreground sm:text-7xl">
-            Novi si u Bitcoinu?
+            Ne moraš ništa kupiti.
           </h1>
           <p className="mt-6 max-w-3xl text-lg leading-8 text-muted-foreground">
-            Kreni od osnova i izbjegni najčešće greške. Ovo je početni put kroz
-            najvažnije teme za prvi smiren ulazak u Bitcoin.
+            Prvo razumij osnove i sigurnost. Ovo je početni put kroz
+            najvažnije Bitcoin teme bez žurbe, hypea i početničkih sigurnosnih
+            grešaka.
           </p>
         </section>
 
@@ -87,6 +89,44 @@ export function BeginnersPage({ articles }: { articles: ArticleEntry[] }) {
               </div>
             ))}
           </div>
+        </section>
+
+        <section className="mt-10 rounded-[1.8rem] border border-border/80 bg-card px-6 py-8 sm:px-10">
+          <h2 className="text-3xl font-semibold tracking-[-0.04em] text-foreground">
+            21 korak za smiren početak
+          </h2>
+          <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+            {onboardingSteps.map((step, index) => (
+              <div
+                key={step.title}
+                className="rounded-[1.4rem] border border-border/70 bg-background/70 px-5 py-5"
+              >
+                <p className="text-xs uppercase tracking-[0.18em] text-primary">
+                  Korak {index + 1}
+                </p>
+                <h3 className="mt-3 text-xl font-semibold tracking-[-0.03em] text-foreground">
+                  {step.title}
+                </h3>
+                <p className="mt-3 text-sm leading-7 text-muted-foreground">
+                  {step.text}
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="mt-10 rounded-[1.8rem] border border-border/80 bg-card px-6 py-8 sm:px-10">
+          <h2 className="text-3xl font-semibold tracking-[-0.04em] text-foreground">
+            Sigurnosni podsjetnik
+          </h2>
+          <ul className="mt-5 grid gap-3 text-base leading-8 text-muted-foreground md:grid-cols-2">
+            {beginnerSafetyWarnings.map((warning) => (
+              <li key={warning} className="flex gap-3">
+                <span className="mt-3 size-2 shrink-0 rounded-full bg-primary" />
+                <span>{warning}</span>
+              </li>
+            ))}
+          </ul>
         </section>
 
         {beginnerLinks.length ? (

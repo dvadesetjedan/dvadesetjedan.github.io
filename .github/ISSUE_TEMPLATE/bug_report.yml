@@ -1,0 +1,21 @@
+name: Prijava greške
+description: Prijavi problem na web stranici.
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Što ne radi?
+      description: Opiši problem bez privatnih podataka.
+    validations:
+      required: true
+  - type: input
+    id: url
+    attributes:
+      label: Poveznica
+      placeholder: https://dvadesetjedan.com/...
+  - type: textarea
+    id: expected
+    attributes:
+      label: Što si očekivao?
