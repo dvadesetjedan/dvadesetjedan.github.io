@@ -27,10 +27,10 @@ export const events: EventEntry[] = [
       "Govorimo srpski i engleski. Dobrodošli su svi, bez obzira na razinu znanja o Bitcoinu. Početnici su posebno dobrodošli.",
       "Ako nas ne pronađete po Bitcoin majicama, provjerite Telegram grupu za točnu lokaciju kod restorana Druga Kuća: https://t.me/dvadesetjedan21",
       "RSVP i detalji događaja dostupni su na Meetup stranici.",
-      "Cover fotografija: Ratko Bozovic, CC BY 2.0, via Wikimedia Commons.",
+      "Cover fotografija: Beogradski izlet.",
     ],
     coverImage:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Crazy_sunset_on_Ada_Ciganlija.jpg/3840px-Crazy_sunset_on_Ada_Ciganlija.jpg",
+      "https://beogradskiizlet.com/wp-content/uploads/2026/03/Biciklisticka-staza-Ada-Ciganlija-sa-pogledom-na-jezero.jpg",
     start: "2026-05-23T16:00:00+02:00",
     end: "2026-05-23T19:00:00+02:00",
     venue: "Restaurant Druga Kuća - Ada Ciganlija",
