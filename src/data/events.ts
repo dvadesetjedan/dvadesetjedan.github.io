@@ -29,7 +29,7 @@ export const events: EventEntry[] = [
       "Dostupne su Networking, Experience i Villa ulaznice. Broj mjesta je ograničen, a detalji i kupnja ulaznica dostupni su na službenoj Villa BTC stranici.",
       "Cover fotografija: Villa BTC.",
     ],
-    coverImage: "https://villabtc.net/assets/images/galerija%203.jpg",
+    coverImage: "/events/villa-btc-split-podstrana.jpg",
     start: "2026-06-05T00:00:00+02:00",
     end: "2026-06-08T00:00:00+02:00",
     displayDate: "5. – 7. lipnja 2026.",
