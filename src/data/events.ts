@@ -16,6 +16,32 @@ export type EventEntry = {
 
 export const events: EventEntry[] = [
   {
+    slug: "bitcoin-only-meetup-belgrade-2026-05-23",
+    title: "Bitcoin only meetup in Belgrade",
+    summary:
+      "Dvadeset Jedan meetup u Beogradu na posebnoj lokaciji na Adi Ciganliji. Otvoreno druženje za bitcoinere, početnike i sve koji žele razgovarati o Bitcoinu, ekonomiji, tehnologiji i zajednici.",
+    description: [
+      "Ovog mjeseca meetup se održava na posebnoj novoj lokaciji na Adi Ciganliji.",
+      "Dvadeset Jedan je grupa Bitcoin maksimalista s ex-yu prostora. Okupljamo se kako bismo razgovarali o Bitcoinu, ekonomiji, tehnologiji, filozofiji i povezanim temama. Ponekad predstavljamo projekte, organiziramo radionice i snimamo podcast.",
+      "Druženje se održava 23. svibnja u 16:00 u restoranu Druga Kuća na Adi Ciganliji u Beogradu.",
+      "Govorimo srpski i engleski. Dobrodošli su svi, bez obzira na razinu znanja o Bitcoinu. Početnici su posebno dobrodošli.",
+      "Ako nas ne pronađete po Bitcoin majicama, provjerite Telegram grupu za točnu lokaciju kod restorana Druga Kuća: https://t.me/dvadesetjedan21",
+      "RSVP i detalji događaja dostupni su na Meetup stranici.",
+    ],
+    coverImage:
+      "https://dvadesetjedan.com/wp-content/uploads/2025/06/DJ_-_YT_background_01.jpg",
+    start: "2026-05-23T16:00:00+02:00",
+    end: "2026-05-23T19:00:00+02:00",
+    venue: "Restaurant Druga Kuća - Ada Ciganlija",
+    address: "Ada Ciganlija 2",
+    city: "Belgrade",
+    country: "Serbia",
+    meetupUrl:
+      "https://www.meetup.com/dvadeset-jedan/events/314211199/?utm_medium=referral&utm_campaign=share-btn_savedevents_share_modal&utm_source=link&utm_version=v2&member_id=60579322",
+    mapUrl:
+      "https://www.google.com/maps/search/?api=1&query=Restaurant+Druga+Kuca+Ada+Ciganlija+2+Belgrade+Serbia",
+  },
+  {
     slug: "meetup-rab",
     title: "Meetup Rab",
     summary:
