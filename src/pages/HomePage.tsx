@@ -8,6 +8,8 @@ import { EventsIcon, TelegramIcon } from "@/components/Icons"
 import { InlineLink } from "@/components/InlineLink"
 import { Layout } from "@/components/Layout"
 import { Section } from "@/components/Section"
+import { episodes } from "@/data/episodes"
+import { events } from "@/data/events"
 import { featuredArticles } from "@/data/featuredArticles"
 import {
   ABOUT_URL,
@@ -27,14 +29,66 @@ import {
   topics,
   trustItems,
 } from "@/data/site"
-import { articleHref, communityHref } from "@/lib/content"
+import {
+  articleHref,
+  communityHref,
+  eventHref,
+  formatEpisodeDate,
+  formatEventDate,
+} from "@/lib/content"
 import { usePageMeta } from "@/lib/usePageMeta"
+
+type LatestCardProps = {
+  eyebrow: string
+  title: string
+  text: string
+  href: string
+  cta: string
+  external?: boolean
+}
+
+function LatestCard({
+  eyebrow,
+  title,
+  text,
+  href,
+  cta,
+  external = false,
+}: LatestCardProps) {
+  return (
+    <a
+      className="rounded-[1.5rem] border border-border/80 bg-card px-5 py-5 transition-colors hover:border-primary/40"
+      href={href}
+      rel={external ? "noreferrer" : undefined}
+      target={external ? "_blank" : undefined}
+    >
+      <p className="text-xs uppercase tracking-[0.2em] text-primary">
+        {eyebrow}
+      </p>
+      <h3 className="mt-3 text-xl font-semibold tracking-[-0.03em] text-foreground">
+        {title}
+      </h3>
+      <p className="mt-3 text-sm leading-7 text-muted-foreground">{text}</p>
+      <span className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-primary">
+        {cta} <ArrowUpRight className="size-4" />
+      </span>
+    </a>
+  )
+}
 
 export function HomePage() {
   usePageMeta(
     "DvadesetJedan | Regionalni Bitcoin signal",
     "DvadesetJedan je regionalni Bitcoin-only signal na našem jeziku: članci, livestream, događaji i zajednica za bitcoinere s Balkana.",
   )
+
+  const latestEpisode = episodes[0]
+  const upcomingEvent = events
+    .filter((event) => new Date(event.end) >= new Date())
+    .sort(
+      (left, right) =>
+        new Date(left.start).getTime() - new Date(right.start).getTime(),
+    )[0]
 
   return (
     <Layout>
@@ -126,6 +180,48 @@ export function HomePage() {
 
         <Section title="Kako se uključiti">
           <ActionCardGrid items={involvementCards} />
+        </Section>
+
+        <Section
+          title="Najnovije iz DvadesetJedan"
+          intro="Brzi ulaz u zadnji livestream, preporučene tekstove i događaje zajednice."
+        >
+          <div className="grid gap-4 md:grid-cols-3">
+            <LatestCard
+              eyebrow="Livestream"
+              title="Najnoviji livestream"
+              text={
+                latestEpisode
+                  ? `${latestEpisode.title}${
+                      latestEpisode.publishedAt
+                        ? ` • ${formatEpisodeDate(latestEpisode.publishedAt)}`
+                        : ""
+                    }`
+                  : "Najnovije livestreamove možeš pronaći na Livestream stranici."
+              }
+              href={latestEpisode?.youtubeUrl ?? LIVESTREAM_URL}
+              cta={latestEpisode ? "Pogledaj epizodu" : "Otvori livestream"}
+              external={Boolean(latestEpisode)}
+            />
+            <LatestCard
+              eyebrow="Članci"
+              title="Preporučeni tekstovi"
+              text="Kreni od početnog redoslijeda čitanja i izgradi razumijevanje korak po korak."
+              href={ARTICLES_URL}
+              cta="Čitaj članke"
+            />
+            <LatestCard
+              eyebrow="Događaji"
+              title={upcomingEvent ? upcomingEvent.title : "Događaji i meetupi"}
+              text={
+                upcomingEvent
+                  ? `${formatEventDate(upcomingEvent)} • ${upcomingEvent.city}`
+                  : "Trenutno nema javno najavljenih događaja. Pogledaj arhivu ili predloži meetup u svom gradu."
+              }
+              href={upcomingEvent ? eventHref(upcomingEvent.slug) : EVENTS_URL}
+              cta={upcomingEvent ? "Pogledaj događaj" : "Otvori događaje"}
+            />
+          </div>
         </Section>
 
         <Section

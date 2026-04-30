@@ -19,3 +19,12 @@ npm run build
 - prije slanja promjene pokrenuti `npm run check`
 - ne izmišljati događaje, epizode, autore, linkove ili datume
 - zadržati Bitcoin-only fokus
+
+### Livestream epizode
+
+- epizode se održavaju u `src/data/episodes.ts`
+- najnovija epizoda mora biti prva
+- ne dodavati epizode bez potvrđenog YouTube URL-a
+- ako nema stvarnog naslova, koristi neutralni naslov s datumom
+- `publishedAt` koristiti u `YYYY-MM-DD` formatu
+- nakon izmjena pokrenuti `npm run check`

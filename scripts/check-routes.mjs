@@ -1,16 +1,20 @@
 import fs from "node:fs"
+import path from "node:path"
 
-const siteSource = fs.readFileSync("src/data/site.ts", "utf8")
+const sourceRoot = "src"
+const sitePath = "src/data/site.ts"
+const routesPath = "src/lib/routes.ts"
 
 const forbiddenAnchors = [
   '"#o-projektu"',
   '"#teme"',
   '"#pitanja"',
   '"#emisije"',
-  "href: \"#\"",
+  'href="#"',
+  'href: "#"',
 ]
 
-const requiredRoutes = [
+const requiredHashRoutes = [
   "#/o-projektu",
   "#/pocetnici",
   "#/clanci",
@@ -22,14 +26,54 @@ const requiredRoutes = [
   "#/doprinesi",
 ]
 
-const failures = [
-  ...forbiddenAnchors
-    .filter((anchor) => siteSource.includes(anchor))
-    .map((anchor) => `Zabranjen goli anchor u src/data/site.ts: ${anchor}`),
-  ...requiredRoutes
-    .filter((route) => !siteSource.includes(route))
-    .map((route) => `Nedostaje poznata interna ruta u src/data/site.ts: ${route}`),
+const requiredRoutePaths = [
+  "/o-projektu",
+  "/pocetnici",
+  "/clanci",
+  "/teme",
+  "/resursi",
+  "/faq",
+  "/livestream",
+  "/dogadaji",
+  "/doprinesi",
 ]
+
+function listSourceFiles(directory) {
+  return fs.readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
+    const fullPath = path.join(directory, entry.name)
+
+    if (entry.isDirectory()) return listSourceFiles(fullPath)
+    if (/\.(ts|tsx)$/.test(entry.name)) return [fullPath]
+
+    return []
+  })
+}
+
+const failures = []
+
+for (const filePath of listSourceFiles(sourceRoot)) {
+  const source = fs.readFileSync(filePath, "utf8")
+
+  for (const pattern of forbiddenAnchors) {
+    if (source.includes(pattern)) {
+      failures.push(`Zabranjen goli anchor u ${filePath}: ${pattern}`)
+    }
+  }
+}
+
+const siteSource = fs.readFileSync(sitePath, "utf8")
+for (const route of requiredHashRoutes) {
+  if (!siteSource.includes(route)) {
+    failures.push(`Nedostaje poznata interna ruta u ${sitePath}: ${route}`)
+  }
+}
+
+const routesSource = fs.readFileSync(routesPath, "utf8")
+for (const routePath of requiredRoutePaths) {
+  if (!routesSource.includes(routePath)) {
+    failures.push(`Ruta nije podržana u ${routesPath}: ${routePath}`)
+  }
+}
 
 if (failures.length) {
   console.error(failures.join("\n"))

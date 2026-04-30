@@ -39,6 +39,16 @@ npm run format
 - Ne izmišljaj događaje, datume, lokacije ili RSVP poveznice.
 - Ako informacija nije potvrđena, radije koristi neutralnu formulaciju nego kontradiktoran opis.
 
+## Kako dodati livestream epizodu
+
+- Dodaj epizodu u `src/data/episodes.ts`.
+- Najnovija epizoda ide prva.
+- Koristi potvrđeni YouTube URL.
+- Ne izmišljaj specifične teme ako nisu potvrđene.
+- Ako nema stvarnog naslova, koristi neutralni naslov s datumom.
+- `publishedAt` format je `YYYY-MM-DD`.
+- Pokreni `npm run check`.
+
 ## Kako predložiti promjenu teksta
 
 - Većina sadržaja za stranicu nalazi se u `src/data/site.ts`.
