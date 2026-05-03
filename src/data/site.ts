@@ -37,8 +37,7 @@ export const media = {
 
 export const heroContent = {
   title: "Bitcoin signal za ljude koji govore našim jezicima.",
-  subtitle:
-    "Uči, pitaj i poveži se s bitcoinerima iz regije — bez tradinga, bez tokena, bez obećanja zarade.",
+  subtitle: "Uči, pitaj i poveži se s bitcoinerima iz regije.",
   body: "DvadesetJedan je regionalna verzija otvorene twentyone.world mreže: gradimo javan Bitcoin signal, otvoren prostor za razgovor i sadržaj na jeziku koji ljudima iz naše regije dolazi prirodno.",
   highlight:
     "Bitcoin-only zajednica za Balkan: lokalni jezik, regionalni kontekst i globalno povezana mreža.",
