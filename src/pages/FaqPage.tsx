@@ -4,7 +4,7 @@ import { ActionButton } from "@/components/ActionButton"
 import { BackLink } from "@/components/BackLink"
 import { Layout } from "@/components/Layout"
 import { PageHero } from "@/components/PageHero"
-import { BEGINNERS_URL, CONTRIBUTE_URL, faqGroups } from "@/data/site"
+import { BEGINNERS_URL, CONTRIBUTE_URL, faqGroups, media } from "@/data/site"
 import { communityHref } from "@/lib/content"
 import { usePageMeta } from "@/lib/usePageMeta"
 
@@ -37,7 +37,23 @@ export function FaqPage() {
                     className="rounded-[1.5rem] border border-border/80 bg-card px-5 py-5"
                   >
                     <summary className="cursor-pointer list-none text-lg font-medium text-foreground">
-                      {item.question}
+                      {item.question ===
+                      "Je li DvadesetJedan dio twentyone.world?" ? (
+                        <>
+                          Je li DvadesetJedan dio{" "}
+                          <a
+                            className="underline decoration-border underline-offset-4 hover:text-primary"
+                            href={media.twentyOneUrl}
+                            rel="noopener noreferrer"
+                            target="_blank"
+                          >
+                            twentyone.world
+                          </a>
+                          ?
+                        </>
+                      ) : (
+                        item.question
+                      )}
                     </summary>
                     <p className="mt-4 max-w-3xl text-sm leading-7 text-muted-foreground">
                       {item.answer}

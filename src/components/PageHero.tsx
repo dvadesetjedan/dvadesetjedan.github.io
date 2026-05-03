@@ -1,3 +1,5 @@
+import type { ReactNode } from "react"
+
 export function PageHero({
   eyebrow,
   title,
@@ -5,7 +7,7 @@ export function PageHero({
 }: {
   eyebrow?: string
   title: string
-  intro: string
+  intro: ReactNode
 }) {
   return (
     <section className="rounded-[2.2rem] border border-border/80 bg-card/70 px-6 py-8 sm:px-10 sm:py-12">

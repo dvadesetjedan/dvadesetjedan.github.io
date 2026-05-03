@@ -1,6 +1,6 @@
 # DvadesetJedan
 
-DvadesetJedan je regionalni Bitcoin-only hub: lokalni jezik, javni signal, livestream, članci, događaji, gradovi i otvorena zajednica u duhu twentyone.world koncepta.
+DvadesetJedan je regionalni Bitcoin-only hub: lokalni jezik, javni signal, livestream, članci, događaji, gradovi i otvorena zajednica u duhu [twentyone.world](https://twentyone.world/) koncepta.
 
 Canonical URL:
 

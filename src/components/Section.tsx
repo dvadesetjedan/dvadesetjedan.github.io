@@ -2,9 +2,9 @@ import type { ReactNode } from "react"
 
 type SectionProps = {
   id?: string
-  title: string
-  intro?: string
-  introTwo?: string
+  title: ReactNode
+  intro?: ReactNode
+  introTwo?: ReactNode
   children: ReactNode
 }
 

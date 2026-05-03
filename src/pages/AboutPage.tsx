@@ -58,7 +58,20 @@ export function AboutPage() {
         </Section>
 
         <Section
-          title="Dio otvorenog TwentyOne.World koncepta"
+          title={
+            <>
+              Dio otvorenog{" "}
+              <a
+                className="underline decoration-border underline-offset-4 hover:text-primary"
+                href={media.twentyOneUrl}
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                TwentyOne.World
+              </a>{" "}
+              koncepta
+            </>
+          }
           intro="DvadesetJedan je regionalni izraz otvorenog twentyone koncepta: stalan Bitcoin signal, lokalni jezik i otvorena zajednica. Ideja nije graditi zatvoreni klub, nego javni prostor u kojem ljudi mogu učiti, pitati, doprinositi i povezivati se."
         >
           <div className="flex flex-wrap gap-3">

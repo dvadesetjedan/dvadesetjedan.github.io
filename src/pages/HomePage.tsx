@@ -98,7 +98,15 @@ export function HomePage() {
           <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_26rem] lg:items-center">
             <div className="hero-copy min-w-0 w-full max-w-[calc(100vw-2.5rem)] sm:max-w-4xl">
               <p className="text-sm uppercase tracking-[0.24em] text-muted-foreground">
-                DvadesetJedan / Balkan / TwentyOne.World
+                DvadesetJedan / Balkan /{" "}
+                <a
+                  className="underline decoration-border underline-offset-4 hover:text-foreground"
+                  href={media.twentyOneUrl}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  TwentyOne.World
+                </a>
               </p>
               <h1 className="mt-5 max-w-full break-words text-3xl font-semibold tracking-[-0.04em] text-foreground sm:text-6xl lg:text-7xl">
                 {heroContent.title}
@@ -107,7 +115,18 @@ export function HomePage() {
                 {heroContent.subtitle}
               </p>
               <p className="mt-7 max-w-3xl break-words text-base leading-8 text-muted-foreground sm:text-lg">
-                {heroContent.body}
+                DvadesetJedan je regionalna verzija otvorene{" "}
+                <a
+                  className="text-foreground underline decoration-border underline-offset-4 hover:text-primary"
+                  href={media.twentyOneUrl}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  twentyone.world
+                </a>{" "}
+                mreže: gradimo javan Bitcoin signal, otvoren prostor za
+                razgovor i sadržaj na jeziku koji ljudima iz naše regije dolazi
+                prirodno.
               </p>
               <p className="mt-6 max-w-3xl break-words rounded-[1.4rem] border border-primary/20 bg-primary/8 px-5 py-4 text-sm leading-7 text-foreground">
                 {heroContent.highlight}
@@ -242,9 +261,17 @@ export function HomePage() {
         >
           <div className="rounded-[1.6rem] border border-border/80 bg-card px-6 py-6">
             <p className="text-base leading-8 text-foreground">
-              Projekt je dio otvorenog TwentyOne.World koncepta i gradi javan
-              prostor za lokalni jezik, regionalni kontekst i globalno povezanu
-              Bitcoin zajednicu.
+              Projekt je dio otvorenog{" "}
+              <a
+                className="underline decoration-border underline-offset-4 hover:text-primary"
+                href={media.twentyOneUrl}
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                TwentyOne.World
+              </a>{" "}
+              koncepta i gradi javan prostor za lokalni jezik, regionalni
+              kontekst i globalno povezanu Bitcoin zajednicu.
             </p>
           </div>
           <div className="mt-6 flex flex-wrap gap-3">
