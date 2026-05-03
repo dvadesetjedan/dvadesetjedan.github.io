@@ -2,7 +2,6 @@ import { ArrowUpRight, PlayCircle, Send, ShieldCheck } from "lucide-react"
 
 import { ActionButton } from "@/components/ActionButton"
 import { ActionCardGrid } from "@/components/ActionCardGrid"
-import { BrandVisual } from "@/components/BrandVisual"
 import { BulletedPanel } from "@/components/BulletedPanel"
 import { CardGrid } from "@/components/CardGrid"
 import { EventsIcon, TelegramIcon } from "@/components/Icons"
@@ -157,7 +156,13 @@ export function HomePage() {
               </div>
             </div>
 
-            <BrandVisual className="rounded-[2.4rem] border border-border/80 shadow-[var(--shadow-soft)]" />
+            <div className="overflow-hidden rounded-[2.4rem] border border-border/80 bg-card shadow-[var(--shadow-soft)]">
+              <img
+                alt="DvadesetJedan vizual"
+                className="h-full min-h-[24rem] w-full object-cover"
+                src={media.heroUrl}
+              />
+            </div>
           </div>
         </section>
 

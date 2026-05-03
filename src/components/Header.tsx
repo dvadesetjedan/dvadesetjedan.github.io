@@ -59,7 +59,7 @@ export function Header() {
           {media.logoUrl ? (
             <img
               alt="DvadesetJedan"
-              className="block h-auto w-auto max-h-8 max-w-[9.75rem] object-contain sm:max-w-[11rem] md:max-w-none"
+              className="block h-auto w-auto max-h-7 max-w-[11rem] object-contain sm:max-h-8 sm:max-w-[13rem]"
               src={media.logoUrl}
             />
           ) : (

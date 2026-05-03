@@ -30,8 +30,8 @@ export const navigation = [
 ] as const
 
 export const media = {
-  logoUrl: "",
-  heroUrl: "/social-preview.svg",
+  logoUrl: "/images/dvadesetjedan-logo.png",
+  heroUrl: "/images/dvadesetjedan-hero.jpg",
   twentyOneUrl: "https://twentyone.world/",
 }
 

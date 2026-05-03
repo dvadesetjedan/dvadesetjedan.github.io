@@ -1,7 +1,5 @@
 import { useState } from "react"
 
-import { BrandVisual } from "@/components/BrandVisual"
-
 type SafeImageProps = {
   src?: string
   alt: string
@@ -18,7 +16,14 @@ export function SafeImage({
   const [failed, setFailed] = useState(false)
 
   if (!src || failed) {
-    return <BrandVisual className={fallbackClassName ?? className} compact />
+    return (
+      <img
+        alt={alt}
+        className={fallbackClassName ?? className}
+        loading="lazy"
+        src="/social-preview.svg"
+      />
+    )
   }
 
   return (
