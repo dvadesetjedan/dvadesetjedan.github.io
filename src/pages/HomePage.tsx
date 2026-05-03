@@ -2,6 +2,7 @@ import { ArrowUpRight, PlayCircle, Send, ShieldCheck } from "lucide-react"
 
 import { ActionButton } from "@/components/ActionButton"
 import { ActionCardGrid } from "@/components/ActionCardGrid"
+import { BrandVisual } from "@/components/BrandVisual"
 import { BulletedPanel } from "@/components/BulletedPanel"
 import { CardGrid } from "@/components/CardGrid"
 import { EventsIcon, TelegramIcon } from "@/components/Icons"
@@ -96,20 +97,20 @@ export function HomePage() {
       <main>
         <section className="mx-auto max-w-7xl px-5 pb-16 pt-12 sm:px-8 sm:pt-18">
           <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_26rem] lg:items-center">
-            <div className="max-w-4xl">
+            <div className="hero-copy min-w-0 w-full max-w-[calc(100vw-2.5rem)] sm:max-w-4xl">
               <p className="text-sm uppercase tracking-[0.24em] text-muted-foreground">
                 DvadesetJedan / Balkan / TwentyOne.World
               </p>
-              <h1 className="mt-5 text-5xl font-semibold tracking-[-0.06em] text-foreground sm:text-7xl">
+              <h1 className="mt-5 max-w-full break-words text-3xl font-semibold tracking-[-0.04em] text-foreground sm:text-6xl lg:text-7xl">
                 {heroContent.title}
               </h1>
-              <p className="mt-5 max-w-3xl text-xl leading-8 text-foreground/90">
+              <p className="mt-5 max-w-3xl break-words text-lg leading-8 text-foreground/90 sm:text-xl">
                 {heroContent.subtitle}
               </p>
-              <p className="mt-7 max-w-3xl text-base leading-8 text-muted-foreground sm:text-lg">
+              <p className="mt-7 max-w-3xl break-words text-base leading-8 text-muted-foreground sm:text-lg">
                 {heroContent.body}
               </p>
-              <p className="mt-6 max-w-3xl rounded-[1.4rem] border border-primary/20 bg-primary/8 px-5 py-4 text-sm leading-7 text-foreground">
+              <p className="mt-6 max-w-3xl break-words rounded-[1.4rem] border border-primary/20 bg-primary/8 px-5 py-4 text-sm leading-7 text-foreground">
                 {heroContent.highlight}
               </p>
 
@@ -156,13 +157,7 @@ export function HomePage() {
               </div>
             </div>
 
-            <div className="overflow-hidden rounded-[2.4rem] border border-border/80 bg-card shadow-[var(--shadow-soft)]">
-              <img
-                alt="DvadesetJedan vizual"
-                className="h-full min-h-[24rem] w-full object-cover"
-                src={media.heroUrl}
-              />
-            </div>
+            <BrandVisual className="rounded-[2.4rem] border border-border/80 shadow-[var(--shadow-soft)]" />
           </div>
         </section>
 

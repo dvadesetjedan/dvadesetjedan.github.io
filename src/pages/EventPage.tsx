@@ -5,6 +5,7 @@ import { ActionButton } from "@/components/ActionButton"
 import { BackLink } from "@/components/BackLink"
 import { InfoTile } from "@/components/InfoTile"
 import { Layout } from "@/components/Layout"
+import { SafeImage } from "@/components/SafeImage"
 import { EVENTS_URL } from "@/data/site"
 import {
   cityHref,
@@ -27,9 +28,10 @@ export function EventPage({ event }: { event: EventEntry }) {
         <BackLink href={EVENTS_URL}>Svi događaji</BackLink>
 
         <article className="overflow-hidden rounded-[2.2rem] border border-border/80 bg-card/75">
-          <img
+          <SafeImage
             alt=""
             className="h-[24rem] w-full object-cover"
+            fallbackClassName="h-[24rem] w-full"
             src={event.coverImage}
           />
 

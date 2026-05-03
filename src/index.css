@@ -43,11 +43,13 @@
 
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
     @apply font-sans;
   }
 
   body {
     @apply font-sans antialiased bg-background text-foreground;
+    overflow-x: hidden;
     background-image:
       radial-gradient(
         circle at top left,
@@ -83,6 +85,12 @@
 
 #root {
   min-height: 100vh;
+}
+
+.hero-copy,
+.hero-copy * {
+  max-width: 100%;
+  overflow-wrap: anywhere;
 }
 
 .wp-content h2 {

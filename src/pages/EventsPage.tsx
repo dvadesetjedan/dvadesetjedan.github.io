@@ -4,9 +4,10 @@ import { ArrowUpRight, Send } from "lucide-react"
 
 import { ActionButton } from "@/components/ActionButton"
 import { BackLink } from "@/components/BackLink"
+import { BrandVisual } from "@/components/BrandVisual"
 import { EventCard } from "@/components/EventCard"
 import { Layout } from "@/components/Layout"
-import { CONTRIBUTE_URL, media } from "@/data/site"
+import { CONTRIBUTE_URL } from "@/data/site"
 import { communityHref } from "@/lib/content"
 import { usePageMeta } from "@/lib/usePageMeta"
 
@@ -58,11 +59,7 @@ export function EventsPage({ events }: { events: EventEntry[] }) {
               </p>
             </div>
 
-            <img
-              alt=""
-              className="h-full min-h-80 w-full object-cover"
-              src={media.heroUrl}
-            />
+            <BrandVisual compact />
           </div>
         </section>
 

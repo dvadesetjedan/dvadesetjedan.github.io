@@ -1,6 +1,7 @@
 import type { ArticleEntry } from "@/data/articles"
 import { BackLink } from "@/components/BackLink"
 import { Layout } from "@/components/Layout"
+import { SafeImage } from "@/components/SafeImage"
 import { ARTICLES_URL } from "@/data/site"
 import {
   articleHref,
@@ -27,9 +28,10 @@ export function ArticlePage({ article }: { article: ArticleEntry }) {
 
         <article className="overflow-hidden rounded-[2.2rem] border border-border/80 bg-card/75">
           {article.image ? (
-            <img
+            <SafeImage
               alt={article.title}
               className="h-[20rem] w-full object-cover sm:h-[24rem]"
+              fallbackClassName="h-[20rem] w-full sm:h-[24rem]"
               src={article.image}
             />
           ) : null}
