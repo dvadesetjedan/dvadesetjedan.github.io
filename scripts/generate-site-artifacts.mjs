@@ -274,7 +274,8 @@ function renderHead(route, assetTags) {
     .join("\n    ")
 
   return `    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=bitcoin" />
+    <link rel="shortcut icon" href="/favicon.svg?v=bitcoin" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>${escapeHtml(route.title)}</title>
     <meta name="description" content="${escapeHtml(route.description)}" />
