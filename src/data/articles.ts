@@ -38,7 +38,7 @@ export const articles: ArticleEntry[] = [
     categories: ["Bitcoin", "Prevodi"],
     tags: ["Prevod"],
     image:
-      "https://dvadesetjedan.com/wp-content/uploads/2025/06/DJ_-_YT_background_01.jpg",
+      "/social-preview.svg",
     originalUrl:
       "https://dvadesetjedan.com/zasto-je-vazna-decentralizacija-bitcoina/",
   },
@@ -53,7 +53,7 @@ export const articles: ArticleEntry[] = [
     categories: ["Bitcoin", "Prevodi"],
     tags: ["Prevod"],
     image:
-      "https://dvadesetjedan.com/wp-content/uploads/2025/06/DJ_-_YT_background_01.jpg",
+      "/social-preview.svg",
     originalUrl: "https://dvadesetjedan.com/selo-i-mocnik/",
   },
   {
@@ -67,7 +67,7 @@ export const articles: ArticleEntry[] = [
     categories: ["Bitcoin", "Prevodi"],
     tags: ["Prevod"],
     image:
-      "https://dvadesetjedan.com/wp-content/uploads/2025/06/DJ_-_YT_background_01.jpg",
+      "/social-preview.svg",
     originalUrl: "https://dvadesetjedan.com/niko-ne-moze-zabraniti-bitcoin/",
   },
   {
@@ -81,7 +81,7 @@ export const articles: ArticleEntry[] = [
     categories: ["Bitcoin", "Prevodi"],
     tags: ["Bitcoin", "Prevod"],
     image:
-      "https://dvadesetjedan.com/wp-content/uploads/2025/06/DJ_-_YT_background_01.jpg",
+      "/social-preview.svg",
     originalUrl: "https://dvadesetjedan.com/never-stop-learning/",
   },
   {
@@ -95,7 +95,7 @@ export const articles: ArticleEntry[] = [
     categories: ["Bitcoin"],
     tags: ["Prevod"],
     image:
-      "https://dvadesetjedan.com/wp-content/uploads/2025/06/DJ_-_YT_background_01.jpg",
+      "/social-preview.svg",
     originalUrl:
       "https://dvadesetjedan.com/latin-american-bitcoin-perspective/",
   },
@@ -110,7 +110,7 @@ export const articles: ArticleEntry[] = [
     categories: ["Bitcoin", "Prevodi"],
     tags: ["Prevod"],
     image:
-      "https://dvadesetjedan.com/wp-content/uploads/2025/06/DJ_-_YT_background_01.jpg",
+      "/social-preview.svg",
     originalUrl: "https://dvadesetjedan.com/btc-scenarij-uspjeha/",
   },
   {
@@ -124,7 +124,7 @@ export const articles: ArticleEntry[] = [
     categories: ["Bitcoin", "Prevodi"],
     tags: ["Prevod"],
     image:
-      "https://dvadesetjedan.com/wp-content/uploads/2025/06/DJ_-_YT_background_01.jpg",
+      "/social-preview.svg",
     originalUrl:
       "https://dvadesetjedan.com/borba-protiv-monetarnog-kolonijalizma-pomocu-otvorenog-koda/",
   },
@@ -139,7 +139,7 @@ export const articles: ArticleEntry[] = [
     categories: ["Bitcoin"],
     tags: ["Bitcoin", "Privatnost"],
     image:
-      "https://dvadesetjedan.com/wp-content/uploads/2025/06/DJ_-_YT_background_01.jpg",
+      "/social-preview.svg",
     originalUrl:
       "https://dvadesetjedan.com/bitcoin-privatnost-najbolje-prakse/",
   },
@@ -154,7 +154,7 @@ export const articles: ArticleEntry[] = [
     categories: ["Bitcoin", "Prevodi"],
     tags: ["Bitcoin"],
     image:
-      "https://dvadesetjedan.com/wp-content/uploads/2025/06/DJ_-_YT_background_01.jpg",
+      "/social-preview.svg",
     originalUrl: "https://dvadesetjedan.com/bitcoin-je-vrijeme/",
   },
   {
@@ -168,7 +168,7 @@ export const articles: ArticleEntry[] = [
     categories: ["Bitcoin", "Prevodi"],
     tags: ["Bitcoin", "Prevod"],
     image:
-      "https://dvadesetjedan.com/wp-content/uploads/2025/07/Example-A-Roll-Image-1024x793-1.jpg",
+      "/social-preview.svg",
     originalUrl: "https://dvadesetjedan.com/bitcoin-daje-ti-krila/",
   },
 ]
