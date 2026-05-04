@@ -22,16 +22,16 @@ function sectionTitle(status: CityEntry["status"]) {
 }
 
 const mapCities: Record<string, { x: number; y: number }> = {
-  ljubljana: { x: 172, y: 142 },
-  zagreb: { x: 206, y: 167 },
-  rijeka: { x: 157, y: 183 },
-  split: { x: 214, y: 274 },
-  rab: { x: 164, y: 216 },
-  "banja-luka": { x: 260, y: 210 },
-  sarajevo: { x: 308, y: 279 },
-  "novi-sad": { x: 377, y: 171 },
-  beograd: { x: 394, y: 221 },
-  podgorica: { x: 373, y: 346 },
+  ljubljana: { x: 202, y: 129 },
+  zagreb: { x: 240, y: 166 },
+  rijeka: { x: 188, y: 188 },
+  rab: { x: 186, y: 221 },
+  split: { x: 238, y: 296 },
+  "banja-luka": { x: 294, y: 216 },
+  sarajevo: { x: 334, y: 294 },
+  "novi-sad": { x: 405, y: 174 },
+  beograd: { x: 416, y: 222 },
+  podgorica: { x: 398, y: 367 },
 }
 
 function RegionalMapGraphic({ cities }: { cities: CityEntry[] }) {
@@ -62,45 +62,86 @@ function RegionalMapGraphic({ cities }: { cities: CityEntry[] }) {
         </defs>
 
         <rect width="620" height="500" fill="#050505" />
-        <circle cx="315" cy="258" r="230" fill="url(#regionGlow)" />
+        <circle cx="336" cy="257" r="236" fill="url(#regionGlow)" />
 
-        <g fill="#252525" stroke="#111" strokeWidth="2">
-          <path d="M116 92 194 76 270 92 257 138 204 132 163 151 107 133Z" />
-          <path d="M275 75 346 63 404 94 387 147 328 138 278 153 248 122Z" />
-          <path d="M410 105 498 91 555 134 535 198 461 185 401 205 382 151Z" />
-          <path d="M71 152 143 138 176 188 149 254 78 247 44 197Z" />
-          <path d="M486 206 566 203 595 265 563 337 494 320 462 259Z" />
-          <path d="M95 270 156 252 201 298 172 372 104 360 62 313Z" />
-          <path d="M451 335 530 356 544 421 471 452 418 406Z" />
-          <path d="M248 375 339 382 385 448 298 477 226 441Z" />
+        <g fill="#242424" stroke="#101010" strokeWidth="2">
+          <path d="M86 58 174 50 210 93 186 137 113 129 64 95Z" />
+          <path d="M207 55 305 42 355 89 318 141 233 132 188 95Z" />
+          <path d="M374 55 473 58 554 107 531 180 438 164 361 119Z" />
+          <path d="M477 182 574 180 603 250 562 325 474 309 434 239Z" />
+          <path d="M73 361 164 339 225 386 188 458 91 441 43 397Z" />
+          <path d="M447 338 548 361 571 430 487 471 416 419Z" />
         </g>
 
-        <g fill="#343434" stroke="#151515" strokeWidth="2.2">
-          <path d="M150 109 209 101 238 131 220 170 177 164 143 137Z" />
-          <path d="M232 137 284 123 330 150 318 213 263 205 220 173Z" />
-          <path d="M331 148 408 132 464 176 451 257 383 269 319 215Z" />
-          <path d="M182 177 224 178 264 211 239 283 196 276 159 227Z" />
-          <path d="M244 219 315 222 377 274 359 339 297 331 236 286Z" />
-          <path d="M380 272 448 262 490 319 462 382 392 356 360 336Z" />
-          <path d="M299 337 361 344 391 398 354 450 294 423 262 375Z" />
+        <path
+          d="M103 143 C80 196 76 248 98 301 C113 337 132 362 164 395"
+          fill="none"
+          stroke="#0b0b0b"
+          strokeLinecap="round"
+          strokeWidth="70"
+        />
+        <path
+          d="M128 150 C102 205 100 257 124 309 C139 344 158 369 191 402"
+          fill="none"
+          stroke="#1b1b1b"
+          strokeLinecap="round"
+          strokeWidth="46"
+        />
+        <path
+          d="M148 164 C126 212 126 257 146 303 C161 338 178 360 203 386"
+          fill="none"
+          stroke="#090909"
+          strokeLinecap="round"
+          strokeWidth="20"
+        />
+
+        <g fill="#333333" stroke="#151515" strokeLinejoin="round" strokeWidth="2.2">
+          <path d="M168 93 246 80 289 109 267 151 214 159 163 135Z" />
+          <path d="M188 157 258 151 312 184 298 235 237 227 191 195Z" />
+          <path d="M183 204 236 227 282 260 262 318 210 302 169 247Z" />
+          <path d="M221 238 305 232 369 282 349 349 287 337 260 316 282 260Z" />
+          <path d="M299 178 378 154 443 191 439 257 369 282 304 233Z" />
+          <path d="M382 255 449 259 494 318 465 385 393 365 349 349 369 282Z" />
+          <path d="M352 351 405 371 431 416 390 461 335 431 311 385Z" />
         </g>
 
-        <g fill="#f7931a" fillOpacity="0.9" stroke="#1f1307" strokeWidth="2.4">
-          <path d="M154 111 209 104 234 132 219 165 178 160 146 136Z" />
-          <path d="M232 139 283 126 326 152 315 209 263 201 221 171Z" />
-          <path d="M332 151 405 136 459 178 448 254 385 265 319 213Z" />
-          <path d="M184 181 222 181 260 214 237 278 198 272 161 228Z" />
-          <path d="M246 223 313 225 373 276 356 334 298 326 239 286Z" />
-          <path d="M382 276 445 266 484 320 459 377 394 352 363 336Z" />
-          <path d="M301 341 358 348 386 397 352 444 298 420 266 376Z" />
+        <g fill="#f7931a" fillOpacity="0.9" stroke="#1f1307" strokeLinejoin="round" strokeWidth="2.4">
+          <path d="M171 96 244 84 283 111 263 148 214 156 166 134Z" />
+          <path d="M191 160 257 154 307 185 295 231 238 224 194 195Z" />
+          <path d="M187 207 238 229 279 261 259 313 213 299 172 247Z" />
+          <path d="M225 241 303 235 364 284 345 344 289 333 264 315 285 262Z" />
+          <path d="M302 181 377 158 437 193 434 253 368 278 307 231Z" />
+          <path d="M382 259 446 263 489 319 461 378 394 361 351 344 370 282Z" />
+          <path d="M354 354 402 374 426 416 388 454 338 428 315 386Z" />
         </g>
 
-        <g stroke="#070707" strokeWidth="2.2" opacity="0.55">
-          <path d="M217 166 263 201" />
-          <path d="M316 210 386 265" />
-          <path d="M237 278 299 326" />
-          <path d="M356 334 395 352" />
-          <path d="M283 126 263 201" />
+        <g fill="#f7931a" opacity="0.84">
+          <path d="M171 225 179 219 187 224 181 232Z" />
+          <path d="M184 251 192 245 201 251 194 260Z" />
+          <path d="M204 282 213 276 222 282 215 292Z" />
+          <path d="M225 309 234 304 242 311 234 319Z" />
+        </g>
+
+        <g stroke="#070707" strokeLinecap="round" strokeWidth="2.2" opacity="0.55">
+          <path d="M263 148 238 224" />
+          <path d="M295 231 368 278" />
+          <path d="M279 261 345 344" />
+          <path d="M351 344 394 361" />
+          <path d="M377 158 434 253" />
+        </g>
+
+        <g
+          fill="#f8ecdc"
+          fontFamily="Geist Variable, sans-serif"
+          fontSize="10"
+          fontWeight="650"
+          opacity="0.76"
+        >
+          <text x="181" y="118">SI</text>
+          <text x="219" y="195">HR</text>
+          <text x="292" y="285">BiH</text>
+          <text x="378" y="219">RS</text>
+          <text x="379" y="394">ME</text>
         </g>
 
         <g filter="url(#markerGlow)">
