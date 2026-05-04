@@ -87,10 +87,10 @@ export function Footer() {
                     <li key={item.label}>
                       <a
                         aria-current={isActive ? "page" : undefined}
-                        className={`inline-flex border-b transition-colors ${
+                        className={`inline-flex w-fit border-b-2 pb-1 transition-colors ${
                           isActive
                             ? "border-primary text-foreground"
-                            : "border-transparent hover:text-foreground"
+                            : "border-transparent hover:border-primary/50 hover:text-foreground"
                         }`}
                         href={item.href}
                         rel={item.external ? "noopener noreferrer" : undefined}
