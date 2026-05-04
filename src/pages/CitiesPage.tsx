@@ -22,6 +22,10 @@ function sectionTitle(status: CityEntry["status"]) {
   return "Arhiva"
 }
 
+function isRegionalFocusCountry(code: string) {
+  return code === "-99" || regionalMapCountries.find((country) => country.code === code)?.focus
+}
+
 const mapCities: Record<string, { x: number; y: number }> = {
   ljubljana: { x: 165.7, y: 127 },
   zagreb: { x: 229.4, y: 139.6 },
@@ -66,15 +70,20 @@ function RegionalMapGraphic({ cities }: { cities: CityEntry[] }) {
         <circle cx="305" cy="230" r="235" fill="url(#regionGlow)" />
 
         <g stroke="#0f0f0f" strokeLinejoin="round" strokeWidth="1.35">
-          {regionalMapCountries.map((country) => (
-            <path
-              d={country.d}
-              fill={country.focus ? "#f7931a" : "#303030"}
-              fillOpacity={country.focus ? 0.92 : 0.95}
-              key={country.code}
-              vectorEffect="non-scaling-stroke"
-            />
-          ))}
+          {regionalMapCountries.map((country) => {
+            const isFocus = isRegionalFocusCountry(country.code)
+
+            return (
+              <path
+                d={country.d}
+                fill={isFocus ? "#f7931a" : "#303030"}
+                fillOpacity={isFocus ? 0.92 : 0.95}
+                key={country.code}
+                stroke={country.code === "-99" ? "#f7931a" : undefined}
+                vectorEffect="non-scaling-stroke"
+              />
+            )
+          })}
         </g>
 
         <g
@@ -85,10 +94,10 @@ function RegionalMapGraphic({ cities }: { cities: CityEntry[] }) {
           opacity="0.78"
         >
           <text x="172" y="128">SI</text>
-          <text x="232" y="188">HR</text>
+          <text x="242" y="160">HR</text>
           <text x="304" y="244">BiH</text>
           <text x="405" y="205">RS</text>
-          <text x="376" y="334">ME</text>
+          <text x="384" y="316">ME</text>
         </g>
 
         <g filter="url(#markerGlow)">
