@@ -10,6 +10,8 @@ import { worldMapCountries } from "@/data/worldMapPaths"
 import { communityHref } from "@/lib/content"
 import { usePageMeta } from "@/lib/usePageMeta"
 
+const dvadesetJedanRegionCountryCodes = new Set(["SI", "HR", "BA", "RS", "ME"])
+
 function WorldMapHeroGraphic() {
   return (
     <figure
@@ -24,15 +26,21 @@ function WorldMapHeroGraphic() {
         <title>DvadesetJedan na TwentyOne.World karti</title>
         <rect fill="#050505" height="520" width="1000" />
         <g stroke="#151515" strokeLinejoin="round" strokeWidth="0.7">
-          {worldMapCountries.map((country) => (
-            <path
-              d={country.d}
-              fill={country.focus ? "#f7931a" : "#303030"}
-              fillOpacity={country.focus ? 0.95 : 0.96}
-              key={country.code}
-              vectorEffect="non-scaling-stroke"
-            />
-          ))}
+          {worldMapCountries.map((country, index) => {
+            const isRegionCountry = dvadesetJedanRegionCountryCodes.has(
+              country.code,
+            )
+
+            return (
+              <path
+                d={country.d}
+                fill={isRegionCountry ? "#f7931a" : "#303030"}
+                fillOpacity={isRegionCountry ? 0.95 : 0.96}
+                key={`${country.code}-${country.name}-${index}`}
+                vectorEffect="non-scaling-stroke"
+              />
+            )
+          })}
         </g>
         <circle
           cx="548"
