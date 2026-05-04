@@ -1,3 +1,4 @@
+import { ChevronRight } from "lucide-react"
 import { useEffect, useState } from "react"
 
 import { navigation, media } from "@/data/site"
@@ -103,8 +104,11 @@ export function Header() {
         </a>
       </div>
 
-      <div className="border-t border-border/60 md:hidden">
-        <nav className="mx-auto flex max-w-7xl gap-5 overflow-x-auto px-5 py-3 text-sm text-muted-foreground sm:px-8">
+      <div className="relative border-t border-border/60 md:hidden">
+        <nav
+          aria-label="Glavna navigacija"
+          className="mobile-scroll-nav mx-auto flex max-w-7xl gap-5 overflow-x-auto px-5 py-3 pr-16 text-sm text-muted-foreground sm:px-8 sm:pr-20"
+        >
           {navigation.map((item) => {
             const isActive = isActiveNavigationItem(route, item.href)
 
@@ -126,6 +130,14 @@ export function Header() {
             )
           })}
         </nav>
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute bottom-0 right-0 top-0 z-10 flex w-20 items-center justify-end bg-gradient-to-l from-background from-45% via-background/92 to-transparent pr-4 sm:w-24 sm:pr-6"
+        >
+          <span className="inline-flex size-7 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-[var(--shadow-soft)]">
+            <ChevronRight className="size-4" />
+          </span>
+        </div>
       </div>
     </header>
   )

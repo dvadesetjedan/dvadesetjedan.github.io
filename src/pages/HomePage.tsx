@@ -178,7 +178,7 @@ export function HomePage() {
             <div className="overflow-hidden rounded-[2.4rem] border border-border/80 bg-card shadow-[var(--shadow-soft)]">
               <img
                 alt="DvadesetJedan vizual"
-                className="h-full min-h-[24rem] w-full object-cover"
+                className="h-auto w-full object-contain sm:min-h-[24rem] sm:object-cover lg:h-full"
                 src={media.heroUrl}
               />
             </div>

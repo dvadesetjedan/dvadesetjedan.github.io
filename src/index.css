@@ -93,6 +93,14 @@
   overflow-wrap: anywhere;
 }
 
+.mobile-scroll-nav {
+  scrollbar-width: none;
+}
+
+.mobile-scroll-nav::-webkit-scrollbar {
+  display: none;
+}
+
 .wp-content h2 {
   font-family: var(--font-heading);
   font-size: clamp(1.9rem, 3vw, 2.6rem);
