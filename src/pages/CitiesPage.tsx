@@ -48,7 +48,7 @@ function RegionalMapGraphic({ cities }: { cities: CityEntry[] }) {
       <svg
         className="aspect-[1.25] h-full min-h-[19rem] w-full"
         role="img"
-        viewBox="0 0 620 500"
+        viewBox="108 76 390 320"
       >
         <title>Mapa DvadesetJedan gradova u regiji</title>
         <defs>
