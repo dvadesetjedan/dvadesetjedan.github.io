@@ -43,15 +43,15 @@ function WorldMapHeroGraphic() {
           })}
         </g>
         <circle
-          cx="548"
-          cy="204"
+          cx="552"
+          cy="146"
           fill="none"
           r="18"
           stroke="#f7931a"
           strokeOpacity="0.42"
           strokeWidth="2"
         />
-        <circle cx="548" cy="204" fill="#fff6e8" r="4.5" />
+        <circle cx="552" cy="146" fill="#fff6e8" r="4.5" />
       </svg>
       <figcaption className="sr-only">
         Karta svijeta prikazuje DvadesetJedan regiju kao narančasti dio otvorene
