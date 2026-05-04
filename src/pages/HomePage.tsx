@@ -410,7 +410,7 @@ export function HomePage() {
           intro="Twentyone koncept naglašava da se zajednice ne grade samo kroz sadržaj, nego i kroz otvoren prostor u kojem se ljudi mogu povezati. DvadesetJedan treba biti mjesto za pitanja, suradnju, prijevode, razgovore, nove ideje i projekte koji nastaju iz zajednice."
         >
           <BulletedPanel items={openCommunityItems} />
-          <div className="mt-6">
+          <div className="mt-6 flex flex-wrap gap-3">
             <ActionButton
               href={communityHref()}
               icon={<Send className="size-4" />}

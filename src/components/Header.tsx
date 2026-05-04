@@ -132,10 +132,10 @@ export function Header() {
         </nav>
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute bottom-0 right-0 top-0 z-10 flex w-20 items-center justify-end bg-gradient-to-l from-background from-45% via-background/92 to-transparent pr-4 sm:w-24 sm:pr-6"
+          className="pointer-events-none absolute bottom-0 right-0 top-0 z-10 flex w-14 items-center justify-end bg-gradient-to-l from-background from-45% via-background/88 to-transparent pr-3 sm:w-16 sm:pr-4"
         >
-          <span className="inline-flex size-7 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-[var(--shadow-soft)]">
-            <ChevronRight className="size-4" />
+          <span className="inline-flex size-6 items-center justify-center rounded-full border border-border/70 bg-card/80 text-muted-foreground shadow-sm">
+            <ChevronRight className="size-3.5" />
           </span>
         </div>
       </div>
