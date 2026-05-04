@@ -44,7 +44,7 @@ export function CityPage({
           <p className="text-sm uppercase tracking-[0.24em] text-muted-foreground">
             Gradovi
           </p>
-          <h1 className="mt-4 flex items-center gap-3 text-5xl font-semibold tracking-[-0.05em] text-foreground sm:text-7xl">
+          <h1 className="safe-heading mt-4 flex items-center gap-3 text-5xl font-semibold tracking-[-0.05em] text-foreground sm:text-7xl">
             <MapPinned className="size-8 text-primary" />
             {city.name}
           </h1>

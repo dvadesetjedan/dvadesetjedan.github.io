@@ -108,7 +108,7 @@ export function HomePage() {
                   TwentyOne.World
                 </a>
               </p>
-              <h1 className="mt-5 max-w-full break-words text-3xl font-semibold tracking-[-0.04em] text-foreground sm:text-6xl lg:text-7xl">
+              <h1 className="safe-heading mt-5 max-w-full break-words text-3xl font-semibold tracking-[-0.04em] text-foreground sm:text-6xl lg:text-7xl">
                 {heroContent.title}
               </h1>
               <p className="mt-5 max-w-3xl break-words text-lg leading-8 text-foreground/90 sm:text-xl">
@@ -451,7 +451,7 @@ export function HomePage() {
 
         <section className="mx-auto max-w-7xl px-5 pb-18 sm:px-8">
           <div className="rounded-[2.2rem] border border-border/80 bg-card px-6 py-8 sm:px-10 sm:py-10">
-            <h2 className="max-w-3xl text-4xl font-semibold tracking-[-0.05em] text-foreground sm:text-5xl">
+            <h2 className="safe-heading max-w-3xl text-4xl font-semibold tracking-[-0.05em] text-foreground sm:text-5xl">
               Počnite s boljim pitanjima o novcu.
             </h2>
             <p className="mt-5 max-w-3xl text-base leading-8 text-muted-foreground">

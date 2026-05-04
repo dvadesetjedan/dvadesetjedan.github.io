@@ -56,7 +56,7 @@ export function ArticlePage({
               ) : null}
             </div>
 
-            <h1 className="mt-5 text-5xl font-semibold tracking-[-0.05em] text-foreground sm:text-6xl">
+            <h1 className="safe-heading mt-5 text-5xl font-semibold tracking-[-0.05em] text-foreground sm:text-6xl">
               {article.title}
             </h1>
             {curation ? (

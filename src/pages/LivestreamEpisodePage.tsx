@@ -31,7 +31,7 @@ export function LivestreamEpisodePage({
           <p className="text-sm uppercase tracking-[0.24em] text-muted-foreground">
             Livestream
           </p>
-          <h1 className="mt-4 text-5xl font-semibold tracking-[-0.05em] text-foreground sm:text-6xl">
+          <h1 className="safe-heading mt-4 text-5xl font-semibold tracking-[-0.05em] text-foreground sm:text-6xl">
             {episode.title}
           </h1>
           {episode.publishedAt ? (

@@ -93,6 +93,19 @@
   overflow-wrap: anywhere;
 }
 
+.safe-heading {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+
+@media (max-width: 480px) {
+  .safe-heading {
+    font-size: clamp(2.5rem, 13vw, 3.4rem);
+    line-height: 0.98;
+  }
+}
+
 .mobile-scroll-nav {
   scrollbar-width: none;
 }

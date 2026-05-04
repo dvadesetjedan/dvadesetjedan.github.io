@@ -27,7 +27,7 @@ export function ArticlesPage({ articles }: { articles: ArticleEntry[] }) {
           <p className="text-sm uppercase tracking-[0.24em] text-muted-foreground">
             Članci
           </p>
-          <h1 className="mt-4 max-w-4xl text-5xl font-semibold tracking-[-0.05em] text-foreground sm:text-7xl">
+          <h1 className="safe-heading mt-4 max-w-4xl text-5xl font-semibold tracking-[-0.05em] text-foreground sm:text-7xl">
             Pisani signal za ljude koji žele razumjeti Bitcoin dublje i odgovornije.
           </h1>
           <p className="mt-6 max-w-3xl text-lg leading-8 text-muted-foreground">
