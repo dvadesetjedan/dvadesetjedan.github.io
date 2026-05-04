@@ -29,7 +29,10 @@ function isRegionalFocusCountry(code: string) {
 const kosovoMapPath = regionalMapCountries.find((country) => country.code === "-99")?.d
 
 const kosovoSerbiaBoundaryPath =
-  "M405.6 310.2L406 307.3L407.3 304.6L404.4 301.8L405.2 298.9L409.2 299.6L411.8 298.4L414.2 296.1L417.7 295.5L421.2 294.9L424.3 292.9L422.2 290.6L424.1 288.1L426.7 286.4L429.4 285.4L431.5 282.1L429.5 279.6L428.6 276.9L431.6 275.6L434.9 273.3L437.7 273L440.1 275.2L442.1 279.3L445.6 281.1L449.9 281.8L451.9 286.2L455 286.8L456 291.2L458.6 292.6L462.3 294.1L463.4 296.8L462.5 299.6L469.3 300.8L472.4 303.2"
+  "M405.6 310.2L406 307.3L407.3 304.6L404.4 301.8L405.2 298.9L409.2 299.6L411.8 298.4L414.2 296.1L417.7 295.5L421.2 294.9L424.3 292.9L422.2 290.6L424.1 288.1L426.7 286.4L429.4 285.4L431.5 282.1L429.5 279.6L428.6 276.9L431.6 275.6L434.9 273.3L437.7 273L440.1 275.2L442.1 279.3L445.6 281.1L449.9 281.8L451.9 286.2L455 286.8L456 291.2L458.6 292.6L462.3 294.1L463.4 296.8L462.5 299.6L469.3 300.8L472.4 303.2L475.6 302.9L478.9 303.8L477.4 307.4L474.7 313.2L472.6 315.3"
+
+const kosovoExternalBoundaryPath =
+  "M472.6 315.3L472.6 318.6L469.1 320L469.8 324.4L467.5 326.3L464.7 325.8L461.7 327L458.6 331L458.8 334L455.8 333.3L453 330L450.5 328.5L447.7 330.4L444.8 331.7L441.8 332.6L437.7 333.9L435.4 336.5L434.8 340.3L435.2 343.4L433.6 346.1L430.5 345.3L427.2 345.4L428.2 342.4L428.2 339.1L426.9 335.9L426.5 332.3L424.4 327.7L417.2 322.1L413.5 322.1L412.2 319.3L411.4 316.4L409.4 313L406.5 311.1L405.6 310.2"
 
 const mapCities: Record<string, { x: number; y: number }> = {
   ljubljana: { x: 165.7, y: 127 },
@@ -109,6 +112,17 @@ function RegionalMapGraphic({ cities }: { cities: CityEntry[] }) {
           strokeLinecap="round"
           strokeLinejoin="round"
           strokeOpacity="0.82"
+          strokeWidth="1.65"
+          vectorEffect="non-scaling-stroke"
+        />
+
+        <path
+          d={kosovoExternalBoundaryPath}
+          fill="none"
+          stroke="#0a0a0a"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeOpacity="0.86"
           strokeWidth="1.65"
           vectorEffect="non-scaling-stroke"
         />
