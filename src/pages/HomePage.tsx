@@ -100,7 +100,7 @@ export function HomePage() {
               <p className="text-sm uppercase tracking-[0.24em] text-muted-foreground">
                 DvadesetJedan / Balkan /{" "}
                 <a
-                  className="underline decoration-border underline-offset-4 hover:text-foreground"
+                  className="font-semibold hover:text-foreground"
                   href={media.twentyOneUrl}
                   rel="noopener noreferrer"
                   target="_blank"
@@ -117,7 +117,7 @@ export function HomePage() {
               <p className="mt-7 max-w-3xl break-words text-base leading-8 text-muted-foreground sm:text-lg">
                 DvadesetJedan je regionalna verzija otvorene{" "}
                 <a
-                  className="text-foreground underline decoration-border underline-offset-4 hover:text-primary"
+                  className="font-semibold text-foreground hover:text-primary"
                   href={media.twentyOneUrl}
                   rel="noopener noreferrer"
                   target="_blank"
@@ -263,7 +263,7 @@ export function HomePage() {
             <p className="text-base leading-8 text-foreground">
               Projekt je dio otvorenog{" "}
               <a
-                className="underline decoration-border underline-offset-4 hover:text-primary"
+                className="font-semibold hover:text-primary"
                 href={media.twentyOneUrl}
                 rel="noopener noreferrer"
                 target="_blank"

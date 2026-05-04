@@ -62,7 +62,7 @@ export function AboutPage() {
             <>
               Dio otvorenog{" "}
               <a
-                className="underline decoration-border underline-offset-4 hover:text-primary"
+                className="font-semibold hover:text-primary"
                 href={media.twentyOneUrl}
                 rel="noopener noreferrer"
                 target="_blank"
