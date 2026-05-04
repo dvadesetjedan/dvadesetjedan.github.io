@@ -1,5 +1,5 @@
 import { ChevronRight } from "lucide-react"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
 import { TelegramIcon } from "@/components/Icons"
 import { navigation, media } from "@/data/site"
@@ -39,6 +39,7 @@ function isActiveNavigationItem(route: Route, href: string) {
 }
 
 export function Header() {
+  const mobileNavRef = useRef<HTMLElement>(null)
   const [route, setRoute] = useState<Route>(() =>
     parseRouteFromPath(window.location.pathname),
   )
@@ -53,6 +54,30 @@ export function Header() {
       window.removeEventListener("dvadesetjedan:navigation", onPopState)
     }
   }, [])
+
+  useEffect(() => {
+    const mobileNav = mobileNavRef.current
+    const activeLink = mobileNav?.querySelector<HTMLAnchorElement>(
+      'a[aria-current="page"]',
+    )
+
+    if (!mobileNav || !activeLink) return
+
+    window.requestAnimationFrame(() => {
+      const navRect = mobileNav.getBoundingClientRect()
+      const linkRect = activeLink.getBoundingClientRect()
+      const targetLeft =
+        mobileNav.scrollLeft +
+        linkRect.left -
+        navRect.left -
+        (navRect.width - linkRect.width) / 2
+
+      mobileNav.scrollTo({
+        left: Math.max(0, targetLeft),
+        behavior: "smooth",
+      })
+    })
+  }, [route])
 
   return (
     <header className="sticky top-0 z-40 border-b border-border/70 bg-background/88 backdrop-blur-xl">
@@ -110,6 +135,7 @@ export function Header() {
         <nav
           aria-label="Glavna navigacija"
           className="mobile-scroll-nav mx-auto flex max-w-7xl gap-5 overflow-x-auto px-5 py-3 pr-16 text-sm text-muted-foreground sm:px-8 sm:pr-20"
+          ref={mobileNavRef}
         >
           {navigation.map((item) => {
             const isActive = isActiveNavigationItem(route, item.href)
