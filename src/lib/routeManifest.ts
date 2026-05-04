@@ -4,7 +4,7 @@ import { organizationJsonLd, websiteJsonLd } from "@/lib/seo"
 export const coreRouteManifest: SeoMetadata[] = [
   {
     path: "/",
-    title: "DvadesetJedan | Regionalni Bitcoin signal",
+    title: "DvadesetJedan / Zajednica",
     description:
       "Bitcoin signal za ljude koji govore našim jezicima: članci, livestream, događaji i zajednica bez tradinga, tokena i obećanja zarade.",
     routeType: "home",

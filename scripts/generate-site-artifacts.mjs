@@ -7,7 +7,7 @@ const siteUrl = "https://dvadesetjedan.com"
 const defaultImage = `${siteUrl}/social-preview.png`
 
 const coreRoutes = [
-  ["/", "DvadesetJedan | Regionalni Bitcoin signal", "Bitcoin signal za ljude koji govore našim jezicima: članci, livestream, događaji i zajednica bez tradinga, tokena i obećanja zarade."],
+  ["/", "DvadesetJedan / Zajednica", "Bitcoin signal za ljude koji govore našim jezicima: članci, livestream, događaji i zajednica bez tradinga, tokena i obećanja zarade."],
   ["/o-projektu/", "O projektu | DvadesetJedan", "DvadesetJedan je regionalni Bitcoin-only signal na našem jeziku i dio otvorenog TwentyOne.World koncepta."],
   ["/pocni-ovdje/", "Počni ovdje | DvadesetJedan", "Početni put za ljude koji žele razumjeti Bitcoin bez žurbe, hypea i početničkih sigurnosnih grešaka."],
   ["/teme/", "Teme | DvadesetJedan", "Teme kroz koje DvadesetJedan obrađuje Bitcoin: novac, sigurnost, štednja, zajednica i dugoročno razmišljanje."],
@@ -299,7 +299,7 @@ function renderHead(route, assetTags) {
     <meta property="og:type" content="${ogType}" />
     <meta property="og:url" content="${canonical}" />
     <meta property="og:image" content="${image}" />
-    <meta property="og:image:alt" content="DvadesetJedan — Regionalni Bitcoin signal" />
+    <meta property="og:image:alt" content="DvadesetJedan / Zajednica" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />

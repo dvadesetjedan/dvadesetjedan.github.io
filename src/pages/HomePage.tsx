@@ -114,7 +114,7 @@ function BitcoinOnlyGraphic() {
 
 export function HomePage() {
   usePageMeta(
-    "DvadesetJedan | Regionalni Bitcoin signal",
+    "DvadesetJedan / Zajednica",
     "DvadesetJedan je regionalni Bitcoin-only signal na našem jeziku: članci, livestream, događaji i zajednica za bitcoinere s Balkana.",
   )
 
