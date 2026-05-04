@@ -17,19 +17,29 @@ export function ContributePage() {
     <Layout>
       <main className="mx-auto max-w-7xl px-5 pb-16 pt-12 sm:px-8 sm:pt-16">
         <BackLink href="/">Početna</BackLink>
-        <section className="rounded-[2.2rem] border border-border/80 bg-card/70 px-6 py-8 sm:px-10 sm:py-12">
-          <p className="text-sm uppercase tracking-[0.24em] text-muted-foreground">
-            Doprinesi
-          </p>
-          <h1 className="safe-heading mt-4 max-w-4xl text-5xl font-semibold tracking-[-0.05em] text-foreground sm:text-7xl">
-            Doprinesi DvadesetJedan
-          </h1>
-          <p className="mt-6 max-w-3xl text-lg leading-8 text-muted-foreground">
-            DvadesetJedan raste kroz doprinos zajednice. Možeš pomoći pisanjem
-            članaka, prijevodima, organizacijom lokalnih druženja, prijavom
-            grešaka, dizajnom, tehničkim poboljšanjima ili dijeljenjem
-            kvalitetnih Bitcoin resursa.
-          </p>
+        <section className="grid gap-8 overflow-hidden rounded-[2.2rem] border border-border/80 bg-card/70 px-6 py-8 sm:px-10 sm:py-12 lg:grid-cols-[minmax(0,1fr)_18rem] lg:items-center">
+          <div>
+            <p className="text-sm uppercase tracking-[0.24em] text-muted-foreground">
+              Doprinesi
+            </p>
+            <h1 className="safe-heading mt-4 max-w-4xl text-5xl font-semibold tracking-[-0.05em] text-foreground sm:text-7xl">
+              Doprinesi DvadesetJedan
+            </h1>
+            <p className="mt-6 max-w-3xl text-lg leading-8 text-muted-foreground">
+              DvadesetJedan raste kroz doprinos zajednice. Možeš pomoći pisanjem
+              članaka, prijevodima, organizacijom lokalnih druženja, prijavom
+              grešaka, dizajnom, tehničkim poboljšanjima ili dijeljenjem
+              kvalitetnih Bitcoin resursa.
+            </p>
+          </div>
+
+          <div className="mx-auto flex aspect-square w-full max-w-[16rem] items-center justify-center rounded-[2rem] border border-primary/25 bg-[#070707] p-7 shadow-soft">
+            <img
+              alt="Twenty One consistency ikona za doprinose"
+              className="h-full w-full object-contain drop-shadow-[0_0_24px_rgba(247,147,26,0.35)]"
+              src="/images/twentyone-consistency.svg"
+            />
+          </div>
         </section>
 
         <section className="mt-10 rounded-[1.8rem] border border-border/80 bg-card px-6 py-6">
