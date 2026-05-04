@@ -77,6 +77,39 @@ function LatestCard({
   )
 }
 
+function BitcoinOnlyGraphic() {
+  return (
+    <div
+      aria-label="Bitcoin da, tokeni ne"
+      className="flex items-center justify-center gap-5 rounded-[1.6rem] border border-primary/20 bg-primary/8 px-5 py-6 sm:gap-7"
+      role="img"
+    >
+      <div className="relative flex items-center">
+        <div className="flex size-24 items-center justify-center rounded-full bg-primary text-6xl font-bold leading-none text-white shadow-[0_18px_45px_rgba(247,147,26,0.24)] sm:size-28 sm:text-7xl">
+          ₿
+        </div>
+        <span className="absolute -right-4 -bottom-2 flex size-10 items-center justify-center rounded-full border border-border bg-card text-xl shadow-sm sm:size-11 sm:text-2xl">
+          👍
+        </span>
+      </div>
+
+      <div className="h-px min-w-8 flex-1 bg-border/80" aria-hidden="true" />
+
+      <div className="relative flex size-24 items-center justify-center rounded-full border border-border bg-card text-6xl shadow-sm sm:size-28 sm:text-7xl">
+        <span className="leading-none">💩</span>
+        <span
+          aria-hidden="true"
+          className="absolute h-2 w-[132%] rotate-45 rounded-full bg-red-600 shadow-sm"
+        />
+        <span
+          aria-hidden="true"
+          className="absolute h-2 w-[132%] -rotate-45 rounded-full bg-red-600 shadow-sm"
+        />
+      </div>
+    </div>
+  )
+}
+
 export function HomePage() {
   usePageMeta(
     "DvadesetJedan | Regionalni Bitcoin signal",
@@ -124,9 +157,8 @@ export function HomePage() {
                 >
                   twentyone.world
                 </a>{" "}
-                mreže: gradimo javan Bitcoin signal, otvoren prostor za
-                razgovor i sadržaj na jeziku koji ljudima iz naše regije dolazi
-                prirodno.
+                mreže: gradimo javan Bitcoin signal, otvoren prostor za razgovor
+                i sadržaj na jeziku koji ljudima iz naše regije dolazi prirodno.
               </p>
               <p className="mt-6 max-w-3xl break-words rounded-[1.4rem] border border-primary/20 bg-primary/8 px-5 py-4 text-sm leading-7 text-foreground">
                 {heroContent.highlight}
@@ -219,7 +251,9 @@ export function HomePage() {
                     }`
                   : "Najnovije livestreamove možeš pronaći na Livestream stranici."
               }
-              href={latestEpisode ? episodeHref(latestEpisode.slug) : LIVESTREAM_URL}
+              href={
+                latestEpisode ? episodeHref(latestEpisode.slug) : LIVESTREAM_URL
+              }
               cta={latestEpisode ? "Pogledaj epizodu" : "Otvori livestream"}
             />
             <LatestCard
@@ -247,11 +281,14 @@ export function HomePage() {
           title="Zašto Bitcoin-only?"
           intro="DvadesetJedan nije crypto grupa. Ne promoviramo tokene, altcoine, trading signale ni brzu zaradu. Fokus je Bitcoin: novac, sloboda, odgovornost, tehnologija i dugoročno razmišljanje."
         >
-          <div className="rounded-[1.6rem] border border-border/80 bg-card px-6 py-6">
-            <p className="text-base leading-8 text-foreground">
-              Naš signal je namjerno uzak: Bitcoin prije hypea, razumijevanje
-              prije šuma i dugoročna perspektiva prije kratkoročnih impulsa.
-            </p>
+          <div className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_24rem] lg:items-center">
+            <div className="rounded-[1.6rem] border border-border/80 bg-card px-6 py-6">
+              <p className="text-base leading-8 text-foreground">
+                Naš signal je namjerno uzak: Bitcoin prije hypea, razumijevanje
+                prije šuma i dugoročna perspektiva prije kratkoročnih impulsa.
+              </p>
+            </div>
+            <BitcoinOnlyGraphic />
           </div>
         </Section>
 
