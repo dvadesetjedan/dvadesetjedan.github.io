@@ -1,8 +1,59 @@
+import { useEffect, useState } from "react"
+
 import { Separator } from "@/components/ui/separator"
 import { footerLinks } from "@/data/site"
+import { parseRouteFromPath, type Route } from "@/lib/routes"
+
+function isActiveFooterLink(route: Route, href: string) {
+  if (href.startsWith("http")) return false
+
+  if (href === "/clanci/") {
+    return route.type === "articles" || route.type === "article"
+  }
+
+  if (href === "/dogadaji/") {
+    return route.type === "events" || route.type === "event"
+  }
+
+  if (href === "/livestream/") {
+    return route.type === "livestream" || route.type === "livestreamEpisode"
+  }
+
+  if (href === "/gradovi/") {
+    return route.type === "cities" || route.type === "city"
+  }
+
+  const routeByHref: Record<string, Route["type"]> = {
+    "/o-projektu/": "about",
+    "/teme/": "topics",
+    "/faq/": "faq",
+    "/resursi/": "resources",
+    "/sigurnost/": "safety",
+    "/pocni-ovdje/": "beginners",
+    "/zajednica/": "community",
+    "/doprinesi/": "contribute",
+  }
+
+  return routeByHref[href] === route.type
+}
 
 export function Footer() {
   const midpoint = Math.ceil(footerLinks.length / 2)
+  const [route, setRoute] = useState<Route>(() =>
+    parseRouteFromPath(window.location.pathname),
+  )
+
+  useEffect(() => {
+    const onNavigation = () =>
+      setRoute(parseRouteFromPath(window.location.pathname))
+
+    window.addEventListener("popstate", onNavigation)
+    window.addEventListener("dvadesetjedan:navigation", onNavigation)
+    return () => {
+      window.removeEventListener("popstate", onNavigation)
+      window.removeEventListener("dvadesetjedan:navigation", onNavigation)
+    }
+  }, [])
 
   return (
     <footer className="mx-auto max-w-7xl px-5 pb-12 sm:px-8">
@@ -29,17 +80,27 @@ export function Footer() {
                 key={index}
                 className="space-y-3 text-sm text-muted-foreground"
               >
-                {group.map((item) => (
-                  <li key={item.label}>
-                    <a
-                      href={item.href}
-                      rel={item.external ? "noopener noreferrer" : undefined}
-                      target={item.external ? "_blank" : undefined}
-                    >
-                      {item.label}
-                    </a>
-                  </li>
-                ))}
+                {group.map((item) => {
+                  const isActive = isActiveFooterLink(route, item.href)
+
+                  return (
+                    <li key={item.label}>
+                      <a
+                        aria-current={isActive ? "page" : undefined}
+                        className={`inline-flex border-b transition-colors ${
+                          isActive
+                            ? "border-primary text-foreground"
+                            : "border-transparent hover:text-foreground"
+                        }`}
+                        href={item.href}
+                        rel={item.external ? "noopener noreferrer" : undefined}
+                        target={item.external ? "_blank" : undefined}
+                      >
+                        {item.label}
+                      </a>
+                    </li>
+                  )
+                })}
               </ul>
             ),
           )}
