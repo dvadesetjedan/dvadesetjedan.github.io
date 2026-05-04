@@ -1,7 +1,6 @@
 import type { ArticleEntry } from "@/data/articles"
 import { BackLink } from "@/components/BackLink"
 import { Layout } from "@/components/Layout"
-import { SafeImage } from "@/components/SafeImage"
 import { ARTICLES_URL } from "@/data/site"
 import {
   articleHref,
@@ -33,14 +32,13 @@ export function ArticlePage({
         <BackLink href={ARTICLES_URL}>Svi članci</BackLink>
 
         <article className="overflow-hidden rounded-[2.2rem] border border-border/80 bg-card/75">
-          {article.image ? (
-            <SafeImage
-              alt={article.title}
-              className="h-[20rem] w-full object-cover sm:h-[24rem]"
-              fallbackClassName="h-[20rem] w-full sm:h-[24rem]"
-              src={article.image}
+          <div className="flex h-[20rem] w-full items-center justify-center border-b border-border/80 bg-[#070707] px-8 py-10 sm:h-[24rem]">
+            <img
+              alt=""
+              className="h-full max-h-[14rem] w-full object-contain drop-shadow-[0_0_28px_rgba(247,147,26,0.38)] sm:max-h-[17rem]"
+              src="/images/twentyone-beacon.svg"
             />
-          ) : null}
+          </div>
 
           <div className="px-6 py-8 sm:px-10 sm:py-12">
             <div className="flex flex-wrap gap-2">
