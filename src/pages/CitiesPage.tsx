@@ -5,6 +5,7 @@ import type { EventEntry } from "@/data/events"
 import { ActionButton } from "@/components/ActionButton"
 import { BackLink } from "@/components/BackLink"
 import { Layout } from "@/components/Layout"
+import { regionalMapCountries } from "@/data/regionalMapPaths"
 import { CONTRIBUTE_URL } from "@/data/site"
 import { cityHref, communityHref } from "@/lib/content"
 import { usePageMeta } from "@/lib/usePageMeta"
@@ -22,16 +23,16 @@ function sectionTitle(status: CityEntry["status"]) {
 }
 
 const mapCities: Record<string, { x: number; y: number }> = {
-  ljubljana: { x: 202, y: 129 },
-  zagreb: { x: 240, y: 166 },
-  rijeka: { x: 188, y: 188 },
-  rab: { x: 186, y: 221 },
-  split: { x: 238, y: 296 },
-  "banja-luka": { x: 294, y: 216 },
-  sarajevo: { x: 334, y: 294 },
-  "novi-sad": { x: 405, y: 174 },
-  beograd: { x: 416, y: 222 },
-  podgorica: { x: 398, y: 367 },
+  ljubljana: { x: 165.7, y: 127 },
+  zagreb: { x: 229.4, y: 139.6 },
+  rijeka: { x: 163, y: 165.1 },
+  rab: { x: 176.7, y: 194.9 },
+  split: { x: 249.2, y: 260 },
+  "banja-luka": { x: 281.6, y: 194 },
+  sarajevo: { x: 334.3, y: 241.9 },
+  "novi-sad": { x: 395.6, y: 168.2 },
+  beograd: { x: 422.1, y: 193.3 },
+  podgorica: { x: 370.8, y: 316.3 },
 }
 
 function RegionalMapGraphic({ cities }: { cities: CityEntry[] }) {
@@ -62,86 +63,32 @@ function RegionalMapGraphic({ cities }: { cities: CityEntry[] }) {
         </defs>
 
         <rect width="620" height="500" fill="#050505" />
-        <circle cx="336" cy="257" r="236" fill="url(#regionGlow)" />
+        <circle cx="305" cy="230" r="235" fill="url(#regionGlow)" />
 
-        <g fill="#242424" stroke="#101010" strokeWidth="2">
-          <path d="M86 58 174 50 210 93 186 137 113 129 64 95Z" />
-          <path d="M207 55 305 42 355 89 318 141 233 132 188 95Z" />
-          <path d="M374 55 473 58 554 107 531 180 438 164 361 119Z" />
-          <path d="M477 182 574 180 603 250 562 325 474 309 434 239Z" />
-          <path d="M73 361 164 339 225 386 188 458 91 441 43 397Z" />
-          <path d="M447 338 548 361 571 430 487 471 416 419Z" />
-        </g>
-
-        <path
-          d="M103 143 C80 196 76 248 98 301 C113 337 132 362 164 395"
-          fill="none"
-          stroke="#0b0b0b"
-          strokeLinecap="round"
-          strokeWidth="70"
-        />
-        <path
-          d="M128 150 C102 205 100 257 124 309 C139 344 158 369 191 402"
-          fill="none"
-          stroke="#1b1b1b"
-          strokeLinecap="round"
-          strokeWidth="46"
-        />
-        <path
-          d="M148 164 C126 212 126 257 146 303 C161 338 178 360 203 386"
-          fill="none"
-          stroke="#090909"
-          strokeLinecap="round"
-          strokeWidth="20"
-        />
-
-        <g fill="#333333" stroke="#151515" strokeLinejoin="round" strokeWidth="2.2">
-          <path d="M168 93 246 80 289 109 267 151 214 159 163 135Z" />
-          <path d="M188 157 258 151 312 184 298 235 237 227 191 195Z" />
-          <path d="M183 204 236 227 282 260 262 318 210 302 169 247Z" />
-          <path d="M221 238 305 232 369 282 349 349 287 337 260 316 282 260Z" />
-          <path d="M299 178 378 154 443 191 439 257 369 282 304 233Z" />
-          <path d="M382 255 449 259 494 318 465 385 393 365 349 349 369 282Z" />
-          <path d="M352 351 405 371 431 416 390 461 335 431 311 385Z" />
-        </g>
-
-        <g fill="#f7931a" fillOpacity="0.9" stroke="#1f1307" strokeLinejoin="round" strokeWidth="2.4">
-          <path d="M171 96 244 84 283 111 263 148 214 156 166 134Z" />
-          <path d="M191 160 257 154 307 185 295 231 238 224 194 195Z" />
-          <path d="M187 207 238 229 279 261 259 313 213 299 172 247Z" />
-          <path d="M225 241 303 235 364 284 345 344 289 333 264 315 285 262Z" />
-          <path d="M302 181 377 158 437 193 434 253 368 278 307 231Z" />
-          <path d="M382 259 446 263 489 319 461 378 394 361 351 344 370 282Z" />
-          <path d="M354 354 402 374 426 416 388 454 338 428 315 386Z" />
-        </g>
-
-        <g fill="#f7931a" opacity="0.84">
-          <path d="M171 225 179 219 187 224 181 232Z" />
-          <path d="M184 251 192 245 201 251 194 260Z" />
-          <path d="M204 282 213 276 222 282 215 292Z" />
-          <path d="M225 309 234 304 242 311 234 319Z" />
-        </g>
-
-        <g stroke="#070707" strokeLinecap="round" strokeWidth="2.2" opacity="0.55">
-          <path d="M263 148 238 224" />
-          <path d="M295 231 368 278" />
-          <path d="M279 261 345 344" />
-          <path d="M351 344 394 361" />
-          <path d="M377 158 434 253" />
+        <g stroke="#0f0f0f" strokeLinejoin="round" strokeWidth="1.35">
+          {regionalMapCountries.map((country) => (
+            <path
+              d={country.d}
+              fill={country.focus ? "#f7931a" : "#303030"}
+              fillOpacity={country.focus ? 0.92 : 0.95}
+              key={country.code}
+              vectorEffect="non-scaling-stroke"
+            />
+          ))}
         </g>
 
         <g
           fill="#f8ecdc"
           fontFamily="Geist Variable, sans-serif"
-          fontSize="10"
+          fontSize="10.5"
           fontWeight="650"
-          opacity="0.76"
+          opacity="0.78"
         >
-          <text x="181" y="118">SI</text>
-          <text x="219" y="195">HR</text>
-          <text x="292" y="285">BiH</text>
-          <text x="378" y="219">RS</text>
-          <text x="379" y="394">ME</text>
+          <text x="172" y="128">SI</text>
+          <text x="232" y="188">HR</text>
+          <text x="304" y="244">BiH</text>
+          <text x="405" y="205">RS</text>
+          <text x="376" y="334">ME</text>
         </g>
 
         <g filter="url(#markerGlow)">
