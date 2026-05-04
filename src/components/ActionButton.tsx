@@ -19,7 +19,7 @@ export function ActionButton({
 }: ActionButtonProps) {
   return (
     <a
-      className={`inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-medium transition-colors ${
+      className={`inline-flex w-fit max-w-full min-w-0 items-center justify-center justify-self-start gap-2 rounded-full px-5 py-3 text-sm font-medium leading-snug transition-colors ${
         primary
           ? "bg-primary text-white"
           : "border border-border/80 bg-card text-foreground"
@@ -28,8 +28,8 @@ export function ActionButton({
       rel={external ? "noopener noreferrer" : undefined}
       target={external ? "_blank" : undefined}
     >
-      {icon}
-      {children}
+      <span className="shrink-0">{icon}</span>
+      <span className="min-w-0 [overflow-wrap:anywhere]">{children}</span>
     </a>
   )
 }
