@@ -26,6 +26,8 @@ function isRegionalFocusCountry(code: string) {
   return code === "-99" || regionalMapCountries.find((country) => country.code === code)?.focus
 }
 
+const kosovoMapPath = regionalMapCountries.find((country) => country.code === "-99")?.d
+
 const mapCities: Record<string, { x: number; y: number }> = {
   ljubljana: { x: 165.7, y: 127 },
   zagreb: { x: 229.4, y: 139.6 },
@@ -79,12 +81,25 @@ function RegionalMapGraphic({ cities }: { cities: CityEntry[] }) {
                 fill={isFocus ? "#f7931a" : "#303030"}
                 fillOpacity={isFocus ? 0.92 : 0.95}
                 key={country.code}
-                stroke={country.code === "-99" ? "#f7931a" : undefined}
                 vectorEffect="non-scaling-stroke"
               />
             )
           })}
         </g>
+
+        {kosovoMapPath ? (
+          <path
+            d={kosovoMapPath}
+            fill="none"
+            stroke="#f8ecdc"
+            strokeDasharray="5 5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeOpacity="0.72"
+            strokeWidth="1.55"
+            vectorEffect="non-scaling-stroke"
+          />
+        ) : null}
 
         <g
           fill="#f8ecdc"
