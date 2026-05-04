@@ -27,7 +27,7 @@ function isRegionalFocusCountry(code: string) {
 }
 
 const kosovoSerbiaBoundaryPath =
-  "M405.6 310.2L406 307.3L407.3 304.6L404.4 301.8L405.2 298.9L409.2 299.6L411.8 298.4L414.2 296.1L417.7 295.5L421.2 294.9L424.3 292.9L422.2 290.6L424.1 288.1L426.7 286.4L429.4 285.4L431.5 282.1L429.5 279.6L428.6 276.9L431.6 275.6L434.9 273.3L437.7 273L440.1 275.2L442.1 279.3L445.6 281.1L449.9 281.8L451.9 286.2L455 286.8L456 291.2L458.6 292.6L462.3 294.1L463.4 296.8L462.5 299.6L469.3 300.8L472.4 303.2L475.6 302.9L478.9 303.8L477.4 307.4L474.7 313.2L472.6 315.3"
+  "M405.6 310.2L406 307.3L407.3 304.6L404.4 301.8L405.2 298.9L409.2 299.6L411.8 298.4L414.2 296.1L417.7 295.5L421.2 294.9L424.3 292.9L422.2 290.6L424.1 288.1L426.7 286.4L429.4 285.4L431.5 282.1L429.5 279.6L428.6 276.9L431.6 275.6L434.9 273.3L437.7 273L440.1 275.2L442.1 279.3L445.6 281.1L449.9 281.8L451.9 286.2L455 286.8L456 291.2L458.6 292.6L462.3 294.1L463.4 296.8L462.5 299.6L469.3 300.8L472.4 303.2"
 
 const mapCities: Record<string, { x: number; y: number }> = {
   ljubljana: { x: 165.7, y: 127 },
@@ -109,9 +109,9 @@ function RegionalMapGraphic({ cities }: { cities: CityEntry[] }) {
         >
           <text x="172" y="128">SI</text>
           <text x="242" y="160">HR</text>
-          <text x="304" y="244">BiH</text>
-          <text x="405" y="205">RS</text>
-          <text x="384" y="316">ME</text>
+          <text x="316" y="232">BiH</text>
+          <text x="423" y="224">RS</text>
+          <text x="386" y="337">ME</text>
         </g>
 
         <g filter="url(#markerGlow)">
@@ -156,9 +156,6 @@ function RegionalMapGraphic({ cities }: { cities: CityEntry[] }) {
         <g fill="#f8ecdc" fontFamily="Geist Variable, sans-serif">
           <text fontSize="18" fontWeight="700" x="34" y="54">
             DVADESETJEDAN
-          </text>
-          <text fill="#f7931a" fontSize="12" fontWeight="600" x="34" y="76">
-            REGIONALNI BITCOIN SIGNAL
           </text>
         </g>
       </svg>
