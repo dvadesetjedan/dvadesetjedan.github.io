@@ -7,7 +7,7 @@ import { BackLink } from "@/components/BackLink"
 import { EventCard } from "@/components/EventCard"
 import { Layout } from "@/components/Layout"
 import { eventMeta } from "@/data/eventMeta"
-import { CONTRIBUTE_URL, media } from "@/data/site"
+import { CONTRIBUTE_URL } from "@/data/site"
 import { communityHref } from "@/lib/content"
 import { usePageMeta } from "@/lib/usePageMeta"
 
@@ -50,26 +50,25 @@ export function EventsPage({ events }: { events: EventEntry[] }) {
     <Layout>
       <main className="mx-auto max-w-7xl px-5 pb-16 pt-12 sm:px-8 sm:pt-16">
         <BackLink href="/">Početna</BackLink>
-        <section className="overflow-hidden rounded-[2.4rem] border border-border/80 bg-card/70">
-          <div className="grid gap-0 lg:grid-cols-[minmax(0,1fr)_24rem]">
-            <div className="px-6 py-8 sm:px-10 sm:py-12">
-              <p className="text-sm uppercase tracking-[0.24em] text-muted-foreground">
-                Događaji
-              </p>
-              <h1 className="safe-heading mt-4 max-w-3xl text-5xl font-semibold tracking-[-0.05em] text-foreground sm:text-7xl">
-                Pregled svih događaja na jednom mjestu.
-              </h1>
-              <p className="mt-6 max-w-2xl text-lg leading-8 text-muted-foreground">
-                Nadolazeći događaji i arhiva prethodnih druženja, sa zasebnim
-                pageom za svaki događaj, prijavom, kartom i kalendar
-                izvozom.
-              </p>
-            </div>
+        <section className="grid gap-8 overflow-hidden rounded-[2.2rem] border border-border/80 bg-card/70 px-6 py-8 sm:px-10 sm:py-12 lg:grid-cols-[minmax(0,1fr)_18rem] lg:items-center">
+          <div>
+            <p className="text-sm uppercase tracking-[0.24em] text-muted-foreground">
+              Događaji
+            </p>
+            <h1 className="safe-heading mt-4 max-w-3xl text-5xl font-semibold tracking-[-0.05em] text-foreground sm:text-7xl">
+              Pregled svih događaja na jednom mjestu.
+            </h1>
+            <p className="mt-6 max-w-2xl text-lg leading-8 text-muted-foreground">
+              Nadolazeći događaji i arhiva prethodnih druženja, sa zasebnim
+              pageom za svaki događaj, prijavom, kartom i kalendar izvozom.
+            </p>
+          </div>
 
+          <div className="mx-auto flex aspect-square w-full max-w-[16rem] items-center justify-center rounded-[2rem] border border-primary/25 bg-[#070707] p-7 shadow-soft">
             <img
-              alt=""
-              className="h-full min-h-80 w-full object-cover"
-              src={media.heroUrl}
+              alt="Twenty One handshake ikona za događaje"
+              className="h-full w-full object-contain drop-shadow-[0_0_24px_rgba(247,147,26,0.35)]"
+              src="/images/twentyone-handshake.svg"
             />
           </div>
         </section>
