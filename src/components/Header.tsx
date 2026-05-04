@@ -1,6 +1,7 @@
 import { ChevronRight } from "lucide-react"
 import { useEffect, useState } from "react"
 
+import { TelegramIcon } from "@/components/Icons"
 import { navigation, media } from "@/data/site"
 import { communityHref } from "@/lib/content"
 import { parseRouteFromPath, type Route } from "@/lib/routes"
@@ -55,12 +56,12 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-border/70 bg-background/88 backdrop-blur-xl">
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-5 py-4 sm:gap-4 sm:px-8">
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-5 py-2.5 sm:gap-4 sm:px-8 sm:py-4">
         <a className="min-w-0 shrink-0 grow-0" href="/">
           {media.logoUrl ? (
             <img
               alt="DvadesetJedan"
-              className="block h-auto w-auto max-h-7 max-w-[11rem] object-contain sm:max-h-8 sm:max-w-[13rem]"
+              className="block h-auto w-auto max-h-6 max-w-[10rem] object-contain sm:max-h-8 sm:max-w-[13rem]"
               src={media.logoUrl}
             />
           ) : (
@@ -94,11 +95,12 @@ export function Header() {
         </nav>
 
         <a
-          className="inline-flex shrink-0 items-center gap-2 rounded-full border border-border/80 bg-card px-3 py-2 text-sm font-medium text-foreground sm:px-4"
+          className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-border/80 bg-card px-3 py-1.5 text-sm font-medium text-foreground sm:gap-2 sm:px-4 sm:py-2"
           href={communityHref()}
           rel="noopener noreferrer"
           target="_blank"
         >
+          <TelegramIcon />
           <span className="hidden sm:inline">Uđi u Telegram</span>
           <span className="sm:hidden">Telegram</span>
         </a>
