@@ -85,9 +85,11 @@ function BitcoinOnlyGraphic() {
       role="img"
     >
       <div className="relative flex items-center">
-        <div className="flex size-24 items-center justify-center rounded-full bg-primary text-6xl font-bold leading-none text-white shadow-[0_18px_45px_rgba(247,147,26,0.24)] sm:size-28 sm:text-7xl">
-          ₿
-        </div>
+        <img
+          alt=""
+          className="size-24 rounded-full shadow-[0_18px_45px_rgba(247,147,26,0.24)] sm:size-28"
+          src="/images/bitcoin-logo.png"
+        />
         <span className="absolute -right-4 -bottom-2 flex size-10 items-center justify-center rounded-full border border-border bg-card text-xl shadow-sm sm:size-11 sm:text-2xl">
           👍
         </span>
