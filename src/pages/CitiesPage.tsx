@@ -26,6 +26,8 @@ function isRegionalFocusCountry(code: string) {
   return code === "-99" || regionalMapCountries.find((country) => country.code === code)?.focus
 }
 
+const kosovoMapPath = regionalMapCountries.find((country) => country.code === "-99")?.d
+
 const kosovoSerbiaBoundaryPath =
   "M405.6 310.2L406 307.3L407.3 304.6L404.4 301.8L405.2 298.9L409.2 299.6L411.8 298.4L414.2 296.1L417.7 295.5L421.2 294.9L424.3 292.9L422.2 290.6L424.1 288.1L426.7 286.4L429.4 285.4L431.5 282.1L429.5 279.6L428.6 276.9L431.6 275.6L434.9 273.3L437.7 273L440.1 275.2L442.1 279.3L445.6 281.1L449.9 281.8L451.9 286.2L455 286.8L456 291.2L458.6 292.6L462.3 294.1L463.4 296.8L462.5 299.6L469.3 300.8L472.4 303.2"
 
@@ -88,6 +90,17 @@ function RegionalMapGraphic({ cities }: { cities: CityEntry[] }) {
           })}
         </g>
 
+        {kosovoMapPath ? (
+          <path
+            d={kosovoMapPath}
+            fill="#f7931a"
+            fillOpacity="0.92"
+            stroke="#f7931a"
+            strokeWidth="3"
+            vectorEffect="non-scaling-stroke"
+          />
+        ) : null}
+
         <path
           d={kosovoSerbiaBoundaryPath}
           fill="none"
@@ -111,7 +124,7 @@ function RegionalMapGraphic({ cities }: { cities: CityEntry[] }) {
           <text x="242" y="160">HR</text>
           <text x="316" y="232">BiH</text>
           <text x="423" y="224">RS</text>
-          <text x="386" y="337">ME</text>
+          <text x="359" y="305">ME</text>
         </g>
 
         <g filter="url(#markerGlow)">
