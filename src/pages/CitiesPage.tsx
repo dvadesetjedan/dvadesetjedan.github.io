@@ -26,7 +26,8 @@ function isRegionalFocusCountry(code: string) {
   return code === "-99" || regionalMapCountries.find((country) => country.code === code)?.focus
 }
 
-const kosovoMapPath = regionalMapCountries.find((country) => country.code === "-99")?.d
+const kosovoSerbiaBoundaryPath =
+  "M405.6 310.2L406 307.3L407.3 304.6L404.4 301.8L405.2 298.9L409.2 299.6L411.8 298.4L414.2 296.1L417.7 295.5L421.2 294.9L424.3 292.9L422.2 290.6L424.1 288.1L426.7 286.4L429.4 285.4L431.5 282.1L429.5 279.6L428.6 276.9L431.6 275.6L434.9 273.3L437.7 273L440.1 275.2L442.1 279.3L445.6 281.1L449.9 281.8L451.9 286.2L455 286.8L456 291.2L458.6 292.6L462.3 294.1L463.4 296.8L462.5 299.6L469.3 300.8L472.4 303.2L475.6 302.9L478.9 303.8L477.4 307.4L474.7 313.2L472.6 315.3"
 
 const mapCities: Record<string, { x: number; y: number }> = {
   ljubljana: { x: 165.7, y: 127 },
@@ -50,7 +51,7 @@ function RegionalMapGraphic({ cities }: { cities: CityEntry[] }) {
       <svg
         className="aspect-[1.25] h-full min-h-[19rem] w-full"
         role="img"
-        viewBox="108 76 390 320"
+        viewBox="100 72 455 330"
       >
         <title>Mapa DvadesetJedan gradova u regiji</title>
         <defs>
@@ -87,19 +88,17 @@ function RegionalMapGraphic({ cities }: { cities: CityEntry[] }) {
           })}
         </g>
 
-        {kosovoMapPath ? (
-          <path
-            d={kosovoMapPath}
-            fill="none"
-            stroke="#f8ecdc"
-            strokeDasharray="5 5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeOpacity="0.72"
-            strokeWidth="1.55"
-            vectorEffect="non-scaling-stroke"
-          />
-        ) : null}
+        <path
+          d={kosovoSerbiaBoundaryPath}
+          fill="none"
+          stroke="#0a0a0a"
+          strokeDasharray="4.5 4.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeOpacity="0.82"
+          strokeWidth="1.65"
+          vectorEffect="non-scaling-stroke"
+        />
 
         <g
           fill="#f8ecdc"
@@ -119,23 +118,33 @@ function RegionalMapGraphic({ cities }: { cities: CityEntry[] }) {
           {cities.map((city) => {
             const point = mapCities[city.slug]
             if (!point) return null
-            const isActive = city.status === "active"
+            const hasMeetupHistory = Boolean(city.eventSlugs?.length)
             return (
               <g key={city.slug}>
                 <circle
                   cx={point.x}
                   cy={point.y}
                   fill="none"
-                  r={isActive ? 18 : 13}
+                  r={hasMeetupHistory ? 18 : 11}
+                  stroke={hasMeetupHistory ? "#fff6e8" : "#f7931a"}
+                  strokeOpacity={hasMeetupHistory ? 0.48 : 0.2}
+                  strokeWidth={hasMeetupHistory ? 2.4 : 1.7}
+                />
+                <circle
+                  cx={point.x}
+                  cy={point.y}
+                  fill="none"
+                  r={hasMeetupHistory ? 11 : 0}
                   stroke="#f7931a"
-                  strokeOpacity={isActive ? 0.42 : 0.24}
+                  strokeOpacity={hasMeetupHistory ? 0.88 : 0}
                   strokeWidth="2"
                 />
                 <circle
                   cx={point.x}
                   cy={point.y}
-                  fill={isActive ? "#fff6e8" : "#f7931a"}
-                  r={isActive ? 5.5 : 4}
+                  fill={hasMeetupHistory ? "#fff6e8" : "#f7931a"}
+                  fillOpacity={hasMeetupHistory ? 1 : 0.72}
+                  r={hasMeetupHistory ? 5.5 : 3.8}
                   stroke="#f7931a"
                   strokeWidth="2.5"
                 />
