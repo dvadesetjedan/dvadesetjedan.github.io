@@ -27,9 +27,11 @@ npm run build
 ## Događaji
 
 - Događaji su u `src/data/events.ts`.
+- Održavateljski meta podaci su u `src/data/eventMeta.ts`.
 - Potrebni su potvrđeni naslov, vrijeme, lokacija, grad, država, prijava i karta.
 - Ne izmišljaj venue, vrijeme, program, city leadove ili RSVP linkove.
 - Ako događaj pripada postojećem gradu, koristi `citySlug`.
+- Za ručnu provjeru Meetupa prati `docs/event-maintenance.md`.
 
 ## Livestream epizode
 
@@ -37,12 +39,21 @@ npm run build
 - Najnovija epizoda ide prva.
 - Koristi potvrđeni YouTube URL.
 - Shownotes, poglavlja i povezane linkove dodaj samo kad su provjereni.
+- Ako epizoda još nema provjerene shownotes, koristi `needsShownotes: true`.
+- Predložak je u `docs/livestream-shownotes.md`.
 
 ## Gradovi
 
 - Gradovi su u `src/data/cities.ts`.
 - Grad se dodaje kada postoji javni događaj ili siguran javni kontekst.
 - Ne dodavati privatne kontakte, city leadove ili neprovjerene lokalne tvrdnje.
+- Emerging gradovi smiju imati samo poziv zajednici i starter checklistu, bez tvrdnje da meetup već postoji.
+
+## Sigurnost za početnike
+
+- Sigurnosni sadržaj je u `src/data/safety.ts`.
+- Ruta je `/sigurnost/`.
+- Ne dodavati product endorsement, investicijske savjete ili upute koje traže privatne podatke.
 
 ## Jezična politika
 
@@ -58,3 +69,4 @@ DvadesetJedan nije investicijski savjet, trading grupa ni projekt o kriptovaluta
 - U PR opisu napiši što si promijenio i koje si komande pokrenuo.
 - Provjeri da nema hash URL-ova za canonical internu navigaciju.
 - Provjeri da nema izmišljenih činjenica.
+- Ako dodaješ stare URL-ove, koristi `src/data/legacyRedirects.ts` i provjeri `docs/legacy-redirects.md`.

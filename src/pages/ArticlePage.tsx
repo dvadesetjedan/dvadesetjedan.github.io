@@ -12,7 +12,13 @@ import {
 import { stripHtml, truncateText } from "@/lib/text"
 import { usePageMeta } from "@/lib/usePageMeta"
 
-export function ArticlePage({ article }: { article: ArticleEntry }) {
+export function ArticlePage({
+  article,
+  articles,
+}: {
+  article: ArticleEntry
+  articles: ArticleEntry[]
+}) {
   usePageMeta(
     `${article.title} | DvadesetJedan`,
     truncateText(stripHtml(article.excerpt)),
@@ -72,6 +78,12 @@ export function ArticlePage({ article }: { article: ArticleEntry }) {
               {article.tags.length ? (
                 <span>{article.tags.join(" • ")}</span>
               ) : null}
+              {article.type ? <span>Tip: {article.type}</span> : null}
+              {article.sourceName ? <span>Izvor: {article.sourceName}</span> : null}
+              {article.permissionStatus &&
+              article.permissionStatus !== "unknown" ? (
+                <span>Dozvola: {article.permissionStatus}</span>
+              ) : null}
               {article.originalUrl ? (
                 <a href={article.originalUrl} rel="noopener noreferrer" target="_blank">
                   Originalna objava
@@ -79,7 +91,7 @@ export function ArticlePage({ article }: { article: ArticleEntry }) {
               ) : null}
             </div>
 
-            {/* contentHtml is generated from repository-controlled article data. */}
+            {/* Legacy repository-controlled HTML. Migration path: docs/article-migration.md. */}
             <div
               className="wp-content mt-10 text-base leading-8 text-foreground"
               dangerouslySetInnerHTML={{ __html: article.contentHtml }}
@@ -91,15 +103,19 @@ export function ArticlePage({ article }: { article: ArticleEntry }) {
                   Preporučeno dalje
                 </h2>
                 <div className="mt-4 flex flex-wrap gap-3">
-                  {recommendedNext.map((slug) => (
-                    <a
-                      key={slug}
-                      className="rounded-full border border-border/80 px-4 py-2 text-sm font-medium text-foreground hover:border-primary/40"
-                      href={articleHref(slug)}
-                    >
-                      {slug}
-                    </a>
-                  ))}
+                  {recommendedNext.map((slug) => {
+                    const nextArticle = articles.find((entry) => entry.slug === slug)
+
+                    return (
+                      <a
+                        key={slug}
+                        className="rounded-full border border-border/80 px-4 py-2 text-sm font-medium text-foreground hover:border-primary/40"
+                        href={articleHref(slug)}
+                      >
+                        {nextArticle?.title ?? slug}
+                      </a>
+                    )
+                  })}
                 </div>
               </section>
             ) : null}

@@ -4,6 +4,7 @@ export type Route =
   | { type: "topics" }
   | { type: "faq" }
   | { type: "resources" }
+  | { type: "safety" }
   | { type: "livestream" }
   | { type: "livestreamEpisode"; slug: string }
   | { type: "articles" }
@@ -54,6 +55,7 @@ export function parseRouteFromPath(pathname: string): Route {
   if (cleanPath === "/teme/") return { type: "topics" }
   if (cleanPath === "/faq/") return { type: "faq" }
   if (cleanPath === "/resursi/") return { type: "resources" }
+  if (cleanPath === "/sigurnost/") return { type: "safety" }
   if (cleanPath === "/livestream/") return { type: "livestream" }
   if (cleanPath.startsWith("/livestream/")) {
     const slug = cleanPath.replace(/^\/livestream\//, "").replace(/\/$/, "")

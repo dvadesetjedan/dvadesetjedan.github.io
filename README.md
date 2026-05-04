@@ -20,6 +20,10 @@ npm run build
 
 `npm run build` generira Vite build i statičke artefakte: route-specific HTML, `sitemap.xml`, `robots.txt`, `rss.xml`, `feed.json` i `404.html`.
 
+## Search indexing nakon deploya
+
+Canonical site je `https://dvadesetjedan.com`. Nakon većih promjena provjeri `robots.txt`, `sitemap.xml`, canonical tagove i po potrebi zatraži indeksiranje ključnih ruta u Google Search Consoleu. Detaljan postupak je u `docs/search-indexing.md`.
+
 ## Sadržaj
 
 - članci: `src/data/articles.ts`
@@ -27,6 +31,8 @@ npm run build
 - livestream epizode: `src/data/episodes.ts`
 - gradovi: `src/data/cities.ts`
 - 21-step onboarding: `src/data/onboarding.ts`
+- sigurnosni vodič: `src/data/safety.ts`
+- legacy redirecti: `src/data/legacyRedirects.ts`
 - site copy i navigacija: `src/data/site.ts`
 - canonical config: `src/data/siteConfig.ts`
 
@@ -40,4 +46,4 @@ npm run build
 
 ## Dokumentacija
 
-Pogledaj `docs/architecture.md`, `docs/content-model.md`, `docs/editorial-policy.md`, `docs/deployment.md` i `CONTRIBUTING.md`.
+Pogledaj `docs/architecture.md`, `docs/content-model.md`, `docs/editorial-policy.md`, `docs/deployment.md`, `docs/search-indexing.md`, `docs/event-maintenance.md`, `docs/legacy-redirects.md` i `CONTRIBUTING.md`.

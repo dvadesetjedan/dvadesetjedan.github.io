@@ -11,6 +11,7 @@ const validInternalPrefixes = [
   "/teme/",
   "/faq/",
   "/resursi/",
+  "/sigurnost/",
   "/clanci/",
   "/livestream/",
   "/dogadaji/",

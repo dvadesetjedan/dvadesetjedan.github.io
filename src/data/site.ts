@@ -8,6 +8,7 @@ export const FAQ_URL = "/faq/"
 export const RESOURCES_URL = "/resursi/"
 export const ARTICLES_URL = "/clanci/"
 export const BEGINNERS_URL = "/pocni-ovdje/"
+export const SAFETY_URL = "/sigurnost/"
 export const EVENTS_URL = "/dogadaji/"
 export const CITIES_URL = "/gradovi/"
 export const COMMUNITY_PAGE_URL = "/zajednica/"
@@ -420,6 +421,7 @@ export const footerLinks = [
   { label: "Zajednica", href: COMMUNITY_PAGE_URL, external: false },
   { label: "Doprinesi", href: CONTRIBUTE_URL, external: false },
   { label: "FAQ", href: FAQ_URL, external: false },
+  { label: "Sigurnost", href: SAFETY_URL, external: false },
   { label: "GitHub", href: GITHUB_URL, external: true },
   { label: "TwentyOne.World", href: media.twentyOneUrl, external: true },
   { label: "Whitepaper", href: WHITEPAPER_URL, external: true },
@@ -477,6 +479,16 @@ export const faqItems = [
     question: "Trebam li kupiti bitcoin prije nego što razumijem sigurnost?",
     answer:
       "Ne moraš. Prije bilo kakve kupnje važno je razumjeti osnove: što je Bitcoin, što znači samostalno skrbništvo, što je seed phrase i koje su najčešće početničke greške.",
+  },
+  {
+    question: "Kako da zaštitim seed phrase?",
+    answer:
+      "Nikad ga ne fotografiraj, ne upisuj u nasumične web stranice, ne šalji privatnom porukom i ne drži ga samo u cloud bilješkama. Ako nisi siguran što radiš, pitaj javno u zajednici bez dijeljenja osjetljivih detalja.",
+  },
+  {
+    question: "Kako prepoznati scam?",
+    answer:
+      "Pazi na privatne poruke, lažni support, hitnost, obećanja sigurne zarade i zahtjeve za seed phraseom ili privatnim ključem. Kad nešto zvuči hitno ili predobro, zastani i provjeri kroz javne kanale.",
   },
   {
     question: "Zašto ne pričate o altcoinima?",
@@ -537,6 +549,8 @@ export const faqGroups = [
       "Kako da počnem ako ne znam ništa o Bitcoinu?",
       "Koji je prvi tekst koji trebam pročitati?",
       "Trebam li kupiti bitcoin prije nego što razumijem sigurnost?",
+      "Kako da zaštitim seed phrase?",
+      "Kako prepoznati scam?",
     ]),
   },
   {

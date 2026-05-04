@@ -5,7 +5,7 @@ export const siteConfig = {
   defaultTitle: "DvadesetJedan | Regionalni Bitcoin signal",
   defaultDescription:
     "Bitcoin signal za ljude koji govore našim jezicima: članci, livestream, događaji i zajednica bez tradinga, tokena i obećanja zarade.",
-  defaultOgImage: "/social-preview.svg",
+  defaultOgImage: "/social-preview.png",
   locale: "hr_HR",
   languagePolicy:
     "Piši regionalno razumljivo na latinici. Prihvatljive su hrvatska, srpska, bosanska i crnogorska varijanta; cilj je jasnoća, ne jezična uniformnost.",

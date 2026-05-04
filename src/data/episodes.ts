@@ -11,6 +11,8 @@ export type EpisodeEntry = {
   transcriptUrl?: string
   relatedArticleSlugs?: string[]
   relatedEventSlugs?: string[]
+  terms?: { term: string; explanation: string }[]
+  needsShownotes?: boolean
 }
 
 export const episodes: EpisodeEntry[] = [
@@ -21,6 +23,7 @@ export const episodes: EpisodeEntry[] = [
       "Bitcoin livestream DvadesetJedan zajednice s razgovorom o aktualnim temama, pitanjima i regionalnoj perspektivi.",
     youtubeUrl: "https://www.youtube.com/live/IA-HH1JMkNM?si=hmlLZYr0GQgIReQ_",
     publishedAt: "2026-05-03",
+    needsShownotes: true,
   },
   {
     slug: "dvadesetjedan-livestream-2026-04-26",
@@ -29,6 +32,7 @@ export const episodes: EpisodeEntry[] = [
       "Bitcoin livestream DvadesetJedan zajednice s razgovorom o aktualnim temama, pitanjima i regionalnoj perspektivi.",
     youtubeUrl: "https://www.youtube.com/live/qtV8qzJo2FQ?si=pKx4NhEiJQsH-aTP",
     publishedAt: "2026-04-26",
+    needsShownotes: true,
   },
   {
     slug: "dvadesetjedan-livestream-2026-04-19",
@@ -37,6 +41,7 @@ export const episodes: EpisodeEntry[] = [
       "Bitcoin livestream DvadesetJedan zajednice s razgovorom o aktualnim temama, pitanjima i regionalnoj perspektivi.",
     youtubeUrl: "https://www.youtube.com/live/Hrvw-zK64BI?si=md1uLbo6GHjk3AAc",
     publishedAt: "2026-04-19",
+    needsShownotes: true,
   },
   {
     slug: "dvadesetjedan-livestream-2026-04-12",
@@ -45,5 +50,6 @@ export const episodes: EpisodeEntry[] = [
       "Bitcoin livestream DvadesetJedan zajednice s razgovorom o aktualnim temama, pitanjima i regionalnoj perspektivi.",
     youtubeUrl: "https://www.youtube.com/live/22K27sRKTHw?si=tL0T8pbylM5N0fsu",
     publishedAt: "2026-04-12",
+    needsShownotes: true,
   },
 ]

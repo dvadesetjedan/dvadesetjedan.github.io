@@ -6,6 +6,7 @@ import { ActionButton } from "@/components/ActionButton"
 import { BackLink } from "@/components/BackLink"
 import { EventCard } from "@/components/EventCard"
 import { Layout } from "@/components/Layout"
+import { eventMeta } from "@/data/eventMeta"
 import { CONTRIBUTE_URL, media } from "@/data/site"
 import { communityHref } from "@/lib/content"
 import { usePageMeta } from "@/lib/usePageMeta"
@@ -18,6 +19,11 @@ const eventSteps = [
   "Počni malim druženjem, ne velikim događajem",
 ] as const
 
+function eventStatus(event: EventEntry, now = new Date()) {
+  if (event.status) return event.status
+  return new Date(event.end) >= now ? "upcoming" : "past"
+}
+
 export function EventsPage({ events }: { events: EventEntry[] }) {
   usePageMeta(
     "Događaji | DvadesetJedan",
@@ -26,17 +32,19 @@ export function EventsPage({ events }: { events: EventEntry[] }) {
 
   const now = new Date()
   const upcomingEvents = events
-    .filter((event) => new Date(event.end) >= now)
+    .filter((event) => eventStatus(event, now) === "upcoming")
     .sort(
       (left, right) =>
         new Date(left.start).getTime() - new Date(right.start).getTime(),
     )
   const pastEvents = events
-    .filter((event) => new Date(event.end) < now)
+    .filter((event) => eventStatus(event, now) === "past")
     .sort(
       (left, right) =>
         new Date(right.start).getTime() - new Date(left.start).getTime(),
     )
+  const cancelledEvents = events.filter((event) => eventStatus(event, now) === "cancelled")
+  const cityGroups = [...new Set(events.map((event) => event.city))].sort()
 
   return (
     <Layout>
@@ -63,6 +71,38 @@ export function EventsPage({ events }: { events: EventEntry[] }) {
               className="h-full min-h-80 w-full object-cover"
               src={media.heroUrl}
             />
+          </div>
+        </section>
+
+        <section className="mt-8 rounded-[1.6rem] border border-border/80 bg-card px-6 py-6">
+          <p className="text-sm leading-7 text-muted-foreground">
+            {eventMeta.freshnessNote}
+          </p>
+          <div className="mt-4 flex flex-wrap gap-3 text-sm">
+            <a
+              className="font-medium text-foreground hover:text-primary"
+              href={eventMeta.primarySourceUrl}
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              Službeni izvor: {eventMeta.primarySourceName}
+            </a>
+            {"lastManualCheck" in eventMeta ? (
+              <span className="text-muted-foreground">
+                Zadnje ručno ažuriranje: {eventMeta.lastManualCheck}
+              </span>
+            ) : null}
+          </div>
+          <div className="mt-4 flex flex-wrap gap-2">
+            {cityGroups.map((city) => (
+              <a
+                className="rounded-full border border-border/80 px-3 py-1 text-xs font-medium text-foreground hover:border-primary/40"
+                href={`#grad-${city.toLowerCase().replace(/\s+/g, "-")}`}
+                key={city}
+              >
+                {city}
+              </a>
+            ))}
           </div>
         </section>
 
@@ -106,11 +146,31 @@ export function EventsPage({ events }: { events: EventEntry[] }) {
           ) : (
             <div className="mt-6 grid gap-5 md:grid-cols-2">
               {upcomingEvents.map((event) => (
-                <EventCard key={event.slug} event={event} />
+                <div id={`grad-${event.city.toLowerCase().replace(/\s+/g, "-")}`} key={event.slug}>
+                  <EventCard event={event} />
+                </div>
               ))}
             </div>
           )}
         </section>
+
+        {cancelledEvents.length ? (
+          <section className="mt-14">
+            <div className="flex items-end justify-between gap-4">
+              <h2 className="text-4xl font-semibold tracking-[-0.04em] text-foreground">
+                Otkazani događaji
+              </h2>
+              <p className="text-sm text-muted-foreground">
+                {cancelledEvents.length} događaja
+              </p>
+            </div>
+            <div className="mt-6 grid gap-5 md:grid-cols-2">
+              {cancelledEvents.map((event) => (
+                <EventCard key={event.slug} event={event} />
+              ))}
+            </div>
+          </section>
+        ) : null}
 
         <section className="mt-14 rounded-[1.8rem] border border-border/80 bg-card px-6 py-8 sm:px-10">
           <h2 className="text-4xl font-semibold tracking-[-0.04em] text-foreground">

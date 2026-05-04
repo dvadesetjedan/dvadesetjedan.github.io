@@ -4,7 +4,7 @@ import path from "node:path"
 const root = process.cwd()
 const distDir = path.join(root, "dist")
 const siteUrl = "https://dvadesetjedan.com"
-const defaultImage = `${siteUrl}/social-preview.svg`
+const defaultImage = `${siteUrl}/social-preview.png`
 
 const coreRoutes = [
   ["/", "DvadesetJedan | Regionalni Bitcoin signal", "Bitcoin signal za ljude koji govore našim jezicima: članci, livestream, događaji i zajednica bez tradinga, tokena i obećanja zarade."],
@@ -13,6 +13,7 @@ const coreRoutes = [
   ["/teme/", "Teme | DvadesetJedan", "Teme kroz koje DvadesetJedan obrađuje Bitcoin: novac, sigurnost, štednja, zajednica i dugoročno razmišljanje."],
   ["/faq/", "Česta pitanja | DvadesetJedan", "Kratki odgovori za ljude koji upoznaju DvadesetJedan, Bitcoin-only pristup i načine uključivanja u zajednicu."],
   ["/resursi/", "Resursi | DvadesetJedan", "Polazna mjesta za učenje o Bitcoinu, provjeru mreže i kvalitetne izvore bez crypto buke."],
+  ["/sigurnost/", "Sigurnost | DvadesetJedan", "Početnički Bitcoin sigurnosni vodič: seed phrase, privatni ključevi, exchange, phishing, Telegram i meetupi."],
   ["/clanci/", "Članci | DvadesetJedan", "Pisani Bitcoin signal DvadesetJedan zajednice: početni redoslijed čitanja, tematski putokazi i arhiva tekstova."],
   ["/livestream/", "Livestream | DvadesetJedan", "Bitcoin livestream DvadesetJedan zajednice: vijesti, komentari, razgovori, pitanja uživo i regionalna perspektiva."],
   ["/dogadaji/", "Događaji | DvadesetJedan", "Nadolazeći Bitcoin događaji, arhiva druženja i način kako predložiti lokalni događaj kroz DvadesetJedan zajednicu."],
@@ -196,6 +197,18 @@ function loadCities() {
     .filter(Boolean)
 }
 
+function loadLegacyRedirects() {
+  return extractObjects(readSource("src/data/legacyRedirects.ts"), "export const legacyRedirects")
+    .map((objectSource) => {
+      const from = readString(objectSource, "from")
+      const to = readString(objectSource, "to")
+      const reason = readString(objectSource, "reason")
+
+      return from && to ? { from, to, reason } : null
+    })
+    .filter(Boolean)
+}
+
 function routeJsonLd(route) {
   const base = []
   if (route.path === "/") {
@@ -315,6 +328,40 @@ function writeRoute(template, route) {
   fs.writeFileSync(filePath, html)
 }
 
+function renderLegacyRedirect(redirect) {
+  const canonical = `${siteUrl}${redirect.to}`
+  const reason = redirect.reason
+    ? `<p>${escapeHtml(redirect.reason)}</p>`
+    : ""
+
+  return `<!doctype html>
+<html lang="hr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Preusmjeravanje | DvadesetJedan</title>
+    <meta name="robots" content="noindex" />
+    <link rel="canonical" href="${canonical}" />
+    <meta http-equiv="refresh" content="0; url=${redirect.to}" />
+    <script>window.location.replace(${JSON.stringify(redirect.to)})</script>
+  </head>
+  <body>
+    <main>
+      <h1>Preusmjeravanje</h1>
+      ${reason}
+      <p>Nova stranica je <a href="${redirect.to}">${canonical}</a>.</p>
+    </main>
+  </body>
+</html>
+`
+}
+
+function writeLegacyRedirect(redirect) {
+  const filePath = path.join(distDir, redirect.from, "index.html")
+  fs.mkdirSync(path.dirname(filePath), { recursive: true })
+  fs.writeFileSync(filePath, renderLegacyRedirect(redirect))
+}
+
 function writeSitemap(routes) {
   const body = routes
     .map((route) => `  <url><loc>${siteUrl}${route.path}</loc></url>`)
@@ -393,8 +440,10 @@ const routes = [
   ...loadEpisodes(),
   ...loadCities(),
 ]
+const legacyRedirects = loadLegacyRedirects()
 
 for (const route of routes) writeRoute(template, route)
+for (const redirect of legacyRedirects) writeLegacyRedirect(redirect)
 
 fs.writeFileSync(path.join(distDir, "404.html"), renderHtml(template, {
   path: "/404/",
@@ -406,4 +455,4 @@ fs.writeFileSync(path.join(distDir, "robots.txt"), `User-agent: *\nAllow: /\nSit
 writeSitemap(routes)
 writeFeeds(routes)
 
-console.log(`Generated ${routes.length} static routes, sitemap, RSS, JSON feed, robots and 404.`)
+console.log(`Generated ${routes.length} static routes, ${legacyRedirects.length} legacy redirects, sitemap, RSS, JSON feed, robots and 404.`)

@@ -12,3 +12,19 @@ Shownotes pomažu da epizoda ostane korisna i nakon prijenosa.
 - linkove koji su stvarno spomenuti
 
 Ako sažetak ili poglavlja nisu poznati, ostavi polje prazno. UI će prikazati neutralni placeholder.
+
+## Shownotes template
+
+```text
+Epizoda:
+YouTube URL:
+Datum:
+Kratki sažetak:
+5 glavnih točaka:
+Poglavlja:
+Linkovi:
+Pojmovi za početnike:
+Mogući clipovi:
+Povezani članci:
+Provjerio:
+```

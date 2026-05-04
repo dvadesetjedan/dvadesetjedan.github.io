@@ -45,4 +45,60 @@ export const cities: CityEntry[] = [
     meetupUrl: "https://www.meetup.com/dvadeset-jedan/",
     eventSlugs: ["meetup-rab"],
   },
+  {
+    slug: "zagreb",
+    name: "Zagreb",
+    country: "Croatia",
+    summary:
+      "Još nema javno potvrđenih DvadesetJedan događaja u ovom gradu. Ako želiš pokrenuti mali Bitcoin-only susret, javi se u zajednicu.",
+    status: "emerging",
+  },
+  {
+    slug: "ljubljana",
+    name: "Ljubljana",
+    country: "Slovenia",
+    summary:
+      "Još nema javno potvrđenih DvadesetJedan događaja u ovom gradu. Ako želiš pokrenuti mali Bitcoin-only susret, javi se u zajednicu.",
+    status: "emerging",
+  },
+  {
+    slug: "sarajevo",
+    name: "Sarajevo",
+    country: "Bosnia and Herzegovina",
+    summary:
+      "Još nema javno potvrđenih DvadesetJedan događaja u ovom gradu. Ako želiš pokrenuti mali Bitcoin-only susret, javi se u zajednicu.",
+    status: "emerging",
+  },
+  {
+    slug: "novi-sad",
+    name: "Novi Sad",
+    country: "Serbia",
+    summary:
+      "Još nema javno potvrđenih DvadesetJedan događaja u ovom gradu. Ako želiš pokrenuti mali Bitcoin-only susret, javi se u zajednicu.",
+    status: "emerging",
+  },
+  {
+    slug: "podgorica",
+    name: "Podgorica",
+    country: "Montenegro",
+    summary:
+      "Još nema javno potvrđenih DvadesetJedan događaja u ovom gradu. Ako želiš pokrenuti mali Bitcoin-only susret, javi se u zajednicu.",
+    status: "emerging",
+  },
+  {
+    slug: "rijeka",
+    name: "Rijeka",
+    country: "Croatia",
+    summary:
+      "Još nema javno potvrđenih DvadesetJedan događaja u ovom gradu. Ako želiš pokrenuti mali Bitcoin-only susret, javi se u zajednicu.",
+    status: "emerging",
+  },
+  {
+    slug: "banja-luka",
+    name: "Banja Luka",
+    country: "Bosnia and Herzegovina",
+    summary:
+      "Još nema javno potvrđenih DvadesetJedan događaja u ovom gradu. Ako želiš pokrenuti mali Bitcoin-only susret, javi se u zajednicu.",
+    status: "emerging",
+  },
 ]

@@ -16,6 +16,12 @@ function statusLabel(status: CityEntry["status"]) {
   return "Arhiva"
 }
 
+function sectionTitle(status: CityEntry["status"]) {
+  if (status === "active") return "Aktivni gradovi"
+  if (status === "emerging") return "Gradovi u nastajanju"
+  return "Arhiva"
+}
+
 export function CitiesPage({
   cities,
   events,
@@ -28,6 +34,13 @@ export function CitiesPage({
     "Regionalne DvadesetJedan ulazne točke za gradove, lokalne događaje i pokretanje Bitcoin-only susreta.",
   )
 
+  const groupedCities = (["active", "emerging", "archive"] as const).map(
+    (status) => ({
+      status,
+      cities: cities.filter((city) => city.status === status),
+    }),
+  )
+
   return (
     <Layout>
       <main className="mx-auto max-w-7xl px-5 pb-16 pt-12 sm:px-8 sm:pt-16">
@@ -38,38 +51,47 @@ export function CitiesPage({
           intro="Ovdje su gradovi povezani s javno najavljenim DvadesetJedan događajima. Nema izmišljenih voditelja ni privatnih kontakata: za koordinaciju koristi zajednicu i službene najave."
         />
 
-        <section className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-          {cities.map((city) => {
-            const cityEvents = events.filter((event) =>
-              city.eventSlugs?.includes(event.slug),
-            )
+        {groupedCities.map((group) =>
+          group.cities.length ? (
+            <section className="mt-10" key={group.status}>
+              <h2 className="text-3xl font-semibold tracking-[-0.04em] text-foreground">
+                {sectionTitle(group.status)}
+              </h2>
+              <div className="mt-5 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+                {group.cities.map((city) => {
+                  const cityEvents = events.filter((event) =>
+                    city.eventSlugs?.includes(event.slug),
+                  )
 
-            return (
-              <a
-                key={city.slug}
-                className="rounded-[1.7rem] border border-border/80 bg-card px-5 py-6 transition-colors hover:border-primary/40"
-                href={cityHref(city.slug)}
-              >
-                <p className="inline-flex rounded-full bg-primary/12 px-3 py-1 text-xs font-medium text-primary">
-                  {statusLabel(city.status)}
-                </p>
-                <h2 className="mt-4 flex items-center gap-2 text-3xl font-semibold tracking-[-0.04em] text-foreground">
-                  <MapPinned className="size-5 text-primary" />
-                  {city.name}
-                </h2>
-                <p className="mt-2 text-sm text-muted-foreground">
-                  {city.country}
-                </p>
-                <p className="mt-4 text-sm leading-7 text-muted-foreground">
-                  {city.summary}
-                </p>
-                <p className="mt-5 text-sm font-medium text-foreground">
-                  {cityEvents.length} povezanih događaja
-                </p>
-              </a>
-            )
-          })}
-        </section>
+                  return (
+                    <a
+                      key={city.slug}
+                      className="rounded-[1.7rem] border border-border/80 bg-card px-5 py-6 transition-colors hover:border-primary/40"
+                      href={cityHref(city.slug)}
+                    >
+                      <p className="inline-flex rounded-full bg-primary/12 px-3 py-1 text-xs font-medium text-primary">
+                        {statusLabel(city.status)}
+                      </p>
+                      <h3 className="mt-4 flex items-center gap-2 text-3xl font-semibold tracking-[-0.04em] text-foreground">
+                        <MapPinned className="size-5 text-primary" />
+                        {city.name}
+                      </h3>
+                      <p className="mt-2 text-sm text-muted-foreground">
+                        {city.country}
+                      </p>
+                      <p className="mt-4 text-sm leading-7 text-muted-foreground">
+                        {city.summary}
+                      </p>
+                      <p className="mt-5 text-sm font-medium text-foreground">
+                        {cityEvents.length} povezanih događaja
+                      </p>
+                    </a>
+                  )
+                })}
+              </div>
+            </section>
+          ) : null,
+        )}
 
         <section className="mt-10 rounded-[1.8rem] border border-border/80 bg-card px-6 py-8 sm:px-10">
           <h2 className="text-3xl font-semibold tracking-[-0.04em] text-foreground">

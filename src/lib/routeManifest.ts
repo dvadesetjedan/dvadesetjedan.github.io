@@ -46,6 +46,13 @@ export const coreRouteManifest: SeoMetadata[] = [
     routeType: "page",
   },
   {
+    path: "/sigurnost/",
+    title: "Sigurnost | DvadesetJedan",
+    description:
+      "Početnički Bitcoin sigurnosni vodič: seed phrase, privatni ključevi, exchange, phishing, Telegram i meetupi.",
+    routeType: "page",
+  },
+  {
     path: "/clanci/",
     title: "Članci | DvadesetJedan",
     description:

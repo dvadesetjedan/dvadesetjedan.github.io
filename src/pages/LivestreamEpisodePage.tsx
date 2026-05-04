@@ -4,8 +4,9 @@ import type { EpisodeEntry } from "@/data/episodes"
 import { ActionButton } from "@/components/ActionButton"
 import { BackLink } from "@/components/BackLink"
 import { Layout } from "@/components/Layout"
-import { LIVESTREAM_URL } from "@/data/site"
-import { formatEpisodeDate } from "@/lib/content"
+import { events } from "@/data/events"
+import { CONTRIBUTE_URL, LIVESTREAM_URL } from "@/data/site"
+import { articleHref, eventHref, formatEpisodeDate } from "@/lib/content"
 import { usePageMeta } from "@/lib/usePageMeta"
 
 function youtubeEmbedUrl(url: string) {
@@ -61,7 +62,27 @@ export function LivestreamEpisodePage({
             <ActionButton href={episode.youtubeUrl} icon={<PlayCircle className="size-4" />} external primary>
               Pogledaj na YouTubeu
             </ActionButton>
+            {episode.needsShownotes ? (
+              <ActionButton
+                href={CONTRIBUTE_URL}
+                icon={<ArrowUpRight className="size-4" />}
+              >
+                Dodaj shownotes
+              </ActionButton>
+            ) : null}
           </div>
+
+          {episode.needsShownotes ? (
+            <section className="mt-8 rounded-[1.5rem] border border-primary/20 bg-primary/8 px-5 py-5">
+              <h2 className="text-2xl font-semibold tracking-[-0.04em] text-foreground">
+                Ovoj epizodi još trebaju shownotes.
+              </h2>
+              <p className="mt-3 text-sm leading-7 text-muted-foreground">
+                Ovoj epizodi još trebaju sažetak, poglavlja i linkovi. Možeš
+                pomoći kroz GitHub ili Telegram.
+              </p>
+            </section>
+          ) : null}
 
           <section className="mt-10 grid gap-6 md:grid-cols-2">
             <div className="rounded-[1.5rem] border border-border/80 bg-background/70 px-5 py-5">
@@ -74,9 +95,13 @@ export function LivestreamEpisodePage({
                     <li key={item}>{item}</li>
                   ))}
                 </ul>
+              ) : episode.needsShownotes ? (
+                <p className="mt-4 text-sm leading-7 text-muted-foreground">
+                  Sažetak treba dodati.
+                </p>
               ) : (
                 <p className="mt-4 text-sm leading-7 text-muted-foreground">
-                  Sažetak će biti dodan.
+                  Sažetak nije dostupan.
                 </p>
               )}
             </div>
@@ -93,9 +118,13 @@ export function LivestreamEpisodePage({
                     </li>
                   ))}
                 </ul>
+              ) : episode.needsShownotes ? (
+                <p className="mt-4 text-sm leading-7 text-muted-foreground">
+                  Poglavlja treba dodati.
+                </p>
               ) : (
                 <p className="mt-4 text-sm leading-7 text-muted-foreground">
-                  Poglavlja će biti dodana kad budu dostupna.
+                  Poglavlja nisu dostupna.
                 </p>
               )}
               {episode.links?.length ? (
@@ -110,6 +139,78 @@ export function LivestreamEpisodePage({
               ) : null}
             </div>
           </section>
+
+          {episode.terms?.length ? (
+            <section className="mt-8 rounded-[1.5rem] border border-border/80 bg-background/70 px-5 py-5">
+              <h2 className="text-2xl font-semibold tracking-[-0.04em] text-foreground">
+                Pojmovi za početnike
+              </h2>
+              <div className="mt-4 grid gap-3 md:grid-cols-2">
+                {episode.terms.map((term) => (
+                  <div className="rounded-[1.2rem] border border-border/70 px-4 py-4" key={term.term}>
+                    <h3 className="font-semibold text-foreground">{term.term}</h3>
+                    <p className="mt-2 text-sm leading-7 text-muted-foreground">
+                      {term.explanation}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </section>
+          ) : null}
+
+          {episode.clips?.length || episode.transcriptUrl ? (
+            <section className="mt-8 rounded-[1.5rem] border border-border/80 bg-background/70 px-5 py-5">
+              <h2 className="text-2xl font-semibold tracking-[-0.04em] text-foreground">
+                Dodatni materijali
+              </h2>
+              <div className="mt-4 flex flex-wrap gap-3">
+                {episode.transcriptUrl ? (
+                  <a className="rounded-full border border-border/80 px-4 py-2 text-sm font-medium text-foreground hover:border-primary/40" href={episode.transcriptUrl} rel="noopener noreferrer" target="_blank">
+                    Transkript
+                  </a>
+                ) : null}
+                {episode.clips?.map((clip) => (
+                  <a className="rounded-full border border-border/80 px-4 py-2 text-sm font-medium text-foreground hover:border-primary/40" href={clip.href} key={clip.href} rel="noopener noreferrer" target="_blank">
+                    {clip.label}
+                  </a>
+                ))}
+              </div>
+            </section>
+          ) : null}
+
+          {episode.relatedArticleSlugs?.length ? (
+            <section className="mt-8 rounded-[1.5rem] border border-border/80 bg-background/70 px-5 py-5">
+              <h2 className="text-2xl font-semibold tracking-[-0.04em] text-foreground">
+                Povezani članci
+              </h2>
+              <div className="mt-4 flex flex-wrap gap-3">
+                {episode.relatedArticleSlugs.map((slug) => (
+                  <a className="rounded-full border border-border/80 px-4 py-2 text-sm font-medium text-foreground hover:border-primary/40" href={articleHref(slug)} key={slug}>
+                    {slug}
+                  </a>
+                ))}
+              </div>
+            </section>
+          ) : null}
+
+          {episode.relatedEventSlugs?.length ? (
+            <section className="mt-8 rounded-[1.5rem] border border-border/80 bg-background/70 px-5 py-5">
+              <h2 className="text-2xl font-semibold tracking-[-0.04em] text-foreground">
+                Povezani događaji
+              </h2>
+              <div className="mt-4 flex flex-wrap gap-3">
+                {episode.relatedEventSlugs.map((slug) => {
+                  const event = events.find((entry) => entry.slug === slug)
+
+                  return event ? (
+                    <a className="rounded-full border border-border/80 px-4 py-2 text-sm font-medium text-foreground hover:border-primary/40" href={eventHref(event.slug)} key={slug}>
+                      {event.title}
+                    </a>
+                  ) : null
+                })}
+              </div>
+            </section>
+          ) : null}
         </article>
       </main>
     </Layout>

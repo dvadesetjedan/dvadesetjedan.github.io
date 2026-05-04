@@ -10,6 +10,15 @@ import { CITIES_URL, CONTRIBUTE_URL } from "@/data/site"
 import { communityHref } from "@/lib/content"
 import { usePageMeta } from "@/lib/usePageMeta"
 
+const starterChecklist = [
+  "Odaberi jednostavno javno mjesto",
+  "Predloži datum",
+  "Zadrži Bitcoin-only fokus",
+  "Početnici su dobrodošli",
+  "Ne traži privatne podatke",
+  "Javi se u zajednicu",
+] as const
+
 export function CityPage({
   city,
   events,
@@ -61,8 +70,9 @@ export function CityPage({
               </div>
             ) : (
               <p className="mt-4 rounded-[1.4rem] border border-dashed border-border/80 px-5 py-5 text-sm leading-7 text-muted-foreground">
-                Trenutno nema javno najavljenih nadolazećih događaja za ovaj
-                grad.
+                {city.status === "emerging"
+                  ? "Još nema javno potvrđenih DvadesetJedan događaja u ovom gradu. Ako želiš pokrenuti mali Bitcoin-only susret, javi se u zajednicu."
+                  : "Trenutno nema javno najavljenih nadolazećih događaja za ovaj grad."}
               </p>
             )}
 
@@ -77,19 +87,33 @@ export function CityPage({
               </div>
             ) : (
               <p className="mt-4 rounded-[1.4rem] border border-dashed border-border/80 px-5 py-5 text-sm leading-7 text-muted-foreground">
-                Arhiva za ovaj grad još nema dodatnih javnih unosa.
+                {city.status === "archive"
+                  ? "Buduće najave ovise o zajednici i službenim kanalima."
+                  : "Arhiva za ovaj grad još nema dodatnih javnih unosa."}
               </p>
             )}
           </div>
 
           <aside className="space-y-4 rounded-[1.8rem] border border-border/80 bg-card px-6 py-6">
             <h2 className="text-2xl font-semibold tracking-[-0.04em] text-foreground">
-              Kako pokrenuti lokalni susret
+              {city.status === "emerging"
+                ? "Starter checklist"
+                : "Kako pokrenuti lokalni susret"}
             </h2>
             <p className="text-sm leading-7 text-muted-foreground">
               Počni malim druženjem, bez pritiska i bez hypea. Javi grad,
               okvirni datum i Bitcoin-only namjeru u zajednici.
             </p>
+            {city.status === "emerging" ? (
+              <ul className="space-y-2 text-sm leading-7 text-foreground">
+                {starterChecklist.map((item) => (
+                  <li className="flex gap-3" key={item}>
+                    <span className="mt-3 size-2 shrink-0 rounded-full bg-primary" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            ) : null}
             <ActionButton href={communityHref()} icon={<Send className="size-4" />} external primary>
               Uđi u zajednicu
             </ActionButton>

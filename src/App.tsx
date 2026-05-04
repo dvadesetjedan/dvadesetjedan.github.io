@@ -21,6 +21,7 @@ import { LivestreamEpisodePage } from "@/pages/LivestreamEpisodePage"
 import { LoadingPage } from "@/pages/LoadingPage"
 import { NotFoundPage } from "@/pages/NotFoundPage"
 import { ResourcesPage } from "@/pages/ResourcesPage"
+import { SafetyPage } from "@/pages/SafetyPage"
 import { TopicsPage } from "@/pages/TopicsPage"
 import {
   cleanPathFromLegacyHash,
@@ -123,6 +124,8 @@ function App() {
       return <FaqPage />
     case "resources":
       return <ResourcesPage />
+    case "safety":
+      return <SafetyPage />
     case "livestream":
       return <LivestreamPage />
     case "livestreamEpisode":
@@ -153,7 +156,7 @@ function App() {
       }
 
       return selectedArticle ? (
-        <ArticlePage article={selectedArticle} />
+        <ArticlePage article={selectedArticle} articles={articleEntries} />
       ) : (
         <NotFoundPage />
       )

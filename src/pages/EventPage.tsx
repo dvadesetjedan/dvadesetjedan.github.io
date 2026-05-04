@@ -6,6 +6,7 @@ import { BackLink } from "@/components/BackLink"
 import { InfoTile } from "@/components/InfoTile"
 import { Layout } from "@/components/Layout"
 import { SafeImage } from "@/components/SafeImage"
+import { eventMeta } from "@/data/eventMeta"
 import { EVENTS_URL } from "@/data/site"
 import {
   cityHref,
@@ -21,6 +22,8 @@ export function EventPage({ event }: { event: EventEntry }) {
     `${event.title} | DvadesetJedan`,
     truncateText(event.summary),
   )
+
+  const isCancelled = event.status === "cancelled"
 
   return (
     <Layout>
@@ -61,7 +64,9 @@ export function EventPage({ event }: { event: EventEntry }) {
                   icon={<CalendarDays className="size-4" />}
                   label="Status"
                   value={
-                    new Date(event.end) >= new Date()
+                    isCancelled
+                      ? "Otkazano"
+                      : new Date(event.end) >= new Date()
                       ? "Nadolazeći događaj"
                       : "Prošli događaj"
                   }
@@ -78,18 +83,23 @@ export function EventPage({ event }: { event: EventEntry }) {
                 Zadnje promjene provjeri kroz službenu prijavu ili Telegram
                 koordinaciju navedenu u opisu događaja.
               </p>
+              <p className="mt-4 rounded-[1.4rem] border border-border/80 bg-background/70 px-5 py-4 text-sm leading-7 text-muted-foreground">
+                {eventMeta.freshnessNote}
+              </p>
             </div>
 
             <aside className="space-y-4">
-              <ActionButton
-                href={event.registrationUrl}
-                icon={<ArrowUpRight className="size-4" />}
-                external
-                primary
-                className="w-full justify-center"
-              >
-                Otvori prijavu
-              </ActionButton>
+              {!isCancelled ? (
+                <ActionButton
+                  href={event.registrationUrl}
+                  icon={<ArrowUpRight className="size-4" />}
+                  external
+                  primary
+                  className="w-full justify-center"
+                >
+                  Otvori prijavu
+                </ActionButton>
+              ) : null}
               <ActionButton
                 href={event.mapUrl}
                 icon={<MapPinned className="size-4" />}

@@ -65,6 +65,11 @@ export function LivestreamPage() {
                     {formatEpisodeDate(latestEpisode.publishedAt)}
                   </p>
                 ) : null}
+                {latestEpisode.needsShownotes ? (
+                  <p className="mt-3 inline-flex rounded-full bg-primary/12 px-3 py-1 text-xs font-medium text-primary">
+                    Sažetak treba dodati
+                  </p>
+                ) : null}
                 <p className="mt-4 text-sm leading-7 text-muted-foreground">
                   {latestEpisode.summary}
                 </p>
@@ -142,6 +147,11 @@ export function LivestreamPage() {
                     <h3 className="text-xl font-semibold tracking-[-0.03em] text-foreground">
                       {episode.title}
                     </h3>
+                    {episode.needsShownotes ? (
+                      <p className="mt-3 inline-flex rounded-full bg-primary/12 px-3 py-1 text-xs font-medium text-primary">
+                        Sažetak treba dodati
+                      </p>
+                    ) : null}
                     <p className="mt-3 text-sm leading-7 text-muted-foreground">
                       {episode.summary}
                     </p>

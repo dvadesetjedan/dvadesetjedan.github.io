@@ -7,6 +7,7 @@ import { Layout } from "@/components/Layout"
 import {
   ARTICLES_URL,
   LIVESTREAM_URL,
+  SAFETY_URL,
   beginnerHighlights,
   beginnerTopics,
   readingOrder,
@@ -66,6 +67,12 @@ export function BeginnersPage({ articles }: { articles: ArticleEntry[] }) {
                 Počni ovdje
               </ActionButton>
               <ActionButton
+                href={SAFETY_URL}
+                icon={<ArrowUpRight className="size-4" />}
+              >
+                Sigurnosni vodič
+              </ActionButton>
+              <ActionButton
                 href={LIVESTREAM_URL}
                 icon={<PlayCircle className="size-4" />}
               >
@@ -95,22 +102,68 @@ export function BeginnersPage({ articles }: { articles: ArticleEntry[] }) {
           <h2 className="text-3xl font-semibold tracking-[-0.04em] text-foreground">
             21 korak za smiren početak
           </h2>
-          <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+          <p className="mt-4 max-w-3xl text-base leading-8 text-muted-foreground">
+            Svaki korak je mali razgovor, ne test. Otvori ono što ti je
+            trenutno važno i pitaj zajednicu kad zapneš.
+          </p>
+          <div className="mt-6 grid gap-4 md:grid-cols-2">
             {onboardingSteps.map((step, index) => (
-              <div
+              <details
                 key={step.title}
                 className="rounded-[1.4rem] border border-border/70 bg-background/70 px-5 py-5"
               >
                 <p className="text-xs uppercase tracking-[0.18em] text-primary">
                   Korak {index + 1}
                 </p>
-                <h3 className="mt-3 text-xl font-semibold tracking-[-0.03em] text-foreground">
+                <summary className="mt-3 cursor-pointer list-none text-xl font-semibold tracking-[-0.03em] text-foreground">
                   {step.title}
-                </h3>
+                </summary>
                 <p className="mt-3 text-sm leading-7 text-muted-foreground">
-                  {step.text}
+                  {step.shortText}
                 </p>
-              </div>
+                <div className="mt-4 space-y-4 border-t border-border/70 pt-4">
+                  <p className="text-sm leading-7 text-foreground">
+                    {step.explanation}
+                  </p>
+                  {step.doNotDo?.length ? (
+                    <div className="rounded-[1.2rem] border border-primary/20 bg-primary/8 px-4 py-4">
+                      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">
+                        Nemoj
+                      </p>
+                      <ul className="mt-3 space-y-2 text-sm leading-7 text-foreground">
+                        {step.doNotDo.map((item) => (
+                          <li className="flex gap-3" key={item}>
+                            <span className="mt-3 size-2 shrink-0 rounded-full bg-primary" />
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ) : null}
+                  {step.questionForCommunity ? (
+                    <p className="rounded-[1.2rem] border border-border/70 px-4 py-3 text-sm leading-7 text-muted-foreground">
+                      Pitanje za zajednicu: {step.questionForCommunity}
+                    </p>
+                  ) : null}
+                  {step.recommendedArticleSlugs?.length ? (
+                    <div className="flex flex-wrap gap-2">
+                      {step.recommendedArticleSlugs.map((slug) => {
+                        const article = articles.find((entry) => entry.slug === slug)
+
+                        return article ? (
+                          <a
+                            className="rounded-full border border-border/80 px-3 py-1 text-xs font-medium text-foreground hover:border-primary/40"
+                            href={articleHref(article.slug)}
+                            key={slug}
+                          >
+                            {article.title}
+                          </a>
+                        ) : null
+                      })}
+                    </div>
+                  ) : null}
+                </div>
+              </details>
             ))}
           </div>
         </section>
