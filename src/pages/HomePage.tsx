@@ -133,7 +133,7 @@ export function HomePage() {
           <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_26rem] lg:items-center">
             <div className="hero-copy min-w-0 w-full max-w-[calc(100vw-2.5rem)] sm:max-w-4xl">
               <p className="text-sm uppercase tracking-[0.24em] text-muted-foreground">
-                DvadesetJedan / Balkan /{" "}
+                DvadesetJedan /{" "}
                 <a
                   className="font-semibold hover:text-foreground"
                   href={media.twentyOneUrl}
