@@ -107,6 +107,13 @@
 }
 
 .mobile-scroll-nav {
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0,
+    #000 1.25rem,
+    #000 calc(100% - 1.25rem),
+    transparent 100%
+  );
   scrollbar-width: none;
 }
 

@@ -1,4 +1,3 @@
-import { ChevronRight } from "lucide-react"
 import { useEffect, useRef, useState } from "react"
 
 import { TelegramIcon } from "@/components/Icons"
@@ -96,7 +95,7 @@ export function Header() {
           )}
         </a>
 
-        <nav className="hidden items-center gap-6 text-sm text-muted-foreground xl:flex">
+        <nav className="hidden items-center gap-4 text-sm text-muted-foreground min-[1160px]:flex xl:gap-6">
           {navigation.map((item) => {
             const isActive = isActiveNavigationItem(route, item.href)
 
@@ -131,10 +130,10 @@ export function Header() {
         </a>
       </div>
 
-      <div className="relative border-t border-border/60 xl:hidden">
+      <div className="border-t border-border/60 min-[1160px]:hidden">
         <nav
           aria-label="Glavna navigacija"
-          className="mobile-scroll-nav mx-auto flex max-w-7xl gap-5 overflow-x-auto px-5 py-3 pr-16 text-sm text-muted-foreground sm:px-8 sm:pr-20"
+          className="mobile-scroll-nav mx-auto flex max-w-7xl gap-5 overflow-x-auto px-5 py-3 text-sm text-muted-foreground sm:px-8"
           ref={mobileNavRef}
         >
           {navigation.map((item) => {
@@ -158,14 +157,6 @@ export function Header() {
             )
           })}
         </nav>
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute bottom-0 right-0 top-0 z-10 flex w-14 items-center justify-end bg-gradient-to-l from-background from-45% via-background/88 to-transparent pr-3 sm:w-16 sm:pr-4"
-        >
-          <span className="inline-flex size-6 items-center justify-center rounded-full border border-border/70 bg-card/80 text-muted-foreground shadow-sm">
-            <ChevronRight className="size-3.5" />
-          </span>
-        </div>
       </div>
     </header>
   )
