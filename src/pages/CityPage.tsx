@@ -26,35 +26,62 @@ export function CityPage({
   city: CityEntry
   events: EventEntry[]
 }) {
-  usePageMeta(
-    `${city.name} | DvadesetJedan gradovi`,
-    city.summary,
-  )
+  usePageMeta(`${city.name} | DvadesetJedan gradovi`, city.summary)
 
-  const cityEvents = events.filter((event) => city.eventSlugs?.includes(event.slug))
+  const cityEvents = events.filter((event) =>
+    city.eventSlugs?.includes(event.slug),
+  )
   const now = new Date()
-  const upcomingEvents = cityEvents.filter((event) => new Date(event.end) >= now)
+  const upcomingEvents = cityEvents.filter(
+    (event) => new Date(event.end) >= now,
+  )
   const pastEvents = cityEvents.filter((event) => new Date(event.end) < now)
 
   return (
     <Layout>
       <main className="mx-auto max-w-7xl px-5 pb-16 pt-12 sm:px-8 sm:pt-16">
         <BackLink href={CITIES_URL}>Svi gradovi</BackLink>
-        <section className="rounded-[2.2rem] border border-border/80 bg-card/70 px-6 py-8 sm:px-10 sm:py-12">
-          <p className="text-sm uppercase tracking-[0.24em] text-muted-foreground">
-            Gradovi
-          </p>
-          <h1 className="safe-heading mt-4 flex items-center gap-3 text-5xl font-semibold tracking-[-0.05em] text-foreground sm:text-7xl">
-            <MapPinned className="size-8 text-primary" />
-            {city.name}
-          </h1>
-          <p className="mt-3 text-sm uppercase tracking-[0.18em] text-muted-foreground">
-            {city.country}
-            {city.region ? ` / ${city.region}` : ""}
-          </p>
-          <p className="mt-6 max-w-3xl text-lg leading-8 text-muted-foreground">
-            {city.summary}
-          </p>
+        <section className="overflow-hidden rounded-[2.2rem] border border-border/80 bg-card/70 px-6 py-8 sm:px-10 sm:py-12">
+          <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_28rem] lg:items-center">
+            <div className="min-w-0">
+              <p className="text-sm uppercase tracking-[0.24em] text-muted-foreground">
+                Gradovi
+              </p>
+              <h1 className="safe-heading mt-4 flex items-center gap-3 text-5xl font-semibold tracking-[-0.05em] text-foreground sm:text-7xl">
+                <MapPinned className="size-8 shrink-0 text-primary" />
+                {city.name}
+              </h1>
+              <p className="mt-3 text-sm uppercase tracking-[0.18em] text-muted-foreground">
+                {city.country}
+                {city.region ? ` / ${city.region}` : ""}
+              </p>
+              <p className="mt-6 max-w-3xl text-lg leading-8 text-muted-foreground">
+                {city.summary}
+              </p>
+            </div>
+
+            {city.image ? (
+              <figure className="overflow-hidden rounded-[1.6rem] border border-border/80 bg-background shadow-soft">
+                <img
+                  alt={city.image.alt}
+                  className="aspect-[4/3] w-full object-cover"
+                  src={city.image.src}
+                />
+                <figcaption className="px-4 py-3 text-xs leading-5 text-muted-foreground">
+                  Foto:{" "}
+                  <a
+                    className="font-medium text-foreground hover:text-primary"
+                    href={city.image.sourceUrl}
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    {city.image.credit}
+                  </a>{" "}
+                  / {city.image.license}
+                </figcaption>
+              </figure>
+            ) : null}
+          </div>
         </section>
 
         <section className="mt-10 grid gap-6 lg:grid-cols-[minmax(0,1fr)_22rem]">
@@ -114,14 +141,26 @@ export function CityPage({
                 ))}
               </ul>
             ) : null}
-            <ActionButton href={communityHref()} icon={<Send className="size-4" />} external primary>
+            <ActionButton
+              href={communityHref()}
+              icon={<Send className="size-4" />}
+              external
+              primary
+            >
               Uđi u zajednicu
             </ActionButton>
-            <ActionButton href={CONTRIBUTE_URL} icon={<ArrowUpRight className="size-4" />}>
+            <ActionButton
+              href={CONTRIBUTE_URL}
+              icon={<ArrowUpRight className="size-4" />}
+            >
               Predloži događaj
             </ActionButton>
             {city.meetupUrl ? (
-              <ActionButton href={city.meetupUrl} icon={<ArrowUpRight className="size-4" />} external>
+              <ActionButton
+                href={city.meetupUrl}
+                icon={<ArrowUpRight className="size-4" />}
+                external
+              >
                 Meetup
               </ActionButton>
             ) : null}
