@@ -96,7 +96,7 @@ export function Header() {
           )}
         </a>
 
-        <nav className="hidden items-center gap-6 text-sm text-muted-foreground md:flex">
+        <nav className="hidden items-center gap-6 text-sm text-muted-foreground xl:flex">
           {navigation.map((item) => {
             const isActive = isActiveNavigationItem(route, item.href)
 
@@ -131,7 +131,7 @@ export function Header() {
         </a>
       </div>
 
-      <div className="relative border-t border-border/60 md:hidden">
+      <div className="relative border-t border-border/60 xl:hidden">
         <nav
           aria-label="Glavna navigacija"
           className="mobile-scroll-nav mx-auto flex max-w-7xl gap-5 overflow-x-auto px-5 py-3 pr-16 text-sm text-muted-foreground sm:px-8 sm:pr-20"
