@@ -8,12 +8,20 @@ export const legacyRedirects: LegacyRedirect[] = [
   {
     from: "/events/",
     to: "/dogadaji/",
-    reason: "Stari engleski indeks događaja preusmjerava na novu regionalnu rutu.",
+    reason:
+      "Stari engleski indeks događaja preusmjerava na novu regionalnu rutu.",
   },
   {
     from: "/event/meetup-rab/",
     to: "/dogadaji/meetup-rab/",
-    reason: "Stara WordPress ruta događaja preusmjerava na statičku stranicu događaja.",
+    reason:
+      "Stara WordPress ruta događaja preusmjerava na statičku stranicu događaja.",
+  },
+  {
+    from: "/dogadaji/bitcoin-only-meetup-belgrade-2026-05-23/",
+    to: "/dogadaji/bitcoin-only-meetup-belgrade-2026-05-30/",
+    reason:
+      "Datum beogradskog Meetup događaja promijenjen je s 23. na 30. svibnja 2026.",
   },
   {
     from: "/never-stop-learning/",
