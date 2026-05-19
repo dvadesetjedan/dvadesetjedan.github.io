@@ -79,7 +79,25 @@ export function LivestreamEpisodePage({
               </h2>
               <p className="mt-3 text-sm leading-7 text-muted-foreground">
                 Ovoj epizodi još trebaju sažetak, poglavlja i linkovi. Možeš
-                pomoći kroz GitHub ili Telegram.
+                pomoći kroz{" "}
+                <a
+                  className="font-medium text-foreground underline decoration-border underline-offset-4 transition-colors hover:text-primary hover:decoration-primary"
+                  href="https://github.com/dvadesetjedan/dvadesetjedan.github.io"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  GitHub
+                </a>{" "}
+                ili{" "}
+                <a
+                  className="font-medium text-foreground underline decoration-border underline-offset-4 transition-colors hover:text-primary hover:decoration-primary"
+                  href="https://t.me/+ud6ARwb7rX5lZjU0"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  Telegram
+                </a>
+                .
               </p>
             </section>
           ) : null}
