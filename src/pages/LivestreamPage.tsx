@@ -68,7 +68,12 @@ export function LivestreamPage() {
             {latestEpisode ? (
               <>
                 <h2 className="mt-3 text-3xl font-semibold tracking-[-0.04em] text-foreground">
-                  {latestEpisode.title}
+                  <a
+                    className="hover:text-primary"
+                    href={episodeHref(latestEpisode.slug)}
+                  >
+                    {latestEpisode.title}
+                  </a>
                 </h2>
                 {latestEpisode.publishedAt ? (
                   <p className="mt-3 text-xs uppercase tracking-[0.18em] text-muted-foreground">
@@ -144,10 +149,9 @@ export function LivestreamPage() {
             {archive.length ? (
               <div className="mt-6 grid gap-4 md:grid-cols-2">
                 {archive.map((episode) => (
-                  <a
+                  <article
                     key={episode.slug}
-                    className="rounded-[1.4rem] border border-border/70 bg-background/70 px-5 py-5 hover:border-primary/40"
-                    href={episodeHref(episode.slug)}
+                    className="rounded-[1.4rem] border border-border/70 bg-background/70 px-5 py-5 transition-colors hover:border-primary/40"
                   >
                     {episode.publishedAt ? (
                       <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
@@ -155,7 +159,12 @@ export function LivestreamPage() {
                       </p>
                     ) : null}
                     <h3 className="text-xl font-semibold tracking-[-0.03em] text-foreground">
-                      {episode.title}
+                      <a
+                        className="hover:text-primary"
+                        href={episodeHref(episode.slug)}
+                      >
+                        {episode.title}
+                      </a>
                     </h3>
                     {episode.needsShownotes ? (
                       <p className="mt-3 inline-flex rounded-full bg-primary/12 px-3 py-1 text-xs font-medium text-primary">
@@ -165,7 +174,7 @@ export function LivestreamPage() {
                     <p className="mt-3 text-sm leading-7 text-muted-foreground">
                       {episode.summary}
                     </p>
-                  </a>
+                  </article>
                 ))}
               </div>
             ) : (
