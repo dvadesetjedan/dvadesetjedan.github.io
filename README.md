@@ -20,6 +20,14 @@ npm run build
 
 `npm run build` generira Vite build i statičke artefakte: route-specific HTML, `sitemap.xml`, `robots.txt`, `rss.xml`, `feed.json` i `404.html`.
 
+## Kako doprinijeti
+
+DvadesetJedan prima male, konkretne doprinose zajednice: ispravke grešaka, prijedloge tema, shownotes za livestream, članke, prijevode, lokalne događaje, korisne Bitcoin-only izvore i poboljšanja stranice.
+
+Ako ne želiš mijenjati kod, otvori GitHub issue kroz jedan od predložaka u `.github/ISSUE_TEMPLATE/`. Napiši što predlažeš, na koju se stranicu odnosi i dodaj javni izvor ako se radi o činjenici, događaju ili vanjskom linku.
+
+Ako šalješ promjenu kroz pull request, drži je malom i jasnom. Detaljan vodič je u `CONTRIBUTING.md` i `docs/github-contribution-guide.md`.
+
 ## Search indexing nakon deploya
 
 Canonical site je `https://dvadesetjedan.com`. Nakon većih promjena provjeri `robots.txt`, `sitemap.xml`, canonical tagove i po potrebi zatraži indeksiranje ključnih ruta u Google Search Consoleu. Detaljan postupak je u `docs/search-indexing.md`.

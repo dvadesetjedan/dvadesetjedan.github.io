@@ -17,6 +17,49 @@ npm run check
 npm run build
 ```
 
+## Ako želiš pomoći, ali ne znaš odakle krenuti
+
+Najjednostavniji doprinos je otvoriti GitHub issue:
+
+- prijavi grešku na stranici
+- predloži temu za članak ili livestream
+- pošalji javni izvor koji nedostaje
+- dodaj kratke shownotes za epizodu
+- predloži lokalni Bitcoin-only susret
+- predloži projekt iz zajednice
+- napiši gdje je tekst nejasan ili zastario
+
+Koristi predloške u `.github/ISSUE_TEMPLATE/`. Ako nisi siguran koji predložak odabrati, otvori najbliži i u opisu napiši kontekst. Nemoj slati privatne podatke, privatne kontakte, seed phrase, financijske podatke ili podatke koje ne želiš javno objaviti.
+
+## Kako izgleda dobar GitHub issue
+
+Dobar issue ne mora biti dug. Dovoljno je:
+
+- link na stranicu ili epizodu na koju se odnosi
+- što predlažeš ili što ne radi
+- zašto je to korisno zajednici
+- javni izvor ako se radi o činjenici, događaju, prijevodu ili vanjskoj poveznici
+- napomena je li podatak provjeren ili je samo prijedlog
+
+Primjeri dobrih doprinosa:
+
+- “Na `/livestream/.../` nedostaje sažetak. Predlažem ove 4 točke.”
+- “Ovaj događaj ima javni Meetup link i lokaciju. Može se dodati u `src/data/events.ts`.”
+- “Ovaj članak bi vrijedilo prevesti jer objašnjava privatnost za početnike. Original je ovdje.”
+- “Na mobilnom prikazu ova dva gumba se dodiruju.”
+
+## Kako poslati pull request
+
+Ako želiš izravno promijeniti datoteke:
+
+1. Forkaj repozitorij ili napravi granu iz `main`.
+2. Napravi malu, jasnu promjenu.
+3. Ne miješaj nepovezane stvari u isti PR.
+4. Pokreni `npm run lint`, `npm run check` i `npm run build`.
+5. U PR opisu napiši što si promijenio, zašto i koje si provjere pokrenuo.
+
+Za sadržaj je često dovoljno promijeniti jednu data datoteku. Za UI promjene provjeri da tekst ne izlazi iz kartica i da mobilni prikaz ostaje uredan.
+
 ## Članci
 
 - Sadržaj je u `src/data/articles.ts`.

@@ -3,6 +3,10 @@ description: Predloži prijevod Bitcoin-only teksta.
 title: "[Prijevod]: "
 labels: ["content", "translation"]
 body:
+  - type: markdown
+    attributes:
+      value: |
+        Predloži prijevod samo ako je tekst Bitcoin-only i ako postoji jasan izvor. Ako status dozvole nije poznat, označi ga kao nepoznat.
   - type: input
     id: original_url
     attributes:
@@ -28,3 +32,9 @@ body:
     id: why
     attributes:
       label: Zašto je tekst koristan regiji?
+      description: Napiši kome bi prijevod pomogao i koju temu razjašnjava.
+  - type: textarea
+    id: notes
+    attributes:
+      label: Napomene
+      description: Ako znaš autora, licencu, postojeći prijevod ili mogući problem s dozvolom, napiši ovdje.

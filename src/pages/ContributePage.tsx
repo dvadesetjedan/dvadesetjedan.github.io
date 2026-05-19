@@ -7,6 +7,28 @@ import { GITHUB_URL, contributionItems } from "@/data/site"
 import { communityHref } from "@/lib/content"
 import { usePageMeta } from "@/lib/usePageMeta"
 
+const GITHUB_ISSUES_URL = `${GITHUB_URL}/issues/new/choose`
+const GITHUB_PULLS_URL = `${GITHUB_URL}/pulls`
+
+const githubContributionSteps = [
+  {
+    title: "1. Odaberi što želiš doprinijeti",
+    text: "Možeš prijaviti grešku, predložiti članak, dodati shownotes, predložiti lokalni susret, poslati prijevod ili pomoći oko koda.",
+  },
+  {
+    title: "2. Otvori GitHub issue",
+    text: "Izaberi predložak koji najbolje odgovara doprinosu. Upiši samo javne i provjerene podatke: link, kontekst, izvor i što predlažeš.",
+  },
+  {
+    title: "3. Za veće izmjene pošalji pull request",
+    text: "Ako mijenjaš datoteke, napravi malu i jasnu promjenu. U opisu napiši što je promijenjeno i koje si provjere pokrenuo.",
+  },
+  {
+    title: "4. Ostani blizu Bitcoin-only smjera",
+    text: "Ne dodaj trading signale, tokene, privatne kontakte, neprovjerene datume, lokacije ili tvrdnje koje zajednica ne može provjeriti.",
+  },
+] as const
+
 export function ContributePage() {
   usePageMeta(
     "Doprinesi | DvadesetJedan",
@@ -62,6 +84,55 @@ export function ContributePage() {
             </ActionButton>
             <ActionButton href={GITHUB_URL} icon={<GitHubIcon />} external>
               Otvori GitHub repozitorij
+            </ActionButton>
+          </div>
+        </section>
+
+        <section className="mt-10 rounded-[1.8rem] border border-border/80 bg-card px-6 py-8 sm:px-10">
+          <div className="max-w-3xl">
+            <p className="text-sm uppercase tracking-[0.22em] text-muted-foreground">
+              GitHub
+            </p>
+            <h2 className="mt-3 text-3xl font-semibold tracking-[-0.04em] text-foreground">
+              Kako doprinijeti preko GitHuba
+            </h2>
+            <p className="mt-4 text-base leading-8 text-muted-foreground">
+              Ne moraš biti programer. GitHub može služiti kao uredno mjesto za
+              prijavu greške, prijedlog teme, dodavanje izvora, shownotesa,
+              prijevoda ili lokalnog događaja. Najvažnije je da doprinos bude
+              konkretan, provjerljiv i Bitcoin-only.
+            </p>
+          </div>
+          <div className="mt-6 grid gap-4 md:grid-cols-2">
+            {githubContributionSteps.map((step) => (
+              <article
+                className="rounded-[1.4rem] border border-border/80 bg-background/70 px-5 py-5"
+                key={step.title}
+              >
+                <h3 className="text-lg font-semibold tracking-[-0.02em] text-foreground">
+                  {step.title}
+                </h3>
+                <p className="mt-3 text-sm leading-7 text-muted-foreground">
+                  {step.text}
+                </p>
+              </article>
+            ))}
+          </div>
+          <div className="mt-6 flex flex-wrap gap-3">
+            <ActionButton
+              href={GITHUB_ISSUES_URL}
+              icon={<ArrowUpRight className="size-4" />}
+              external
+              primary
+            >
+              Otvori GitHub issue
+            </ActionButton>
+            <ActionButton
+              href={GITHUB_PULLS_URL}
+              icon={<GitHubIcon />}
+              external
+            >
+              Pogledaj pull requestove
             </ActionButton>
           </div>
         </section>

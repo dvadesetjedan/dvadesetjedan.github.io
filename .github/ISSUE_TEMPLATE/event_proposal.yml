@@ -3,6 +3,10 @@ description: Predloži javni Bitcoin-only događaj.
 title: "[Događaj]: "
 labels: ["event"]
 body:
+  - type: markdown
+    attributes:
+      value: |
+        Predloži samo javni Bitcoin-only događaj s podacima koje smijemo objaviti. Ako lokacija ili vrijeme nisu potvrđeni, jasno to napiši.
   - type: input
     id: city
     attributes:
@@ -19,6 +23,11 @@ body:
     attributes:
       label: Detalji
       description: Lokacija, RSVP link i program ako su javno potvrđeni.
+  - type: input
+    id: public_source
+    attributes:
+      label: Javni izvor
+      description: Meetup, službena stranica, objava organizatora ili drugi javni link.
   - type: checkboxes
     id: policy
     attributes:

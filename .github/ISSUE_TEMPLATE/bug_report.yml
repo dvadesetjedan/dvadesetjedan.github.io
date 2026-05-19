@@ -3,6 +3,10 @@ description: Prijavi problem na web stranici.
 title: "[Bug]: "
 labels: ["bug"]
 body:
+  - type: markdown
+    attributes:
+      value: |
+        Hvala što prijavljuješ problem. Napiši dovoljno konkretno da netko može ponoviti grešku. Ne šalji privatne podatke.
   - type: textarea
     id: problem
     attributes:
@@ -19,3 +23,9 @@ body:
     id: expected
     attributes:
       label: Što si očekivao?
+      description: Kako bi se stranica trebala ponašati ili izgledati?
+  - type: textarea
+    id: context
+    attributes:
+      label: Dodatni kontekst
+      description: Uređaj, preglednik, screenshot ili kratka napomena ako pomaže.

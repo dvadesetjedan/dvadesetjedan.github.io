@@ -3,6 +3,10 @@ description: Predloži lokalni Bitcoin-only susret.
 title: "[Grad]: "
 labels: ["city", "event"]
 body:
+  - type: markdown
+    attributes:
+      value: |
+        Lokalni susret može početi vrlo jednostavno: nekoliko ljudi, javna lokacija i jasna Bitcoin-only namjera. Ne šalji privatne kontakte koje ne želiš javno objaviti.
   - type: input
     id: city
     attributes:
@@ -14,6 +18,11 @@ body:
     attributes:
       label: Ideja
       description: Opiši mali, siguran i javan format susreta.
+  - type: textarea
+    id: help_needed
+    attributes:
+      label: Što ti treba od zajednice?
+      description: Primjerice pomoć oko prostora, najave, teme, dizajna, koordinacije ili moderiranja.
   - type: checkboxes
     id: privacy
     attributes:

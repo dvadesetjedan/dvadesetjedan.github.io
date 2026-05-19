@@ -3,6 +3,10 @@ description: Predloži originalni Bitcoin-only članak.
 title: "[Članak]: "
 labels: ["content", "article"]
 body:
+  - type: markdown
+    attributes:
+      value: |
+        Predloži članak koji pomaže ljudima razumjeti Bitcoin. Tema treba biti Bitcoin-only, obrazovna i bez trading signala.
   - type: textarea
     id: idea
     attributes:
@@ -15,6 +19,11 @@ body:
     attributes:
       label: Izvori
       description: Dodaj javne izvore ako postoje. Ne izmišljaj autore ili datume.
+  - type: textarea
+    id: outline
+    attributes:
+      label: Predložena struktura
+      description: Ako imaš ideju, napiši kratke točke ili redoslijed sekcija.
   - type: dropdown
     id: difficulty
     attributes:

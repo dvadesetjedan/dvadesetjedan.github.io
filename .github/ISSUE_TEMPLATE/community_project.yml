@@ -1,0 +1,128 @@
+name: Predloži projekt iz zajednice
+description: Predloži Bitcoin-only projekt za stranicu Iz zajednice.
+title: "[Iz zajednice]: "
+labels: ["content", "community-project"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Hvala što predlažeš projekt. Ne šalji privatne podatke koje ne želiš javno objaviti.
+  - type: input
+    id: project_name
+    attributes:
+      label: Naziv projekta
+    validations:
+      required: true
+  - type: input
+    id: owner
+    attributes:
+      label: Tko vodi projekt
+      description: Osoba, pseudonim, tim ili naziv projekta.
+    validations:
+      required: true
+  - type: dropdown
+    id: public_identity
+    attributes:
+      label: Želiš li prikazati ime, pseudonim ili samo naziv projekta?
+      options:
+        - Ime
+        - Pseudonim
+        - Samo naziv projekta
+    validations:
+      required: true
+  - type: input
+    id: short_description
+    attributes:
+      label: Kratki opis u jednoj rečenici
+    validations:
+      required: true
+  - type: textarea
+    id: long_description
+    attributes:
+      label: Duži opis
+      description: Što projekt radi i kome pomaže?
+    validations:
+      required: true
+  - type: dropdown
+    id: category
+    attributes:
+      label: Kategorija
+      options:
+        - edukacija
+        - prijevod
+        - događaj
+        - video
+        - audio
+        - članci
+        - alat
+        - regionalna zajednica
+        - ekologija
+        - drugo
+    validations:
+      required: true
+  - type: textarea
+    id: links
+    attributes:
+      label: Linkovi
+      description: Web, YouTube, GitHub, Nostr, Instagram, Telegram, Substack, Spotify, Fountain, PDF ili donation link.
+      placeholder: |
+        Web:
+        YouTube:
+        GitHub:
+        Nostr:
+        Instagram:
+        Telegram:
+        Substack:
+        Spotify:
+        Fountain:
+        PDF:
+        Donation:
+  - type: checkboxes
+    id: desired_actions
+    attributes:
+      label: Što želiš da ljudi naprave?
+      options:
+        - label: pogledaju
+        - label: podijele
+        - label: preuzmu PDF
+        - label: dođu na događaj
+        - label: pomognu
+        - label: doniraju
+        - label: kontaktiraju te
+  - type: dropdown
+    id: bitcoin_only
+    attributes:
+      label: Je li projekt Bitcoin-only?
+      options:
+        - "Da"
+        - "Ne"
+        - "Nisam siguran"
+    validations:
+      required: true
+  - type: dropdown
+    id: risky_promotion
+    attributes:
+      label: Promovira li projekt tokene, trading, leverage ili obećanja zarade?
+      options:
+        - "Ne"
+        - "Da"
+    validations:
+      required: true
+  - type: dropdown
+    id: consent
+    attributes:
+      label: Smije li DvadesetJedan objaviti ove podatke?
+      options:
+        - "Da"
+        - "Ne"
+    validations:
+      required: true
+  - type: textarea
+    id: donation
+    attributes:
+      label: Postoji li donation link i kome ide novac?
+      description: Donacije moraju ići izravno autoru ili projektu.
+  - type: textarea
+    id: notes
+    attributes:
+      label: Dodatne napomene

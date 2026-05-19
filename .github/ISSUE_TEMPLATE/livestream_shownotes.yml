@@ -3,6 +3,10 @@ description: Predloži sažetak, poglavlja ili linkove za epizodu.
 title: "[Shownotes]: "
 labels: ["livestream", "content"]
 body:
+  - type: markdown
+    attributes:
+      value: |
+        Shownotes trebaju pomoći gledatelju da brzo shvati što je u epizodi. Ne dodaj tvrdnje koje nisu iz epizode ili javnog izvora.
   - type: input
     id: episode
     attributes:
@@ -19,3 +23,8 @@ body:
     attributes:
       label: Poglavlja
       description: Format primjerice 00:12:34 Tema.
+  - type: textarea
+    id: links
+    attributes:
+      label: Spomenuti linkovi
+      description: Dodaj samo javne linkove koji su stvarno spomenuti ili direktno korisni za epizodu.
