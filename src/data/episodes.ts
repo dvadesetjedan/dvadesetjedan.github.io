@@ -18,7 +18,7 @@ export type EpisodeEntry = {
 export const episodes: EpisodeEntry[] = [
   {
     slug: "dvadesetjedan-livestream-2026-05-17",
-    title: "DvadesetJedan livestream — 17.5.2026.",
+    title: "DvadesetJedan Uživo - epizoda emitirana 17. 5. 2026.",
     summary:
       "Bitcoin livestream DvadesetJedan zajednice s razgovorom o aktualnim temama, pitanjima i regionalnoj perspektivi.",
     youtubeUrl: "https://www.youtube.com/live/P01tcWSENpc?si=57hQTcjeSmiBjsxB",
@@ -27,7 +27,7 @@ export const episodes: EpisodeEntry[] = [
   },
   {
     slug: "dvadesetjedan-livestream-2026-05-10",
-    title: "DvadesetJedan livestream — 10.5.2026.",
+    title: "DvadesetJedan Uživo - epizoda emitirana 10. 5. 2026.",
     summary:
       "Bitcoin livestream DvadesetJedan zajednice s razgovorom o aktualnim temama, pitanjima i regionalnoj perspektivi.",
     youtubeUrl: "https://youtube.com/live/BYV-FgTY7pQ",
@@ -36,7 +36,7 @@ export const episodes: EpisodeEntry[] = [
   },
   {
     slug: "dvadesetjedan-livestream-2026-05-03",
-    title: "DvadesetJedan livestream — 3.5.2026.",
+    title: "DvadesetJedan Uživo - epizoda emitirana 3. 5. 2026.",
     summary:
       "Bitcoin livestream DvadesetJedan zajednice s razgovorom o aktualnim temama, pitanjima i regionalnoj perspektivi.",
     youtubeUrl: "https://www.youtube.com/live/IA-HH1JMkNM?si=hmlLZYr0GQgIReQ_",
@@ -45,7 +45,7 @@ export const episodes: EpisodeEntry[] = [
   },
   {
     slug: "dvadesetjedan-livestream-2026-04-26",
-    title: "DvadesetJedan livestream — 26.4.2026.",
+    title: "DvadesetJedan Uživo - epizoda emitirana 26. 4. 2026.",
     summary:
       "Bitcoin livestream DvadesetJedan zajednice s razgovorom o aktualnim temama, pitanjima i regionalnoj perspektivi.",
     youtubeUrl: "https://www.youtube.com/live/qtV8qzJo2FQ?si=pKx4NhEiJQsH-aTP",
@@ -54,7 +54,7 @@ export const episodes: EpisodeEntry[] = [
   },
   {
     slug: "dvadesetjedan-livestream-2026-04-19",
-    title: "DvadesetJedan livestream — 19.4.2026.",
+    title: "DvadesetJedan Uživo - epizoda emitirana 19. 4. 2026.",
     summary:
       "Bitcoin livestream DvadesetJedan zajednice s razgovorom o aktualnim temama, pitanjima i regionalnoj perspektivi.",
     youtubeUrl: "https://www.youtube.com/live/Hrvw-zK64BI?si=md1uLbo6GHjk3AAc",
@@ -63,7 +63,7 @@ export const episodes: EpisodeEntry[] = [
   },
   {
     slug: "dvadesetjedan-livestream-2026-04-12",
-    title: "DvadesetJedan livestream — 12.4.2026.",
+    title: "DvadesetJedan Uživo - epizoda emitirana 12. 4. 2026.",
     summary:
       "Bitcoin livestream DvadesetJedan zajednice s razgovorom o aktualnim temama, pitanjima i regionalnoj perspektivi.",
     youtubeUrl: "https://www.youtube.com/live/22K27sRKTHw?si=tL0T8pbylM5N0fsu",
