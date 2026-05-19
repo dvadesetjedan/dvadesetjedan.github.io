@@ -141,29 +141,31 @@ export function CityPage({
                 ))}
               </ul>
             ) : null}
-            <ActionButton
-              href={communityHref()}
-              icon={<Send className="size-4" />}
-              external
-              primary
-            >
-              Uđi u zajednicu
-            </ActionButton>
-            <ActionButton
-              href={CONTRIBUTE_URL}
-              icon={<ArrowUpRight className="size-4" />}
-            >
-              Predloži događaj
-            </ActionButton>
-            {city.meetupUrl ? (
+            <div className="flex flex-wrap gap-3">
               <ActionButton
-                href={city.meetupUrl}
-                icon={<ArrowUpRight className="size-4" />}
+                href={communityHref()}
+                icon={<Send className="size-4" />}
                 external
+                primary
               >
-                Meetup
+                Uđi u zajednicu
               </ActionButton>
-            ) : null}
+              <ActionButton
+                href={CONTRIBUTE_URL}
+                icon={<ArrowUpRight className="size-4" />}
+              >
+                Predloži događaj
+              </ActionButton>
+              {city.meetupUrl ? (
+                <ActionButton
+                  href={city.meetupUrl}
+                  icon={<ArrowUpRight className="size-4" />}
+                  external
+                >
+                  Meetup
+                </ActionButton>
+              ) : null}
+            </div>
           </aside>
         </section>
       </main>

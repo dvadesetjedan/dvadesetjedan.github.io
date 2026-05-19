@@ -17,6 +17,31 @@ import {
 import { truncateText } from "@/lib/text"
 import { usePageMeta } from "@/lib/usePageMeta"
 
+const BULL_BITCOIN_LABEL = "Bull Bitcoin"
+const BULL_BITCOIN_URL = "https://www.bullbitcoin.com/"
+
+function renderDescriptionParagraph(paragraph: string) {
+  if (!paragraph.includes(BULL_BITCOIN_LABEL)) {
+    return paragraph
+  }
+
+  return paragraph.split(BULL_BITCOIN_LABEL).map((part, index, parts) => (
+    <span key={`${part}-${index}`}>
+      {part}
+      {index < parts.length - 1 ? (
+        <a
+          className="font-medium text-foreground underline decoration-border underline-offset-4 transition-colors hover:text-primary hover:decoration-primary"
+          href={BULL_BITCOIN_URL}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          {BULL_BITCOIN_LABEL}
+        </a>
+      ) : null}
+    </span>
+  ))
+}
+
 export function EventPage({ event }: { event: EventEntry }) {
   usePageMeta(
     `${event.title} | DvadesetJedan`,
@@ -89,7 +114,7 @@ export function EventPage({ event }: { event: EventEntry }) {
 
               <div className="mt-10 space-y-5 text-base leading-8 text-foreground">
                 {event.description.map((paragraph) => (
-                  <p key={paragraph}>{paragraph}</p>
+                  <p key={paragraph}>{renderDescriptionParagraph(paragraph)}</p>
                 ))}
               </div>
               <p className="mt-8 rounded-[1.4rem] border border-primary/20 bg-primary/8 px-5 py-4 text-sm leading-7 text-foreground">
