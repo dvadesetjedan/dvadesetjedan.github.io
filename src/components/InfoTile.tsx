@@ -7,7 +7,7 @@ export function InfoTile({
 }: {
   icon: ReactNode
   label: string
-  value: string
+  value: ReactNode
 }) {
   return (
     <div className="rounded-[1.4rem] border border-border/80 bg-background/70 px-4 py-4">

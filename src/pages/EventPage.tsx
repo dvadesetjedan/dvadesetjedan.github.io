@@ -58,7 +58,21 @@ export function EventPage({ event }: { event: EventEntry }) {
                 <InfoTile
                   icon={<Clock3 className="size-4" />}
                   label="Adresa"
-                  value={event.address}
+                  value={
+                    event.address ? (
+                      <a
+                        className="inline-flex items-center gap-1 text-foreground underline decoration-border underline-offset-4 transition-colors hover:text-primary hover:decoration-primary"
+                        href={event.mapUrl}
+                        rel="noopener noreferrer"
+                        target="_blank"
+                      >
+                        {event.address}
+                        <ArrowUpRight className="size-3.5" />
+                      </a>
+                    ) : (
+                      "Lokacija će biti objavljena naknadno."
+                    )
+                  }
                 />
                 <InfoTile
                   icon={<CalendarDays className="size-4" />}
