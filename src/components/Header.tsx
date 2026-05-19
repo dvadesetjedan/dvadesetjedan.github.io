@@ -119,7 +119,7 @@ export function Header() {
         </nav>
 
         <a
-          className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-border/80 bg-card px-3 py-1.5 text-sm font-medium text-foreground sm:gap-2 sm:px-4 sm:py-2"
+          className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-border/80 bg-card px-3 py-1.5 text-sm font-medium text-foreground shadow-sm transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:bg-background hover:shadow-md active:translate-y-0 sm:gap-2 sm:px-4 sm:py-2"
           href={communityHref()}
           rel="noopener noreferrer"
           target="_blank"

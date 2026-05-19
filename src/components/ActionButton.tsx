@@ -19,10 +19,10 @@ export function ActionButton({
 }: ActionButtonProps) {
   return (
     <a
-      className={`inline-flex w-fit max-w-full min-w-0 items-center justify-center justify-self-start gap-2 rounded-full px-5 py-3 text-sm font-medium leading-snug transition-colors ${
+      className={`inline-flex w-fit max-w-full min-w-0 items-center justify-center justify-self-start gap-2 rounded-full px-5 py-3 text-sm font-medium leading-snug shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md active:translate-y-0 ${
         primary
-          ? "bg-primary text-white"
-          : "border border-border/80 bg-card text-foreground"
+          ? "bg-primary text-white hover:bg-primary/90"
+          : "border border-border/80 bg-card text-foreground hover:border-primary/40 hover:bg-background"
       } ${className}`.trim()}
       href={href}
       rel={external ? "noopener noreferrer" : undefined}

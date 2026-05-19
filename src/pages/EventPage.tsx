@@ -117,7 +117,7 @@ export function EventPage({ event }: { event: EventEntry }) {
                 Dodaj u Google kalendar
               </ActionButton>
               <a
-                className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-border/80 bg-card px-5 py-3 text-sm font-medium text-foreground"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-border/80 bg-card px-5 py-3 text-sm font-medium text-foreground shadow-sm transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:bg-background hover:shadow-md active:translate-y-0"
                 download={`${event.slug}.ics`}
                 href={makeIcsUrl(event)}
               >
