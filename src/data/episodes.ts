@@ -17,6 +17,15 @@ export type EpisodeEntry = {
 
 export const episodes: EpisodeEntry[] = [
   {
+    slug: "dvadesetjedan-livestream-2026-05-31",
+    title: "DvadesetJedan Uživo - epizoda emitirana 31. 5. 2026.",
+    summary:
+      "Bitcoin livestream DvadesetJedan zajednice s razgovorom o aktualnim temama, pitanjima i regionalnoj perspektivi.",
+    youtubeUrl: "https://www.youtube.com/live/S9WmtBVGVY0?si=mdlw-4nOSwtMIJf5",
+    publishedAt: "2026-05-31",
+    needsShownotes: true,
+  },
+  {
     slug: "dvadesetjedan-livestream-2026-05-24",
     title: "DvadesetJedan Uživo - epizoda emitirana 24. 5. 2026.",
     summary:
