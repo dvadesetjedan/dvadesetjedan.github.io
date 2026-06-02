@@ -1,9 +1,16 @@
 import { useEffect, useRef, useState } from "react"
+import { Moon, Sun } from "lucide-react"
 
 import { TelegramIcon } from "@/components/Icons"
 import { navigation, media } from "@/data/site"
 import { communityHref } from "@/lib/content"
 import { parseRouteFromPath, type Route } from "@/lib/routes"
+import {
+  applyTheme,
+  getInitialTheme,
+  storeTheme,
+  type ColorTheme,
+} from "@/lib/theme"
 
 function isActiveNavigationItem(route: Route, href: string) {
   if (href.startsWith("http")) return false
@@ -42,6 +49,7 @@ export function Header() {
   const [route, setRoute] = useState<Route>(() =>
     parseRouteFromPath(window.location.pathname),
   )
+  const [theme, setTheme] = useState<ColorTheme>(() => getInitialTheme())
 
   useEffect(() => {
     const onPopState = () => setRoute(parseRouteFromPath(window.location.pathname))
@@ -77,6 +85,14 @@ export function Header() {
       })
     })
   }, [route])
+
+  const toggleTheme = () => {
+    const nextTheme = theme === "dark" ? "light" : "dark"
+
+    setTheme(nextTheme)
+    storeTheme(nextTheme)
+    applyTheme(nextTheme)
+  }
 
   return (
     <header className="sticky top-0 z-40 border-b border-border/70 bg-background/88 backdrop-blur-xl">
@@ -118,16 +134,38 @@ export function Header() {
           })}
         </nav>
 
-        <a
-          className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-border/80 bg-card px-3 py-1.5 text-sm font-medium text-foreground shadow-sm transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:bg-background hover:shadow-md active:translate-y-0 sm:gap-2 sm:px-4 sm:py-2"
-          href={communityHref()}
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          <TelegramIcon />
-          <span className="hidden sm:inline">Uđi u Telegram</span>
-          <span className="sm:hidden">Telegram</span>
-        </a>
+        <div className="flex shrink-0 items-center gap-2">
+          <button
+            aria-label={
+              theme === "dark"
+                ? "Prebaci na svijetli način"
+                : "Prebaci na tamni način"
+            }
+            className="inline-flex items-center gap-1.5 rounded-full border border-border/80 bg-card px-3 py-1.5 text-sm font-medium text-foreground shadow-sm transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:bg-background hover:shadow-md active:translate-y-0 sm:gap-2 sm:px-4 sm:py-2"
+            onClick={toggleTheme}
+            type="button"
+          >
+            {theme === "dark" ? (
+              <Sun className="size-4" />
+            ) : (
+              <Moon className="size-4" />
+            )}
+            <span className="hidden lg:inline">
+              {theme === "dark" ? "Svijetlo" : "Tamno"}
+            </span>
+          </button>
+
+          <a
+            className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-border/80 bg-card px-3 py-1.5 text-sm font-medium text-foreground shadow-sm transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:bg-background hover:shadow-md active:translate-y-0 sm:gap-2 sm:px-4 sm:py-2"
+            href={communityHref()}
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            <TelegramIcon />
+            <span className="hidden sm:inline">Uđi u Telegram</span>
+            <span className="sm:hidden">Telegram</span>
+          </a>
+        </div>
       </div>
 
       <div className="border-t border-border/60 min-[1160px]:hidden">
