@@ -101,8 +101,12 @@ export function Header() {
           {media.logoUrl ? (
             <img
               alt="DvadesetJedan"
-              className="block h-auto w-auto max-h-6 max-w-[10rem] object-contain dark:brightness-0 dark:invert sm:max-h-8 sm:max-w-[13rem]"
-              src={media.logoUrl}
+              className="block h-auto w-auto max-h-6 max-w-[10rem] object-contain sm:max-h-8 sm:max-w-[13rem]"
+              src={
+                theme === "dark"
+                  ? "/images/dvadesetjedan-logo-dark.png"
+                  : media.logoUrl
+              }
             />
           ) : (
             <span className="text-lg font-semibold tracking-[-0.03em] text-foreground">
