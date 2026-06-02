@@ -41,9 +41,9 @@ export function CityPage({
     <Layout>
       <main className="mx-auto max-w-7xl px-5 pb-16 pt-12 sm:px-8 sm:pt-16">
         <BackLink href={CITIES_URL}>Svi gradovi</BackLink>
-        <section className="overflow-hidden rounded-[2.2rem] border border-border/80 bg-card/70 px-6 py-8 sm:px-10 sm:py-12">
-          <div className="grid gap-8 lg:grid-cols-2 lg:items-center">
-            <div className="min-w-0">
+        <section className="overflow-hidden rounded-[2.2rem] border border-border/80 bg-card/70">
+          <div className="grid lg:min-h-[30rem] lg:grid-cols-2 lg:items-stretch">
+            <div className="min-w-0 px-6 py-8 sm:px-10 sm:py-12 lg:self-center">
               <p className="text-sm uppercase tracking-[0.24em] text-muted-foreground">
                 Gradovi
               </p>
@@ -61,24 +61,12 @@ export function CityPage({
             </div>
 
             {city.image ? (
-              <figure className="overflow-hidden rounded-[1.6rem] border border-border/80 bg-background shadow-soft">
+              <figure className="min-h-full overflow-hidden bg-background">
                 <img
                   alt={city.image.alt}
-                  className="aspect-[16/11] w-full object-cover"
+                  className="h-full min-h-[18rem] w-full object-cover lg:min-h-[30rem]"
                   src={city.image.src}
                 />
-                <figcaption className="px-4 py-3 text-xs leading-5 text-muted-foreground">
-                  Foto:{" "}
-                  <a
-                    className="font-medium text-foreground hover:text-primary"
-                    href={city.image.sourceUrl}
-                    rel="noopener noreferrer"
-                    target="_blank"
-                  >
-                    {city.image.credit}
-                  </a>{" "}
-                  / {city.image.license}
-                </figcaption>
               </figure>
             ) : null}
           </div>
