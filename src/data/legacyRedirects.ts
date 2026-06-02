@@ -12,6 +12,12 @@ export const legacyRedirects: LegacyRedirect[] = [
       "Stari engleski indeks događaja preusmjerava na novu regionalnu rutu.",
   },
   {
+    from: "/meetups/",
+    to: "/dogadaji/",
+    reason:
+      "Stara meetup ruta preusmjerava na novu stranicu događaja i susreta.",
+  },
+  {
     from: "/event/meetup-rab/",
     to: "/dogadaji/meetup-rab/",
     reason:
