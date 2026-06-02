@@ -101,7 +101,7 @@ export function Header() {
           {media.logoUrl ? (
             <img
               alt="DvadesetJedan"
-              className="block h-auto w-auto max-h-6 max-w-[10rem] object-contain sm:max-h-8 sm:max-w-[13rem]"
+              className="block h-auto w-auto max-h-6 max-w-[10rem] object-contain dark:brightness-0 dark:invert sm:max-h-8 sm:max-w-[13rem]"
               src={media.logoUrl}
             />
           ) : (
@@ -150,9 +150,6 @@ export function Header() {
             ) : (
               <Moon className="size-4" />
             )}
-            <span className="hidden lg:inline">
-              {theme === "dark" ? "Svijetlo" : "Tamno"}
-            </span>
           </button>
 
           <a
