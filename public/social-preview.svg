@@ -4,7 +4,7 @@
   <image x="944" y="72" width="156" height="156" href="/images/bitcoin-logo.png" preserveAspectRatio="xMidYMid meet"/>
   <text x="96" y="220" fill="#121212" font-family="Arial, Helvetica, sans-serif" font-size="96" font-weight="700" letter-spacing="-2">DvadesetJedan</text>
   <text x="96" y="304" fill="#6E6253" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="600">Regionalni Bitcoin signal</text>
-  <rect x="96" y="352" width="446" height="54" rx="27" fill="#F7931A" fill-opacity="0.12" stroke="#F7931A" stroke-opacity="0.24"/>
+  <rect x="96" y="352" width="488" height="54" rx="27" fill="#F7931A" fill-opacity="0.12" stroke="#F7931A" stroke-opacity="0.24"/>
   <text x="128" y="387" fill="#B86C0C" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700">Bitcoin-only zajednica za Balkan</text>
   <path d="M98 476H474" stroke="#D8C8B2" stroke-width="3" stroke-linecap="round"/>
   <text x="96" y="516" fill="#4C4339" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="500">Članci, livestream, događaji i otvorena zajednica</text>

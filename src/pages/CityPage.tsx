@@ -42,7 +42,7 @@ export function CityPage({
       <main className="mx-auto max-w-7xl px-5 pb-16 pt-12 sm:px-8 sm:pt-16">
         <BackLink href={CITIES_URL}>Svi gradovi</BackLink>
         <section className="overflow-hidden rounded-[2.2rem] border border-border/80 bg-card/70 px-6 py-8 sm:px-10 sm:py-12">
-          <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_28rem] lg:items-center">
+          <div className="grid gap-8 lg:grid-cols-2 lg:items-center">
             <div className="min-w-0">
               <p className="text-sm uppercase tracking-[0.24em] text-muted-foreground">
                 Gradovi
@@ -64,7 +64,7 @@ export function CityPage({
               <figure className="overflow-hidden rounded-[1.6rem] border border-border/80 bg-background shadow-soft">
                 <img
                   alt={city.image.alt}
-                  className="aspect-[4/3] w-full object-cover"
+                  className="aspect-[16/11] w-full object-cover"
                   src={city.image.src}
                 />
                 <figcaption className="px-4 py-3 text-xs leading-5 text-muted-foreground">
