@@ -1,4 +1,5 @@
 import { ArrowUpRight, CalendarDays, Clock3, MapPinned } from "lucide-react"
+import type { ReactNode } from "react"
 
 import type { EventEntry } from "@/data/events"
 import { ActionButton } from "@/components/ActionButton"
@@ -19,27 +20,38 @@ import { usePageMeta } from "@/lib/usePageMeta"
 
 const BULL_BITCOIN_LABEL = "Bull Bitcoin"
 const BULL_BITCOIN_URL = "https://www.bullbitcoin.com/"
+const REVOLUTION_ROCKS_LABEL = "Revolution.Rocks"
+const REVOLUTION_ROCKS_URL = "https://www.revolution.rocks/"
+
+const DESCRIPTION_LINKS = [
+  { label: BULL_BITCOIN_LABEL, href: BULL_BITCOIN_URL },
+  { label: REVOLUTION_ROCKS_LABEL, href: REVOLUTION_ROCKS_URL },
+] as const
 
 function renderDescriptionParagraph(paragraph: string) {
-  if (!paragraph.includes(BULL_BITCOIN_LABEL)) {
-    return paragraph
-  }
+  return DESCRIPTION_LINKS.reduce<ReactNode[]>((segments, link) => {
+    return segments.flatMap((segment, segmentIndex) => {
+      if (typeof segment !== "string" || !segment.includes(link.label)) {
+        return segment
+      }
 
-  return paragraph.split(BULL_BITCOIN_LABEL).map((part, index, parts) => (
-    <span key={`${part}-${index}`}>
-      {part}
-      {index < parts.length - 1 ? (
-        <a
-          className="font-medium text-foreground underline decoration-border underline-offset-4 transition-colors hover:text-primary hover:decoration-primary"
-          href={BULL_BITCOIN_URL}
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          {BULL_BITCOIN_LABEL}
-        </a>
-      ) : null}
-    </span>
-  ))
+      return segment.split(link.label).map((part, partIndex, parts) => (
+        <span key={`${link.label}-${segmentIndex}-${partIndex}`}>
+          {part}
+          {partIndex < parts.length - 1 ? (
+            <a
+              className="font-medium text-foreground underline decoration-border underline-offset-4 transition-colors hover:text-primary hover:decoration-primary"
+              href={link.href}
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              {link.label}
+            </a>
+          ) : null}
+        </span>
+      ))
+    })
+  }, [paragraph])
 }
 
 export function EventPage({ event }: { event: EventEntry }) {
