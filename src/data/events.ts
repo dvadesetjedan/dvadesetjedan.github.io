@@ -28,6 +28,71 @@ export type EventEntry = {
 
 export const events: EventEntry[] = [
   {
+    slug: "revolution-rocks-belgrade-2026",
+    title: "Revolution.Rocks Belgrade 2026",
+    summary:
+      "Dvodnevni glazbeno-edukacijski događaj na Zappa Barki u Beogradu: koncertna večer, paneli, razgovori i value-for-value model uz Bitcoin Lightning.",
+    description: [
+      "Revolution.Rocks je dvodnevni događaj u Beogradu, 19. i 20. lipnja 2026., na Zappa Barki, plutajućem klubu na Dunavu kod Nebojšine kule.",
+      "Prva večer je glazbena: nastupaju The Higher Low, Joe Martin, Longy, Scardust, Roger 9000 i još jedan izvođač koji će biti potvrđen naknadno, uz DJ after-party nakon ponoći.",
+      "Drugi dan donosi panele, razgovore i networking o budućnosti glazbe, neovisnosti kreatora i tehnologiji koja umjetnicima može dati izravniji odnos s publikom.",
+      "Brief događaja: ovo nije klasična tehnološka konferencija s glazbom u pozadini, nego glazbeni događaj s idejama o tome kako publika, umjetnici i platforme mogu graditi drukčiji model vrijednosti.",
+      "Središnja tema je value-for-value: sadržaj se može pratiti besplatno, a publika dobrovoljno šalje vrijednost izravno autorima. Bitcoin Lightning omogućuje instant mikroplaćanja u satoshijima, globalno i uz vrlo male troškove.",
+      "Ako ne možeš doći u Beograd, oba dana najavljena su za livestream na Tunestru i drugim platformama, uz mogućnost podrške izvođačima u stvarnom vremenu.",
+      "Full Festival Pass pokriva Music Night, Education Day i oba after-partyja. Službena stranica navodi plaćanje Bitcoinom preko Lightninga ili karticom.",
+      "Cover fotografija: Revolution.Rocks / Scardust.",
+    ],
+    coverImage:
+      "https://o5ukxfhhcdiyrb5y.public.blob.vercel-storage.com/Scardust.jpeg",
+    start: "2026-06-19T18:00:00+02:00",
+    end: "2026-06-21T00:00:00+02:00",
+    displayDate: "19. – 20. lipnja 2026.",
+    venue: "Zappa Barka",
+    address: "Bulevar vojvode Bojovića, kod Nebojšine kule",
+    city: "Belgrade",
+    country: "Serbia",
+    registrationUrl: "https://www.revolution.rocks/#tickets",
+    mapUrl:
+      "https://www.google.com/maps/search/?api=1&query=Zappa+Barka+Bulevar+vojvode+Bojovica+Belgrade+Serbia",
+    sourceName: "Revolution.Rocks",
+    sourceUrl: "https://www.revolution.rocks/",
+    language: "engleski",
+    citySlug: "beograd",
+    tags: ["Bitcoin", "Lightning", "Value-for-value", "Glazba", "Beograd"],
+  },
+  {
+    slug: "bitcoin-only-meetup-belgrade-2026-06-17",
+    title: "Bitcoin-only meetup u Beogradu",
+    summary:
+      "Otvoreno DvadesetJedan druženje u Docker Brewery & Beer Garden u Beogradu za razgovor o Bitcoinu, ekonomiji, tehnologiji, filozofiji i zajednici.",
+    description: [
+      "DvadesetJedan meetup u Beogradu održava se u srijedu, 17. lipnja 2026. od 19:00 do 22:00 u Docker Brewery & Beer Garden.",
+      "Format je otvoreno Bitcoin-only druženje: razgovor o Bitcoinu, ekonomiji, tehnologiji, filozofiji, projektima i zajednici.",
+      "Najava navodi da se grupa okuplja svake treće srijede u mjesecu do 30. rujna 2026., ali ovaj unos se odnosi na javno najavljeni termin 17. lipnja.",
+      "Govori se srpski i engleski. Dobrodošli su svi bez obzira na razinu znanja o Bitcoinu, a početnici su posebno dobrodošli.",
+      "RSVP, broj slobodnih mjesta i eventualne zadnje promjene provjeri na Meetup stranici događaja.",
+      "Cover fotografija: Meetup.",
+    ],
+    coverImage:
+      "https://secure.meetupstatic.com/photos/event/6/5/c/highres_530401628.jpeg",
+    start: "2026-06-17T19:00:00+02:00",
+    end: "2026-06-17T22:00:00+02:00",
+    venue: "Docker Brewery & Beer Garden",
+    address: "Žorža Klemansoa 27b",
+    city: "Belgrade",
+    country: "Serbia",
+    registrationUrl: "https://www.meetup.com/dvadeset-jedan/events/314211200/",
+    mapUrl:
+      "https://www.google.com/maps/search/?api=1&query=Docker+Brewery+Beer+Garden+Zorza+Klemansoa+27b+Belgrade+Serbia",
+    sourceName: "Meetup",
+    sourceUrl: "https://www.meetup.com/dvadeset-jedan/events/314211200/",
+    meetupUrl: "https://www.meetup.com/dvadeset-jedan/events/314211200/",
+    organizer: "DvadesetJedan",
+    language: "srpski i engleski",
+    citySlug: "beograd",
+    tags: ["Bitcoin-only", "Meetup", "Beograd"],
+  },
+  {
     slug: "villa-btc-2026",
     title: "Villa BTC 2026",
     summary:

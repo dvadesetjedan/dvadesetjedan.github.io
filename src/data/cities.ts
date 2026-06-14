@@ -35,7 +35,11 @@ export const cities: CityEntry[] = [
       license: "CC BY 2.0",
     },
     meetupUrl: "https://www.meetup.com/dvadeset-jedan/",
-    eventSlugs: ["bitcoin-only-meetup-belgrade-2026-05-30"],
+    eventSlugs: [
+      "bitcoin-only-meetup-belgrade-2026-05-30",
+      "bitcoin-only-meetup-belgrade-2026-06-17",
+      "revolution-rocks-belgrade-2026",
+    ],
     notes: [
       "Ne objavljuj privatne kontakte ni lokacijske detalje koji nisu već javni u najavi događaja.",
     ],

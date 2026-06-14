@@ -6,6 +6,7 @@ export type EventMeta = {
 }
 
 export const eventMeta: EventMeta = {
+  lastManualCheck: "2026-06-14",
   primarySourceName: "Meetup",
   primarySourceUrl: "https://www.meetup.com/dvadeset-jedan/",
   freshnessNote:
