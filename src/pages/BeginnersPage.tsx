@@ -57,8 +57,8 @@ export function BeginnersPage({ articles }: { articles: ArticleEntry[] }) {
         <section className="mt-10 grid gap-6 lg:grid-cols-[minmax(0,1fr)_24rem]">
           <div className="rounded-[1.8rem] border border-border/80 bg-card px-6 py-6">
             <ul className="grid gap-3 text-base leading-8 text-foreground sm:grid-cols-2">
-              {beginnerTopics.map((topic) => (
-                <li key={topic} className="flex gap-3">
+              {beginnerTopics.map((topic, topicIndex) => (
+                <li key={`${topic}-${topicIndex}`} className="flex gap-3">
                   <span className="mt-1 size-4 shrink-0 rounded-full bg-primary/20" />
                   <span>{topic}</span>
                 </li>

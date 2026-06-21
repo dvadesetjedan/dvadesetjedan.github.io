@@ -389,8 +389,8 @@ export function HomePage() {
                 početni put kroz najvažnije teme.
               </p>
               <ul className="mt-6 grid gap-3 text-base leading-8 text-foreground sm:grid-cols-2">
-                {beginnerTopics.map((topic) => (
-                  <li key={topic} className="flex gap-3">
+                {beginnerTopics.map((topic, topicIndex) => (
+                  <li key={`${topic}-${topicIndex}`} className="flex gap-3">
                     <ShieldCheck className="mt-1 size-4 shrink-0 text-primary" />
                     <span>{topic}</span>
                   </li>
