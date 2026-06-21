@@ -17,6 +17,7 @@ const validInternalPrefixes = [
   "/dogadaji/",
   "/gradovi/",
   "/zajednica/",
+  "/iz-zajednice/",
   "/doprinesi/",
 ]
 

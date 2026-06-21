@@ -14,11 +14,7 @@ function youtubeEmbedUrl(url: string) {
   return match ? `https://www.youtube.com/embed/${match[1]}` : null
 }
 
-export function LivestreamEpisodePage({
-  episode,
-}: {
-  episode: EpisodeEntry
-}) {
+export function LivestreamEpisodePage({ episode }: { episode: EpisodeEntry }) {
   usePageMeta(`${episode.title} | DvadesetJedan`, episode.summary)
 
   const embedUrl = youtubeEmbedUrl(episode.youtubeUrl)
@@ -59,7 +55,12 @@ export function LivestreamEpisodePage({
           </p>
 
           <div className="mt-6 flex flex-wrap gap-3">
-            <ActionButton href={episode.youtubeUrl} icon={<PlayCircle className="size-4" />} external primary>
+            <ActionButton
+              href={episode.youtubeUrl}
+              icon={<PlayCircle className="size-4" />}
+              external
+              primary
+            >
               Pogledaj na YouTubeu
             </ActionButton>
             {episode.needsShownotes ? (
@@ -148,7 +149,13 @@ export function LivestreamEpisodePage({
               {episode.links?.length ? (
                 <div className="mt-5 space-y-2">
                   {episode.links.map((link) => (
-                    <a key={link.href} className="inline-flex items-center gap-2 text-sm font-medium text-primary" href={link.href} rel="noopener noreferrer" target="_blank">
+                    <a
+                      key={link.href}
+                      className="inline-flex items-center gap-2 text-sm font-medium text-primary"
+                      href={link.href}
+                      rel="noopener noreferrer"
+                      target="_blank"
+                    >
                       {link.label}
                       <ArrowUpRight className="size-4" />
                     </a>
@@ -165,8 +172,13 @@ export function LivestreamEpisodePage({
               </h2>
               <div className="mt-4 grid gap-3 md:grid-cols-2">
                 {episode.terms.map((term) => (
-                  <div className="rounded-[1.2rem] border border-border/70 px-4 py-4" key={term.term}>
-                    <h3 className="font-semibold text-foreground">{term.term}</h3>
+                  <div
+                    className="rounded-[1.2rem] border border-border/70 px-4 py-4"
+                    key={term.term}
+                  >
+                    <h3 className="font-semibold text-foreground">
+                      {term.term}
+                    </h3>
                     <p className="mt-2 text-sm leading-7 text-muted-foreground">
                       {term.explanation}
                     </p>
@@ -183,12 +195,23 @@ export function LivestreamEpisodePage({
               </h2>
               <div className="mt-4 flex flex-wrap gap-3">
                 {episode.transcriptUrl ? (
-                  <a className="rounded-full border border-border/80 px-4 py-2 text-sm font-medium text-foreground hover:border-primary/40" href={episode.transcriptUrl} rel="noopener noreferrer" target="_blank">
+                  <a
+                    className="rounded-full border border-border/80 px-4 py-2 text-sm font-medium text-foreground hover:border-primary/40"
+                    href={episode.transcriptUrl}
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
                     Transkript
                   </a>
                 ) : null}
                 {episode.clips?.map((clip) => (
-                  <a className="rounded-full border border-border/80 px-4 py-2 text-sm font-medium text-foreground hover:border-primary/40" href={clip.href} key={clip.href} rel="noopener noreferrer" target="_blank">
+                  <a
+                    className="rounded-full border border-border/80 px-4 py-2 text-sm font-medium text-foreground hover:border-primary/40"
+                    href={clip.href}
+                    key={clip.href}
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
                     {clip.label}
                   </a>
                 ))}
@@ -203,7 +226,11 @@ export function LivestreamEpisodePage({
               </h2>
               <div className="mt-4 flex flex-wrap gap-3">
                 {episode.relatedArticleSlugs.map((slug) => (
-                  <a className="rounded-full border border-border/80 px-4 py-2 text-sm font-medium text-foreground hover:border-primary/40" href={articleHref(slug)} key={slug}>
+                  <a
+                    className="rounded-full border border-border/80 px-4 py-2 text-sm font-medium text-foreground hover:border-primary/40"
+                    href={articleHref(slug)}
+                    key={slug}
+                  >
                     {slug}
                   </a>
                 ))}
@@ -221,7 +248,11 @@ export function LivestreamEpisodePage({
                   const event = events.find((entry) => entry.slug === slug)
 
                   return event ? (
-                    <a className="rounded-full border border-border/80 px-4 py-2 text-sm font-medium text-foreground hover:border-primary/40" href={eventHref(event.slug)} key={slug}>
+                    <a
+                      className="rounded-full border border-border/80 px-4 py-2 text-sm font-medium text-foreground hover:border-primary/40"
+                      href={eventHref(event.slug)}
+                      key={slug}
+                    >
                       {event.title}
                     </a>
                   ) : null

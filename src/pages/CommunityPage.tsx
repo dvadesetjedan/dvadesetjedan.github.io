@@ -4,7 +4,13 @@ import { ActionButton } from "@/components/ActionButton"
 import { BackLink } from "@/components/BackLink"
 import { Layout } from "@/components/Layout"
 import { siteConfig } from "@/data/siteConfig"
-import { EVENTS_URL, GITHUB_URL, YOUTUBE_URL } from "@/data/site"
+import {
+  COMMUNITY_PROJECT_ISSUE_URL,
+  COMMUNITY_PROJECTS_URL,
+  EVENTS_URL,
+  GITHUB_URL,
+  YOUTUBE_URL,
+} from "@/data/site"
 import { communityHref } from "@/lib/content"
 import { usePageMeta } from "@/lib/usePageMeta"
 
@@ -59,10 +65,17 @@ export function CommunityPage() {
           >
             Uđi u Telegram
           </ActionButton>
-          <ActionButton href={YOUTUBE_URL} icon={<PlayCircle className="size-4" />} external>
+          <ActionButton
+            href={YOUTUBE_URL}
+            icon={<PlayCircle className="size-4" />}
+            external
+          >
             Otvori YouTube
           </ActionButton>
-          <ActionButton href={EVENTS_URL} icon={<ArrowUpRight className="size-4" />}>
+          <ActionButton
+            href={EVENTS_URL}
+            icon={<ArrowUpRight className="size-4" />}
+          >
             Pogledaj događaje
           </ActionButton>
         </section>
@@ -91,11 +104,46 @@ export function CommunityPage() {
             stanja računa ili osobne dokumente.
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
-            <ActionButton href={siteConfig.socials.meetup} icon={<ArrowUpRight className="size-4" />} external>
+            <ActionButton
+              href={siteConfig.socials.meetup}
+              icon={<ArrowUpRight className="size-4" />}
+              external
+            >
               Meetup stranica
             </ActionButton>
-            <ActionButton href={GITHUB_URL} icon={<ArrowUpRight className="size-4" />} external>
+            <ActionButton
+              href={GITHUB_URL}
+              icon={<ArrowUpRight className="size-4" />}
+              external
+            >
               GitHub
+            </ActionButton>
+          </div>
+        </section>
+
+        <section className="mt-10 rounded-[1.8rem] border border-border/80 bg-card px-6 py-8 sm:px-10">
+          <h2 className="text-3xl font-semibold tracking-[-0.04em] text-foreground">
+            Imaš projekt koji treba biti ovdje?
+          </h2>
+          <p className="mt-4 max-w-3xl text-base leading-8 text-muted-foreground">
+            Ako radiš Bitcoin-only projekt, prijevod, edukaciju, meetup, video
+            kanal ili korisne upute, možeš ga predložiti za stranicu Iz
+            zajednice.
+          </p>
+          <div className="mt-6 flex flex-wrap gap-3">
+            <ActionButton
+              external
+              href={COMMUNITY_PROJECT_ISSUE_URL}
+              icon={<ArrowUpRight className="size-4" />}
+              primary
+            >
+              Predloži projekt
+            </ActionButton>
+            <ActionButton
+              href={COMMUNITY_PROJECTS_URL}
+              icon={<ArrowUpRight className="size-4" />}
+            >
+              Pogledaj projekte
             </ActionButton>
           </div>
         </section>

@@ -40,8 +40,8 @@ export function BeginnersPage({ articles }: { articles: ArticleEntry[] }) {
             </h1>
             <p className="mt-6 max-w-3xl text-lg leading-8 text-muted-foreground">
               Prvo razumij osnove i sigurnost. Ovo je početni put kroz
-              najvažnije Bitcoin teme bez žurbe, hypea i početničkih
-              sigurnosnih grešaka.
+              najvažnije Bitcoin teme bez žurbe, hypea i početničkih sigurnosnih
+              grešaka.
             </p>
           </div>
 
@@ -113,8 +113,8 @@ export function BeginnersPage({ articles }: { articles: ArticleEntry[] }) {
             21 korak za smiren početak
           </h2>
           <p className="mt-4 max-w-3xl text-base leading-8 text-muted-foreground">
-            Svaki korak je mali razgovor, ne test. Otvori ono što ti je
-            trenutno važno i pitaj zajednicu kad zapneš.
+            Svaki korak je mali razgovor, ne test. Otvori ono što ti je trenutno
+            važno i pitaj zajednicu kad zapneš.
           </p>
           <div className="mt-6 grid gap-4 md:grid-cols-2">
             {onboardingSteps.map((step, index) => (
@@ -158,7 +158,9 @@ export function BeginnersPage({ articles }: { articles: ArticleEntry[] }) {
                   {step.recommendedArticleSlugs?.length ? (
                     <div className="flex flex-wrap gap-2">
                       {step.recommendedArticleSlugs.map((slug) => {
-                        const article = articles.find((entry) => entry.slug === slug)
+                        const article = articles.find(
+                          (entry) => entry.slug === slug,
+                        )
 
                         return article ? (
                           <a

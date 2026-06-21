@@ -23,6 +23,12 @@ function isActiveFooterLink(route: Route, href: string) {
     return route.type === "cities" || route.type === "city"
   }
 
+  if (href === "/iz-zajednice/") {
+    return (
+      route.type === "communityProjects" || route.type === "communityProject"
+    )
+  }
+
   const routeByHref: Record<string, Route["type"]> = {
     "/o-projektu/": "about",
     "/teme/": "topics",

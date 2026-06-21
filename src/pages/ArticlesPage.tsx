@@ -52,7 +52,16 @@ export function ArticlesPage({ articles }: { articles: ArticleEntry[] }) {
             Filteri za održavatelje i čitatelje
           </h2>
           <div className="mt-5 flex flex-wrap gap-2">
-            {[...topics, ...tags, "original", "translation", "guide", "beginner", "intermediate", "advanced"].map((item) => (
+            {[
+              ...topics,
+              ...tags,
+              "original",
+              "translation",
+              "guide",
+              "beginner",
+              "intermediate",
+              "advanced",
+            ].map((item) => (
               <span
                 key={item}
                 className="rounded-full border border-border/80 px-3 py-1 text-xs font-medium text-muted-foreground"

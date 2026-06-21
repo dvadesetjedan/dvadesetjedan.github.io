@@ -2,6 +2,7 @@ import type { ArticleEntry } from "@/data/articles"
 import type { EventEntry } from "@/data/events"
 import {
   COMMUNITY_URL,
+  COMMUNITY_PROJECTS_URL,
   CONTRIBUTE_URL,
   EVENTS_URL,
   articleCurations,
@@ -25,6 +26,10 @@ export function episodeHref(slug: string) {
 
 export function cityHref(slug: string) {
   return `/gradovi/${slug}/`
+}
+
+export function communityProjectHref(slug: string) {
+  return `${COMMUNITY_PROJECTS_URL}${slug}/`
 }
 
 export function formatArticleDate(value: string) {
@@ -108,8 +113,7 @@ export function isTranslatedArticle(article: ArticleEntry) {
 export function makeGoogleCalendarUrl(event: EventEntry) {
   const toCalendarStamp = (value: string) =>
     new Date(value).toISOString().replace(/[-:]/g, "").replace(".000", "")
-  const toAllDayStamp = (value: string) =>
-    value.slice(0, 10).replace(/-/g, "")
+  const toAllDayStamp = (value: string) => value.slice(0, 10).replace(/-/g, "")
 
   const start = event.allDay
     ? toAllDayStamp(event.start)
@@ -128,8 +132,7 @@ export function makeGoogleCalendarUrl(event: EventEntry) {
 export function makeIcsUrl(event: EventEntry) {
   const toUtcStamp = (value: string) =>
     new Date(value).toISOString().replace(/[-:]/g, "").replace(".000", "")
-  const toAllDayStamp = (value: string) =>
-    value.slice(0, 10).replace(/-/g, "")
+  const toAllDayStamp = (value: string) => value.slice(0, 10).replace(/-/g, "")
 
   const dtStart = event.allDay
     ? `DTSTART;VALUE=DATE:${toAllDayStamp(event.start)}`

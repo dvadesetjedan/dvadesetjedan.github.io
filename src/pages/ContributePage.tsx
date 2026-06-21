@@ -3,7 +3,11 @@ import { ArrowUpRight, Send } from "lucide-react"
 import { ActionButton } from "@/components/ActionButton"
 import { BackLink } from "@/components/BackLink"
 import { Layout } from "@/components/Layout"
-import { GITHUB_URL, contributionItems } from "@/data/site"
+import {
+  COMMUNITY_PROJECT_ISSUE_URL,
+  GITHUB_URL,
+  contributionItems,
+} from "@/data/site"
 import { communityHref } from "@/lib/content"
 import { usePageMeta } from "@/lib/usePageMeta"
 
@@ -154,6 +158,28 @@ export function ContributePage() {
               primary
             >
               Predloži događaj
+            </ActionButton>
+          </div>
+        </section>
+
+        <section className="mt-10 rounded-[1.8rem] border border-border/80 bg-card px-6 py-8 sm:px-10">
+          <h2 className="text-3xl font-semibold tracking-[-0.04em] text-foreground">
+            Predloži projekt iz zajednice
+          </h2>
+          <p className="mt-4 max-w-3xl text-base leading-8 text-muted-foreground">
+            Projekt mora biti Bitcoin-only ili jasno koristan za Bitcoin
+            edukaciju, lokalnu zajednicu ili otvoreni Bitcoin signal.
+            Objavljujemo samo javne podatke za koje autor ili tim daju
+            pristanak.
+          </p>
+          <div className="mt-6">
+            <ActionButton
+              external
+              href={COMMUNITY_PROJECT_ISSUE_URL}
+              icon={<ArrowUpRight className="size-4" />}
+              primary
+            >
+              Predloži projekt
             </ActionButton>
           </div>
         </section>

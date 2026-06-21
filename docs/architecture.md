@@ -21,6 +21,8 @@ Canonical routing sada koristi path URL-ove:
 - `/dogadaji/:slug/`
 - `/livestream/:slug/`
 - `/gradovi/:slug/`
+- `/iz-zajednice/`
+- `/iz-zajednice/:slug/`
 
 Legacy hash URL-ovi se preusmjeravaju na početnom učitavanju. Nakon `vite build`, skripta `scripts/generate-site-artifacts.mjs` generira route-specific HTML, `sitemap.xml`, `robots.txt`, `rss.xml`, `feed.json` i `404.html`.
 
@@ -34,6 +36,17 @@ Phase 2 zadržava isti statični Vite/React smjer i dodaje održavateljske sloje
 - livestream epizode imaju `needsShownotes` i polja za provjerene sažetke, poglavlja, linkove, pojmove i povezani sadržaj
 - emerging gradovi postoje kao poziv zajednici, bez izmišljenih lokalnih voditelja ili događaja
 - default social preview koristi PNG fallback na `/social-preview.png`
+
+## Iz zajednice
+
+Sekcija `/iz-zajednice/` prikazuje kurirane Bitcoin-only inicijative članova,
+prijatelja i regionalnih poveznica oko DvadesetJedan zajednice. Podaci su u
+`src/data/communityProjects.ts`, a javne stranice koriste samo
+`publishedCommunityProjects`.
+
+Generator artefakata uključuje index i detaljne stranice objavljenih projekata.
+Unosi sa `status: "draft"` ili bez `consentConfirmed: true` ne smiju završiti u
+statičkim rutama ni sitemapu.
 
 Generator artefakata je i dalje mala Node skripta koja čita postojeće TypeScript data datoteke kontroliranim parserima. Migracija na direktan TypeScript import kroz `tsx` ostaje dobar sljedeći korak, ali nije uvedena u ovom passu jer bi dodala novu dev ovisnost i veći rizik bez potrebe za runtime promjenu.
 

@@ -6,7 +6,7 @@ import { CalendarDays, MapPinned, MoveRight } from "lucide-react"
 export function EventCard({ event }: { event: EventEntry }) {
   return (
     <a
-      className="group overflow-hidden rounded-[1.8rem] border border-border/80 bg-card/70 transition-transform hover:-translate-y-0.5"
+      className="group overflow-hidden rounded-[1.8rem] bg-card/70 shadow-[var(--shadow-border)] transition-[translate,scale,box-shadow] duration-150 ease-out hover:-translate-y-0.5 hover:shadow-[var(--shadow-border-hover)] active:scale-[0.99] motion-reduce:transition-none motion-reduce:hover:translate-y-0 motion-reduce:active:scale-100"
       href={eventHref(event.slug)}
     >
       <SafeImage
@@ -17,7 +17,7 @@ export function EventCard({ event }: { event: EventEntry }) {
       />
       <div className="space-y-5 px-5 py-5">
         <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
-          <span className="inline-flex items-center gap-2">
+          <span className="inline-flex items-center gap-2 tabular-nums">
             <CalendarDays className="size-4" />
             {formatEventDate(event)}
           </span>

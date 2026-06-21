@@ -29,36 +29,36 @@ const DESCRIPTION_LINKS = [
 ] as const
 
 function renderDescriptionParagraph(paragraph: string) {
-  return DESCRIPTION_LINKS.reduce<ReactNode[]>((segments, link) => {
-    return segments.flatMap((segment, segmentIndex) => {
-      if (typeof segment !== "string" || !segment.includes(link.label)) {
-        return segment
-      }
+  return DESCRIPTION_LINKS.reduce<ReactNode[]>(
+    (segments, link) => {
+      return segments.flatMap((segment, segmentIndex) => {
+        if (typeof segment !== "string" || !segment.includes(link.label)) {
+          return segment
+        }
 
-      return segment.split(link.label).map((part, partIndex, parts) => (
-        <span key={`${link.label}-${segmentIndex}-${partIndex}`}>
-          {part}
-          {partIndex < parts.length - 1 ? (
-            <a
-              className="font-medium text-foreground underline decoration-border underline-offset-4 transition-colors hover:text-primary hover:decoration-primary"
-              href={link.href}
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              {link.label}
-            </a>
-          ) : null}
-        </span>
-      ))
-    })
-  }, [paragraph])
+        return segment.split(link.label).map((part, partIndex, parts) => (
+          <span key={`${link.label}-${segmentIndex}-${partIndex}`}>
+            {part}
+            {partIndex < parts.length - 1 ? (
+              <a
+                className="font-medium text-foreground underline decoration-border underline-offset-4 transition-colors hover:text-primary hover:decoration-primary"
+                href={link.href}
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                {link.label}
+              </a>
+            ) : null}
+          </span>
+        ))
+      })
+    },
+    [paragraph],
+  )
 }
 
 export function EventPage({ event }: { event: EventEntry }) {
-  usePageMeta(
-    `${event.title} | DvadesetJedan`,
-    truncateText(event.summary),
-  )
+  usePageMeta(`${event.title} | DvadesetJedan`, truncateText(event.summary))
 
   const isCancelled = event.status === "cancelled"
 
@@ -118,8 +118,8 @@ export function EventPage({ event }: { event: EventEntry }) {
                     isCancelled
                       ? "Otkazano"
                       : new Date(event.end) >= new Date()
-                      ? "Nadolazeći događaj"
-                      : "Prošli događaj"
+                        ? "Nadolazeći događaj"
+                        : "Prošli događaj"
                   }
                 />
               </div>
@@ -168,7 +168,7 @@ export function EventPage({ event }: { event: EventEntry }) {
                 Dodaj u Google kalendar
               </ActionButton>
               <a
-                className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-border/80 bg-card px-5 py-3 text-sm font-medium text-foreground shadow-sm transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:bg-background hover:shadow-md active:translate-y-0"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-card py-3 pl-[1.125rem] pr-5 text-sm font-medium text-foreground shadow-[var(--shadow-border)] transition-[translate,scale,box-shadow,background-color,color] duration-150 ease-out hover:-translate-y-0.5 hover:bg-background hover:shadow-[var(--shadow-border-hover)] active:scale-[0.96] motion-reduce:transition-none motion-reduce:hover:translate-y-0 motion-reduce:active:scale-100"
                 download={`${event.slug}.ics`}
                 href={makeIcsUrl(event)}
               >

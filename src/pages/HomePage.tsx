@@ -8,6 +8,7 @@ import { EventsIcon, TelegramIcon } from "@/components/Icons"
 import { InlineLink } from "@/components/InlineLink"
 import { Layout } from "@/components/Layout"
 import { Section } from "@/components/Section"
+import { publishedCommunityProjects } from "@/data/communityProjects"
 import { episodes } from "@/data/episodes"
 import { events } from "@/data/events"
 import { featuredArticles } from "@/data/featuredArticles"
@@ -18,6 +19,7 @@ import {
   CONTRIBUTE_URL,
   EVENTS_URL,
   FAQ_URL,
+  COMMUNITY_PROJECTS_URL,
   LIVESTREAM_URL,
   TOPICS_URL,
   beginnerHighlights,
@@ -32,6 +34,7 @@ import {
 import {
   articleHref,
   communityHref,
+  communityProjectHref,
   episodeHref,
   eventHref,
   formatEpisodeDate,
@@ -58,7 +61,7 @@ function LatestCard({
 }: LatestCardProps) {
   return (
     <a
-      className="rounded-[1.5rem] border border-border/80 bg-card px-5 py-5 transition-colors hover:border-primary/40"
+      className="rounded-[1.5rem] bg-card px-5 py-5 shadow-[var(--shadow-border)] transition-[translate,scale,box-shadow] duration-150 ease-out hover:-translate-y-0.5 hover:shadow-[var(--shadow-border-hover)] active:scale-[0.99] motion-reduce:transition-none motion-reduce:hover:translate-y-0 motion-reduce:active:scale-100"
       href={href}
       rel={external ? "noopener noreferrer" : undefined}
       target={external ? "_blank" : undefined}
@@ -125,6 +128,9 @@ export function HomePage() {
       (left, right) =>
         new Date(left.start).getTime() - new Date(right.start).getTime(),
     )[0]
+  const featuredCommunityProjects = publishedCommunityProjects
+    .filter((project) => project.featured)
+    .slice(0, 3)
 
   return (
     <Layout>
@@ -212,7 +218,7 @@ export function HomePage() {
             <div className="overflow-hidden rounded-[2.4rem] border border-border/80 bg-card shadow-[var(--shadow-soft)]">
               <img
                 alt="DvadesetJedan vizual"
-                className="h-auto w-full object-contain sm:min-h-[24rem] sm:object-cover lg:h-full"
+                className="image-depth h-auto w-full object-contain sm:min-h-[24rem] sm:object-cover lg:h-full"
                 src={media.heroUrl}
               />
             </div>
@@ -276,6 +282,50 @@ export function HomePage() {
               href={upcomingEvent ? eventHref(upcomingEvent.slug) : EVENTS_URL}
               cta={upcomingEvent ? "Pogledaj događaj" : "Otvori događaje"}
             />
+          </div>
+        </Section>
+
+        <Section
+          title="Što rade ljudi iz zajednice"
+          intro="Članovi i prijatelji DvadesetJedan zajednice prevode edukacijske materijale, organiziraju događaje, snimaju videe, pišu članke i pokreću lokalne Bitcoin inicijative."
+        >
+          <div className="grid gap-4 md:grid-cols-3">
+            {featuredCommunityProjects.map((project) => (
+              <a
+                className="rounded-[1.5rem] bg-card px-5 py-5 shadow-[var(--shadow-border)] transition-[translate,scale,box-shadow] duration-150 ease-out hover:-translate-y-0.5 hover:shadow-[var(--shadow-border-hover)] active:scale-[0.99] motion-reduce:transition-none motion-reduce:hover:translate-y-0 motion-reduce:active:scale-100"
+                href={communityProjectHref(project.slug)}
+                key={project.slug}
+              >
+                <p className="text-xs uppercase tracking-[0.2em] text-primary">
+                  Iz zajednice
+                </p>
+                <h3 className="mt-3 text-xl font-semibold tracking-[-0.03em] text-foreground">
+                  {project.title}
+                </h3>
+                <p className="mt-3 text-sm leading-7 text-muted-foreground">
+                  {project.summary}
+                </p>
+                <span className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-primary">
+                  Pogledaj projekt <ArrowUpRight className="size-4" />
+                </span>
+              </a>
+            ))}
+          </div>
+          <div className="mt-6">
+            <ActionButton
+              href={COMMUNITY_PROJECTS_URL}
+              icon={<ArrowUpRight className="size-4" />}
+              primary
+            >
+              Pogledaj sve iz zajednice
+            </ActionButton>
+            <ActionButton
+              className="ml-0 mt-3 sm:ml-3 sm:mt-0"
+              href={`${COMMUNITY_PROJECTS_URL}#arhiva-zajednice`}
+              icon={<ArrowUpRight className="size-4" />}
+            >
+              Pogledaj i arhivu zajednice
+            </ActionButton>
           </div>
         </Section>
 

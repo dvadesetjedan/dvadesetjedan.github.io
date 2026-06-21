@@ -64,26 +64,36 @@ export function ArticlePage({
             ) : null}
 
             <div className="mt-6 flex flex-wrap gap-x-6 gap-y-3 text-sm text-muted-foreground">
-              <span>{formatArticleDate(article.date)}</span>
+              <span className="tabular-nums">
+                {formatArticleDate(article.date)}
+              </span>
               {article.author ? <span>Autor: {article.author}</span> : null}
               {article.translator ? (
                 <span>Prijevod: {article.translator}</span>
               ) : null}
               {article.difficulty ? <span>{article.difficulty}</span> : null}
               {article.readingTimeMinutes ? (
-                <span>{article.readingTimeMinutes} min čitanja</span>
+                <span className="tabular-nums">
+                  {article.readingTimeMinutes} min čitanja
+                </span>
               ) : null}
               {article.tags.length ? (
                 <span>{article.tags.join(" • ")}</span>
               ) : null}
               {article.type ? <span>Tip: {article.type}</span> : null}
-              {article.sourceName ? <span>Izvor: {article.sourceName}</span> : null}
+              {article.sourceName ? (
+                <span>Izvor: {article.sourceName}</span>
+              ) : null}
               {article.permissionStatus &&
               article.permissionStatus !== "unknown" ? (
                 <span>Dozvola: {article.permissionStatus}</span>
               ) : null}
               {article.originalUrl ? (
-                <a href={article.originalUrl} rel="noopener noreferrer" target="_blank">
+                <a
+                  href={article.originalUrl}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
                   Originalna objava
                 </a>
               ) : null}
@@ -102,7 +112,9 @@ export function ArticlePage({
                 </h2>
                 <div className="mt-4 flex flex-wrap gap-3">
                   {recommendedNext.map((slug) => {
-                    const nextArticle = articles.find((entry) => entry.slug === slug)
+                    const nextArticle = articles.find(
+                      (entry) => entry.slug === slug,
+                    )
 
                     return (
                       <a

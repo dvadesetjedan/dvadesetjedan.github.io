@@ -70,7 +70,9 @@ function normalizeText(value = "") {
 function day(value) {
   if (!value) return ""
   const date = new Date(value)
-  return Number.isNaN(date.getTime()) ? String(value).slice(0, 10) : date.toISOString().slice(0, 10)
+  return Number.isNaN(date.getTime())
+    ? String(value).slice(0, 10)
+    : date.toISOString().slice(0, 10)
 }
 
 function getSourceEvents(value) {
@@ -81,29 +83,45 @@ function getSourceEvents(value) {
   return []
 }
 
-const repoEvents = extractObjects(readSource("src/data/events.ts"), "export const events").map((objectSource) => ({
+const repoEvents = extractObjects(
+  readSource("src/data/events.ts"),
+  "export const events",
+).map((objectSource) => ({
   title: readString(objectSource, "title"),
   start: readString(objectSource, "start"),
   city: readString(objectSource, "city"),
-  sourceUrl: readString(objectSource, "sourceUrl") ?? readString(objectSource, "meetupUrl") ?? readString(objectSource, "registrationUrl"),
+  sourceUrl:
+    readString(objectSource, "sourceUrl") ??
+    readString(objectSource, "meetupUrl") ??
+    readString(objectSource, "registrationUrl"),
   venue: readString(objectSource, "venue"),
 }))
 
-const sourceEvents = getSourceEvents(JSON.parse(fs.readFileSync(sourcePath, "utf8"))).map((event) => ({
+const sourceEvents = getSourceEvents(
+  JSON.parse(fs.readFileSync(sourcePath, "utf8")),
+).map((event) => ({
   title: event.title ?? event.name ?? "",
   start: event.start ?? event.startDate ?? event.date ?? event.time ?? "",
-  city: event.city ?? event.group?.localized_location ?? event.venue?.city ?? "",
-  sourceUrl: event.sourceUrl ?? event.meetupUrl ?? event.url ?? event.link ?? "",
+  city:
+    event.city ?? event.group?.localized_location ?? event.venue?.city ?? "",
+  sourceUrl:
+    event.sourceUrl ?? event.meetupUrl ?? event.url ?? event.link ?? "",
   venue: event.venue?.name ?? event.location ?? event.venue ?? "",
 }))
 
-const bySourceUrl = new Map(repoEvents.filter((event) => event.sourceUrl).map((event) => [event.sourceUrl, event]))
+const bySourceUrl = new Map(
+  repoEvents
+    .filter((event) => event.sourceUrl)
+    .map((event) => [event.sourceUrl, event]),
+)
 const matchedRepo = new Set()
 const missingInRepo = []
 const changed = []
 
 for (const sourceEvent of sourceEvents) {
-  const urlMatch = sourceEvent.sourceUrl ? bySourceUrl.get(sourceEvent.sourceUrl) : null
+  const urlMatch = sourceEvent.sourceUrl
+    ? bySourceUrl.get(sourceEvent.sourceUrl)
+    : null
   const fuzzyMatch =
     urlMatch ??
     repoEvents.find(
@@ -120,19 +138,37 @@ for (const sourceEvent of sourceEvents) {
 
   matchedRepo.add(fuzzyMatch)
   const differences = []
-  if (normalizeText(fuzzyMatch.title) !== normalizeText(sourceEvent.title)) differences.push("title")
-  if (day(fuzzyMatch.start) !== day(sourceEvent.start)) differences.push("date/time")
-  if (sourceEvent.city && normalizeText(fuzzyMatch.city) !== normalizeText(sourceEvent.city)) differences.push("city")
-  if (sourceEvent.venue && normalizeText(fuzzyMatch.venue) !== normalizeText(sourceEvent.venue)) differences.push("location")
-  if (differences.length) changed.push({ repo: fuzzyMatch, source: sourceEvent, differences })
+  if (normalizeText(fuzzyMatch.title) !== normalizeText(sourceEvent.title))
+    differences.push("title")
+  if (day(fuzzyMatch.start) !== day(sourceEvent.start))
+    differences.push("date/time")
+  if (
+    sourceEvent.city &&
+    normalizeText(fuzzyMatch.city) !== normalizeText(sourceEvent.city)
+  )
+    differences.push("city")
+  if (
+    sourceEvent.venue &&
+    normalizeText(fuzzyMatch.venue) !== normalizeText(sourceEvent.venue)
+  )
+    differences.push("location")
+  if (differences.length)
+    changed.push({ repo: fuzzyMatch, source: sourceEvent, differences })
 }
 
-const missingInMeetup = repoEvents.filter((event) => event.sourceUrl?.includes("meetup.com") && !matchedRepo.has(event))
+const missingInMeetup = repoEvents.filter(
+  (event) => event.sourceUrl?.includes("meetup.com") && !matchedRepo.has(event),
+)
 
 console.log("Meetup usporedba")
 console.log(`- U source JSON, ali nisu u repo: ${missingInRepo.length}`)
-for (const event of missingInRepo) console.log(`  • ${event.title || "(bez naslova)"} — ${day(event.start)} — ${event.city}`)
+for (const event of missingInRepo)
+  console.log(
+    `  • ${event.title || "(bez naslova)"} — ${day(event.start)} — ${event.city}`,
+  )
 console.log(`- U repo, ali nisu u source JSON: ${missingInMeetup.length}`)
-for (const event of missingInMeetup) console.log(`  • ${event.title} — ${day(event.start)} — ${event.city}`)
+for (const event of missingInMeetup)
+  console.log(`  • ${event.title} — ${day(event.start)} — ${event.city}`)
 console.log(`- Moguće promjene: ${changed.length}`)
-for (const item of changed) console.log(`  • ${item.repo.title}: ${item.differences.join(", ")}`)
+for (const item of changed)
+  console.log(`  • ${item.repo.title}: ${item.differences.join(", ")}`)

@@ -88,6 +88,13 @@ export const coreRouteManifest: SeoMetadata[] = [
     routeType: "page",
   },
   {
+    path: "/iz-zajednice/",
+    title: "Iz zajednice | DvadesetJedan",
+    description:
+      "Projekti, prijevodi, događaji i edukacijske inicijative ljudi iz DvadesetJedan kruga.",
+    routeType: "communityProjects",
+  },
+  {
     path: "/doprinesi/",
     title: "Doprinesi | DvadesetJedan",
     description:

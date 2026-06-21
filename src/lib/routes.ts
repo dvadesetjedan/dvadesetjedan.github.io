@@ -11,6 +11,8 @@ export type Route =
   | { type: "article"; slug: string }
   | { type: "beginners" }
   | { type: "community" }
+  | { type: "communityProjects" }
+  | { type: "communityProject"; slug: string }
   | { type: "contribute" }
   | { type: "events" }
   | { type: "event"; slug: string }
@@ -73,6 +75,14 @@ export function parseRouteFromPath(pathname: string): Route {
   }
   if (cleanPath === "/pocni-ovdje/") return { type: "beginners" }
   if (cleanPath === "/zajednica/") return { type: "community" }
+  if (cleanPath === "/iz-zajednice/") return { type: "communityProjects" }
+  if (cleanPath.startsWith("/iz-zajednice/")) {
+    const slug = cleanPath.replace(/^\/iz-zajednice\//, "").replace(/\/$/, "")
+
+    return slug
+      ? { type: "communityProject", slug }
+      : { type: "notFound", path: cleanPath }
+  }
   if (cleanPath === "/doprinesi/") return { type: "contribute" }
   if (cleanPath === "/dogadaji/") {
     return { type: "events" }
@@ -87,9 +97,7 @@ export function parseRouteFromPath(pathname: string): Route {
   if (cleanPath.startsWith("/gradovi/")) {
     const slug = cleanPath.replace(/^\/gradovi\//, "").replace(/\/$/, "")
 
-    return slug
-      ? { type: "city", slug }
-      : { type: "notFound", path: cleanPath }
+    return slug ? { type: "city", slug } : { type: "notFound", path: cleanPath }
   }
 
   return { type: "notFound", path: cleanPath }

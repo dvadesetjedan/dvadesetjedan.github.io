@@ -12,9 +12,11 @@ export const SAFETY_URL = "/sigurnost/"
 export const EVENTS_URL = "/dogadaji/"
 export const CITIES_URL = "/gradovi/"
 export const COMMUNITY_PAGE_URL = "/zajednica/"
+export const COMMUNITY_PROJECTS_URL = "/iz-zajednice/"
 export const CONTRIBUTE_URL = "/doprinesi/"
 export const LIVESTREAM_URL = "/livestream/"
 export const GITHUB_URL = siteConfig.socials.github
+export const COMMUNITY_PROJECT_ISSUE_URL = `${GITHUB_URL}/issues/new?template=community_project.yml`
 export const WHITEPAPER_URL = "https://bitcoin.org/bitcoin.pdf"
 export const BITCOIN_CORE_URL = "https://bitcoincore.org/"
 export const MEMPOOL_URL = "https://mempool.space/"
@@ -403,6 +405,7 @@ export const contributionItems = [
   "Predloži ili napiši članak",
   "Prevedi kvalitetan Bitcoin tekst",
   "Organiziraj događaj u svom gradu",
+  "Predloži projekt iz zajednice",
   "Prijavi grešku na stranici",
   "Pomozi oko dizajna ili koda",
   "Podijeli korisne resurse za početnike",
@@ -419,6 +422,7 @@ export const footerLinks = [
   { label: "Događaji", href: EVENTS_URL, external: false },
   { label: "Gradovi", href: CITIES_URL, external: false },
   { label: "Zajednica", href: COMMUNITY_PAGE_URL, external: false },
+  { label: "Iz zajednice", href: COMMUNITY_PROJECTS_URL, external: false },
   { label: "Doprinesi", href: CONTRIBUTE_URL, external: false },
   { label: "FAQ", href: FAQ_URL, external: false },
   { label: "Sigurnost", href: SAFETY_URL, external: false },

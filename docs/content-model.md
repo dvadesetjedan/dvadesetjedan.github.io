@@ -6,6 +6,7 @@ Glavni izvori sadržaja:
 - `src/data/events.ts`
 - `src/data/episodes.ts`
 - `src/data/cities.ts`
+- `src/data/communityProjects.ts`
 - `src/data/onboarding.ts`
 - `src/data/site.ts`
 - `src/data/siteConfig.ts`
@@ -35,6 +36,20 @@ Ako epizoda još nema provjerene shownotes, postavi `needsShownotes: true`. UI t
 Gradovi se izvode iz postojećih javnih događaja i poznatog javnog konteksta. Ne dodaju se voditelji, privatni kontakti ili neprovjerene lokalne tvrdnje.
 
 Status grada može biti `active`, `emerging` ili `archive`. Emerging gradovi ne smiju imati izmišljene eventSlugs, voditelje ili privatne kontakte.
+
+## Iz zajednice
+
+`src/data/communityProjects.ts` sadrži kurirane Bitcoin-only projekte,
+prijevode, događaje, pisanje, video/audio sadržaj i regionalne poveznice ljudi
+iz DvadesetJedan kruga.
+
+Javno se koriste samo unosi iz `publishedCommunityProjects`: status ne smije
+biti `draft`, a `consentConfirmed` mora biti `true`. Planirani unosi bez
+pristanka mogu ostati u data datoteci za održavatelje, ali se ne smiju pojaviti
+u javnim rutama, sitemapu ni na homepageu.
+
+Donation linkovi trebaju `donationNote`, a privatni kontakti se ne prikazuju bez
+izričitog pristanka. Detaljnija pravila su u `docs/community-projects.md`.
 
 ## Onboarding i sigurnost
 

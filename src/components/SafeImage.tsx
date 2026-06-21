@@ -1,5 +1,7 @@
 import { useState } from "react"
 
+import { cn } from "@/lib/utils"
+
 type SafeImageProps = {
   src?: string
   alt: string
@@ -14,12 +16,17 @@ export function SafeImage({
   fallbackClassName,
 }: SafeImageProps) {
   const [failed, setFailed] = useState(false)
+  const imageClassName = cn("image-depth", className)
+  const fallbackImageClassName = cn(
+    "image-depth",
+    fallbackClassName ?? className,
+  )
 
   if (!src || failed) {
     return (
       <img
         alt={alt}
-        className={fallbackClassName ?? className}
+        className={fallbackImageClassName}
         loading="lazy"
         src="/social-preview.svg"
       />
@@ -29,7 +36,7 @@ export function SafeImage({
   return (
     <img
       alt={alt}
-      className={className}
+      className={imageClassName}
       loading="lazy"
       onError={() => setFailed(true)}
       src={src}

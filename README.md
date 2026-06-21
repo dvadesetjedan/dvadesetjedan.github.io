@@ -38,6 +38,7 @@ Canonical site je `https://dvadesetjedan.com`. Nakon većih promjena provjeri `r
 - događaji: `src/data/events.ts`
 - livestream epizode: `src/data/episodes.ts`
 - gradovi: `src/data/cities.ts`
+- projekti iz zajednice: `src/data/communityProjects.ts`
 - 21-step onboarding: `src/data/onboarding.ts`
 - sigurnosni vodič: `src/data/safety.ts`
 - legacy redirecti: `src/data/legacyRedirects.ts`
@@ -54,4 +55,4 @@ Canonical site je `https://dvadesetjedan.com`. Nakon većih promjena provjeri `r
 
 ## Dokumentacija
 
-Pogledaj `docs/architecture.md`, `docs/content-model.md`, `docs/editorial-policy.md`, `docs/deployment.md`, `docs/search-indexing.md`, `docs/event-maintenance.md`, `docs/legacy-redirects.md` i `CONTRIBUTING.md`.
+Pogledaj `docs/architecture.md`, `docs/content-model.md`, `docs/community-projects.md`, `docs/github-contribution-guide.md`, `docs/editorial-policy.md`, `docs/deployment.md`, `docs/search-indexing.md`, `docs/event-maintenance.md`, `docs/legacy-redirects.md` i `CONTRIBUTING.md`.

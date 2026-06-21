@@ -43,7 +43,9 @@ export function EventsPage({ events }: { events: EventEntry[] }) {
       (left, right) =>
         new Date(right.start).getTime() - new Date(left.start).getTime(),
     )
-  const cancelledEvents = events.filter((event) => eventStatus(event, now) === "cancelled")
+  const cancelledEvents = events.filter(
+    (event) => eventStatus(event, now) === "cancelled",
+  )
   const cityGroups = [...new Set(events.map((event) => event.city))].sort()
 
   return (
@@ -145,7 +147,10 @@ export function EventsPage({ events }: { events: EventEntry[] }) {
           ) : (
             <div className="mt-6 grid gap-5 md:grid-cols-2">
               {upcomingEvents.map((event) => (
-                <div id={`grad-${event.city.toLowerCase().replace(/\s+/g, "-")}`} key={event.slug}>
+                <div
+                  id={`grad-${event.city.toLowerCase().replace(/\s+/g, "-")}`}
+                  key={event.slug}
+                >
                   <EventCard event={event} />
                 </div>
               ))}

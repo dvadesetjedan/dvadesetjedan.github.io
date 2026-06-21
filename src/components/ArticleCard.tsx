@@ -12,7 +12,7 @@ export function ArticleCard({ article }: { article: ArticleEntry }) {
   const curation = getArticleCuration(article.slug)
 
   return (
-    <div className="rounded-[1.6rem] border border-border/80 bg-card px-5 py-6">
+    <div className="rounded-[1.6rem] bg-card px-5 py-6 shadow-[var(--shadow-border)]">
       <div className="flex flex-wrap gap-2">
         {curation ? (
           <span className="inline-flex rounded-full bg-primary/12 px-3 py-1 text-xs font-medium text-primary">
@@ -30,7 +30,7 @@ export function ArticleCard({ article }: { article: ArticleEntry }) {
           {article.title}
         </a>
       </h3>
-      <p className="mt-2 text-xs uppercase tracking-[0.18em] text-muted-foreground">
+      <p className="mt-2 text-xs uppercase tracking-[0.18em] text-muted-foreground tabular-nums">
         {formatArticleDate(article.date)}
       </p>
       <div

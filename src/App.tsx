@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react"
 
 import type { ArticleEntry } from "@/data/articles"
 import { cities } from "@/data/cities"
+import { publishedCommunityProjects } from "@/data/communityProjects"
 import { episodes } from "@/data/episodes"
 import { events } from "@/data/events"
 import { AboutPage } from "@/pages/AboutPage"
@@ -12,6 +13,8 @@ import { ContributePage } from "@/pages/ContributePage"
 import { CitiesPage } from "@/pages/CitiesPage"
 import { CityPage } from "@/pages/CityPage"
 import { CommunityPage } from "@/pages/CommunityPage"
+import { CommunityProjectPage } from "@/pages/CommunityProjectPage"
+import { CommunityProjectsPage } from "@/pages/CommunityProjectsPage"
 import { EventsPage } from "@/pages/EventsPage"
 import { EventPage } from "@/pages/EventPage"
 import { FaqPage } from "@/pages/FaqPage"
@@ -108,6 +111,13 @@ function App() {
     return cities.find((city) => city.slug === route.slug)
   }, [route])
 
+  const selectedCommunityProject = useMemo(() => {
+    if (route.type !== "communityProject") return undefined
+    return publishedCommunityProjects.find(
+      (project) => project.slug === route.slug,
+    )
+  }, [route])
+
   const selectedArticle = useMemo(() => {
     if (!articleEntries || route.type !== "article") return undefined
     return articleEntries.find((article) => article.slug === route.slug)
@@ -174,6 +184,14 @@ function App() {
       return <ContributePage />
     case "community":
       return <CommunityPage />
+    case "communityProjects":
+      return <CommunityProjectsPage />
+    case "communityProject":
+      return selectedCommunityProject ? (
+        <CommunityProjectPage project={selectedCommunityProject} />
+      ) : (
+        <NotFoundPage />
+      )
     case "events":
       return <EventsPage events={events} />
     case "event":

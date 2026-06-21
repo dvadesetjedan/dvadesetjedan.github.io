@@ -16,7 +16,7 @@ export function BackToTopButton() {
   return (
     <button
       aria-label="Natrag na vrh stranice"
-      className={`fixed bottom-5 right-5 z-50 inline-flex size-11 items-center justify-center rounded-full border border-border/80 bg-card/95 text-foreground shadow-[var(--shadow-soft)] backdrop-blur transition-all hover:border-primary/40 hover:text-primary sm:bottom-6 sm:right-6 ${
+      className={`fixed bottom-5 right-5 z-50 inline-flex size-11 items-center justify-center rounded-full bg-card/95 text-foreground shadow-[var(--shadow-border)] backdrop-blur transition-[translate,scale,opacity,color,box-shadow] duration-150 ease-out hover:text-primary hover:shadow-[var(--shadow-border-hover)] active:scale-[0.96] motion-reduce:transition-none motion-reduce:active:scale-100 sm:bottom-6 sm:right-6 ${
         isVisible
           ? "translate-y-0 opacity-100"
           : "pointer-events-none translate-y-3 opacity-0"

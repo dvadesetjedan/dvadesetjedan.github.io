@@ -44,6 +44,8 @@
   html {
     scroll-behavior: smooth;
     overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     @apply font-sans;
   }
 
@@ -74,6 +76,23 @@
     @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background;
   }
 
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  p,
+  li {
+    text-wrap: pretty;
+  }
+
+  time,
+  .tabular-date,
+  .tabular-numeric {
+    font-variant-numeric: tabular-nums;
+  }
+
   ::selection {
     background: rgba(247, 147, 26, 0.28);
   }
@@ -93,12 +112,22 @@
   max-width: 100%;
   overflow-wrap: anywhere;
   word-break: normal;
+  text-wrap: balance;
+}
+
+.image-depth {
+  outline: 1px solid rgba(0, 0, 0, 0.1);
+  outline-offset: -1px;
+}
+
+.dark .image-depth {
+  outline-color: rgba(255, 255, 255, 0.1);
 }
 
 @media (max-width: 480px) {
   .safe-heading {
-    font-size: clamp(2.5rem, 13vw, 3.4rem);
-    line-height: 0.98;
+    font-size: 2.35rem;
+    line-height: 1.04;
   }
 }
 
@@ -123,12 +152,14 @@
   letter-spacing: -0.04em;
   line-height: 1;
   margin-top: 2.75rem;
+  text-wrap: balance;
 }
 
 .wp-content p,
 .wp-content blockquote,
 .wp-content li {
   color: var(--foreground);
+  text-wrap: wrap;
 }
 
 .wp-content p {
@@ -152,10 +183,15 @@
 }
 
 .wp-content img {
-  border: 1px solid var(--border);
   border-radius: calc(var(--radius) * 1.2);
   display: block;
+  outline: 1px solid rgba(0, 0, 0, 0.1);
+  outline-offset: -1px;
   width: 100%;
+}
+
+.dark .wp-content img {
+  outline-color: rgba(255, 255, 255, 0.1);
 }
 
 @theme inline {
@@ -238,6 +274,12 @@
   --body-secondary-glow: rgba(107, 78, 42, 0.04);
   --body-wash-start: rgba(255, 255, 255, 0.62);
   --body-wash-end: rgba(255, 255, 255, 0.22);
+  --shadow-border:
+    0 0 0 1px rgba(0, 0, 0, 0.06), 0 1px 2px -1px rgba(0, 0, 0, 0.06),
+    0 2px 4px 0 rgba(0, 0, 0, 0.04);
+  --shadow-border-hover:
+    0 0 0 1px rgba(0, 0, 0, 0.08), 0 1px 2px -1px rgba(0, 0, 0, 0.08),
+    0 2px 4px 0 rgba(0, 0, 0, 0.06);
 }
 
 .dark {
@@ -276,4 +318,6 @@
   --body-secondary-glow: rgba(255, 216, 164, 0.04);
   --body-wash-start: rgba(0, 0, 0, 0.18);
   --body-wash-end: rgba(0, 0, 0, 0.04);
+  --shadow-border: 0 0 0 1px rgba(255, 255, 255, 0.08);
+  --shadow-border-hover: 0 0 0 1px rgba(255, 255, 255, 0.13);
 }

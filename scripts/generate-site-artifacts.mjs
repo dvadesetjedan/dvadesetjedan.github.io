@@ -7,24 +7,86 @@ const siteUrl = "https://dvadesetjedan.com"
 const defaultImage = `${siteUrl}/social-preview.png`
 
 const coreRoutes = [
-  ["/", "DvadesetJedan | Bitcoin Zajednica", "Bitcoin signal za ljude koji govore našim jezicima: članci, livestream, događaji i zajednica bez tradinga, tokena i obećanja zarade."],
-  ["/o-projektu/", "O projektu | DvadesetJedan", "DvadesetJedan je regionalni Bitcoin-only signal na našem jeziku i dio otvorenog TwentyOne.World koncepta."],
-  ["/pocni-ovdje/", "Počni ovdje | DvadesetJedan", "Početni put za ljude koji žele razumjeti Bitcoin bez žurbe, hypea i početničkih sigurnosnih grešaka."],
-  ["/teme/", "Teme | DvadesetJedan", "Teme kroz koje DvadesetJedan obrađuje Bitcoin: novac, sigurnost, štednja, zajednica i dugoročno razmišljanje."],
-  ["/faq/", "Česta pitanja | DvadesetJedan", "Kratki odgovori za ljude koji upoznaju DvadesetJedan, Bitcoin-only pristup i načine uključivanja u zajednicu."],
-  ["/resursi/", "Resursi | DvadesetJedan", "Polazna mjesta za učenje o Bitcoinu, provjeru mreže i kvalitetne izvore bez crypto buke."],
-  ["/sigurnost/", "Sigurnost | DvadesetJedan", "Početnički Bitcoin sigurnosni vodič: seed phrase, privatni ključevi, exchange, phishing, Telegram i meetupi."],
-  ["/clanci/", "Članci | DvadesetJedan", "Pisani Bitcoin signal DvadesetJedan zajednice: početni redoslijed čitanja, tematski putokazi i arhiva tekstova."],
-  ["/livestream/", "Livestream | DvadesetJedan", "Bitcoin livestream DvadesetJedan zajednice: vijesti, komentari, razgovori, pitanja uživo i regionalna perspektiva."],
-  ["/dogadaji/", "Događaji | DvadesetJedan", "Nadolazeći Bitcoin događaji, arhiva druženja i način kako predložiti lokalni događaj kroz DvadesetJedan zajednicu."],
-  ["/gradovi/", "Gradovi | DvadesetJedan", "Regionalne DvadesetJedan ulazne točke za gradove, lokalne događaje i pokretanje Bitcoin-only susreta."],
-  ["/zajednica/", "Zajednica | DvadesetJedan", "Ulaz u DvadesetJedan zajednicu: Telegram, YouTube, događaji, načela razgovora i Bitcoin-only pravila."],
-  ["/doprinesi/", "Doprinesi | DvadesetJedan", "Načini kako doprinijeti DvadesetJedan zajednici kroz članke, prijevode, događaje, kod i kvalitetne Bitcoin resurse."],
+  [
+    "/",
+    "DvadesetJedan | Bitcoin Zajednica",
+    "Bitcoin signal za ljude koji govore našim jezicima: članci, livestream, događaji i zajednica bez tradinga, tokena i obećanja zarade.",
+  ],
+  [
+    "/o-projektu/",
+    "O projektu | DvadesetJedan",
+    "DvadesetJedan je regionalni Bitcoin-only signal na našem jeziku i dio otvorenog TwentyOne.World koncepta.",
+  ],
+  [
+    "/pocni-ovdje/",
+    "Počni ovdje | DvadesetJedan",
+    "Početni put za ljude koji žele razumjeti Bitcoin bez žurbe, hypea i početničkih sigurnosnih grešaka.",
+  ],
+  [
+    "/teme/",
+    "Teme | DvadesetJedan",
+    "Teme kroz koje DvadesetJedan obrađuje Bitcoin: novac, sigurnost, štednja, zajednica i dugoročno razmišljanje.",
+  ],
+  [
+    "/faq/",
+    "Česta pitanja | DvadesetJedan",
+    "Kratki odgovori za ljude koji upoznaju DvadesetJedan, Bitcoin-only pristup i načine uključivanja u zajednicu.",
+  ],
+  [
+    "/resursi/",
+    "Resursi | DvadesetJedan",
+    "Polazna mjesta za učenje o Bitcoinu, provjeru mreže i kvalitetne izvore bez crypto buke.",
+  ],
+  [
+    "/sigurnost/",
+    "Sigurnost | DvadesetJedan",
+    "Početnički Bitcoin sigurnosni vodič: seed phrase, privatni ključevi, exchange, phishing, Telegram i meetupi.",
+  ],
+  [
+    "/clanci/",
+    "Članci | DvadesetJedan",
+    "Pisani Bitcoin signal DvadesetJedan zajednice: početni redoslijed čitanja, tematski putokazi i arhiva tekstova.",
+  ],
+  [
+    "/livestream/",
+    "Livestream | DvadesetJedan",
+    "Bitcoin livestream DvadesetJedan zajednice: vijesti, komentari, razgovori, pitanja uživo i regionalna perspektiva.",
+  ],
+  [
+    "/dogadaji/",
+    "Događaji | DvadesetJedan",
+    "Nadolazeći Bitcoin događaji, arhiva druženja i način kako predložiti lokalni događaj kroz DvadesetJedan zajednicu.",
+  ],
+  [
+    "/gradovi/",
+    "Gradovi | DvadesetJedan",
+    "Regionalne DvadesetJedan ulazne točke za gradove, lokalne događaje i pokretanje Bitcoin-only susreta.",
+  ],
+  [
+    "/zajednica/",
+    "Zajednica | DvadesetJedan",
+    "Ulaz u DvadesetJedan zajednicu: Telegram, YouTube, događaji, načela razgovora i Bitcoin-only pravila.",
+  ],
+  [
+    "/iz-zajednice/",
+    "Iz zajednice | DvadesetJedan",
+    "Projekti, prijevodi, događaji i edukacijske inicijative ljudi iz DvadesetJedan kruga.",
+  ],
+  [
+    "/doprinesi/",
+    "Doprinesi | DvadesetJedan",
+    "Načini kako doprinijeti DvadesetJedan zajednici kroz članke, prijevode, događaje, kod i kvalitetne Bitcoin resurse.",
+  ],
 ].map(([routePath, title, description]) => ({
   path: routePath,
   title,
   description,
-  type: routePath === "/" ? "website" : "page",
+  type:
+    routePath === "/iz-zajednice/"
+      ? "communityProjects"
+      : routePath === "/"
+        ? "website"
+        : "page",
 }))
 
 function readSource(filePath) {
@@ -52,7 +114,9 @@ function readString(objectSource, key) {
 }
 
 function readStringArray(objectSource, key) {
-  const match = objectSource.match(new RegExp(`${key}:\\s*\\[([^\\]]*)\\]`, "s"))
+  const match = objectSource.match(
+    new RegExp(`${key}:\\s*\\[([^\\]]*)\\]`, "s"),
+  )
   if (!match) return []
   return [...match[1].matchAll(/"([^"]*)"/g)].map((entry) => entry[1])
 }
@@ -85,7 +149,10 @@ function extractObjects(source, anchor) {
 }
 
 function loadArticles() {
-  return extractObjects(readSource("src/data/articles.ts"), "export const articles")
+  return extractObjects(
+    readSource("src/data/articles.ts"),
+    "export const articles",
+  )
     .map((objectSource) => {
       const slug = readString(objectSource, "slug")
       const title = readString(objectSource, "title")
@@ -148,7 +215,11 @@ function loadEvents() {
                 address: [address, city, country].filter(Boolean).join(", "),
               },
               offers: registrationUrl
-                ? { "@type": "Offer", url: registrationUrl, availability: "https://schema.org/InStock" }
+                ? {
+                    "@type": "Offer",
+                    url: registrationUrl,
+                    availability: "https://schema.org/InStock",
+                  }
                 : undefined,
             },
           }
@@ -158,7 +229,10 @@ function loadEvents() {
 }
 
 function loadEpisodes() {
-  return extractObjects(readSource("src/data/episodes.ts"), "export const episodes")
+  return extractObjects(
+    readSource("src/data/episodes.ts"),
+    "export const episodes",
+  )
     .map((objectSource) => {
       const slug = readString(objectSource, "slug")
       const title = readString(objectSource, "title")
@@ -197,8 +271,49 @@ function loadCities() {
     .filter(Boolean)
 }
 
+function loadCommunityProjects() {
+  return extractObjects(
+    readSource("src/data/communityProjects.ts"),
+    "export const communityProjects",
+  )
+    .map((objectSource) => {
+      const slug = readString(objectSource, "slug")
+      const title = readString(objectSource, "title")
+      const summary = readString(objectSource, "summary")
+      const status = readString(objectSource, "status")
+      const consentConfirmed = objectSource.includes("consentConfirmed: true")
+      const featured = objectSource.includes("featured: true")
+
+      return slug && title && summary && status !== "draft" && consentConfirmed
+        ? {
+            path: `/iz-zajednice/${slug}/`,
+            title: `${title} | DvadesetJedan`,
+            description: truncate(summary || title),
+            type: "communityProject",
+            featured,
+            jsonLd: {
+              "@context": "https://schema.org",
+              "@type": "CreativeWork",
+              name: title,
+              description: summary,
+              url: `${siteUrl}/iz-zajednice/${slug}/`,
+              isPartOf: {
+                "@type": "WebSite",
+                name: "DvadesetJedan",
+                url: siteUrl,
+              },
+            },
+          }
+        : null
+    })
+    .filter(Boolean)
+}
+
 function loadLegacyRedirects() {
-  return extractObjects(readSource("src/data/legacyRedirects.ts"), "export const legacyRedirects")
+  return extractObjects(
+    readSource("src/data/legacyRedirects.ts"),
+    "export const legacyRedirects",
+  )
     .map((objectSource) => {
       const from = readString(objectSource, "from")
       const to = readString(objectSource, "to")
@@ -225,7 +340,13 @@ function routeJsonLd(route) {
           "https://twentyone.world/",
         ],
       },
-      { "@context": "https://schema.org", "@type": "WebSite", name: "DvadesetJedan", url: siteUrl, inLanguage: "hr" },
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        name: "DvadesetJedan",
+        url: siteUrl,
+        inLanguage: "hr",
+      },
     )
   }
   if (route.type === "article") {
@@ -246,10 +367,27 @@ function routeJsonLd(route) {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "DvadesetJedan", item: `${siteUrl}/` },
-        { "@type": "ListItem", position: 2, name: parts[0], item: `${siteUrl}/${parts[0]}/` },
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "DvadesetJedan",
+          item: `${siteUrl}/`,
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: parts[0],
+          item: `${siteUrl}/${parts[0]}/`,
+        },
         ...(parts[1]
-          ? [{ "@type": "ListItem", position: 3, name: route.title.split("|")[0].trim(), item: `${siteUrl}${route.path}` }]
+          ? [
+              {
+                "@type": "ListItem",
+                position: 3,
+                name: route.title.split("|")[0].trim(),
+                item: `${siteUrl}${route.path}`,
+              },
+            ]
           : []),
       ],
     })
@@ -270,7 +408,9 @@ function extractAssetTags(template) {
   const head = template.match(/<head>([\s\S]*?)<\/head>/)?.[1] ?? ""
   return head
     .split("\n")
-    .filter((line) => line.includes("/assets/") || line.includes('type="module"'))
+    .filter(
+      (line) => line.includes("/assets/") || line.includes('type="module"'),
+    )
     .join("\n")
 }
 
@@ -283,7 +423,10 @@ function renderHead(route, assetTags) {
       : defaultImage
   const ogType = route.type === "article" ? "article" : "website"
   const jsonLd = routeJsonLd(route)
-    .map((item) => `<script type="application/ld+json">${JSON.stringify(item)}</script>`)
+    .map(
+      (item) =>
+        `<script type="application/ld+json">${JSON.stringify(item)}</script>`,
+    )
     .join("\n    ")
 
   return `    <meta charset="UTF-8" />
@@ -330,9 +473,7 @@ function writeRoute(template, route) {
 
 function renderLegacyRedirect(redirect) {
   const canonical = `${siteUrl}${redirect.to}`
-  const reason = redirect.reason
-    ? `<p>${escapeHtml(redirect.reason)}</p>`
-    : ""
+  const reason = redirect.reason ? `<p>${escapeHtml(redirect.reason)}</p>` : ""
 
   return `<!doctype html>
 <html lang="hr">
@@ -374,7 +515,9 @@ function writeSitemap(routes) {
 
 function writeFeeds(routes) {
   const feedItems = routes
-    .filter((route) => ["article", "livestreamEpisode", "event"].includes(route.type))
+    .filter((route) =>
+      ["article", "livestreamEpisode", "event"].includes(route.type),
+    )
     .filter((route) => route.date)
     .sort((left, right) => String(right.date).localeCompare(String(left.date)))
     .slice(0, 20)
@@ -429,7 +572,9 @@ function writeFeeds(routes) {
 
 const templatePath = path.join(distDir, "index.html")
 if (!fs.existsSync(templatePath)) {
-  throw new Error("dist/index.html ne postoji. Pokreni Vite build prije generatora.")
+  throw new Error(
+    "dist/index.html ne postoji. Pokreni Vite build prije generatora.",
+  )
 }
 
 const template = fs.readFileSync(templatePath, "utf8")
@@ -439,20 +584,30 @@ const routes = [
   ...loadEvents(),
   ...loadEpisodes(),
   ...loadCities(),
+  ...loadCommunityProjects(),
 ]
 const legacyRedirects = loadLegacyRedirects()
 
 for (const route of routes) writeRoute(template, route)
 for (const redirect of legacyRedirects) writeLegacyRedirect(redirect)
 
-fs.writeFileSync(path.join(distDir, "404.html"), renderHtml(template, {
-  path: "/404/",
-  title: "Stranica nije pronađena | DvadesetJedan",
-  description: "Poveznica je možda promijenjena ili stranica više ne postoji.",
-  type: "page",
-}))
-fs.writeFileSync(path.join(distDir, "robots.txt"), `User-agent: *\nAllow: /\nSitemap: ${siteUrl}/sitemap.xml\n`)
+fs.writeFileSync(
+  path.join(distDir, "404.html"),
+  renderHtml(template, {
+    path: "/404/",
+    title: "Stranica nije pronađena | DvadesetJedan",
+    description:
+      "Poveznica je možda promijenjena ili stranica više ne postoji.",
+    type: "page",
+  }),
+)
+fs.writeFileSync(
+  path.join(distDir, "robots.txt"),
+  `User-agent: *\nAllow: /\nSitemap: ${siteUrl}/sitemap.xml\n`,
+)
 writeSitemap(routes)
 writeFeeds(routes)
 
-console.log(`Generated ${routes.length} static routes, ${legacyRedirects.length} legacy redirects, sitemap, RSS, JSON feed, robots and 404.`)
+console.log(
+  `Generated ${routes.length} static routes, ${legacyRedirects.length} legacy redirects, sitemap, RSS, JSON feed, robots and 404.`,
+)

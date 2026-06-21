@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react"
 import { Moon, Sun } from "lucide-react"
+import { AnimatePresence, motion } from "motion/react"
 
 import { TelegramIcon } from "@/components/Icons"
 import { navigation, media } from "@/data/site"
@@ -52,7 +53,8 @@ export function Header() {
   const [theme, setTheme] = useState<ColorTheme>(() => getInitialTheme())
 
   useEffect(() => {
-    const onPopState = () => setRoute(parseRouteFromPath(window.location.pathname))
+    const onPopState = () =>
+      setRoute(parseRouteFromPath(window.location.pathname))
 
     window.addEventListener("popstate", onPopState)
     window.addEventListener("dvadesetjedan:navigation", onPopState)
@@ -129,7 +131,11 @@ export function Header() {
                     : "border-transparent hover:text-foreground"
                 }`}
                 href={item.href}
-                rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                rel={
+                  item.href.startsWith("http")
+                    ? "noopener noreferrer"
+                    : undefined
+                }
                 target={item.href.startsWith("http") ? "_blank" : undefined}
               >
                 {item.label}
@@ -145,26 +151,37 @@ export function Header() {
                 ? "Prebaci na svijetli način"
                 : "Prebaci na tamni način"
             }
-            className="inline-flex items-center gap-1.5 rounded-full border border-border/80 bg-card px-3 py-1.5 text-sm font-medium text-foreground shadow-sm transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:bg-background hover:shadow-md active:translate-y-0 sm:gap-2 sm:px-4 sm:py-2"
+            className="relative inline-flex size-10 items-center justify-center rounded-full bg-card text-foreground shadow-[var(--shadow-border)] transition-[translate,scale,box-shadow,background-color,color] duration-150 ease-out hover:-translate-y-0.5 hover:bg-background hover:shadow-[var(--shadow-border-hover)] active:scale-[0.96] motion-reduce:transition-none motion-reduce:hover:translate-y-0 motion-reduce:active:scale-100"
             onClick={toggleTheme}
             type="button"
           >
-            {theme === "dark" ? (
-              <Sun className="size-4" />
-            ) : (
-              <Moon className="size-4" />
-            )}
+            <AnimatePresence initial={false} mode="wait">
+              <motion.span
+                animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+                className="absolute inset-0 flex items-center justify-center"
+                exit={{ opacity: 0, scale: 0.25, filter: "blur(4px)" }}
+                initial={{ opacity: 0, scale: 0.25, filter: "blur(4px)" }}
+                key={theme}
+                transition={{ type: "spring", duration: 0.3, bounce: 0 }}
+              >
+                {theme === "dark" ? (
+                  <Sun className="size-4" />
+                ) : (
+                  <Moon className="size-4" />
+                )}
+              </motion.span>
+            </AnimatePresence>
           </button>
 
           <a
-            className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-border/80 bg-card px-3 py-1.5 text-sm font-medium text-foreground shadow-sm transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:bg-background hover:shadow-md active:translate-y-0 sm:gap-2 sm:px-4 sm:py-2"
+            aria-label="Uđi u Telegram"
+            className="inline-flex min-h-10 shrink-0 items-center gap-1.5 rounded-full bg-card py-2 pl-3 pr-3 text-sm font-medium text-foreground shadow-[var(--shadow-border)] transition-[translate,scale,box-shadow,background-color,color] duration-150 ease-out hover:-translate-y-0.5 hover:bg-background hover:shadow-[var(--shadow-border-hover)] active:scale-[0.96] motion-reduce:transition-none motion-reduce:hover:translate-y-0 motion-reduce:active:scale-100 sm:gap-2 sm:pl-3.5 sm:pr-4"
             href={communityHref()}
             rel="noopener noreferrer"
             target="_blank"
           >
             <TelegramIcon />
             <span className="hidden sm:inline">Uđi u Telegram</span>
-            <span className="sm:hidden">Telegram</span>
           </a>
         </div>
       </div>
@@ -188,7 +205,11 @@ export function Header() {
                     : "border-transparent hover:text-foreground"
                 }`}
                 href={item.href}
-                rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                rel={
+                  item.href.startsWith("http")
+                    ? "noopener noreferrer"
+                    : undefined
+                }
                 target={item.href.startsWith("http") ? "_blank" : undefined}
               >
                 {item.label}

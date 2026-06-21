@@ -92,6 +92,18 @@ Za sadržaj je često dovoljno promijeniti jednu data datoteku. Za UI promjene p
 - Ne dodavati privatne kontakte, city leadove ili neprovjerene lokalne tvrdnje.
 - Emerging gradovi smiju imati samo poziv zajednici i starter checklistu, bez tvrdnje da meetup već postoji.
 
+## Iz zajednice
+
+- Projekti iz zajednice su u `src/data/communityProjects.ts`.
+- Javno se renderiraju samo projekti koji imaju `consentConfirmed: true` i nisu `draft`.
+- Planirani unosi bez potvrđenog pristanka mogu ostati u data datoteci, ali ne smiju biti u javnim rutama, sitemapu ili homepage listi.
+- Projekt mora biti Bitcoin-only ili jasno koristan za Bitcoin edukaciju, lokalnu zajednicu ili otvoreni Bitcoin signal.
+- Ne dodavati tokene, trading signale, leverage, affiliate-first projekte ni obećanja zarade.
+- Donation linkovi su dopušteni samo kao opcionalna podrška autoru ili projektu i trebaju `donationNote`.
+- Privatne kontakte, osobne Telegram handleove i slične podatke objavljuj samo ako je pristanak izričito potvrđen.
+- Ako autor traži izmjenu ili uklanjanje, ažuriraj podatke ili postavi `consentConfirmed: false`.
+- Detalji održavanja su u `docs/community-projects.md`.
+
 ## Sigurnost za početnike
 
 - Sigurnosni sadržaj je u `src/data/safety.ts`.

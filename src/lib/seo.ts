@@ -7,6 +7,8 @@ export type SeoRouteType =
   | "event"
   | "livestreamEpisode"
   | "city"
+  | "communityProjects"
+  | "communityProject"
 
 export type SeoMetadata = {
   path: string
