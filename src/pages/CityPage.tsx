@@ -6,6 +6,7 @@ import { ActionButton } from "@/components/ActionButton"
 import { BackLink } from "@/components/BackLink"
 import { EventCard } from "@/components/EventCard"
 import { Layout } from "@/components/Layout"
+import { OptimizedImage } from "@/components/OptimizedImage"
 import { CITIES_URL, CONTRIBUTE_URL } from "@/data/site"
 import { communityHref } from "@/lib/content"
 import { usePageMeta } from "@/lib/usePageMeta"
@@ -62,9 +63,11 @@ export function CityPage({
 
             {city.image ? (
               <figure className="min-h-full overflow-hidden bg-background">
-                <img
+                <OptimizedImage
                   alt={city.image.alt}
                   className="h-full min-h-[18rem] w-full object-cover lg:min-h-[30rem]"
+                  decoding="async"
+                  pictureClassName="block h-full"
                   src={city.image.src}
                 />
               </figure>

@@ -1,16 +1,14 @@
-import { useEffect, useMemo, useState } from "react"
+import { lazy, Suspense, useEffect, useMemo, useState } from "react"
 
 import type { ArticleEntry } from "@/data/articles"
 import { cities } from "@/data/cities"
 import { publishedCommunityProjects } from "@/data/communityProjects"
 import { episodes } from "@/data/episodes"
 import { events } from "@/data/events"
-import { AboutPage } from "@/pages/AboutPage"
 import { ArticlesPage } from "@/pages/ArticlesPage"
 import { ArticlePage } from "@/pages/ArticlePage"
 import { BeginnersPage } from "@/pages/BeginnersPage"
 import { ContributePage } from "@/pages/ContributePage"
-import { CitiesPage } from "@/pages/CitiesPage"
 import { CityPage } from "@/pages/CityPage"
 import { CommunityPage } from "@/pages/CommunityPage"
 import { CommunityProjectPage } from "@/pages/CommunityProjectPage"
@@ -31,6 +29,18 @@ import {
   parseRouteFromPath,
   type Route,
 } from "@/lib/routes"
+
+const AboutPage = lazy(() =>
+  import("@/pages/AboutPage").then((module) => ({
+    default: module.AboutPage,
+  })),
+)
+
+const CitiesPage = lazy(() =>
+  import("@/pages/CitiesPage").then((module) => ({
+    default: module.CitiesPage,
+  })),
+)
 
 function App() {
   const [route, setRoute] = useState<Route>(() => {
@@ -127,7 +137,19 @@ function App() {
     case "home":
       return <HomePage />
     case "about":
-      return <AboutPage />
+      return (
+        <Suspense
+          fallback={
+            <LoadingPage
+              eyebrow="O projektu"
+              message="Pripremamo kartu i osnovni kontekst projekta."
+              title="Učitavamo projekt."
+            />
+          }
+        >
+          <AboutPage />
+        </Suspense>
+      )
     case "topics":
       return <TopicsPage />
     case "faq":
@@ -201,7 +223,19 @@ function App() {
         <NotFoundPage />
       )
     case "cities":
-      return <CitiesPage cities={cities} events={events} />
+      return (
+        <Suspense
+          fallback={
+            <LoadingPage
+              eyebrow="Gradovi"
+              message="Pripremamo regionalnu kartu i popis gradova."
+              title="Učitavamo gradove."
+            />
+          }
+        >
+          <CitiesPage cities={cities} events={events} />
+        </Suspense>
+      )
     case "city":
       return selectedCity ? (
         <CityPage city={selectedCity} events={events} />

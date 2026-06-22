@@ -4,8 +4,27 @@ import path from "node:path"
 const distDir = path.join(process.cwd(), "dist")
 const failures = []
 
+function readFile(relativePath) {
+  return fs.readFileSync(path.join(process.cwd(), relativePath), "utf8")
+}
+
 function exists(relativePath) {
   return fs.existsSync(path.join(distDir, relativePath))
+}
+
+function walkFiles(directory) {
+  if (!fs.existsSync(directory)) return []
+
+  return fs.readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
+    const entryPath = path.join(directory, entry.name)
+
+    if (entry.isDirectory()) return walkFiles(entryPath)
+    return entryPath
+  })
+}
+
+function toWebpPath(filePath) {
+  return filePath.replace(/\.(png|jpe?g)$/i, ".webp")
 }
 
 for (const file of [
@@ -69,6 +88,59 @@ if (exists("index.html")) {
     failures.push(
       "Homepage ne smije sadržavati Bitcoin Diploma projekt ako nije featured.",
     )
+  }
+}
+
+const optimizedImageRoots = [
+  path.join(distDir, "events"),
+  path.join(distDir, "images"),
+]
+const optimizedImages = optimizedImageRoots
+  .flatMap(walkFiles)
+  .filter((file) => /\.(png|jpe?g)$/i.test(file))
+
+if (exists("social-preview.png")) {
+  optimizedImages.push(path.join(distDir, "social-preview.png"))
+}
+
+for (const imagePath of optimizedImages) {
+  const webpPath = toWebpPath(imagePath)
+
+  if (!fs.existsSync(webpPath)) {
+    failures.push(
+      `Nedostaje WebP par za dist/${path.relative(distDir, imagePath)}.`,
+    )
+  }
+}
+
+const appJs = fs
+  .readdirSync(path.join(distDir, "assets"))
+  .filter((file) => file.endsWith(".js"))
+  .map((file) => fs.readFileSync(path.join(distDir, "assets", file), "utf8"))
+  .join("\n")
+
+if (!appJs.includes("image/webp") || !appJs.includes(".webp")) {
+  failures.push("Build ne sadrži WebP picture/source reference.")
+}
+
+const optimizedImageSource = readFile("src/components/OptimizedImage.tsx")
+for (const requiredSnippet of [
+  "<picture",
+  '<source srcSet={resolvedWebpSrc} type="image/webp" />',
+  "<img",
+]) {
+  if (!optimizedImageSource.includes(requiredSnippet)) {
+    failures.push("OptimizedImage ne čuva očekivani WebP + img fallback markup.")
+  }
+}
+
+const appSource = readFile("src/App.tsx")
+for (const routeImport of [
+  'import("@/pages/AboutPage")',
+  'import("@/pages/CitiesPage")',
+]) {
+  if (!appSource.includes(routeImport)) {
+    failures.push(`Nedostaje lazy route import: ${routeImport}.`)
   }
 }
 

@@ -7,6 +7,7 @@ import { CardGrid } from "@/components/CardGrid"
 import { EventsIcon, TelegramIcon } from "@/components/Icons"
 import { InlineLink } from "@/components/InlineLink"
 import { Layout } from "@/components/Layout"
+import { OptimizedImage } from "@/components/OptimizedImage"
 import { Section } from "@/components/Section"
 import { publishedCommunityProjects } from "@/data/communityProjects"
 import { episodes } from "@/data/episodes"
@@ -88,9 +89,10 @@ function BitcoinOnlyGraphic() {
       role="img"
     >
       <div className="relative flex items-center">
-        <img
+        <OptimizedImage
           alt=""
           className="size-24 rounded-full shadow-[0_18px_45px_rgba(247,147,26,0.24)] sm:size-28"
+          pictureClassName="block"
           src="/images/bitcoin-logo.png"
         />
         <span className="absolute -right-4 -bottom-2 flex size-10 items-center justify-center rounded-full border border-border bg-card text-xl shadow-sm sm:size-11 sm:text-2xl">
@@ -216,9 +218,11 @@ export function HomePage() {
             </div>
 
             <div className="overflow-hidden rounded-[2.4rem] border border-border/80 bg-card shadow-[var(--shadow-soft)]">
-              <img
+              <OptimizedImage
                 alt="DvadesetJedan vizual"
                 className="image-depth h-auto w-full object-contain sm:min-h-[24rem] sm:object-cover lg:h-full"
+                decoding="async"
+                pictureClassName="block h-full w-full"
                 src={media.heroUrl}
               />
             </div>

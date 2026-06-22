@@ -1,5 +1,6 @@
 import { useState } from "react"
 
+import { OptimizedImage } from "@/components/OptimizedImage"
 import { cn } from "@/lib/utils"
 
 type SafeImageProps = {
@@ -34,11 +35,12 @@ export function SafeImage({
   }
 
   return (
-    <img
+    <OptimizedImage
       alt={alt}
       className={imageClassName}
       loading="lazy"
       onError={() => setFailed(true)}
+      pictureClassName="block"
       src={src}
     />
   )
