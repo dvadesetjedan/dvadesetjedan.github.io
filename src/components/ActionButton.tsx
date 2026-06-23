@@ -7,6 +7,7 @@ type ActionButtonProps = {
   external?: boolean
   primary?: boolean
   className?: string
+  download?: boolean | string
 }
 
 export function ActionButton({
@@ -16,6 +17,7 @@ export function ActionButton({
   external = false,
   primary = false,
   className = "",
+  download,
 }: ActionButtonProps) {
   return (
     <a
@@ -24,6 +26,7 @@ export function ActionButton({
           ? "bg-primary text-primary-foreground hover:bg-primary/90"
           : "bg-card text-foreground hover:bg-background"
       } ${className}`.trim()}
+      download={download}
       href={href}
       rel={external ? "noopener noreferrer" : undefined}
       target={external ? "_blank" : undefined}

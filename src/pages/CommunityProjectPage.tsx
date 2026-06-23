@@ -64,6 +64,12 @@ function isNavigableHref(href: string) {
   return href.startsWith("http") || href.startsWith("/")
 }
 
+function downloadName(link: CommunityProject["links"][number]) {
+  if (link.type !== "pdf") return undefined
+
+  return link.href.split("/").filter(Boolean).pop()
+}
+
 function LinkList({
   title,
   links,
@@ -82,6 +88,7 @@ function LinkList({
         {links.map((link) =>
           isNavigableHref(link.href) ? (
             <ActionButton
+              download={downloadName(link)}
               external={link.href.startsWith("http")}
               href={link.href}
               icon={<ArrowUpRight className="size-4" />}

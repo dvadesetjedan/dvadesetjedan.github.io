@@ -42,6 +42,30 @@ const categorySections: {
   },
 ]
 
+const projectOrder = new Map(
+  [
+    "bitchamler",
+    "bitcoin-diploma-na-nasem-jeziku",
+    "lux-bitcoin-clanci-i-prijevodi",
+    "croatianhodl",
+  ].map((slug, index) => [slug, index]),
+)
+
+function sortProjects(projects: CommunityProject[]) {
+  return [...projects].sort((left, right) => {
+    const leftOrder = projectOrder.get(left.slug) ?? Number.MAX_SAFE_INTEGER
+    const rightOrder = projectOrder.get(right.slug) ?? Number.MAX_SAFE_INTEGER
+
+    return leftOrder - rightOrder
+  })
+}
+
+function downloadName(link: CommunityProject["links"][number]) {
+  if (link.type !== "pdf") return undefined
+
+  return link.href.split("/").filter(Boolean).pop()
+}
+
 function belongsToCategory(
   project: CommunityProject,
   categories: CommunityProjectCategory[],
@@ -105,6 +129,7 @@ function ProjectCard({ project }: { project: CommunityProject }) {
         </ActionButton>
         {publicLinks.map((link) => (
           <ActionButton
+            download={downloadName(link)}
             external={link.href.startsWith("http")}
             href={link.href}
             icon={<ArrowUpRight className="size-4" />}
@@ -136,11 +161,13 @@ export function CommunityProjectsPage() {
     "Projekti, prijevodi, događaji i edukacijske inicijative ljudi iz DvadesetJedan kruga.",
   )
 
-  const featuredProjects = publishedCommunityProjects.filter(
-    (project) => project.featured && project.status !== "archive",
+  const featuredProjects = sortProjects(
+    publishedCommunityProjects.filter(
+      (project) => project.featured && project.status !== "archive",
+    ),
   )
-  const activeProjects = publishedCommunityProjects.filter(
-    (project) => project.status !== "archive",
+  const activeProjects = sortProjects(
+    publishedCommunityProjects.filter((project) => project.status !== "archive"),
   )
   const archiveProjects = publishedCommunityProjects.filter(
     (project) => project.status === "archive",
