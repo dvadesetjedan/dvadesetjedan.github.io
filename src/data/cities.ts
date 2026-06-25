@@ -36,6 +36,7 @@ export const cities: CityEntry[] = [
     },
     meetupUrl: "https://www.meetup.com/dvadeset-jedan/",
     eventSlugs: [
+      "bitcoin-only-meetup-belgrade-2026-08-19",
       "bitcoin-only-meetup-belgrade-2026-05-30",
       "bitcoin-only-meetup-belgrade-2026-06-17",
       "revolution-rocks-belgrade-2026",

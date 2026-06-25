@@ -28,6 +28,49 @@ export type EventEntry = {
 
 export const events: EventEntry[] = [
   {
+    slug: "bitcoin-only-meetup-belgrade-2026-08-19",
+    title: "Bitcoin-only meetup u Beogradu",
+    summary:
+      "Otvoreno DvadesetJedan druženje u Docker Brewery & Beer Garden u Beogradu za razgovor o Bitcoinu, ekonomiji, tehnologiji, filozofiji i zajednici.",
+    description: [
+      "DvadesetJedan meetup u Beogradu održava se u srijedu, 19. kolovoza 2026. od 19:00 do 22:00 u Docker Brewery & Beer Garden.",
+      "Format je otvoreno Bitcoin-only druženje: razgovor o Bitcoinu, ekonomiji, tehnologiji, filozofiji, projektima i zajednici.",
+      "Najava navodi da se grupa okuplja svake treće srijede u mjesecu do 30. rujna 2026., ali ovaj unos se odnosi na javno najavljeni termin 19. kolovoza.",
+      "Govori se srpski i engleski. Dobrodošli su svi bez obzira na razinu znanja o Bitcoinu, a početnici su posebno dobrodošli.",
+      "Ako ne možeš prepoznati ekipu po Bitcoin majicama ili merchu, provjeri Telegram grupu za točan broj stola.",
+      "RSVP, broj slobodnih mjesta i eventualne zadnje promjene provjeri na Meetup stranici događaja.",
+      "Cover fotografija: Docker Brewery & Beer Garden.",
+    ],
+    coverImage: "/events/docker-brewery-belgrade.png",
+    start: "2026-08-19T19:00:00+02:00",
+    end: "2026-08-19T22:00:00+02:00",
+    venue: "Docker Brewery & Beer Garden",
+    address: "Žorža Klemansoa 27b",
+    city: "Belgrade",
+    country: "Serbia",
+    registrationUrl: "https://www.meetup.com/dvadeset-jedan/events/314211200/",
+    mapUrl:
+      "https://www.google.com/maps/search/?api=1&query=Docker+Brewery+Beer+Garden+Zorza+Klemansoa+27b+Belgrade+Serbia",
+    sourceName: "Meetup",
+    sourceUrl: "https://www.meetup.com/dvadeset-jedan/events/314211200/",
+    meetupUrl: "https://www.meetup.com/dvadeset-jedan/events/314211200/",
+    organizer: "Plumski",
+    language: "srpski i engleski",
+    capacityNote: "Meetup najava navodi 29 slobodnih mjesta u trenutku unosa.",
+    citySlug: "beograd",
+    tags: ["Bitcoin-only", "Meetup", "Beograd"],
+    relatedLinks: [
+      {
+        label: "Telegram koordinacija",
+        href: "https://t.me/dvadesetjedan21",
+      },
+      {
+        label: "YouTube podcast",
+        href: "https://www.youtube.com/@dvadesetjedan/streams",
+      },
+    ],
+  },
+  {
     slug: "revolution-rocks-belgrade-2026",
     title: "Revolution.Rocks Belgrade 2026",
     summary:
