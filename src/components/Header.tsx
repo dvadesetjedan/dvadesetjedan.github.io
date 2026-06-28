@@ -22,12 +22,7 @@ function isActiveNavigationItem(route: Route, href: string) {
   }
 
   if (href === "/dogadaji/") {
-    return (
-      route.type === "events" ||
-      route.type === "event" ||
-      route.type === "universityProgram" ||
-      route.type === "bitcoinMoneyBelgrade"
-    )
+    return route.type === "events" || route.type === "event"
   }
 
   if (href === "/livestream/") {

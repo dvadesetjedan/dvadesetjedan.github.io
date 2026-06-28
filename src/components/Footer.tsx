@@ -12,20 +12,7 @@ function isActiveFooterLink(route: Route, href: string) {
   }
 
   if (href === "/dogadaji/") {
-    return (
-      route.type === "events" ||
-      route.type === "event" ||
-      route.type === "universityProgram" ||
-      route.type === "bitcoinMoneyBelgrade"
-    )
-  }
-
-  if (href === "/bitcoin-na-univerzitetima-beograd/") {
-    return route.type === "universityProgram"
-  }
-
-  if (href === "/bitcoin-kao-novac-beograd-2026/") {
-    return route.type === "bitcoinMoneyBelgrade"
+    return route.type === "events" || route.type === "event"
   }
 
   if (href === "/livestream/") {

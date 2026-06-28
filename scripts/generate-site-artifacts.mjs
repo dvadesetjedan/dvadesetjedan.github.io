@@ -58,21 +58,6 @@ const coreRoutes = [
     "Nadolazeći Bitcoin događaji, arhiva druženja i način kako predložiti lokalni događaj kroz DvadesetJedan zajednicu.",
   ],
   [
-    "/bitcoin-na-univerzitetima-beograd/",
-    "Bitcoin na univerzitetima: Beograd 2026 | DvadesetJedan",
-    "Serija predavanja i radionica za studente u Beogradu o Bitcoinu kao novcu, tehnologiji, štednji, sigurnosti i osobnoj financijskoj odgovornosti.",
-    "Bitcoin na univerzitetima: Beograd 2026",
-    "Obrazovni serijal DvadesetJedan za studente u Beogradu: Bitcoin kao novac, tehnologija, štednja i sigurnost — bez trading hypea i bez altcoina.",
-  ],
-  [
-    "/bitcoin-kao-novac-beograd-2026/",
-    "Bitcoin kao novac: Beograd 2026 | DvadesetJedan",
-    "Pilot edukacijski dan u Beogradu: jedno fakultetsko predavanje i jedan otvoreni meetup o Bitcoinu kao novcu, tehnologiji, štednji i osobnoj odgovornosti.",
-    "Bitcoin kao novac: Beograd 2026",
-    "DvadesetJedan pokreće pilot edukacijski dan u Beogradu: Bitcoin kao novac, jedno fakultetsko predavanje i jedan otvoreni meetup.",
-    "/images/bitcoin-kao-novac-beograd-2026-hero.png",
-  ],
-  [
     "/gradovi/",
     "Gradovi | DvadesetJedan",
     "Regionalne DvadesetJedan ulazne točke za gradove, lokalne događaje i pokretanje Bitcoin-only susreta.",

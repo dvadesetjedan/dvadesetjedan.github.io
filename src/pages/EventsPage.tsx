@@ -7,11 +7,7 @@ import { BackLink } from "@/components/BackLink"
 import { EventCard } from "@/components/EventCard"
 import { Layout } from "@/components/Layout"
 import { eventMeta } from "@/data/eventMeta"
-import {
-  BITCOIN_MONEY_BELGRADE_URL,
-  CONTRIBUTE_URL,
-  UNIVERSITY_PROGRAM_URL,
-} from "@/data/site"
+import { CONTRIBUTE_URL } from "@/data/site"
 import { communityHref } from "@/lib/content"
 import { usePageMeta } from "@/lib/usePageMeta"
 
@@ -108,46 +104,6 @@ export function EventsPage({ events }: { events: EventEntry[] }) {
                 {city}
               </a>
             ))}
-          </div>
-        </section>
-
-        <section className="mt-8 grid gap-5 lg:grid-cols-2">
-          <div className="rounded-[1.8rem] border border-primary/20 bg-primary/8 px-6 py-8 sm:px-10">
-            <h2 className="text-3xl font-semibold tracking-[-0.04em] text-foreground">
-              Bitcoin kao novac: Beograd 2026
-            </h2>
-            <p className="mt-4 max-w-3xl text-base leading-8 text-muted-foreground">
-              Pilot edukacijski dan: jedno fakultetsko predavanje i jedan
-              otvoreni večernji meetup u Beogradu.
-            </p>
-            <div className="mt-6">
-              <ActionButton
-                href={BITCOIN_MONEY_BELGRADE_URL}
-                icon={<ArrowUpRight className="size-4" />}
-                primary
-              >
-                Otvori pilot
-              </ActionButton>
-            </div>
-          </div>
-
-          <div className="rounded-[1.8rem] border border-border/80 bg-card px-6 py-8 sm:px-10">
-            <h2 className="text-3xl font-semibold tracking-[-0.04em] text-foreground">
-              Bitcoin na univerzitetima: Beograd 2026
-            </h2>
-            <p className="mt-4 max-w-3xl text-base leading-8 text-muted-foreground">
-              Jesenski obrazovni serijal za studente o Bitcoinu kao novcu,
-              tehnologiji, štednji, sigurnosti i osobnoj financijskoj
-              odgovornosti.
-            </p>
-            <div className="mt-6">
-              <ActionButton
-                href={UNIVERSITY_PROGRAM_URL}
-                icon={<ArrowUpRight className="size-4" />}
-              >
-                Otvori serijal
-              </ActionButton>
-            </div>
           </div>
         </section>
 

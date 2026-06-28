@@ -15,8 +15,6 @@ const validInternalPrefixes = [
   "/clanci/",
   "/livestream/",
   "/dogadaji/",
-  "/bitcoin-na-univerzitetima-beograd/",
-  "/bitcoin-kao-novac-beograd-2026/",
   "/gradovi/",
   "/zajednica/",
   "/iz-zajednice/",
