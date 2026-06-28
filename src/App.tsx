@@ -8,6 +8,7 @@ import { events } from "@/data/events"
 import { ArticlesPage } from "@/pages/ArticlesPage"
 import { ArticlePage } from "@/pages/ArticlePage"
 import { BeginnersPage } from "@/pages/BeginnersPage"
+import { BitcoinUniversitiesBelgradePage } from "@/pages/BitcoinUniversitiesBelgradePage"
 import { ContributePage } from "@/pages/ContributePage"
 import { CityPage } from "@/pages/CityPage"
 import { CommunityPage } from "@/pages/CommunityPage"
@@ -222,6 +223,8 @@ function App() {
       ) : (
         <NotFoundPage />
       )
+    case "universityProgram":
+      return <BitcoinUniversitiesBelgradePage />
     case "cities":
       return (
         <Suspense

@@ -16,6 +16,7 @@ export type Route =
   | { type: "contribute" }
   | { type: "events" }
   | { type: "event"; slug: string }
+  | { type: "universityProgram" }
   | { type: "cities" }
   | { type: "city"; slug: string }
   | { type: "notFound"; path: string }
@@ -86,6 +87,9 @@ export function parseRouteFromPath(pathname: string): Route {
   if (cleanPath === "/doprinesi/") return { type: "contribute" }
   if (cleanPath === "/dogadaji/") {
     return { type: "events" }
+  }
+  if (cleanPath === "/bitcoin-na-univerzitetima-beograd/") {
+    return { type: "universityProgram" }
   }
   if (cleanPath.startsWith("/dogadaji/")) {
     const slug = cleanPath.replace(/^\/dogadaji\//, "").replace(/\/$/, "")

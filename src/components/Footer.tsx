@@ -12,7 +12,15 @@ function isActiveFooterLink(route: Route, href: string) {
   }
 
   if (href === "/dogadaji/") {
-    return route.type === "events" || route.type === "event"
+    return (
+      route.type === "events" ||
+      route.type === "event" ||
+      route.type === "universityProgram"
+    )
+  }
+
+  if (href === "/bitcoin-na-univerzitetima-beograd/") {
+    return route.type === "universityProgram"
   }
 
   if (href === "/livestream/") {

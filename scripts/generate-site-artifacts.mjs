@@ -58,6 +58,13 @@ const coreRoutes = [
     "Nadolazeći Bitcoin događaji, arhiva druženja i način kako predložiti lokalni događaj kroz DvadesetJedan zajednicu.",
   ],
   [
+    "/bitcoin-na-univerzitetima-beograd/",
+    "Bitcoin na univerzitetima: Beograd 2026 | DvadesetJedan",
+    "Serija predavanja i radionica za studente u Beogradu o Bitcoinu kao novcu, tehnologiji, štednji, sigurnosti i osobnoj financijskoj odgovornosti.",
+    "Bitcoin na univerzitetima: Beograd 2026",
+    "Obrazovni serijal DvadesetJedan za studente u Beogradu: Bitcoin kao novac, tehnologija, štednja i sigurnost — bez trading hypea i bez altcoina.",
+  ],
+  [
     "/gradovi/",
     "Gradovi | DvadesetJedan",
     "Regionalne DvadesetJedan ulazne točke za gradove, lokalne događaje i pokretanje Bitcoin-only susreta.",
@@ -77,10 +84,12 @@ const coreRoutes = [
     "Doprinesi | DvadesetJedan",
     "Načini kako doprinijeti DvadesetJedan zajednici kroz članke, prijevode, događaje, kod i kvalitetne Bitcoin resurse.",
   ],
-].map(([routePath, title, description]) => ({
+].map(([routePath, title, description, ogTitle, ogDescription]) => ({
   path: routePath,
   title,
   description,
+  ogTitle,
+  ogDescription,
   type:
     routePath === "/iz-zajednice/"
       ? "communityProjects"
@@ -416,6 +425,8 @@ function extractAssetTags(template) {
 
 function renderHead(route, assetTags) {
   const canonical = `${siteUrl}${route.path}`
+  const ogTitle = route.ogTitle ?? route.title
+  const ogDescription = route.ogDescription ?? route.description
   const image = route.image?.startsWith("http")
     ? route.image
     : route.image?.startsWith("/")
@@ -437,8 +448,8 @@ function renderHead(route, assetTags) {
     <meta name="description" content="${escapeHtml(route.description)}" />
     <meta name="theme-color" content="#f5efe4" />
     <link rel="canonical" href="${canonical}" />
-    <meta property="og:title" content="${escapeHtml(route.title)}" />
-    <meta property="og:description" content="${escapeHtml(route.description)}" />
+    <meta property="og:title" content="${escapeHtml(ogTitle)}" />
+    <meta property="og:description" content="${escapeHtml(ogDescription)}" />
     <meta property="og:type" content="${ogType}" />
     <meta property="og:url" content="${canonical}" />
     <meta property="og:image" content="${image}" />
@@ -446,8 +457,8 @@ function renderHead(route, assetTags) {
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="${escapeHtml(route.title)}" />
-    <meta name="twitter:description" content="${escapeHtml(route.description)}" />
+    <meta name="twitter:title" content="${escapeHtml(ogTitle)}" />
+    <meta name="twitter:description" content="${escapeHtml(ogDescription)}" />
     <meta name="twitter:image" content="${image}" />
 ${assetTags}
     ${jsonLd}`

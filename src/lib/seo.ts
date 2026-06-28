@@ -14,6 +14,8 @@ export type SeoMetadata = {
   path: string
   title: string
   description: string
+  ogTitle?: string
+  ogDescription?: string
   routeType: SeoRouteType
   image?: string
   jsonLd?: Record<string, unknown>[]

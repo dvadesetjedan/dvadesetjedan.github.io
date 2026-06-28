@@ -10,6 +10,7 @@ export const ARTICLES_URL = "/clanci/"
 export const BEGINNERS_URL = "/pocni-ovdje/"
 export const SAFETY_URL = "/sigurnost/"
 export const EVENTS_URL = "/dogadaji/"
+export const UNIVERSITY_PROGRAM_URL = "/bitcoin-na-univerzitetima-beograd/"
 export const CITIES_URL = "/gradovi/"
 export const COMMUNITY_PAGE_URL = "/zajednica/"
 export const COMMUNITY_PROJECTS_URL = "/iz-zajednice/"
@@ -420,6 +421,11 @@ export const footerLinks = [
   { label: "Livestream", href: LIVESTREAM_URL, external: false },
   { label: "YouTube kanal", href: YOUTUBE_URL, external: true },
   { label: "Događaji", href: EVENTS_URL, external: false },
+  {
+    label: "Bitcoin na univerzitetima",
+    href: UNIVERSITY_PROGRAM_URL,
+    external: false,
+  },
   { label: "Gradovi", href: CITIES_URL, external: false },
   { label: "Zajednica", href: COMMUNITY_PAGE_URL, external: false },
   { label: "Iz zajednice", href: COMMUNITY_PROJECTS_URL, external: false },

@@ -74,6 +74,16 @@ export const coreRouteManifest: SeoMetadata[] = [
     routeType: "page",
   },
   {
+    path: "/bitcoin-na-univerzitetima-beograd/",
+    title: "Bitcoin na univerzitetima: Beograd 2026 | DvadesetJedan",
+    description:
+      "Serija predavanja i radionica za studente u Beogradu o Bitcoinu kao novcu, tehnologiji, štednji, sigurnosti i osobnoj financijskoj odgovornosti.",
+    ogTitle: "Bitcoin na univerzitetima: Beograd 2026",
+    ogDescription:
+      "Obrazovni serijal DvadesetJedan za studente u Beogradu: Bitcoin kao novac, tehnologija, štednja i sigurnost — bez trading hypea i bez altcoina.",
+    routeType: "page",
+  },
+  {
     path: "/gradovi/",
     title: "Gradovi | DvadesetJedan",
     description:
