@@ -17,6 +17,7 @@ export type Route =
   | { type: "events" }
   | { type: "event"; slug: string }
   | { type: "universityProgram" }
+  | { type: "bitcoinMoneyBelgrade" }
   | { type: "cities" }
   | { type: "city"; slug: string }
   | { type: "notFound"; path: string }
@@ -90,6 +91,9 @@ export function parseRouteFromPath(pathname: string): Route {
   }
   if (cleanPath === "/bitcoin-na-univerzitetima-beograd/") {
     return { type: "universityProgram" }
+  }
+  if (cleanPath === "/bitcoin-kao-novac-beograd-2026/") {
+    return { type: "bitcoinMoneyBelgrade" }
   }
   if (cleanPath.startsWith("/dogadaji/")) {
     const slug = cleanPath.replace(/^\/dogadaji\//, "").replace(/\/$/, "")

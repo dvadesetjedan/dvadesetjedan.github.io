@@ -25,7 +25,8 @@ function isActiveNavigationItem(route: Route, href: string) {
     return (
       route.type === "events" ||
       route.type === "event" ||
-      route.type === "universityProgram"
+      route.type === "universityProgram" ||
+      route.type === "bitcoinMoneyBelgrade"
     )
   }
 

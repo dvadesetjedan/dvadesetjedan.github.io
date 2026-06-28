@@ -65,6 +65,14 @@ const coreRoutes = [
     "Obrazovni serijal DvadesetJedan za studente u Beogradu: Bitcoin kao novac, tehnologija, štednja i sigurnost — bez trading hypea i bez altcoina.",
   ],
   [
+    "/bitcoin-kao-novac-beograd-2026/",
+    "Bitcoin kao novac: Beograd 2026 | DvadesetJedan",
+    "Pilot edukacijski dan u Beogradu: jedno fakultetsko predavanje i jedan otvoreni meetup o Bitcoinu kao novcu, tehnologiji, štednji i osobnoj odgovornosti.",
+    "Bitcoin kao novac: Beograd 2026",
+    "DvadesetJedan pokreće pilot edukacijski dan u Beogradu: Bitcoin kao novac, jedno fakultetsko predavanje i jedan otvoreni meetup.",
+    "/images/bitcoin-kao-novac-beograd-2026-hero.png",
+  ],
+  [
     "/gradovi/",
     "Gradovi | DvadesetJedan",
     "Regionalne DvadesetJedan ulazne točke za gradove, lokalne događaje i pokretanje Bitcoin-only susreta.",
@@ -84,12 +92,13 @@ const coreRoutes = [
     "Doprinesi | DvadesetJedan",
     "Načini kako doprinijeti DvadesetJedan zajednici kroz članke, prijevode, događaje, kod i kvalitetne Bitcoin resurse.",
   ],
-].map(([routePath, title, description, ogTitle, ogDescription]) => ({
+].map(([routePath, title, description, ogTitle, ogDescription, image]) => ({
   path: routePath,
   title,
   description,
   ogTitle,
   ogDescription,
+  image,
   type:
     routePath === "/iz-zajednice/"
       ? "communityProjects"

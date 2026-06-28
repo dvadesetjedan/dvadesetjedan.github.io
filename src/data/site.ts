@@ -11,6 +11,8 @@ export const BEGINNERS_URL = "/pocni-ovdje/"
 export const SAFETY_URL = "/sigurnost/"
 export const EVENTS_URL = "/dogadaji/"
 export const UNIVERSITY_PROGRAM_URL = "/bitcoin-na-univerzitetima-beograd/"
+export const BITCOIN_MONEY_BELGRADE_URL =
+  "/bitcoin-kao-novac-beograd-2026/"
 export const CITIES_URL = "/gradovi/"
 export const COMMUNITY_PAGE_URL = "/zajednica/"
 export const COMMUNITY_PROJECTS_URL = "/iz-zajednice/"
@@ -424,6 +426,11 @@ export const footerLinks = [
   {
     label: "Bitcoin na univerzitetima",
     href: UNIVERSITY_PROGRAM_URL,
+    external: false,
+  },
+  {
+    label: "Bitcoin kao novac Beograd",
+    href: BITCOIN_MONEY_BELGRADE_URL,
     external: false,
   },
   { label: "Gradovi", href: CITIES_URL, external: false },
