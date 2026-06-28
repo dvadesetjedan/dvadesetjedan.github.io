@@ -74,7 +74,7 @@ export function BitcoinUniversitiesBelgradePage() {
       <main className="mx-auto max-w-7xl px-5 pb-16 pt-12 sm:px-8 sm:pt-16">
         <BackLink href="/dogadaji/">Događaji</BackLink>
 
-        <section className="grid gap-8 overflow-hidden rounded-[2.2rem] border border-border/80 bg-card/70 px-6 py-8 shadow-[var(--shadow-border)] sm:px-10 sm:py-12 lg:grid-cols-[minmax(0,1fr)_20rem] lg:items-center">
+        <section className="grid gap-8 overflow-hidden rounded-[2.2rem] border border-border/80 bg-card/70 px-6 py-8 shadow-[var(--shadow-border)] sm:px-10 sm:py-12 lg:grid-cols-[minmax(0,1fr)_26rem] lg:items-center">
           <div>
             <h1 className="safe-heading max-w-4xl text-5xl font-semibold tracking-[-0.05em] text-foreground sm:text-7xl">
               Bitcoin na univerzitetima: Beograd 2026
@@ -112,12 +112,26 @@ export function BitcoinUniversitiesBelgradePage() {
             </div>
           </div>
 
-          <div className="mx-auto flex aspect-square w-full max-w-[17rem] items-center justify-center rounded-[2rem] border border-primary/25 bg-[#070707] p-8 shadow-soft">
-            <img
-              alt="DvadesetJedan znak za obrazovni Bitcoin serijal"
-              className="h-full w-full object-contain drop-shadow-[0_0_24px_rgba(247,147,26,0.35)]"
-              src="/images/twentyone-beacon.svg"
-            />
+          <div className="relative mx-auto aspect-[4/3] w-full max-w-[26rem] overflow-hidden rounded-[2rem] border border-primary/25 bg-[#070707] shadow-soft lg:aspect-[4/5]">
+            <picture>
+              <source
+                srcSet="/images/sava-centar-lighting.webp"
+                type="image/webp"
+              />
+              <img
+                alt="Detalj rasvjete u Sava Centru u Beogradu"
+                className="h-full w-full object-cover"
+                src="/images/sava-centar-lighting.jpg"
+              />
+            </picture>
+            <a
+              className="absolute bottom-3 right-3 rounded-full bg-black/70 px-3 py-1 text-[0.68rem] font-medium leading-5 text-white/85 backdrop-blur transition-colors hover:text-white"
+              href="https://commons.wikimedia.org/wiki/File:Sava_Centar_lighting.jpg"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              Foto: Wikimedia Commons, CC BY-SA 4.0
+            </a>
           </div>
         </section>
 
