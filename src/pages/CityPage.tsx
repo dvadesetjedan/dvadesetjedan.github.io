@@ -49,7 +49,7 @@ export function CityPage({
                 Gradovi
               </p>
               <h1 className="safe-heading mt-4 flex items-center gap-3 text-5xl font-semibold tracking-[-0.05em] text-foreground sm:text-7xl">
-                <MapPinned className="size-8 shrink-0 text-primary" />
+                <MapPinned className="size-8 shrink-0 text-primary-strong" />
                 {city.name}
               </h1>
               <p className="mt-3 text-sm uppercase tracking-[0.18em] text-muted-foreground">
@@ -67,8 +67,13 @@ export function CityPage({
                   alt={city.image.alt}
                   className="h-full min-h-[18rem] w-full object-cover lg:min-h-[30rem]"
                   decoding="async"
+                  fetchPriority="high"
+                  height={1080}
+                  loading="eager"
                   pictureClassName="block h-full"
+                  sizes="(min-width: 1024px) 50vw, 100vw"
                   src={city.image.src}
+                  width={1920}
                 />
               </figure>
             ) : null}

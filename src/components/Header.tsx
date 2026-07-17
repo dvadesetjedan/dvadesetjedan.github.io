@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react"
 import { Moon, Sun } from "lucide-react"
-import { AnimatePresence, motion } from "motion/react"
 
 import { TelegramIcon } from "@/components/Icons"
 import { OptimizedImage } from "@/components/OptimizedImage"
@@ -84,7 +83,9 @@ export function Header() {
 
       mobileNav.scrollTo({
         left: Math.max(0, targetLeft),
-        behavior: "smooth",
+        behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+          ? "auto"
+          : "smooth",
       })
     })
   }, [route])
@@ -103,7 +104,11 @@ export function Header() {
   return (
     <header className="sticky top-0 z-40 border-b border-border/70 bg-background/88 backdrop-blur-xl">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-5 py-2.5 sm:gap-4 sm:px-8 sm:py-4">
-        <a className="min-w-0 shrink-0 grow-0" href="/">
+        <a
+          aria-label="DvadesetJedan početna"
+          className="inline-flex min-h-11 min-w-0 shrink-0 grow-0 items-center"
+          href="/"
+        >
           {media.logoUrl ? (
             <OptimizedImage
               alt="DvadesetJedan"
@@ -111,6 +116,8 @@ export function Header() {
               decoding="async"
               pictureClassName="block"
               src={logoUrl}
+              width={850}
+              height={74}
             />
           ) : (
             <span className="text-lg font-semibold tracking-[-0.03em] text-foreground">
@@ -127,7 +134,7 @@ export function Header() {
               <a
                 key={item.label}
                 aria-current={isActive ? "page" : undefined}
-                className={`whitespace-nowrap border-b transition-colors ${
+                className={`inline-flex min-h-11 items-center whitespace-nowrap border-b transition-colors ${
                   isActive
                     ? "border-primary text-foreground"
                     : "border-transparent hover:text-foreground"
@@ -153,31 +160,35 @@ export function Header() {
                 ? "Prebaci na svijetli način"
                 : "Prebaci na tamni način"
             }
-            className="relative inline-flex size-10 items-center justify-center rounded-full bg-card text-foreground shadow-[var(--shadow-border)] transition-[translate,scale,box-shadow,background-color,color] duration-150 ease-out hover:-translate-y-0.5 hover:bg-background hover:shadow-[var(--shadow-border-hover)] active:scale-[0.96] motion-reduce:transition-none motion-reduce:hover:translate-y-0 motion-reduce:active:scale-100"
+            className="relative inline-flex size-11 items-center justify-center rounded-full bg-card text-foreground shadow-[var(--shadow-border)] transition-[translate,scale,box-shadow,background-color,color] duration-150 ease-out hover:-translate-y-0.5 hover:bg-background hover:shadow-[var(--shadow-border-hover)] active:scale-[0.96] motion-reduce:transition-none motion-reduce:hover:translate-y-0 motion-reduce:active:scale-100"
             onClick={toggleTheme}
             type="button"
           >
-            <AnimatePresence initial={false} mode="wait">
-              <motion.span
-                animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-                className="absolute inset-0 flex items-center justify-center"
-                exit={{ opacity: 0, scale: 0.25, filter: "blur(4px)" }}
-                initial={{ opacity: 0, scale: 0.25, filter: "blur(4px)" }}
-                key={theme}
-                transition={{ type: "spring", duration: 0.3, bounce: 0 }}
-              >
-                {theme === "dark" ? (
-                  <Sun className="size-4" />
-                ) : (
-                  <Moon className="size-4" />
-                )}
-              </motion.span>
-            </AnimatePresence>
+            <span
+              aria-hidden="true"
+              className={`absolute inset-0 flex items-center justify-center transition-[opacity,scale,filter] duration-200 ease-[cubic-bezier(0.2,0,0,1)] motion-reduce:transition-none ${
+                theme === "dark"
+                  ? "scale-100 opacity-100 blur-0"
+                  : "scale-[0.25] opacity-0 blur-[4px]"
+              }`}
+            >
+              <Sun className="size-4" />
+            </span>
+            <span
+              aria-hidden="true"
+              className={`absolute inset-0 flex items-center justify-center transition-[opacity,scale,filter] duration-200 ease-[cubic-bezier(0.2,0,0,1)] motion-reduce:transition-none ${
+                theme === "light"
+                  ? "scale-100 opacity-100 blur-0"
+                  : "scale-[0.25] opacity-0 blur-[4px]"
+              }`}
+            >
+              <Moon className="size-4" />
+            </span>
           </button>
 
           <a
             aria-label="Uđi u Telegram"
-            className="inline-flex min-h-10 shrink-0 items-center gap-1.5 rounded-full bg-card py-2 pl-3 pr-3 text-sm font-medium text-foreground shadow-[var(--shadow-border)] transition-[translate,scale,box-shadow,background-color,color] duration-150 ease-out hover:-translate-y-0.5 hover:bg-background hover:shadow-[var(--shadow-border-hover)] active:scale-[0.96] motion-reduce:transition-none motion-reduce:hover:translate-y-0 motion-reduce:active:scale-100 sm:gap-2 sm:pl-3.5 sm:pr-4"
+            className="inline-flex min-h-11 shrink-0 items-center gap-1.5 rounded-full bg-card py-2 pl-3 pr-3 text-sm font-medium text-foreground shadow-[var(--shadow-border)] transition-[translate,scale,box-shadow,background-color,color] duration-150 ease-out hover:-translate-y-0.5 hover:bg-background hover:shadow-[var(--shadow-border-hover)] active:scale-[0.96] motion-reduce:transition-none motion-reduce:hover:translate-y-0 motion-reduce:active:scale-100 sm:gap-2 sm:pl-3.5 sm:pr-6"
             href={communityHref()}
             rel="noopener noreferrer"
             target="_blank"
@@ -201,7 +212,7 @@ export function Header() {
               <a
                 key={item.label}
                 aria-current={isActive ? "page" : undefined}
-                className={`shrink-0 whitespace-nowrap border-b transition-colors ${
+                className={`inline-flex min-h-11 shrink-0 items-center whitespace-nowrap border-b transition-colors ${
                   isActive
                     ? "border-primary text-foreground"
                     : "border-transparent hover:text-foreground"

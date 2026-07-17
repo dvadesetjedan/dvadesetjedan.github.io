@@ -6,6 +6,17 @@ export type LegacyRedirect = {
 
 export const legacyRedirects: LegacyRedirect[] = [
   {
+    from: "/pocetnici/",
+    to: "/pocni-ovdje/",
+    reason: "Stara početnička ruta preusmjerava na aktualni početni vodič.",
+  },
+  {
+    from: "/eventi/",
+    to: "/dogadaji/",
+    reason:
+      "Stara regionalna ruta događaja preusmjerava na aktualni indeks događaja.",
+  },
+  {
     from: "/events/",
     to: "/dogadaji/",
     reason:
@@ -35,6 +46,21 @@ export const legacyRedirects: LegacyRedirect[] = [
     reason: "Stara WordPress ruta članka preusmjerava na novu arhivu članaka.",
   },
   {
+    from: "/selo-i-mocnik/",
+    to: "/clanci/selo-i-mocnik/",
+    reason: "Stara WordPress ruta članka preusmjerava na novu arhivu članaka.",
+  },
+  {
+    from: "/latin-american-bitcoin-perspective/",
+    to: "/clanci/latin-american-bitcoin-perspective/",
+    reason: "Stara WordPress ruta članka preusmjerava na novu arhivu članaka.",
+  },
+  {
+    from: "/btc-scenarij-uspjeha/",
+    to: "/clanci/btc-scenarij-uspjeha/",
+    reason: "Stara WordPress ruta članka preusmjerava na novu arhivu članaka.",
+  },
+  {
     from: "/borba-protiv-monetarnog-kolonijalizma-pomocu-otvorenog-koda/",
     to: "/clanci/borba-protiv-monetarnog-kolonijalizma-pomocu-otvorenog-koda/",
     reason: "Stara WordPress ruta članka preusmjerava na novu arhivu članaka.",
@@ -57,6 +83,11 @@ export const legacyRedirects: LegacyRedirect[] = [
   {
     from: "/bitcoin-je-vrijeme/",
     to: "/clanci/bitcoin-je-vrijeme/",
+    reason: "Stara WordPress ruta članka preusmjerava na novu arhivu članaka.",
+  },
+  {
+    from: "/bitcoin-daje-ti-krila/",
+    to: "/clanci/bitcoin-daje-ti-krila/",
     reason: "Stara WordPress ruta članka preusmjerava na novu arhivu članaka.",
   },
 ]

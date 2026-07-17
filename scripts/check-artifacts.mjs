@@ -43,6 +43,9 @@ if (exists("robots.txt")) {
   if (!robots.includes("Sitemap: https://dvadesetjedan.com/sitemap.xml")) {
     failures.push("robots.txt ne referencira canonical sitemap.")
   }
+  if (!robots.includes("User-agent: OAI-SearchBot\nAllow: /")) {
+    failures.push("robots.txt ne dopušta OAI-SearchBot za AI pretraživanje.")
+  }
 }
 
 if (exists("sitemap.xml")) {
@@ -126,7 +129,8 @@ if (!appJs.includes("image/webp") || !appJs.includes(".webp")) {
 const optimizedImageSource = readFile("src/components/OptimizedImage.tsx")
 for (const requiredSnippet of [
   "<picture",
-  '<source srcSet={resolvedWebpSrc} type="image/webp" />',
+  "<source",
+  'type="image/webp"',
   "<img",
 ]) {
   if (!optimizedImageSource.includes(requiredSnippet)) {

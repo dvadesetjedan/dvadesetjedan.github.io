@@ -89,7 +89,7 @@ function ProjectCard({ project }: { project: CommunityProject }) {
 
   return (
     <article
-      className={`flex h-full flex-col rounded-[1.6rem] border px-5 py-5 ${
+      className={`flex h-full flex-col rounded-[1.6rem] border px-5 py-5 sm:px-6 ${
         project.status === "archive"
           ? "border-primary/20 bg-primary/8"
           : "border-border/80 bg-card"
@@ -205,7 +205,7 @@ export function CommunityProjectsPage() {
             prijevode, članke, video kanale i druge Bitcoin-only inicijative.
             Ovdje ih skupljamo na jednom mjestu.
           </p>
-          <div className="mt-8 rounded-[1.5rem] border border-primary/20 bg-primary/8 px-5 py-5">
+          <div className="mt-8 rounded-[1.5rem] border border-primary/20 bg-primary/8 px-5 py-5 sm:px-6">
             <p className="text-sm leading-7 text-foreground">
               Projekti navedeni na ovoj stranici nisu nužno službeni projekti
               DvadesetJedan zajednice. Svaki projekt vodi osoba ili tim naveden
@@ -265,7 +265,7 @@ export function CommunityProjectsPage() {
                   "Objavljujemo samo podatke koje autor ili tim žele javno prikazati.",
                 ].map((item) => (
                   <li className="flex gap-3" key={item}>
-                    <CheckCircle2 className="mt-1 size-4 shrink-0 text-primary" />
+                    <CheckCircle2 className="mt-1 size-4 shrink-0 text-primary-strong" />
                     <span>{item}</span>
                   </li>
                 ))}

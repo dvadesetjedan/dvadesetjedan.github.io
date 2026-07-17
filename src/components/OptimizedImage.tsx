@@ -1,16 +1,21 @@
 import type { ComponentPropsWithoutRef } from "react"
 
-import { getLocalWebpSrc } from "@/lib/images"
+import {
+  getLocalResponsiveWebpSrcSet,
+  getLocalWebpSrc,
+} from "@/lib/images"
 
 type OptimizedImageProps = Omit<ComponentPropsWithoutRef<"img">, "src"> & {
   src?: string
   webpSrc?: string
+  webpSrcSet?: string
   pictureClassName?: string
 }
 
 export function OptimizedImage({
   src,
   webpSrc,
+  webpSrcSet,
   pictureClassName,
   ...imageProps
 }: OptimizedImageProps) {
@@ -24,7 +29,13 @@ export function OptimizedImage({
 
   return (
     <picture className={pictureClassName}>
-      <source srcSet={resolvedWebpSrc} type="image/webp" />
+      <source
+        sizes={imageProps.sizes}
+        srcSet={
+          webpSrcSet ?? getLocalResponsiveWebpSrcSet(src) ?? resolvedWebpSrc
+        }
+        type="image/webp"
+      />
       <img {...imageProps} src={src} />
     </picture>
   )

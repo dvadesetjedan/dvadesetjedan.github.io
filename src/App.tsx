@@ -1,29 +1,21 @@
-import { lazy, Suspense, useEffect, useMemo, useState } from "react"
+import {
+  lazy,
+  Suspense,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type ReactNode,
+} from "react"
 
 import type { ArticleEntry } from "@/data/articles"
 import { cities } from "@/data/cities"
 import { publishedCommunityProjects } from "@/data/communityProjects"
 import { episodes } from "@/data/episodes"
 import { events } from "@/data/events"
-import { ArticlesPage } from "@/pages/ArticlesPage"
-import { ArticlePage } from "@/pages/ArticlePage"
-import { BeginnersPage } from "@/pages/BeginnersPage"
-import { ContributePage } from "@/pages/ContributePage"
-import { CityPage } from "@/pages/CityPage"
-import { CommunityPage } from "@/pages/CommunityPage"
-import { CommunityProjectPage } from "@/pages/CommunityProjectPage"
-import { CommunityProjectsPage } from "@/pages/CommunityProjectsPage"
-import { EventsPage } from "@/pages/EventsPage"
-import { EventPage } from "@/pages/EventPage"
-import { FaqPage } from "@/pages/FaqPage"
 import { HomePage } from "@/pages/HomePage"
-import { LivestreamPage } from "@/pages/LivestreamPage"
-import { LivestreamEpisodePage } from "@/pages/LivestreamEpisodePage"
 import { LoadingPage } from "@/pages/LoadingPage"
 import { NotFoundPage } from "@/pages/NotFoundPage"
-import { ResourcesPage } from "@/pages/ResourcesPage"
-import { SafetyPage } from "@/pages/SafetyPage"
-import { TopicsPage } from "@/pages/TopicsPage"
 import {
   cleanPathFromLegacyHash,
   parseRouteFromPath,
@@ -36,13 +28,110 @@ const AboutPage = lazy(() =>
   })),
 )
 
+const TopicsPage = lazy(() =>
+  import("@/pages/TopicsPage").then((module) => ({
+    default: module.TopicsPage,
+  })),
+)
+
+const FaqPage = lazy(() =>
+  import("@/pages/FaqPage").then((module) => ({
+    default: module.FaqPage,
+  })),
+)
+
+const ResourcesPage = lazy(() =>
+  import("@/pages/ResourcesPage").then((module) => ({
+    default: module.ResourcesPage,
+  })),
+)
+
+const SafetyPage = lazy(() =>
+  import("@/pages/SafetyPage").then((module) => ({
+    default: module.SafetyPage,
+  })),
+)
+
+const LivestreamPage = lazy(() =>
+  import("@/pages/LivestreamPage").then((module) => ({
+    default: module.LivestreamPage,
+  })),
+)
+
+const LivestreamEpisodePage = lazy(() =>
+  import("@/pages/LivestreamEpisodePage").then((module) => ({
+    default: module.LivestreamEpisodePage,
+  })),
+)
+
+const ArticlesPage = lazy(() =>
+  import("@/pages/ArticlesPage").then((module) => ({
+    default: module.ArticlesPage,
+  })),
+)
+
+const ArticlePage = lazy(() =>
+  import("@/pages/ArticlePage").then((module) => ({
+    default: module.ArticlePage,
+  })),
+)
+
+const BeginnersPage = lazy(() =>
+  import("@/pages/BeginnersPage").then((module) => ({
+    default: module.BeginnersPage,
+  })),
+)
+
+const ContributePage = lazy(() =>
+  import("@/pages/ContributePage").then((module) => ({
+    default: module.ContributePage,
+  })),
+)
+
+const CommunityPage = lazy(() =>
+  import("@/pages/CommunityPage").then((module) => ({
+    default: module.CommunityPage,
+  })),
+)
+
+const CommunityProjectsPage = lazy(() =>
+  import("@/pages/CommunityProjectsPage").then((module) => ({
+    default: module.CommunityProjectsPage,
+  })),
+)
+
+const CommunityProjectPage = lazy(() =>
+  import("@/pages/CommunityProjectPage").then((module) => ({
+    default: module.CommunityProjectPage,
+  })),
+)
+
+const EventsPage = lazy(() =>
+  import("@/pages/EventsPage").then((module) => ({
+    default: module.EventsPage,
+  })),
+)
+
+const EventPage = lazy(() =>
+  import("@/pages/EventPage").then((module) => ({
+    default: module.EventPage,
+  })),
+)
+
 const CitiesPage = lazy(() =>
   import("@/pages/CitiesPage").then((module) => ({
     default: module.CitiesPage,
   })),
 )
 
+const CityPage = lazy(() =>
+  import("@/pages/CityPage").then((module) => ({
+    default: module.CityPage,
+  })),
+)
+
 function App() {
+  const navigationKind = useRef<"initial" | "push" | "pop">("initial")
   const [route, setRoute] = useState<Route>(() => {
     const legacyPath = cleanPathFromLegacyHash(window.location.hash)
 
@@ -59,29 +148,47 @@ function App() {
 
   useEffect(() => {
     const onPopState = () => {
+      navigationKind.current = "pop"
       setRoute(parseRouteFromPath(window.location.pathname))
-      window.scrollTo({ top: 0, behavior: "auto" })
-    }
-
-    const onClick = (event: MouseEvent) => {
-      const target = event.target
-      if (!(target instanceof Element)) return
-
-      const anchor = target.closest("a")
-      if (!anchor) return
-
-      const href = anchor.getAttribute("href")
-      if (!href || !href.startsWith("/") || href.startsWith("//")) return
-      if (anchor.target || event.metaKey || event.ctrlKey || event.shiftKey) {
-        return
-      }
-
-      event.preventDefault()
-      window.history.pushState(null, "", href)
-      onPopState()
       window.dispatchEvent(new Event("dvadesetjedan:navigation"))
     }
 
+    const onClick = (event: MouseEvent) => {
+      if (
+        event.defaultPrevented ||
+        event.button !== 0 ||
+        event.metaKey ||
+        event.ctrlKey ||
+        event.shiftKey ||
+        event.altKey
+      ) {
+        return
+      }
+
+      const target = event.target
+      if (!(target instanceof Element)) return
+
+      const anchor = target.closest<HTMLAnchorElement>("a[href]")
+      if (!anchor) return
+      if (anchor.hasAttribute("download")) return
+      if (anchor.target && anchor.target !== "_self") return
+
+      const url = new URL(anchor.href, window.location.href)
+      if (url.origin !== window.location.origin) return
+      if (/\/[^/]+\.[a-z0-9]{2,8}$/i.test(url.pathname)) return
+
+      event.preventDefault()
+      navigationKind.current = "push"
+      window.history.pushState(
+        null,
+        "",
+        `${url.pathname}${url.search}${url.hash}`,
+      )
+      setRoute(parseRouteFromPath(url.pathname))
+      window.dispatchEvent(new Event("dvadesetjedan:navigation"))
+    }
+
+    window.history.scrollRestoration = "auto"
     window.addEventListener("popstate", onPopState)
     document.addEventListener("click", onClick)
     return () => {
@@ -89,6 +196,63 @@ function App() {
       document.removeEventListener("click", onClick)
     }
   }, [])
+
+  useEffect(() => {
+    let frame = 0
+    let attempts = 0
+    let cancelled = false
+
+    const settleNavigation = () => {
+      if (cancelled) return
+
+      const rawHash = window.location.hash.slice(1)
+      const hashTarget = rawHash
+        ? document.getElementById(decodeURIComponent(rawHash))
+        : null
+
+      if (rawHash && !hashTarget && attempts < 120) {
+        attempts += 1
+        frame = window.requestAnimationFrame(settleNavigation)
+        return
+      }
+
+      if (
+        !rawHash &&
+        navigationKind.current !== "initial" &&
+        document.querySelector('[data-route-loading="true"]') &&
+        attempts < 120
+      ) {
+        attempts += 1
+        frame = window.requestAnimationFrame(settleNavigation)
+        return
+      }
+
+      if (hashTarget) {
+        hashTarget.scrollIntoView({ block: "start" })
+        hashTarget.setAttribute("tabindex", "-1")
+        hashTarget.focus({ preventScroll: true })
+      } else {
+        if (navigationKind.current === "push") {
+          window.scrollTo({ top: 0, behavior: "auto" })
+        }
+
+        if (navigationKind.current !== "initial") {
+          document
+            .getElementById("main-content")
+            ?.focus({ preventScroll: true })
+        }
+      }
+
+      navigationKind.current = "initial"
+    }
+
+    frame = window.requestAnimationFrame(settleNavigation)
+
+    return () => {
+      cancelled = true
+      window.cancelAnimationFrame(frame)
+    }
+  }, [route])
 
   useEffect(() => {
     if (
@@ -133,41 +297,39 @@ function App() {
     return articleEntries.find((article) => article.slug === route.slug)
   }, [articleEntries, route])
 
+  let page: ReactNode
+
   switch (route.type) {
     case "home":
-      return <HomePage />
+      page = <HomePage />
+      break
     case "about":
-      return (
-        <Suspense
-          fallback={
-            <LoadingPage
-              eyebrow="O projektu"
-              message="Pripremamo kartu i osnovni kontekst projekta."
-              title="Učitavamo projekt."
-            />
-          }
-        >
-          <AboutPage />
-        </Suspense>
-      )
+      page = <AboutPage />
+      break
     case "topics":
-      return <TopicsPage />
+      page = <TopicsPage />
+      break
     case "faq":
-      return <FaqPage />
+      page = <FaqPage />
+      break
     case "resources":
-      return <ResourcesPage />
+      page = <ResourcesPage />
+      break
     case "safety":
-      return <SafetyPage />
+      page = <SafetyPage />
+      break
     case "livestream":
-      return <LivestreamPage />
+      page = <LivestreamPage />
+      break
     case "livestreamEpisode":
-      return selectedEpisode ? (
+      page = selectedEpisode ? (
         <LivestreamEpisodePage episode={selectedEpisode} />
       ) : (
         <NotFoundPage />
       )
+      break
     case "articles":
-      return articleEntries ? (
+      page = articleEntries ? (
         <ArticlesPage articles={articleEntries} />
       ) : (
         <LoadingPage
@@ -176,24 +338,27 @@ function App() {
           title="Učitavamo pisani signal."
         />
       )
+      break
     case "article":
       if (!articleEntries) {
-        return (
+        page = (
           <LoadingPage
             eyebrow="Članci"
             message="Pripremamo odabrani članak."
             title="Učitavamo članak."
           />
         )
+        break
       }
 
-      return selectedArticle ? (
+      page = selectedArticle ? (
         <ArticlePage article={selectedArticle} articles={articleEntries} />
       ) : (
         <NotFoundPage />
       )
+      break
     case "beginners":
-      return articleEntries ? (
+      page = articleEntries ? (
         <BeginnersPage articles={articleEntries} />
       ) : (
         <LoadingPage
@@ -202,51 +367,63 @@ function App() {
           title="Učitavamo početni put."
         />
       )
+      break
     case "contribute":
-      return <ContributePage />
+      page = <ContributePage />
+      break
     case "community":
-      return <CommunityPage />
+      page = <CommunityPage />
+      break
     case "communityProjects":
-      return <CommunityProjectsPage />
+      page = <CommunityProjectsPage />
+      break
     case "communityProject":
-      return selectedCommunityProject ? (
+      page = selectedCommunityProject ? (
         <CommunityProjectPage project={selectedCommunityProject} />
       ) : (
         <NotFoundPage />
       )
+      break
     case "events":
-      return <EventsPage events={events} />
+      page = <EventsPage events={events} />
+      break
     case "event":
-      return selectedEvent ? (
+      page = selectedEvent ? (
         <EventPage event={selectedEvent} />
       ) : (
         <NotFoundPage />
       )
+      break
     case "cities":
-      return (
-        <Suspense
-          fallback={
-            <LoadingPage
-              eyebrow="Gradovi"
-              message="Pripremamo regionalnu kartu i popis gradova."
-              title="Učitavamo gradove."
-            />
-          }
-        >
-          <CitiesPage cities={cities} events={events} />
-        </Suspense>
-      )
+      page = <CitiesPage cities={cities} events={events} />
+      break
     case "city":
-      return selectedCity ? (
+      page = selectedCity ? (
         <CityPage city={selectedCity} events={events} />
       ) : (
         <NotFoundPage />
       )
+      break
     case "notFound":
-      return <NotFoundPage />
+      page = <NotFoundPage />
+      break
     default:
-      return <NotFoundPage />
+      page = <NotFoundPage />
   }
+
+  return (
+    <Suspense
+      fallback={
+        <LoadingPage
+          eyebrow="DvadesetJedan"
+          message="Pripremamo traženu stranicu."
+          title="Učitavamo sadržaj."
+        />
+      }
+    >
+      {page}
+    </Suspense>
+  )
 }
 
 export default App

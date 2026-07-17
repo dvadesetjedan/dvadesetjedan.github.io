@@ -24,6 +24,14 @@ function eventStatus(event: EventEntry, now = new Date()) {
   return new Date(event.end) >= now ? "upcoming" : "past"
 }
 
+function eventCountLabel(count: number) {
+  return count === 1 ? "1 događaj" : `${count} događaja`
+}
+
+function cityAnchorId(city: string) {
+  return `grad-${city.toLowerCase().replace(/\s+/g, "-")}`
+}
+
 export function EventsPage({ events }: { events: EventEntry[] }) {
   usePageMeta(
     "Događaji | DvadesetJedan",
@@ -46,7 +54,17 @@ export function EventsPage({ events }: { events: EventEntry[] }) {
   const cancelledEvents = events.filter(
     (event) => eventStatus(event, now) === "cancelled",
   )
-  const cityGroups = [...new Set(events.map((event) => event.city))].sort()
+  const cityAnchorOwners = new Map<string, string>()
+  for (const event of [
+    ...upcomingEvents,
+    ...cancelledEvents,
+    ...pastEvents,
+  ]) {
+    if (!cityAnchorOwners.has(event.city)) {
+      cityAnchorOwners.set(event.city, event.slug)
+    }
+  }
+  const cityGroups = [...cityAnchorOwners.keys()].sort()
 
   return (
     <Layout>
@@ -62,7 +80,7 @@ export function EventsPage({ events }: { events: EventEntry[] }) {
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-muted-foreground">
               Nadolazeći događaji i arhiva prethodnih druženja, sa zasebnim
-              pageom za svaki događaj, prijavom, kartom i kalendar izvozom.
+              stranicom za svaki događaj, prijavom, kartom i izvozom u kalendar.
             </p>
           </div>
 
@@ -71,6 +89,8 @@ export function EventsPage({ events }: { events: EventEntry[] }) {
               alt="Twenty One handshake ikona za događaje"
               className="h-full w-full object-contain drop-shadow-[0_0_24px_rgba(247,147,26,0.35)]"
               src="/images/twentyone-handshake.svg"
+              width={1009}
+              height={810}
             />
           </div>
         </section>
@@ -81,7 +101,7 @@ export function EventsPage({ events }: { events: EventEntry[] }) {
           </p>
           <div className="mt-4 flex flex-wrap gap-3 text-sm">
             <a
-              className="font-medium text-foreground hover:text-primary"
+              className="font-medium text-foreground hover:text-primary-strong"
               href={eventMeta.primarySourceUrl}
               rel="noopener noreferrer"
               target="_blank"
@@ -97,8 +117,8 @@ export function EventsPage({ events }: { events: EventEntry[] }) {
           <div className="mt-4 flex flex-wrap gap-2">
             {cityGroups.map((city) => (
               <a
-                className="rounded-full border border-border/80 px-3 py-1 text-xs font-medium text-foreground hover:border-primary/40"
-                href={`#grad-${city.toLowerCase().replace(/\s+/g, "-")}`}
+                className="inline-flex min-h-11 items-center rounded-full border border-border/80 px-3 py-1 text-xs font-medium text-foreground hover:border-primary/40"
+                href={`#${cityAnchorId(city)}`}
                 key={city}
               >
                 {city}
@@ -113,7 +133,7 @@ export function EventsPage({ events }: { events: EventEntry[] }) {
               Nadolazeći događaji
             </h2>
             <p className="text-sm text-muted-foreground">
-              {upcomingEvents.length} događaja
+              {eventCountLabel(upcomingEvents.length)}
             </p>
           </div>
 
@@ -148,7 +168,12 @@ export function EventsPage({ events }: { events: EventEntry[] }) {
             <div className="mt-6 grid gap-5 md:grid-cols-2">
               {upcomingEvents.map((event) => (
                 <div
-                  id={`grad-${event.city.toLowerCase().replace(/\s+/g, "-")}`}
+                  className="scroll-mt-32"
+                  id={
+                    cityAnchorOwners.get(event.city) === event.slug
+                      ? cityAnchorId(event.city)
+                      : undefined
+                  }
                   key={event.slug}
                 >
                   <EventCard event={event} />
@@ -165,12 +190,22 @@ export function EventsPage({ events }: { events: EventEntry[] }) {
                 Otkazani događaji
               </h2>
               <p className="text-sm text-muted-foreground">
-                {cancelledEvents.length} događaja
+                {eventCountLabel(cancelledEvents.length)}
               </p>
             </div>
             <div className="mt-6 grid gap-5 md:grid-cols-2">
               {cancelledEvents.map((event) => (
-                <EventCard key={event.slug} event={event} />
+                <div
+                  className="scroll-mt-32"
+                  id={
+                    cityAnchorOwners.get(event.city) === event.slug
+                      ? cityAnchorId(event.city)
+                      : undefined
+                  }
+                  key={event.slug}
+                >
+                  <EventCard event={event} />
+                </div>
               ))}
             </div>
           </section>
@@ -187,7 +222,7 @@ export function EventsPage({ events }: { events: EventEntry[] }) {
           <ol className="mt-6 grid gap-3 text-base leading-8 text-foreground md:grid-cols-2">
             {eventSteps.map((step, index) => (
               <li key={step} className="flex gap-3">
-                <span className="mt-1 inline-flex size-6 shrink-0 items-center justify-center rounded-full bg-primary/12 text-xs font-semibold text-primary">
+                <span className="mt-1 inline-flex size-6 shrink-0 items-center justify-center rounded-full bg-primary/12 text-xs font-semibold text-primary-strong">
                   {index + 1}
                 </span>
                 <span>{step}</span>
@@ -218,14 +253,24 @@ export function EventsPage({ events }: { events: EventEntry[] }) {
               Arhiva druženja
             </h2>
             <p className="text-sm text-muted-foreground">
-              {pastEvents.length} događaja
+              {eventCountLabel(pastEvents.length)}
             </p>
           </div>
 
           {pastEvents.length > 0 ? (
             <div className="mt-6 grid gap-5 md:grid-cols-2">
               {pastEvents.map((event) => (
-                <EventCard key={event.slug} event={event} />
+                <div
+                  className="scroll-mt-32"
+                  id={
+                    cityAnchorOwners.get(event.city) === event.slug
+                      ? cityAnchorId(event.city)
+                      : undefined
+                  }
+                  key={event.slug}
+                >
+                  <EventCard event={event} />
+                </div>
               ))}
             </div>
           ) : (

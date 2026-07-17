@@ -28,7 +28,7 @@ export function SafetyPage() {
 
         <section className="mt-10 rounded-[1.8rem] border border-primary/20 bg-primary/8 px-6 py-6 sm:px-10">
           <div className="flex gap-4">
-            <ShieldCheck className="mt-1 size-6 shrink-0 text-primary" />
+            <ShieldCheck className="mt-1 size-6 shrink-0 text-primary-strong" />
             <div>
               <h2 className="text-2xl font-semibold tracking-[-0.04em] text-foreground">
                 DvadesetJedan nije investicijski savjet.
@@ -48,7 +48,7 @@ export function SafetyPage() {
           <div className="grid gap-5 md:grid-cols-2">
             {safetySections.map((section) => (
               <article
-                className="rounded-[1.5rem] border border-border/80 bg-card px-5 py-5"
+                className="rounded-[1.5rem] border border-border/80 bg-card px-5 py-5 sm:px-6"
                 key={section.title}
               >
                 <h3 className="text-2xl font-semibold tracking-[-0.04em] text-foreground">

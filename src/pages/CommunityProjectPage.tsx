@@ -98,7 +98,7 @@ function LinkList({
             </ActionButton>
           ) : (
             <div
-              className="rounded-[1rem] border border-border/80 bg-background px-4 py-3 text-sm leading-7 text-muted-foreground"
+              className="rounded-[1rem] border border-border/80 bg-background px-4 py-3 text-sm leading-7 text-muted-foreground sm:px-6"
               key={`${link.label}-${link.href}`}
             >
               <span className="font-medium text-foreground">{link.label}:</span>{" "}
@@ -169,12 +169,12 @@ export function CommunityProjectPage({
             ))}
           </div>
 
-          <p className="mt-8 rounded-[1.4rem] border border-primary/20 bg-primary/8 px-5 py-4 text-sm leading-7 text-foreground">
+          <p className="mt-8 rounded-[1.4rem] border border-primary/20 bg-primary/8 px-5 py-4 text-sm leading-7 text-foreground sm:px-6">
             {relationshipNote(project)}
           </p>
 
           {project.needsDetails ? (
-            <p className="mt-4 rounded-[1.4rem] border border-border/80 bg-background/70 px-5 py-4 text-sm leading-7 text-muted-foreground">
+            <p className="mt-4 rounded-[1.4rem] border border-border/80 bg-background/70 px-5 py-4 text-sm leading-7 text-muted-foreground sm:px-6">
               Ovaj unos je početna verzija. Projekt može poslati dodatni opis,
               linkove ili materijale za objavu.
             </p>
@@ -188,7 +188,7 @@ export function CommunityProjectPage({
           <ul className="mt-6 grid gap-3 text-base leading-8 text-muted-foreground md:grid-cols-2">
             {helpItems.map((item) => (
               <li className="flex gap-3" key={item}>
-                <CheckCircle2 className="mt-1 size-4 shrink-0 text-primary" />
+                <CheckCircle2 className="mt-1 size-4 shrink-0 text-primary-strong" />
                 <span>{item}</span>
               </li>
             ))}
@@ -221,7 +221,7 @@ export function CommunityProjectPage({
         {donationLinks.length ? (
           <section className="mt-5 rounded-[1.6rem] border border-primary/20 bg-primary/8 px-6 py-5">
             <div className="flex gap-3">
-              <HeartHandshake className="mt-1 size-5 shrink-0 text-primary" />
+              <HeartHandshake className="mt-1 size-5 shrink-0 text-primary-strong" />
               <div className="space-y-3 text-sm leading-7 text-foreground">
                 {project.donationNote ? <p>{project.donationNote}</p> : null}
                 <p>{donationDisclaimer}</p>

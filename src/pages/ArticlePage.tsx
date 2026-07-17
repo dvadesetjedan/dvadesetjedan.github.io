@@ -1,3 +1,5 @@
+import { useMemo } from "react"
+
 import type { ArticleEntry } from "@/data/articles"
 import { BackLink } from "@/components/BackLink"
 import { Layout } from "@/components/Layout"
@@ -8,7 +10,11 @@ import {
   getArticleCuration,
   isTranslatedArticle,
 } from "@/lib/content"
-import { stripHtml, truncateText } from "@/lib/text"
+import {
+  sanitizeLegacyArticleHtml,
+  stripHtml,
+  truncateText,
+} from "@/lib/text"
 import { usePageMeta } from "@/lib/usePageMeta"
 
 export function ArticlePage({
@@ -25,6 +31,15 @@ export function ArticlePage({
 
   const curation = getArticleCuration(article.slug)
   const recommendedNext = article.recommendedNextSlugs ?? []
+  const externalOriginalUrl = article.originalUrl?.startsWith(
+    "https://dvadesetjedan.com/",
+  )
+    ? undefined
+    : article.originalUrl
+  const safeContentHtml = useMemo(
+    () => sanitizeLegacyArticleHtml(article.contentHtml),
+    [article.contentHtml],
+  )
 
   return (
     <Layout>
@@ -37,13 +52,15 @@ export function ArticlePage({
               alt=""
               className="h-full max-h-[14rem] w-full object-contain drop-shadow-[0_0_28px_rgba(247,147,26,0.38)] sm:max-h-[17rem]"
               src="/images/twentyone-beacon.svg"
+              width={1009}
+              height={810}
             />
           </div>
 
           <div className="px-6 py-8 sm:px-10 sm:py-12">
             <div className="flex flex-wrap gap-2">
               {curation ? (
-                <span className="inline-flex rounded-full bg-primary/12 px-3 py-1 text-xs font-medium text-primary">
+                <span className="inline-flex rounded-full bg-primary/12 px-3 py-1 text-xs font-medium text-primary-strong">
                   {curation.topic}
                 </span>
               ) : null}
@@ -88,9 +105,9 @@ export function ArticlePage({
               article.permissionStatus !== "unknown" ? (
                 <span>Dozvola: {article.permissionStatus}</span>
               ) : null}
-              {article.originalUrl ? (
+              {externalOriginalUrl ? (
                 <a
-                  href={article.originalUrl}
+                  href={externalOriginalUrl}
                   rel="noopener noreferrer"
                   target="_blank"
                 >
@@ -102,11 +119,35 @@ export function ArticlePage({
             {/* Legacy repository-controlled HTML. Migration path: docs/article-migration.md. */}
             <div
               className="wp-content mt-10 text-base leading-8 text-foreground"
-              dangerouslySetInnerHTML={{ __html: article.contentHtml }}
+              dangerouslySetInnerHTML={{ __html: safeContentHtml }}
             />
 
+            {article.slug === "bitcoin-je-vrijeme" ? (
+              <p className="wp-content mt-8 border-t border-border/70 pt-5 text-sm leading-7 text-muted-foreground">
+                Tekst i ilustracije: Gigi, licenca{" "}
+                <a
+                  className="font-medium text-foreground underline underline-offset-4 hover:text-primary-strong"
+                  href="https://creativecommons.org/licenses/by-sa/4.0/"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  CC BY-SA 4.0
+                </a>
+                .{" "}
+                <a
+                  className="font-medium text-foreground underline underline-offset-4 hover:text-primary-strong"
+                  href="https://dergigi.com/2021/01/14/bitcoin-is-time/"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  Izvorna objava
+                </a>
+                .
+              </p>
+            ) : null}
+
             {recommendedNext.length ? (
-              <section className="mt-10 rounded-[1.5rem] border border-border/80 bg-background/70 px-5 py-5">
+              <section className="mt-10 rounded-[1.5rem] border border-border/80 bg-background/70 px-5 py-5 sm:px-6">
                 <h2 className="text-2xl font-semibold tracking-[-0.04em] text-foreground">
                   Preporučeno dalje
                 </h2>
@@ -119,7 +160,7 @@ export function ArticlePage({
                     return (
                       <a
                         key={slug}
-                        className="rounded-full border border-border/80 px-4 py-2 text-sm font-medium text-foreground hover:border-primary/40"
+                        className="inline-flex min-h-11 items-center rounded-full border border-border/80 px-4 py-2 text-sm font-medium text-foreground hover:border-primary/40"
                         href={articleHref(slug)}
                       >
                         {nextArticle?.title ?? slug}

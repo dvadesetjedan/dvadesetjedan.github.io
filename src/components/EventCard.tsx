@@ -6,16 +6,17 @@ import { CalendarDays, MapPinned, MoveRight } from "lucide-react"
 export function EventCard({ event }: { event: EventEntry }) {
   return (
     <a
-      className="group overflow-hidden rounded-[1.8rem] bg-card/70 shadow-[var(--shadow-border)] transition-[translate,scale,box-shadow] duration-150 ease-out hover:-translate-y-0.5 hover:shadow-[var(--shadow-border-hover)] active:scale-[0.99] motion-reduce:transition-none motion-reduce:hover:translate-y-0 motion-reduce:active:scale-100"
+      className="group overflow-hidden rounded-[1.8rem] bg-card/70 shadow-[var(--shadow-border)] transition-[translate,scale,box-shadow] duration-150 ease-out hover:-translate-y-0.5 hover:shadow-[var(--shadow-border-hover)] active:scale-[0.96] motion-reduce:transition-none motion-reduce:hover:translate-y-0 motion-reduce:active:scale-100"
       href={eventHref(event.slug)}
     >
       <SafeImage
-        alt=""
+        alt={`${event.title} — ${event.venue}`}
         className="h-60 w-full object-cover"
-        fallbackClassName="h-60 w-full"
+        fallbackClassName="h-60 w-full object-cover"
+        sizes="(min-width: 1280px) 33vw, (min-width: 768px) 50vw, 100vw"
         src={event.coverImage}
       />
-      <div className="space-y-5 px-5 py-5">
+      <div className="space-y-5 px-5 py-5 sm:px-6 sm:py-6">
         <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
           <span className="inline-flex items-center gap-2 tabular-nums">
             <CalendarDays className="size-4" />

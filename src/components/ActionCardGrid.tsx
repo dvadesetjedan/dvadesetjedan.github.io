@@ -18,7 +18,7 @@ export function ActionCardGrid({ items }: ActionCardGridProps) {
       {items.map((item) => (
         <div
           key={item.title}
-          className="rounded-[1.6rem] bg-card px-5 py-6 shadow-[var(--shadow-border)]"
+          className="rounded-[1.6rem] bg-card px-5 py-6 shadow-[var(--shadow-border)] sm:px-6"
         >
           <h3 className="text-xl font-semibold tracking-[-0.03em] text-foreground">
             {item.title}

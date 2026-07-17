@@ -56,6 +56,8 @@ export function LivestreamPage() {
               alt="Twenty One beacon ikona za livestream"
               className="h-full w-full object-contain drop-shadow-[0_0_24px_rgba(247,147,26,0.35)]"
               src="/images/twentyone-beacon.svg"
+              width={1009}
+              height={810}
             />
           </div>
         </section>
@@ -69,7 +71,7 @@ export function LivestreamPage() {
               <>
                 <h2 className="mt-3 text-3xl font-semibold tracking-[-0.04em] text-foreground">
                   <a
-                    className="hover:text-primary"
+                    className="hover:text-primary-strong"
                     href={episodeHref(latestEpisode.slug)}
                   >
                     {latestEpisode.title}
@@ -81,7 +83,7 @@ export function LivestreamPage() {
                   </p>
                 ) : null}
                 {latestEpisode.needsShownotes ? (
-                  <p className="mt-3 inline-flex rounded-full bg-primary/12 px-3 py-1 text-xs font-medium text-primary">
+                  <p className="mt-3 inline-flex rounded-full bg-primary/12 px-3 py-1 text-xs font-medium text-primary-strong">
                     Sažetak treba dodati
                   </p>
                 ) : null}
@@ -151,7 +153,7 @@ export function LivestreamPage() {
                 {archive.map((episode) => (
                   <article
                     key={episode.slug}
-                    className="rounded-[1.4rem] border border-border/70 bg-background/70 px-5 py-5 transition-colors hover:border-primary/40"
+                    className="rounded-[1.4rem] border border-border/70 bg-background/70 px-5 py-5 transition-colors hover:border-primary/40 sm:px-6"
                   >
                     {episode.publishedAt ? (
                       <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
@@ -160,14 +162,14 @@ export function LivestreamPage() {
                     ) : null}
                     <h3 className="text-xl font-semibold tracking-[-0.03em] text-foreground">
                       <a
-                        className="hover:text-primary"
+                        className="hover:text-primary-strong"
                         href={episodeHref(episode.slug)}
                       >
                         {episode.title}
                       </a>
                     </h3>
                     {episode.needsShownotes ? (
-                      <p className="mt-3 inline-flex rounded-full bg-primary/12 px-3 py-1 text-xs font-medium text-primary">
+                      <p className="mt-3 inline-flex rounded-full bg-primary/12 px-3 py-1 text-xs font-medium text-primary-strong">
                         Sažetak treba dodati
                       </p>
                     ) : null}

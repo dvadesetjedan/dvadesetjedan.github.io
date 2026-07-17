@@ -62,19 +62,19 @@ function LatestCard({
 }: LatestCardProps) {
   return (
     <a
-      className="rounded-[1.5rem] bg-card px-5 py-5 shadow-[var(--shadow-border)] transition-[translate,scale,box-shadow] duration-150 ease-out hover:-translate-y-0.5 hover:shadow-[var(--shadow-border-hover)] active:scale-[0.99] motion-reduce:transition-none motion-reduce:hover:translate-y-0 motion-reduce:active:scale-100"
+      className="rounded-[1.5rem] bg-card px-5 py-5 shadow-[var(--shadow-border)] transition-[translate,scale,box-shadow] duration-150 ease-out hover:-translate-y-0.5 hover:shadow-[var(--shadow-border-hover)] active:scale-[0.96] motion-reduce:transition-none motion-reduce:hover:translate-y-0 motion-reduce:active:scale-100 sm:px-6"
       href={href}
       rel={external ? "noopener noreferrer" : undefined}
       target={external ? "_blank" : undefined}
     >
-      <p className="text-xs uppercase tracking-[0.2em] text-primary">
+      <p className="text-xs uppercase tracking-[0.2em] text-primary-strong">
         {eyebrow}
       </p>
       <h3 className="mt-3 text-xl font-semibold tracking-[-0.03em] text-foreground">
         {title}
       </h3>
       <p className="mt-3 text-sm leading-7 text-muted-foreground">{text}</p>
-      <span className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-primary">
+      <span className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-primary-strong">
         {cta} <ArrowUpRight className="size-4" />
       </span>
     </a>
@@ -85,7 +85,7 @@ function BitcoinOnlyGraphic() {
   return (
     <div
       aria-label="Bitcoin da, tokeni ne"
-      className="flex items-center justify-center gap-5 rounded-[1.6rem] border border-primary/20 bg-primary/8 px-5 py-6 sm:gap-7"
+      className="flex items-center justify-center gap-5 rounded-[1.6rem] border border-primary/20 bg-primary/8 px-5 py-6 sm:gap-7 sm:px-6"
       role="img"
     >
       <div className="relative flex items-center">
@@ -94,6 +94,9 @@ function BitcoinOnlyGraphic() {
           className="size-24 rounded-full shadow-[0_18px_45px_rgba(247,147,26,0.24)] sm:size-28"
           pictureClassName="block"
           src="/images/bitcoin-logo.png"
+          loading="lazy"
+          width={512}
+          height={512}
         />
         <span className="absolute -right-4 -bottom-2 flex size-10 items-center justify-center rounded-full border border-border bg-card text-xl shadow-sm sm:size-11 sm:text-2xl">
           👍
@@ -102,7 +105,7 @@ function BitcoinOnlyGraphic() {
 
       <div className="h-px min-w-8 flex-1 bg-border/80" aria-hidden="true" />
 
-      <div className="relative flex size-24 items-center justify-center rounded-full border border-border bg-card text-6xl shadow-sm sm:size-28 sm:text-7xl">
+      <div className="relative flex size-24 items-center justify-center rounded-full border border-border bg-card text-6xl shadow-sm sm:size-32 sm:text-7xl">
         <span className="leading-none">💩</span>
         <span
           aria-hidden="true"
@@ -160,7 +163,7 @@ export function HomePage() {
               <p className="mt-7 max-w-3xl break-words text-base leading-8 text-muted-foreground sm:text-lg">
                 DvadesetJedan je regionalna verzija otvorene{" "}
                 <a
-                  className="font-semibold text-foreground hover:text-primary"
+                  className="font-semibold text-foreground hover:text-primary-strong"
                   href={media.twentyOneUrl}
                   rel="noopener noreferrer"
                   target="_blank"
@@ -170,7 +173,7 @@ export function HomePage() {
                 mreže: gradimo javan Bitcoin signal, otvoren prostor za razgovor
                 i sadržaj na jeziku koji ljudima iz naše regije dolazi prirodno.
               </p>
-              <p className="mt-6 max-w-3xl break-words rounded-[1.4rem] border border-primary/20 bg-primary/8 px-5 py-4 text-sm leading-7 text-foreground">
+              <p className="mt-6 max-w-3xl break-words rounded-[1.4rem] border border-primary/20 bg-primary/8 px-5 py-4 text-sm leading-7 text-foreground sm:px-6">
                 {heroContent.highlight}
               </p>
 
@@ -224,6 +227,8 @@ export function HomePage() {
                 decoding="async"
                 pictureClassName="block h-full w-full"
                 src={media.heroUrl}
+                width={1280}
+                height={720}
               />
             </div>
           </div>
@@ -234,7 +239,7 @@ export function HomePage() {
             {trustItems.map((item) => (
               <div
                 key={item}
-                className="rounded-[1.2rem] border border-border/70 bg-background/80 px-4 py-4 text-sm font-medium text-foreground"
+                className="rounded-[1.2rem] border border-border/70 bg-background/80 px-4 py-4 text-sm font-medium text-foreground sm:px-6"
               >
                 {item}
               </div>
@@ -296,11 +301,11 @@ export function HomePage() {
           <div className="grid gap-4 md:grid-cols-3">
             {featuredCommunityProjects.map((project) => (
               <a
-                className="rounded-[1.5rem] bg-card px-5 py-5 shadow-[var(--shadow-border)] transition-[translate,scale,box-shadow] duration-150 ease-out hover:-translate-y-0.5 hover:shadow-[var(--shadow-border-hover)] active:scale-[0.99] motion-reduce:transition-none motion-reduce:hover:translate-y-0 motion-reduce:active:scale-100"
+                className="rounded-[1.5rem] bg-card px-5 py-5 shadow-[var(--shadow-border)] transition-[translate,scale,box-shadow] duration-150 ease-out hover:-translate-y-0.5 hover:shadow-[var(--shadow-border-hover)] active:scale-[0.96] motion-reduce:transition-none motion-reduce:hover:translate-y-0 motion-reduce:active:scale-100 sm:px-6"
                 href={communityProjectHref(project.slug)}
                 key={project.slug}
               >
-                <p className="text-xs uppercase tracking-[0.2em] text-primary">
+                <p className="text-xs uppercase tracking-[0.2em] text-primary-strong">
                   Iz zajednice
                 </p>
                 <h3 className="mt-3 text-xl font-semibold tracking-[-0.03em] text-foreground">
@@ -309,7 +314,7 @@ export function HomePage() {
                 <p className="mt-3 text-sm leading-7 text-muted-foreground">
                   {project.summary}
                 </p>
-                <span className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-primary">
+                <span className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-primary-strong">
                   Pogledaj projekt <ArrowUpRight className="size-4" />
                 </span>
               </a>
@@ -356,7 +361,7 @@ export function HomePage() {
             <p className="text-base leading-8 text-foreground">
               Projekt je dio otvorenog{" "}
               <a
-                className="font-semibold hover:text-primary"
+                className="font-semibold hover:text-primary-strong"
                 href={media.twentyOneUrl}
                 rel="noopener noreferrer"
                 target="_blank"
@@ -395,7 +400,7 @@ export function HomePage() {
               <ul className="mt-6 grid gap-3 text-base leading-8 text-foreground sm:grid-cols-2">
                 {beginnerTopics.map((topic, topicIndex) => (
                   <li key={`${topic}-${topicIndex}`} className="flex gap-3">
-                    <ShieldCheck className="mt-1 size-4 shrink-0 text-primary" />
+                    <ShieldCheck className="mt-1 size-4 shrink-0 text-primary-strong" />
                     <span>{topic}</span>
                   </li>
                 ))}
@@ -415,7 +420,7 @@ export function HomePage() {
               {beginnerHighlights.map((item) => (
                 <div
                   key={item.title}
-                  className="rounded-[1.5rem] border border-border/80 bg-card px-5 py-5"
+                  className="rounded-[1.5rem] border border-border/80 bg-card px-5 py-5 sm:px-6"
                 >
                   <h3 className="text-xl font-semibold tracking-[-0.03em] text-foreground">
                     {item.title}
@@ -437,7 +442,7 @@ export function HomePage() {
             {featuredArticles.map((article) => (
               <a
                 key={article.slug}
-                className="rounded-[1.5rem] border border-border/80 bg-card px-5 py-5 transition-colors hover:border-primary/40"
+                className="rounded-[1.5rem] border border-border/80 bg-card px-5 py-5 transition-colors hover:border-primary/40 sm:px-6"
                 href={articleHref(article.slug)}
               >
                 <h3 className="text-xl font-semibold tracking-[-0.03em] text-foreground">
@@ -446,7 +451,7 @@ export function HomePage() {
                 <p className="mt-3 text-sm leading-7 text-muted-foreground">
                   {article.description}
                 </p>
-                <span className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-primary">
+                <span className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-primary-strong">
                   Čitaj tekst <ArrowUpRight className="size-4" />
                 </span>
               </a>

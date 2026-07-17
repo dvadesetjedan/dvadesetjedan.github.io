@@ -41,7 +41,7 @@ function renderDescriptionParagraph(paragraph: string) {
             {part}
             {partIndex < parts.length - 1 ? (
               <a
-                className="font-medium text-foreground underline decoration-border underline-offset-4 transition-colors hover:text-primary hover:decoration-primary"
+                className="font-medium text-foreground underline decoration-border underline-offset-4 transition-colors hover:text-primary-strong hover:decoration-primary"
                 href={link.href}
                 rel="noopener noreferrer"
                 target="_blank"
@@ -69,9 +69,12 @@ export function EventPage({ event }: { event: EventEntry }) {
 
         <article className="overflow-hidden rounded-[2.2rem] border border-border/80 bg-card/75">
           <SafeImage
-            alt=""
+            alt={`${event.title} — ${event.venue}`}
             className="h-[24rem] w-full object-cover"
-            fallbackClassName="h-[24rem] w-full"
+            fallbackClassName="h-[24rem] w-full object-cover"
+            fetchPriority="high"
+            loading="eager"
+            sizes="(min-width: 1024px) 1024px, 100vw"
             src={event.coverImage}
           />
 
@@ -80,6 +83,11 @@ export function EventPage({ event }: { event: EventEntry }) {
               <h1 className="safe-heading text-5xl font-semibold tracking-[-0.05em] text-foreground sm:text-6xl">
                 {event.title}
               </h1>
+              {isCancelled ? (
+                <p className="mt-4 inline-flex rounded-full bg-destructive px-4 py-2 text-sm font-semibold text-white">
+                  Događaj je otkazan
+                </p>
+              ) : null}
 
               <div className="mt-8 grid gap-4 sm:grid-cols-2">
                 <InfoTile
@@ -98,7 +106,7 @@ export function EventPage({ event }: { event: EventEntry }) {
                   value={
                     event.address ? (
                       <a
-                        className="inline-flex items-center gap-1 text-foreground underline decoration-border underline-offset-4 transition-colors hover:text-primary hover:decoration-primary"
+                        className="inline-flex items-center gap-1 text-foreground underline decoration-border underline-offset-4 transition-colors hover:text-primary-strong hover:decoration-primary"
                         href={event.mapUrl}
                         rel="noopener noreferrer"
                         target="_blank"
@@ -124,32 +132,46 @@ export function EventPage({ event }: { event: EventEntry }) {
                 />
               </div>
 
-              <div className="mt-10 space-y-5 text-base leading-8 text-foreground">
-                {event.description.map((paragraph) => (
-                  <p key={paragraph}>{renderDescriptionParagraph(paragraph)}</p>
-                ))}
-              </div>
-              <p className="mt-8 rounded-[1.4rem] border border-primary/20 bg-primary/8 px-5 py-4 text-sm leading-7 text-foreground">
-                Početnici su dobrodošli gdje je to u skladu s najavom događaja.
-                Zadnje promjene provjeri kroz službenu prijavu ili Telegram
-                koordinaciju navedenu u opisu događaja.
-              </p>
-              <p className="mt-4 rounded-[1.4rem] border border-border/80 bg-background/70 px-5 py-4 text-sm leading-7 text-muted-foreground">
-                {eventMeta.freshnessNote}
-              </p>
-            </div>
-
-            <aside className="space-y-4">
               {!isCancelled ? (
                 <ActionButton
                   href={event.registrationUrl}
                   icon={<ArrowUpRight className="size-4" />}
                   external
                   primary
-                  className="w-full justify-center"
+                  className="mt-6 w-full justify-center lg:hidden"
                 >
                   Otvori prijavu
                 </ActionButton>
+              ) : null}
+
+              <div className="mt-10 space-y-5 text-base leading-8 text-foreground">
+                {event.description.map((paragraph) => (
+                  <p key={paragraph}>{renderDescriptionParagraph(paragraph)}</p>
+                ))}
+              </div>
+              <p className="mt-8 rounded-[1.4rem] border border-primary/20 bg-primary/8 px-5 py-4 text-sm leading-7 text-foreground sm:px-6">
+                Početnici su dobrodošli gdje je to u skladu s najavom događaja.
+                Zadnje promjene provjeri kroz službenu prijavu ili Telegram
+                koordinaciju navedenu u opisu događaja.
+              </p>
+              <p className="mt-4 rounded-[1.4rem] border border-border/80 bg-background/70 px-5 py-4 text-sm leading-7 text-muted-foreground sm:px-6">
+                {eventMeta.freshnessNote}
+              </p>
+            </div>
+
+            <aside className="space-y-4 lg:sticky lg:top-40 lg:self-start">
+              {!isCancelled ? (
+                <div className="hidden lg:block">
+                  <ActionButton
+                    href={event.registrationUrl}
+                    icon={<ArrowUpRight className="size-4" />}
+                    external
+                    primary
+                    className="w-full justify-center"
+                  >
+                    Otvori prijavu
+                  </ActionButton>
+                </div>
               ) : null}
               <ActionButton
                 href={event.mapUrl}
@@ -168,7 +190,7 @@ export function EventPage({ event }: { event: EventEntry }) {
                 Dodaj u Google kalendar
               </ActionButton>
               <a
-                className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-card py-3 pl-[1.125rem] pr-5 text-sm font-medium text-foreground shadow-[var(--shadow-border)] transition-[translate,scale,box-shadow,background-color,color] duration-150 ease-out hover:-translate-y-0.5 hover:bg-background hover:shadow-[var(--shadow-border-hover)] active:scale-[0.96] motion-reduce:transition-none motion-reduce:hover:translate-y-0 motion-reduce:active:scale-100"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-card py-3 pl-[1.125rem] pr-5 text-sm font-medium text-foreground shadow-[var(--shadow-border)] transition-[translate,scale,box-shadow,background-color,color] duration-150 ease-out hover:-translate-y-0.5 hover:bg-background hover:shadow-[var(--shadow-border-hover)] active:scale-[0.96] motion-reduce:transition-none motion-reduce:hover:translate-y-0 motion-reduce:active:scale-100 sm:pr-6"
                 download={`${event.slug}.ics`}
                 href={makeIcsUrl(event)}
               >

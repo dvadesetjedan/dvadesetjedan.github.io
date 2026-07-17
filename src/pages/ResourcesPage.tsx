@@ -35,7 +35,7 @@ export function ResourcesPage() {
                 {group.items.map((item) => (
                   <a
                     key={item.title}
-                    className="rounded-[1.5rem] border border-border/80 bg-card px-5 py-5 transition-colors hover:border-primary/40"
+                    className="rounded-[1.5rem] border border-border/80 bg-card px-5 py-5 transition-colors hover:border-primary/40 sm:px-6"
                     href={item.href}
                     rel={item.external ? "noopener noreferrer" : undefined}
                     target={item.external ? "_blank" : undefined}
@@ -46,7 +46,7 @@ export function ResourcesPage() {
                     <p className="mt-3 text-sm leading-7 text-muted-foreground">
                       {item.text}
                     </p>
-                    <span className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-primary">
+                    <span className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-primary-strong">
                       Otvori <ArrowUpRight className="size-4" />
                     </span>
                   </a>

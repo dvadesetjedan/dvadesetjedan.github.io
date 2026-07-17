@@ -2,29 +2,61 @@
 <html lang="hr">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="/favicon.png?v=bitcoin-official" />
-    <link rel="shortcut icon" href="/favicon.png?v=bitcoin-official" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>DvadesetJedan | Bitcoin Zajednica</title>
     <meta
       name="description"
       content="DvadesetJedan je regionalni Bitcoin-only signal na našem jeziku: članci, livestream, događaji i zajednica za bitcoinere s Balkana."
     />
-    <meta name="theme-color" content="#f5efe4" />
-    <link rel="canonical" href="https://dvadesetjedan.github.io/" />
+    <meta name="theme-color" content="#fbf6ef" />
+    <script>
+      ;(() => {
+        try {
+          const stored = localStorage.getItem("dvadesetjedan-theme")
+          const dark =
+            stored === "dark" ||
+            (stored !== "light" &&
+              window.matchMedia("(prefers-color-scheme: dark)").matches)
+          document.documentElement.classList.toggle("dark", dark)
+          document.documentElement.style.colorScheme = dark ? "dark" : "light"
+          document.querySelector('meta[name="theme-color"]').content = dark
+            ? "#19130f"
+            : "#fbf6ef"
+        } catch {}
+      })()
+    </script>
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://dvadesetjedan.com/" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="DvadesetJedan RSS"
+      href="https://dvadesetjedan.com/rss.xml"
+    />
+    <link
+      rel="alternate"
+      type="application/feed+json"
+      title="DvadesetJedan JSON Feed"
+      href="https://dvadesetjedan.com/feed.json"
+    />
     <meta property="og:title" content="DvadesetJedan | Bitcoin Zajednica" />
     <meta
       property="og:description"
       content="DvadesetJedan je regionalni Bitcoin-only signal na našem jeziku: članci, livestream, događaji i zajednica za bitcoinere s Balkana."
     />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://dvadesetjedan.github.io/" />
+    <meta property="og:url" content="https://dvadesetjedan.com/" />
+    <meta property="og:site_name" content="DvadesetJedan" />
+    <meta property="og:locale" content="hr_HR" />
     <meta
       property="og:image"
-      content="https://dvadesetjedan.github.io/social-preview.svg"
+      content="https://dvadesetjedan.com/social-preview.png"
     />
     <meta property="og:image:alt" content="DvadesetJedan | Bitcoin Zajednica" />
-    <meta property="og:image:type" content="image/svg+xml" />
+    <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
@@ -35,7 +67,11 @@
     />
     <meta
       name="twitter:image"
-      content="https://dvadesetjedan.github.io/social-preview.svg"
+      content="https://dvadesetjedan.com/social-preview.png"
+    />
+    <meta
+      name="twitter:image:alt"
+      content="DvadesetJedan | Bitcoin Zajednica"
     />
     <script>
       ;(() => {

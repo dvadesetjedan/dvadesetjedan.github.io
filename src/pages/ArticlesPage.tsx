@@ -18,6 +18,18 @@ export function ArticlesPage({ articles }: { articles: ArticleEntry[] }) {
   const orderedArticles = sortArticles(articles)
   const topics = [...new Set(articles.flatMap((article) => article.categories))]
   const tags = [...new Set(articles.flatMap((article) => article.tags))]
+  const topicLabels = [
+    ...new Set([
+      ...topics,
+      ...tags,
+      "original",
+      "translation",
+      "guide",
+      "beginner",
+      "intermediate",
+      "advanced",
+    ]),
+  ]
 
   return (
     <Layout>
@@ -43,25 +55,18 @@ export function ArticlesPage({ articles }: { articles: ArticleEntry[] }) {
               alt="Twenty One beacon ikona za članke"
               className="h-full w-full object-contain drop-shadow-[0_0_24px_rgba(247,147,26,0.35)]"
               src="/images/twentyone-beacon.svg"
+              width={1009}
+              height={810}
             />
           </div>
         </section>
 
         <section className="mt-10 rounded-[1.8rem] border border-border/80 bg-card px-6 py-6">
           <h2 className="text-3xl font-semibold tracking-[-0.04em] text-foreground">
-            Filteri za održavatelje i čitatelje
+            Teme i oznake
           </h2>
           <div className="mt-5 flex flex-wrap gap-2">
-            {[
-              ...topics,
-              ...tags,
-              "original",
-              "translation",
-              "guide",
-              "beginner",
-              "intermediate",
-              "advanced",
-            ].map((item) => (
+            {topicLabels.map((item) => (
               <span
                 key={item}
                 className="rounded-full border border-border/80 px-3 py-1 text-xs font-medium text-muted-foreground"
@@ -77,9 +82,9 @@ export function ArticlesPage({ articles }: { articles: ArticleEntry[] }) {
             {articleCategories.map((category) => (
               <div
                 key={category.title}
-                className="rounded-[1.5rem] border border-border/80 bg-card px-5 py-5"
+                className="rounded-[1.5rem] border border-border/80 bg-card px-5 py-5 sm:px-6 sm:py-6"
               >
-                <p className="text-xs uppercase tracking-[0.22em] text-primary">
+                <p className="text-xs uppercase tracking-[0.22em] text-primary-strong">
                   {category.label}
                 </p>
                 <h2 className="mt-3 text-2xl font-semibold tracking-[-0.03em] text-foreground">
@@ -109,13 +114,13 @@ export function ArticlesPage({ articles }: { articles: ArticleEntry[] }) {
 
                 return (
                   <li key={item.slug} className="flex gap-3">
-                    <span className="inline-flex size-6 shrink-0 items-center justify-center rounded-full bg-primary/12 text-xs font-semibold text-primary">
+                    <span className="inline-flex size-6 shrink-0 items-center justify-center rounded-full bg-primary/12 text-xs font-semibold text-primary-strong">
                       {index + 1}
                     </span>
                     {article ? (
                       <div>
                         <a
-                          className="font-medium text-foreground hover:text-primary"
+                          className="font-medium text-foreground hover:text-primary-strong"
                           href={articleHref(article.slug)}
                         >
                           {item.label}

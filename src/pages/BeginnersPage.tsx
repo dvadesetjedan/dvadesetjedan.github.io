@@ -50,6 +50,8 @@ export function BeginnersPage({ articles }: { articles: ArticleEntry[] }) {
               alt="Twenty One beacon ikona za početnički put"
               className="h-full w-full object-contain drop-shadow-[0_0_24px_rgba(247,147,26,0.35)]"
               src="/images/twentyone-beacon.svg"
+              width={1009}
+              height={810}
             />
           </div>
         </section>
@@ -95,7 +97,7 @@ export function BeginnersPage({ articles }: { articles: ArticleEntry[] }) {
             {beginnerHighlights.map((item) => (
               <div
                 key={item.title}
-                className="rounded-[1.5rem] border border-border/80 bg-card px-5 py-5"
+                className="rounded-[1.5rem] border border-border/80 bg-card px-5 py-5 sm:px-6"
               >
                 <h3 className="text-xl font-semibold tracking-[-0.03em] text-foreground">
                   {item.title}
@@ -120,13 +122,15 @@ export function BeginnersPage({ articles }: { articles: ArticleEntry[] }) {
             {onboardingSteps.map((step, index) => (
               <details
                 key={step.title}
-                className="rounded-[1.4rem] border border-border/70 bg-background/70 px-5 py-5"
+                className="rounded-[1.4rem] border border-border/70 bg-background/70 px-5 py-5 sm:px-6"
               >
-                <p className="text-xs uppercase tracking-[0.18em] text-primary">
-                  Korak {index + 1}
-                </p>
-                <summary className="mt-3 cursor-pointer list-none text-xl font-semibold tracking-[-0.03em] text-foreground">
-                  {step.title}
+                <summary className="disclosure-summary cursor-pointer list-none text-xl font-semibold tracking-[-0.03em] text-foreground">
+                  <span>
+                    <span className="mb-2 block text-xs uppercase tracking-[0.18em] text-primary-strong">
+                      Korak {index + 1}
+                    </span>
+                    {step.title}
+                  </span>
                 </summary>
                 <p className="mt-3 text-sm leading-7 text-muted-foreground">
                   {step.shortText}
@@ -136,8 +140,8 @@ export function BeginnersPage({ articles }: { articles: ArticleEntry[] }) {
                     {step.explanation}
                   </p>
                   {step.doNotDo?.length ? (
-                    <div className="rounded-[1.2rem] border border-primary/20 bg-primary/8 px-4 py-4">
-                      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">
+                    <div className="rounded-[1.2rem] border border-primary/20 bg-primary/8 px-4 py-4 sm:px-6">
+                      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary-strong">
                         Nemoj
                       </p>
                       <ul className="mt-3 space-y-2 text-sm leading-7 text-foreground">
@@ -151,7 +155,7 @@ export function BeginnersPage({ articles }: { articles: ArticleEntry[] }) {
                     </div>
                   ) : null}
                   {step.questionForCommunity ? (
-                    <p className="rounded-[1.2rem] border border-border/70 px-4 py-3 text-sm leading-7 text-muted-foreground">
+                    <p className="rounded-[1.2rem] border border-border/70 px-4 py-3 text-sm leading-7 text-muted-foreground sm:px-6">
                       Pitanje za zajednicu: {step.questionForCommunity}
                     </p>
                   ) : null}
@@ -164,7 +168,7 @@ export function BeginnersPage({ articles }: { articles: ArticleEntry[] }) {
 
                         return article ? (
                           <a
-                            className="rounded-full border border-border/80 px-3 py-1 text-xs font-medium text-foreground hover:border-primary/40"
+                            className="inline-flex min-h-11 items-center rounded-full border border-border/80 px-3 py-1 text-xs font-medium text-foreground hover:border-primary/40"
                             href={articleHref(article.slug)}
                             key={slug}
                           >
@@ -204,7 +208,7 @@ export function BeginnersPage({ articles }: { articles: ArticleEntry[] }) {
                 {beginnerLinks.map((article) => (
                   <a
                     key={article.slug}
-                    className="rounded-[1.4rem] border border-border/70 bg-background/70 px-5 py-5 hover:border-primary/40"
+                    className="rounded-[1.4rem] border border-border/70 bg-background/70 px-5 py-5 hover:border-primary/40 sm:px-6"
                     href={articleHref(article.slug)}
                   >
                     <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">

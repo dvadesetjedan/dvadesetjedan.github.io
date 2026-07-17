@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react"
 
-import { Separator } from "@/components/ui/separator"
 import { footerLinks } from "@/data/site"
 import { parseRouteFromPath, type Route } from "@/lib/routes"
 
@@ -63,7 +62,7 @@ export function Footer() {
 
   return (
     <footer className="mx-auto max-w-7xl px-5 pb-12 sm:px-8">
-      <Separator className="mb-8" />
+      <hr className="mb-8 border-0 border-t border-border" />
       <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_24rem]">
         <div>
           <h2 className="text-xl font-semibold tracking-[-0.03em] text-foreground">
@@ -93,7 +92,7 @@ export function Footer() {
                     <li key={item.label}>
                       <a
                         aria-current={isActive ? "page" : undefined}
-                        className={`inline-flex w-fit border-b-2 pb-1 transition-colors ${
+                        className={`inline-flex min-h-11 w-fit items-center border-b-2 transition-colors ${
                           isActive
                             ? "border-primary text-foreground"
                             : "border-transparent hover:border-primary/50 hover:text-foreground"

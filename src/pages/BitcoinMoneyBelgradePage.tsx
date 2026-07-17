@@ -51,8 +51,8 @@ function NumberedCard({
   index: number
 }) {
   return (
-    <article className="rounded-[1.5rem] border border-border/80 bg-card px-5 py-6 shadow-[var(--shadow-border)]">
-      <span className="inline-flex size-8 items-center justify-center rounded-full bg-primary/12 text-sm font-semibold text-primary">
+    <article className="rounded-[1.5rem] border border-border/80 bg-card px-5 py-6 shadow-[var(--shadow-border)] sm:px-6">
+      <span className="inline-flex size-8 items-center justify-center rounded-full bg-primary/12 text-sm font-semibold text-primary-strong">
         {index + 1}
       </span>
       <h3 className="mt-5 text-xl font-semibold tracking-[-0.03em] text-foreground">
@@ -80,8 +80,13 @@ function TopicCard({
         <img
           alt={imageAlt}
           className="h-full w-full object-cover"
+          decoding="async"
+          height={941}
           loading="lazy"
+          sizes="(min-width: 1280px) 33vw, (min-width: 768px) 50vw, 100vw"
           src={image}
+          srcSet={`${image.replace(/\.webp$/, "-480.webp")} 480w, ${image.replace(/\.webp$/, "-960.webp")} 960w`}
+          width={1672}
         />
       </div>
       <div className="px-5 py-6">
@@ -121,7 +126,10 @@ export function BitcoinMoneyBelgradePage() {
               <img
                 alt="Predavanje o Bitcoinu u modernoj univerzitetskoj dvorani s pogledom na Beograd"
                 className="absolute inset-0 h-full w-full object-cover"
+                fetchPriority="high"
+                height={941}
                 src={BITCOIN_MONEY_BELGRADE_HERO_IMAGE}
+                width={1672}
               />
             </picture>
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/35 to-black/5" />
@@ -186,7 +194,7 @@ export function BitcoinMoneyBelgradePage() {
                 className="rounded-[1.6rem] border border-border/80 bg-card px-6 py-6 shadow-[var(--shadow-border)]"
                 key={block.time}
               >
-                <p className="inline-flex items-center gap-2 text-sm font-medium text-primary">
+                <p className="inline-flex items-center gap-2 text-sm font-medium text-primary-strong">
                   <CalendarDays className="size-4" />
                   {block.time}
                 </p>
@@ -223,7 +231,7 @@ export function BitcoinMoneyBelgradePage() {
 
         <section className="mt-10 rounded-[1.8rem] border border-primary/25 bg-primary/8 px-6 py-8 sm:px-10">
           <div className="flex gap-4">
-            <ShieldCheck className="mt-1 size-6 shrink-0 text-primary" />
+            <ShieldCheck className="mt-1 size-6 shrink-0 text-primary-strong" />
             <div>
               <h2 className="text-4xl font-semibold tracking-[-0.05em] text-foreground sm:text-5xl">
                 Što ovo nije
@@ -246,7 +254,7 @@ export function BitcoinMoneyBelgradePage() {
           <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-start">
             <div className="rounded-[1.8rem] border border-border/80 bg-card px-6 py-6 sm:px-10">
               <p className="mb-5 inline-flex items-center gap-2 text-base font-medium text-foreground">
-                <MapPin className="size-4 text-primary" />
+                <MapPin className="size-4 text-primary-strong" />
                 Idealni partneri
               </p>
               <BulletList items={pilotPartners} />
@@ -273,7 +281,7 @@ export function BitcoinMoneyBelgradePage() {
             <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {pilotBudgetItems.map((item) => (
                 <div
-                  className="rounded-[1.1rem] border border-border/70 bg-background/70 px-4 py-3 text-sm leading-7 text-foreground"
+                  className="rounded-[1.1rem] border border-border/70 bg-background/70 px-4 py-3 text-sm leading-7 text-foreground sm:px-6"
                   key={item}
                 >
                   {item}
@@ -285,10 +293,10 @@ export function BitcoinMoneyBelgradePage() {
           <div className="mt-6 grid gap-5 lg:grid-cols-3">
             {pilotSponsorshipOptions.map((tier) => (
               <article
-                className="rounded-[1.5rem] border border-border/80 bg-card px-5 py-6 shadow-[var(--shadow-border)]"
+                className="rounded-[1.5rem] border border-border/80 bg-card px-5 py-6 shadow-[var(--shadow-border)] sm:px-6"
                 key={tier.title}
               >
-                <p className="text-sm font-medium text-primary">
+                <p className="text-sm font-medium text-primary-strong">
                   {tier.price}
                 </p>
                 <h3 className="mt-2 text-2xl font-semibold tracking-[-0.04em] text-foreground">
@@ -331,7 +339,7 @@ export function BitcoinMoneyBelgradePage() {
           <div className="grid gap-4">
             {pilotFaq.map((item) => (
               <article
-                className="rounded-[1.5rem] border border-border/80 bg-card px-5 py-5"
+                className="rounded-[1.5rem] border border-border/80 bg-card px-5 py-5 sm:px-6"
                 key={item.question}
               >
                 <h3 className="text-xl font-semibold tracking-[-0.03em] text-foreground">

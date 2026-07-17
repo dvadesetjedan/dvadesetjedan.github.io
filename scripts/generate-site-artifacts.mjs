@@ -5,6 +5,27 @@ const root = process.cwd()
 const distDir = path.join(root, "dist")
 const siteUrl = "https://dvadesetjedan.com"
 const defaultImage = `${siteUrl}/social-preview.png`
+const organizationId = `${siteUrl}/#organization`
+const websiteId = `${siteUrl}/#website`
+
+const organizationReference = {
+  "@type": "Organization",
+  "@id": organizationId,
+  name: "DvadesetJedan",
+  url: `${siteUrl}/`,
+  logo: {
+    "@type": "ImageObject",
+    url: `${siteUrl}/images/bitcoin-logo.png`,
+    width: 512,
+    height: 512,
+  },
+  sameAs: [
+    "https://www.youtube.com/@dvadesetjedan/streams",
+    "https://t.me/+ud6ARwb7rX5lZjU0",
+    "https://github.com/dvadesetjedan/dvadesetjedan.github.io",
+    "https://twentyone.world/",
+  ],
+}
 
 const coreRoutes = [
   [
@@ -111,6 +132,127 @@ function truncate(value, length = 180) {
   return `${value.slice(0, length - 1).trim()}…`
 }
 
+function zagrebOffset(datePart) {
+  try {
+    const parts = new Intl.DateTimeFormat("en-US", {
+      timeZone: "Europe/Zagreb",
+      timeZoneName: "shortOffset",
+    }).formatToParts(new Date(`${datePart}T12:00:00Z`))
+    const label = parts.find((part) => part.type === "timeZoneName")?.value
+    const match = label?.match(/^GMT([+-])(\d{1,2})(?::(\d{2}))?$/)
+
+    if (match) {
+      return `${match[1]}${match[2].padStart(2, "0")}:${match[3] ?? "00"}`
+    }
+  } catch {
+    // Keep a valid local ISO timestamp if this Node build has limited Intl data.
+  }
+
+  return ""
+}
+
+function normalizeDate(value) {
+  if (!value) return undefined
+
+  const trimmed = value.trim()
+  const legacyDateTime = trimmed.match(
+    /^(\d{4}-\d{2}-\d{2})\s+(\d{2}:\d{2}:\d{2})$/,
+  )
+  const normalized = legacyDateTime
+    ? `${legacyDateTime[1]}T${legacyDateTime[2]}${zagrebOffset(legacyDateTime[1])}`
+    : trimmed
+
+  return Number.isNaN(new Date(normalized).getTime()) ? undefined : normalized
+}
+
+function feedDate(value) {
+  const normalized = normalizeDate(value)
+  if (!normalized) return undefined
+  if (/^\d{4}-\d{2}-\d{2}$/.test(normalized)) {
+    return `${normalized}T00:00:00Z`
+  }
+
+  return new Date(normalized).toISOString()
+}
+
+function resolveImage(image) {
+  if (!image || /\/social-preview\.svg(?:[?#]|$)/i.test(image)) {
+    return defaultImage
+  }
+  if (image.startsWith("http")) return image
+  return `${siteUrl}${image.startsWith("/") ? image : `/${image}`}`
+}
+
+function imageMimeType(image) {
+  const pathname = new URL(image).pathname.toLowerCase()
+  if (pathname.endsWith(".webp")) return "image/webp"
+  if (pathname.endsWith(".jpg") || pathname.endsWith(".jpeg")) {
+    return "image/jpeg"
+  }
+  if (pathname.endsWith(".svg")) return "image/svg+xml"
+  return "image/png"
+}
+
+function articleLanguage(languageVariant) {
+  return (
+    {
+      regional: "hr",
+      hr: "hr",
+      "sr-latn": "sr-Latn",
+      bs: "bs",
+      me: "cnr",
+      en: "en",
+    }[languageVariant] ?? "hr"
+  )
+}
+
+function eventLanguages(language) {
+  if (!language) return "hr"
+
+  const languages = []
+  if (/hrvatsk/i.test(language)) languages.push("hr")
+  if (/srpsk/i.test(language)) languages.push("sr-Latn")
+  if (/bosansk/i.test(language)) languages.push("bs")
+  if (/englesk/i.test(language)) languages.push("en")
+
+  return languages.length <= 1 ? (languages[0] ?? "hr") : languages
+}
+
+function externalSourceUrl(value) {
+  if (!value) return undefined
+
+  try {
+    const source = new URL(value)
+    return ["dvadesetjedan.com", "www.dvadesetjedan.com"].includes(
+      source.hostname,
+    )
+      ? undefined
+      : source.href
+  } catch {
+    return undefined
+  }
+}
+
+function youtubeVideoId(value) {
+  if (!value) return undefined
+
+  try {
+    const url = new URL(value)
+    if (url.hostname === "youtu.be") return url.pathname.split("/")[1]
+
+    const queryId = url.searchParams.get("v")
+    if (queryId) return queryId
+
+    const segments = url.pathname.split("/").filter(Boolean)
+    const markerIndex = segments.findIndex((segment) =>
+      ["live", "embed", "shorts"].includes(segment),
+    )
+    return markerIndex >= 0 ? segments[markerIndex + 1] : undefined
+  } catch {
+    return undefined
+  }
+}
+
 function readString(objectSource, key) {
   const match = objectSource.match(new RegExp(`${key}:\\s*"([^"]*)"`, "s"))
   return match?.[1]
@@ -163,7 +305,15 @@ function loadArticles() {
       const excerpt = htmlToText(readString(objectSource, "excerpt"))
       const image = readString(objectSource, "image")
       const originalUrl = readString(objectSource, "originalUrl")
+      const author = readString(objectSource, "author")
+      const translator = readString(objectSource, "translator")
+      const sourceName = readString(objectSource, "sourceName")
+      const languageVariant = readString(objectSource, "languageVariant")
+      const articleType = readString(objectSource, "type")
       const tags = readStringArray(objectSource, "tags")
+      const topics = readStringArray(objectSource, "topics")
+      const categories = readStringArray(objectSource, "categories")
+      const publishedAt = normalizeDate(date)
 
       return slug && title
         ? {
@@ -171,10 +321,17 @@ function loadArticles() {
             title: `${title} | DvadesetJedan`,
             description: truncate(excerpt || title),
             type: "article",
-            date,
+            date: publishedAt,
+            lastmod: publishedAt?.slice(0, 10),
             image,
             originalUrl,
-            tags,
+            author,
+            translator,
+            sourceName,
+            language: articleLanguage(languageVariant),
+            articleType,
+            tags: [...new Set([...tags, ...topics])],
+            categories,
           }
         : null
     })
@@ -195,6 +352,13 @@ function loadEvents() {
       const country = readString(objectSource, "country")
       const registrationUrl = readString(objectSource, "registrationUrl")
       const image = readString(objectSource, "coverImage")
+      const organizer = readString(objectSource, "organizer")
+      const language = readString(objectSource, "language")
+      const status = readString(objectSource, "status")
+      const tags = readStringArray(objectSource, "tags")
+      const canonical = `${siteUrl}/dogadaji/${slug}/`
+      const startDate = normalizeDate(start)
+      const endDate = normalizeDate(end)
 
       return slug && title
         ? {
@@ -202,28 +366,50 @@ function loadEvents() {
             title: `${title} | DvadesetJedan`,
             description: truncate(summary || title),
             type: "event",
-            date: start,
+            date: startDate,
             image,
             jsonLd: {
               "@context": "https://schema.org",
               "@type": "Event",
+              "@id": `${canonical}#event`,
               name: title,
-              startDate: start,
-              endDate: end,
+              startDate,
+              endDate,
               description: summary,
-              url: `${siteUrl}/dogadaji/${slug}/`,
+              url: canonical,
+              image: resolveImage(image),
+              eventStatus:
+                status === "cancelled"
+                  ? "https://schema.org/EventCancelled"
+                  : "https://schema.org/EventScheduled",
+              eventAttendanceMode:
+                "https://schema.org/OfflineEventAttendanceMode",
+              inLanguage: eventLanguages(language),
+              keywords: tags.length ? tags : undefined,
               location: {
                 "@type": "Place",
                 name: venue,
-                address: [address, city, country].filter(Boolean).join(", "),
+                address: {
+                  "@type": "PostalAddress",
+                  streetAddress: address,
+                  addressLocality: city,
+                  addressCountry: country,
+                },
               },
+              organizer:
+                organizer && organizer !== "DvadesetJedan"
+                  ? { "@type": "Person", name: organizer }
+                  : { "@id": organizationId },
               offers: registrationUrl
                 ? {
                     "@type": "Offer",
                     url: registrationUrl,
-                    availability: "https://schema.org/InStock",
                   }
                 : undefined,
+              mainEntityOfPage: {
+                "@type": "WebPage",
+                "@id": canonical,
+              },
             },
           }
         : null
@@ -241,6 +427,10 @@ function loadEpisodes() {
       const title = readString(objectSource, "title")
       const summary = readString(objectSource, "summary")
       const publishedAt = readString(objectSource, "publishedAt")
+      const youtubeUrl = readString(objectSource, "youtubeUrl")
+      const videoId = youtubeVideoId(youtubeUrl)
+      const uploadDate = normalizeDate(publishedAt)
+      const canonical = `${siteUrl}/livestream/${slug}/`
 
       return slug && title
         ? {
@@ -248,7 +438,33 @@ function loadEpisodes() {
             title: `${title} | DvadesetJedan`,
             description: truncate(summary || title),
             type: "livestreamEpisode",
-            date: publishedAt,
+            date: uploadDate,
+            lastmod: uploadDate?.slice(0, 10),
+            image: videoId
+              ? `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`
+              : undefined,
+            jsonLd: videoId
+              ? {
+                  "@context": "https://schema.org",
+                  "@type": "VideoObject",
+                  "@id": `${canonical}#video`,
+                  name: title,
+                  description: truncate(summary || title),
+                  thumbnailUrl: [
+                    `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`,
+                  ],
+                  uploadDate,
+                  embedUrl: `https://www.youtube.com/embed/${videoId}`,
+                  sameAs: youtubeUrl,
+                  url: canonical,
+                  inLanguage: "hr",
+                  publisher: { "@id": organizationId },
+                  mainEntityOfPage: {
+                    "@type": "WebPage",
+                    "@id": canonical,
+                  },
+                }
+              : undefined,
           }
         : null
     })
@@ -328,39 +544,55 @@ function loadLegacyRedirects() {
 }
 
 function routeJsonLd(route) {
-  const base = []
-  if (route.path === "/") {
-    base.push(
-      {
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        name: "DvadesetJedan",
-        url: siteUrl,
-        sameAs: [
-          "https://www.youtube.com/@dvadesetjedan/streams",
-          "https://t.me/+ud6ARwb7rX5lZjU0",
-          "https://github.com/dvadesetjedan/dvadesetjedan.github.io",
-          "https://twentyone.world/",
-        ],
-      },
-      {
-        "@context": "https://schema.org",
-        "@type": "WebSite",
-        name: "DvadesetJedan",
-        url: siteUrl,
-        inLanguage: "hr",
-      },
-    )
-  }
+  const base = [
+    {
+      "@context": "https://schema.org",
+      ...organizationReference,
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "@id": websiteId,
+      name: "DvadesetJedan",
+      url: `${siteUrl}/`,
+      inLanguage: "hr",
+      publisher: { "@id": organizationId },
+    },
+  ]
   if (route.type === "article") {
+    const canonical = `${siteUrl}${route.path}`
+    const author = route.author
+      ? { "@type": "Person", name: route.author }
+      : undefined
+    const sourceUrl = externalSourceUrl(route.originalUrl)
+
     base.push({
       "@context": "https://schema.org",
       "@type": "Article",
+      "@id": `${canonical}#article`,
       headline: route.title.replace(" | DvadesetJedan", ""),
       datePublished: route.date,
+      dateModified: route.date,
       description: route.description,
-      url: `${siteUrl}${route.path}`,
-      image: route.image?.startsWith("http") ? route.image : defaultImage,
+      url: canonical,
+      image: [resolveImage(route.image)],
+      author,
+      translator: route.translator
+        ? { "@type": "Person", name: route.translator }
+        : undefined,
+      publisher: { "@id": organizationId },
+      mainEntityOfPage: {
+        "@type": "WebPage",
+        "@id": canonical,
+      },
+      isPartOf: { "@id": websiteId },
+      inLanguage: route.language,
+      keywords: route.tags?.length ? route.tags : undefined,
+      articleSection: route.categories?.length ? route.categories : undefined,
+      isBasedOn: sourceUrl,
+      sourceOrganization: route.sourceName
+        ? { "@type": "Organization", name: route.sourceName }
+        : undefined,
     })
   }
   if (route.jsonLd) base.push(route.jsonLd)
@@ -412,21 +644,76 @@ function extractAssetTags(template) {
   return head
     .split("\n")
     .filter(
-      (line) => line.includes("/assets/") || line.includes('type="module"'),
+      (line) =>
+        line.includes('<script type="module"') ||
+        line.includes('rel="modulepreload"') ||
+        line.includes('rel="stylesheet"'),
     )
     .join("\n")
 }
 
-function renderHead(route, assetTags) {
+function extractFontPreloads() {
+  const assetsDir = path.join(distDir, "assets")
+  if (!fs.existsSync(assetsDir)) return ""
+
+  const fontUrls = new Set()
+  for (const file of fs.readdirSync(assetsDir)) {
+    if (!file.endsWith(".css")) continue
+
+    const css = fs.readFileSync(path.join(assetsDir, file), "utf8")
+    for (const match of css.matchAll(
+      /url\((['"]?)(\/assets\/geist-(?:latin|latin-ext)-[^)'"\s]+\.woff2)\1\)/g,
+    )) {
+      if (fs.existsSync(path.join(distDir, match[2].slice(1)))) {
+        fontUrls.add(match[2])
+      }
+    }
+  }
+
+  return [...fontUrls]
+    .sort((left, right) => left.localeCompare(right))
+    .map(
+      (fontUrl) =>
+        `    <link rel="preload" href="${fontUrl}" as="font" type="font/woff2" crossorigin />`,
+    )
+    .join("\n")
+}
+
+function renderHead(route, assetTags, fontPreloads) {
   const canonical = `${siteUrl}${route.path}`
   const ogTitle = route.ogTitle ?? route.title
   const ogDescription = route.ogDescription ?? route.description
-  const image = route.image?.startsWith("http")
-    ? route.image
-    : route.image?.startsWith("/")
-      ? `${siteUrl}${route.image}`
-      : defaultImage
-  const ogType = route.type === "article" ? "article" : "website"
+  const image = resolveImage(route.image)
+  const imageType = imageMimeType(image)
+  const imageAlt = route.imageAlt ?? ogTitle
+  const ogType =
+    route.type === "article"
+      ? "article"
+      : route.type === "livestreamEpisode"
+        ? "video.other"
+        : "website"
+  const imageDimensions =
+    image === defaultImage
+      ? `    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />`
+      : ""
+  const articleMeta =
+    route.type === "article"
+      ? [
+          route.date
+            ? `    <meta property="article:published_time" content="${escapeHtml(route.date)}" />`
+            : "",
+          route.date
+            ? `    <meta property="article:modified_time" content="${escapeHtml(route.date)}" />`
+            : "",
+          ...(route.tags ?? []).map(
+            (tag) =>
+              `    <meta property="article:tag" content="${escapeHtml(tag)}" />`,
+          ),
+        ]
+          .filter(Boolean)
+          .join("\n")
+      : ""
   const jsonLd = routeJsonLd(route)
     .map(
       (item) =>
@@ -435,33 +722,81 @@ function renderHead(route, assetTags) {
     .join("\n    ")
 
   return `    <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="/favicon.png?v=bitcoin-official" />
-    <link rel="shortcut icon" href="/favicon.png?v=bitcoin-official" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>${escapeHtml(route.title)}</title>
     <meta name="description" content="${escapeHtml(route.description)}" />
-    <meta name="theme-color" content="#f5efe4" />
+    <meta name="theme-color" content="#fbf6ef" />
+    <script>
+      ;(() => {
+        try {
+          const stored = localStorage.getItem("dvadesetjedan-theme")
+          const dark = stored === "dark" || (stored !== "light" && window.matchMedia("(prefers-color-scheme: dark)").matches)
+          document.documentElement.classList.toggle("dark", dark)
+          document.documentElement.style.colorScheme = dark ? "dark" : "light"
+          document.querySelector('meta[name="theme-color"]').content = dark ? "#19130f" : "#fbf6ef"
+        } catch {}
+      })()
+    </script>
+    <meta name="robots" content="${route.noindex ? "noindex, follow" : "index, follow"}" />
     <link rel="canonical" href="${canonical}" />
+    <link rel="alternate" type="application/rss+xml" title="DvadesetJedan RSS" href="${siteUrl}/rss.xml" />
+    <link rel="alternate" type="application/feed+json" title="DvadesetJedan JSON Feed" href="${siteUrl}/feed.json" />
     <meta property="og:title" content="${escapeHtml(ogTitle)}" />
     <meta property="og:description" content="${escapeHtml(ogDescription)}" />
     <meta property="og:type" content="${ogType}" />
     <meta property="og:url" content="${canonical}" />
+    <meta property="og:site_name" content="DvadesetJedan" />
+    <meta property="og:locale" content="hr_HR" />
     <meta property="og:image" content="${image}" />
-    <meta property="og:image:alt" content="DvadesetJedan | Bitcoin Zajednica" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
+    <meta property="og:image:type" content="${imageType}" />
+    <meta property="og:image:alt" content="${escapeHtml(imageAlt)}" />
+${imageDimensions}
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="${escapeHtml(ogTitle)}" />
     <meta name="twitter:description" content="${escapeHtml(ogDescription)}" />
     <meta name="twitter:image" content="${image}" />
+    <meta name="twitter:image:alt" content="${escapeHtml(imageAlt)}" />
+${articleMeta}
+${fontPreloads}
 ${assetTags}
     ${jsonLd}`
 }
 
+function renderNoscript(route) {
+  const heading = route.title.split("|")[0].trim()
+
+  return `    <noscript>
+      <main>
+        <h1>${escapeHtml(heading)}</h1>
+        <p>${escapeHtml(route.description)}</p>
+        <nav aria-label="Glavna navigacija">
+          <a href="/">Naslovnica</a>
+          <a href="/pocni-ovdje/">Počni ovdje</a>
+          <a href="/clanci/">Članci</a>
+          <a href="/livestream/">Livestream</a>
+          <a href="/dogadaji/">Događaji</a>
+          <a href="/zajednica/">Zajednica</a>
+        </nav>
+      </main>
+    </noscript>`
+}
+
 function renderHtml(template, route) {
-  return template.replace(
+  const renderedHead = template.replace(
     /<head>[\s\S]*?<\/head>/,
-    `<head>\n${renderHead(route, extractAssetTags(template))}\n  </head>`,
+    `<head>\n${renderHead(
+      route,
+      extractAssetTags(template),
+      extractFontPreloads(),
+    )}\n  </head>`,
+  )
+
+  return renderedHead.replace(
+    /<noscript>[\s\S]*?<\/noscript>/,
+    renderNoscript(route),
   )
 }
 
@@ -510,7 +845,12 @@ function writeLegacyRedirect(redirect) {
 
 function writeSitemap(routes) {
   const body = routes
-    .map((route) => `  <url><loc>${siteUrl}${route.path}</loc></url>`)
+    .map(
+      (route) =>
+        `  <url><loc>${siteUrl}${route.path}</loc>${
+          route.lastmod ? `<lastmod>${route.lastmod}</lastmod>` : ""
+        }</url>`,
+    )
     .join("\n")
   fs.writeFileSync(
     path.join(distDir, "sitemap.xml"),
@@ -520,9 +860,7 @@ function writeSitemap(routes) {
 
 function writeFeeds(routes) {
   const feedItems = routes
-    .filter((route) =>
-      ["article", "livestreamEpisode", "event"].includes(route.type),
-    )
+    .filter((route) => ["article", "livestreamEpisode"].includes(route.type))
     .filter((route) => route.date)
     .sort((left, right) => String(right.date).localeCompare(String(left.date)))
     .slice(0, 20)
@@ -534,7 +872,7 @@ function writeFeeds(routes) {
         <link>${siteUrl}${item.path}</link>
         <guid>${siteUrl}${item.path}</guid>
         <description>${escapeHtml(item.description)}</description>
-        <pubDate>${new Date(item.date).toUTCString()}</pubDate>
+        <pubDate>${new Date(feedDate(item.date)).toUTCString()}</pubDate>
       </item>`,
     )
     .join("\n")
@@ -566,7 +904,7 @@ function writeFeeds(routes) {
           url: `${siteUrl}${item.path}`,
           title: item.title,
           content_text: item.description,
-          date_published: item.date,
+          date_published: feedDate(item.date),
         })),
       },
       null,
@@ -604,11 +942,12 @@ fs.writeFileSync(
     description:
       "Poveznica je možda promijenjena ili stranica više ne postoji.",
     type: "page",
+    noindex: true,
   }),
 )
 fs.writeFileSync(
   path.join(distDir, "robots.txt"),
-  `User-agent: *\nAllow: /\nSitemap: ${siteUrl}/sitemap.xml\n`,
+  `User-agent: OAI-SearchBot\nAllow: /\n\nUser-agent: *\nAllow: /\nSitemap: ${siteUrl}/sitemap.xml\n`,
 )
 writeSitemap(routes)
 writeFeeds(routes)

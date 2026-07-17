@@ -64,6 +64,8 @@ export function ContributePage() {
               alt="Twenty One consistency ikona za doprinose"
               className="h-full w-full object-contain drop-shadow-[0_0_24px_rgba(247,147,26,0.35)]"
               src="/images/twentyone-consistency.svg"
+              width={1009}
+              height={810}
             />
           </div>
         </section>
@@ -72,7 +74,7 @@ export function ContributePage() {
           <ul className="grid gap-3 text-base leading-8 text-muted-foreground md:grid-cols-2">
             {contributionItems.map((item) => (
               <li key={item} className="flex gap-3">
-                <ArrowUpRight className="mt-1 size-4 shrink-0 text-primary" />
+                <ArrowUpRight className="mt-1 size-4 shrink-0 text-primary-strong" />
                 <span>{item}</span>
               </li>
             ))}
@@ -110,7 +112,7 @@ export function ContributePage() {
           <div className="mt-6 grid gap-4 md:grid-cols-2">
             {githubContributionSteps.map((step) => (
               <article
-                className="rounded-[1.4rem] border border-border/80 bg-background/70 px-5 py-5"
+                className="rounded-[1.4rem] border border-border/80 bg-background/70 px-5 py-5 sm:px-6"
                 key={step.title}
               >
                 <h3 className="text-lg font-semibold tracking-[-0.02em] text-foreground">

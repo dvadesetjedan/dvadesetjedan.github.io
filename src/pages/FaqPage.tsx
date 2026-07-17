@@ -34,29 +34,27 @@ export function FaqPage() {
                 {group.items.map((item) => (
                   <details
                     key={item.question}
-                    className="rounded-[1.5rem] border border-border/80 bg-card px-5 py-5"
+                    className="rounded-[1.5rem] border border-border/80 bg-card px-5 py-5 sm:px-6"
                   >
-                    <summary className="cursor-pointer list-none text-lg font-medium text-foreground">
+                    <summary className="disclosure-summary cursor-pointer list-none text-lg font-medium text-foreground">
+                      {item.question}
+                    </summary>
+                    <p className="mt-4 max-w-3xl text-sm leading-7 text-muted-foreground">
+                      {item.answer}
                       {item.question ===
                       "Je li DvadesetJedan dio twentyone.world?" ? (
                         <>
-                          Je li DvadesetJedan dio{" "}
+                          {" "}
                           <a
-                            className="font-semibold hover:text-primary"
+                            className="font-semibold text-foreground hover:text-primary-strong"
                             href={media.twentyOneUrl}
                             rel="noopener noreferrer"
                             target="_blank"
                           >
-                            twentyone.world
+                            Otvori twentyone.world.
                           </a>
-                          ?
                         </>
-                      ) : (
-                        item.question
-                      )}
-                    </summary>
-                    <p className="mt-4 max-w-3xl text-sm leading-7 text-muted-foreground">
-                      {item.answer}
+                      ) : null}
                     </p>
                   </details>
                 ))}

@@ -122,7 +122,7 @@ export function AboutPage() {
             <>
               Dio otvorenog{" "}
               <a
-                className="font-semibold hover:text-primary"
+                className="font-semibold hover:text-primary-strong"
                 href={media.twentyOneUrl}
                 rel="noopener noreferrer"
                 target="_blank"

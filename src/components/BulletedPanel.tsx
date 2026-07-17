@@ -6,7 +6,7 @@ export function BulletedPanel({ items }: { items: ReadonlyArray<string> }) {
       <ul className="grid gap-3 text-base leading-8 text-muted-foreground md:grid-cols-2">
         {items.map((item) => (
           <li key={item} className="flex gap-3">
-            <ShieldCheck className="mt-1 size-4 shrink-0 text-primary" />
+            <ShieldCheck className="mt-1 size-4 shrink-0 text-primary-strong" />
             <span>{item}</span>
           </li>
         ))}

@@ -52,6 +52,8 @@ export function CommunityPage() {
               alt="Twenty One space ikona za zajednicu"
               className="h-full w-full object-contain drop-shadow-[0_0_24px_rgba(247,147,26,0.35)]"
               src="/images/twentyone-space.svg"
+              width={296}
+              height={238}
             />
           </div>
         </section>
@@ -87,7 +89,7 @@ export function CommunityPage() {
           <ul className="mt-6 grid gap-3 text-base leading-8 text-muted-foreground md:grid-cols-2">
             {principles.map((principle) => (
               <li key={principle} className="flex gap-3">
-                <ShieldCheck className="mt-1 size-4 shrink-0 text-primary" />
+                <ShieldCheck className="mt-1 size-4 shrink-0 text-primary-strong" />
                 <span>{principle}</span>
               </li>
             ))}

@@ -22,6 +22,10 @@ function sectionTitle(status: CityEntry["status"]) {
   return "Arhiva"
 }
 
+function relatedEventCountLabel(count: number) {
+  return count === 1 ? "1 povezan događaj" : `${count} povezanih događaja`
+}
+
 function isRegionalFocusCountry(code: string) {
   return (
     code === "-99" ||
@@ -266,14 +270,14 @@ export function CitiesPage({
                   return (
                     <a
                       key={city.slug}
-                      className="rounded-[1.7rem] border border-border/80 bg-card px-5 py-6 transition-colors hover:border-primary/40"
+                      className="rounded-[1.7rem] border border-border/80 bg-card px-5 py-6 transition-colors hover:border-primary/40 sm:px-6"
                       href={cityHref(city.slug)}
                     >
-                      <p className="inline-flex rounded-full bg-primary/12 px-3 py-1 text-xs font-medium text-primary">
+                      <p className="inline-flex rounded-full bg-primary/12 px-3 py-1 text-xs font-medium text-primary-strong">
                         {statusLabel(city.status)}
                       </p>
                       <h3 className="mt-4 flex items-center gap-2 text-3xl font-semibold tracking-[-0.04em] text-foreground">
-                        <MapPinned className="size-5 text-primary" />
+                        <MapPinned className="size-5 text-primary-strong" />
                         {city.name}
                       </h3>
                       <p className="mt-2 text-sm text-muted-foreground">
@@ -283,7 +287,7 @@ export function CitiesPage({
                         {city.summary}
                       </p>
                       <p className="mt-5 text-sm font-medium text-foreground">
-                        {cityEvents.length} povezanih događaja
+                        {relatedEventCountLabel(cityEvents.length)}
                       </p>
                     </a>
                   )

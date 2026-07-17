@@ -74,7 +74,7 @@ export function LivestreamEpisodePage({ episode }: { episode: EpisodeEntry }) {
           </div>
 
           {episode.needsShownotes ? (
-            <section className="mt-8 rounded-[1.5rem] border border-primary/20 bg-primary/8 px-5 py-5">
+            <section className="mt-8 rounded-[1.5rem] border border-primary/20 bg-primary/8 px-5 py-5 sm:px-6">
               <h2 className="text-2xl font-semibold tracking-[-0.04em] text-foreground">
                 Ovoj epizodi još trebaju shownotes.
               </h2>
@@ -82,7 +82,7 @@ export function LivestreamEpisodePage({ episode }: { episode: EpisodeEntry }) {
                 Ovoj epizodi još trebaju sažetak, poglavlja i linkovi. Možeš
                 pomoći kroz{" "}
                 <a
-                  className="font-medium text-foreground underline decoration-border underline-offset-4 transition-colors hover:text-primary hover:decoration-primary"
+                  className="font-medium text-foreground underline decoration-border underline-offset-4 transition-colors hover:text-primary-strong hover:decoration-primary"
                   href="https://github.com/dvadesetjedan/dvadesetjedan.github.io"
                   rel="noopener noreferrer"
                   target="_blank"
@@ -91,7 +91,7 @@ export function LivestreamEpisodePage({ episode }: { episode: EpisodeEntry }) {
                 </a>{" "}
                 ili{" "}
                 <a
-                  className="font-medium text-foreground underline decoration-border underline-offset-4 transition-colors hover:text-primary hover:decoration-primary"
+                  className="font-medium text-foreground underline decoration-border underline-offset-4 transition-colors hover:text-primary-strong hover:decoration-primary"
                   href="https://t.me/+ud6ARwb7rX5lZjU0"
                   rel="noopener noreferrer"
                   target="_blank"
@@ -104,7 +104,7 @@ export function LivestreamEpisodePage({ episode }: { episode: EpisodeEntry }) {
           ) : null}
 
           <section className="mt-10 grid gap-6 md:grid-cols-2">
-            <div className="rounded-[1.5rem] border border-border/80 bg-background/70 px-5 py-5">
+            <div className="rounded-[1.5rem] border border-border/80 bg-background/70 px-5 py-5 sm:px-6">
               <h2 className="text-2xl font-semibold tracking-[-0.04em] text-foreground">
                 Sažetak
               </h2>
@@ -125,7 +125,7 @@ export function LivestreamEpisodePage({ episode }: { episode: EpisodeEntry }) {
               )}
             </div>
 
-            <div className="rounded-[1.5rem] border border-border/80 bg-background/70 px-5 py-5">
+            <div className="rounded-[1.5rem] border border-border/80 bg-background/70 px-5 py-5 sm:px-6">
               <h2 className="text-2xl font-semibold tracking-[-0.04em] text-foreground">
                 Poglavlja i linkovi
               </h2>
@@ -151,7 +151,7 @@ export function LivestreamEpisodePage({ episode }: { episode: EpisodeEntry }) {
                   {episode.links.map((link) => (
                     <a
                       key={link.href}
-                      className="inline-flex items-center gap-2 text-sm font-medium text-primary"
+                      className="inline-flex items-center gap-2 text-sm font-medium text-primary-strong"
                       href={link.href}
                       rel="noopener noreferrer"
                       target="_blank"
@@ -166,14 +166,14 @@ export function LivestreamEpisodePage({ episode }: { episode: EpisodeEntry }) {
           </section>
 
           {episode.terms?.length ? (
-            <section className="mt-8 rounded-[1.5rem] border border-border/80 bg-background/70 px-5 py-5">
+            <section className="mt-8 rounded-[1.5rem] border border-border/80 bg-background/70 px-5 py-5 sm:px-6">
               <h2 className="text-2xl font-semibold tracking-[-0.04em] text-foreground">
                 Pojmovi za početnike
               </h2>
               <div className="mt-4 grid gap-3 md:grid-cols-2">
                 {episode.terms.map((term) => (
                   <div
-                    className="rounded-[1.2rem] border border-border/70 px-4 py-4"
+                    className="rounded-[1.2rem] border border-border/70 px-4 py-4 sm:px-6"
                     key={term.term}
                   >
                     <h3 className="font-semibold text-foreground">
@@ -189,7 +189,7 @@ export function LivestreamEpisodePage({ episode }: { episode: EpisodeEntry }) {
           ) : null}
 
           {episode.clips?.length || episode.transcriptUrl ? (
-            <section className="mt-8 rounded-[1.5rem] border border-border/80 bg-background/70 px-5 py-5">
+            <section className="mt-8 rounded-[1.5rem] border border-border/80 bg-background/70 px-5 py-5 sm:px-6">
               <h2 className="text-2xl font-semibold tracking-[-0.04em] text-foreground">
                 Dodatni materijali
               </h2>
@@ -220,7 +220,7 @@ export function LivestreamEpisodePage({ episode }: { episode: EpisodeEntry }) {
           ) : null}
 
           {episode.relatedArticleSlugs?.length ? (
-            <section className="mt-8 rounded-[1.5rem] border border-border/80 bg-background/70 px-5 py-5">
+            <section className="mt-8 rounded-[1.5rem] border border-border/80 bg-background/70 px-5 py-5 sm:px-6">
               <h2 className="text-2xl font-semibold tracking-[-0.04em] text-foreground">
                 Povezani članci
               </h2>
@@ -239,7 +239,7 @@ export function LivestreamEpisodePage({ episode }: { episode: EpisodeEntry }) {
           ) : null}
 
           {episode.relatedEventSlugs?.length ? (
-            <section className="mt-8 rounded-[1.5rem] border border-border/80 bg-background/70 px-5 py-5">
+            <section className="mt-8 rounded-[1.5rem] border border-border/80 bg-background/70 px-5 py-5 sm:px-6">
               <h2 className="text-2xl font-semibold tracking-[-0.04em] text-foreground">
                 Povezani događaji
               </h2>

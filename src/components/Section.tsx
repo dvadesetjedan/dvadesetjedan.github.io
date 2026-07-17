@@ -16,7 +16,10 @@ export function Section({
   children,
 }: SectionProps) {
   return (
-    <section className="mx-auto max-w-7xl px-5 py-10 sm:px-8 sm:py-14" id={id}>
+    <section
+      className="mx-auto max-w-7xl scroll-mt-32 px-5 py-10 sm:px-8 sm:py-14"
+      id={id}
+    >
       <div className="max-w-4xl">
         <h2 className="text-4xl font-semibold tracking-[-0.05em] text-foreground sm:text-5xl">
           {title}

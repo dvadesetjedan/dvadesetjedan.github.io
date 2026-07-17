@@ -1,7 +1,7 @@
 export type ColorTheme = "light" | "dark"
 
 const THEME_STORAGE_KEY = "dvadesetjedan-theme"
-const LIGHT_THEME_COLOR = "#f5efe4"
+const LIGHT_THEME_COLOR = "#fbf6ef"
 const DARK_THEME_COLOR = "#19130f"
 
 function getSystemTheme(): ColorTheme {

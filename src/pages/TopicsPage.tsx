@@ -75,7 +75,7 @@ export function TopicsPage() {
                   return topic ? (
                     <div
                       key={topic.title}
-                      className="rounded-[1.2rem] border border-border/70 bg-background/70 px-4 py-4"
+                      className="rounded-[1.2rem] border border-border/70 bg-background/70 px-4 py-4 sm:px-6"
                     >
                       <h3 className="text-lg font-semibold tracking-[-0.03em] text-foreground">
                         {topic.title}

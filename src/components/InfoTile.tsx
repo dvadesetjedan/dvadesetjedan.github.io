@@ -10,7 +10,7 @@ export function InfoTile({
   value: ReactNode
 }) {
   return (
-    <div className="rounded-[1.4rem] border border-border/80 bg-background/70 px-4 py-4">
+    <div className="rounded-[1.4rem] border border-border/80 bg-background/70 px-4 py-4 sm:px-6">
       <p className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-muted-foreground">
         {icon}
         {label}

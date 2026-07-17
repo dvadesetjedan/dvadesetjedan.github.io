@@ -6,16 +6,18 @@ import {
   isTranslatedArticle,
 } from "@/lib/content"
 import { ArrowUpRight } from "lucide-react"
-import { ActionButton } from "@/components/ActionButton"
 
 export function ArticleCard({ article }: { article: ArticleEntry }) {
   const curation = getArticleCuration(article.slug)
 
   return (
-    <div className="rounded-[1.6rem] bg-card px-5 py-6 shadow-[var(--shadow-border)]">
+    <a
+      className="group block rounded-[1.6rem] bg-card px-5 py-6 shadow-[var(--shadow-border)] transition-[translate,scale,box-shadow] duration-150 ease-out hover:-translate-y-0.5 hover:shadow-[var(--shadow-border-hover)] active:scale-[0.96] motion-reduce:transition-none motion-reduce:hover:translate-y-0 motion-reduce:active:scale-100 sm:px-6"
+      href={articleHref(article.slug)}
+    >
       <div className="flex flex-wrap gap-2">
         {curation ? (
-          <span className="inline-flex rounded-full bg-primary/12 px-3 py-1 text-xs font-medium text-primary">
+          <span className="inline-flex rounded-full bg-primary/12 px-3 py-1 text-xs font-medium text-primary-strong">
             {curation.topic}
           </span>
         ) : null}
@@ -26,9 +28,7 @@ export function ArticleCard({ article }: { article: ArticleEntry }) {
         ) : null}
       </div>
       <h3 className="mt-4 text-2xl font-semibold tracking-[-0.04em] text-foreground">
-        <a className="hover:text-primary" href={articleHref(article.slug)}>
-          {article.title}
-        </a>
+        {article.title}
       </h3>
       <p className="mt-2 text-xs uppercase tracking-[0.18em] text-muted-foreground tabular-nums">
         {formatArticleDate(article.date)}
@@ -42,14 +42,10 @@ export function ArticleCard({ article }: { article: ArticleEntry }) {
           {curation.blurb}
         </p>
       ) : null}
-      <div className="mt-5">
-        <ActionButton
-          href={articleHref(article.slug)}
-          icon={<ArrowUpRight className="size-4" />}
-        >
-          Čitaj članak
-        </ActionButton>
-      </div>
-    </div>
+      <span className="mt-5 inline-flex min-h-11 items-center gap-2 text-sm font-medium text-primary-strong">
+        Čitaj članak
+        <ArrowUpRight className="size-4 transition-transform group-hover:translate-x-0.5" />
+      </span>
+    </a>
   )
 }

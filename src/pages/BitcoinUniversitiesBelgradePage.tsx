@@ -46,8 +46,8 @@ function ProgramCard({
   index: number
 }) {
   return (
-    <article className="rounded-[1.5rem] border border-border/80 bg-card px-5 py-6 shadow-[var(--shadow-border)]">
-      <span className="inline-flex size-8 items-center justify-center rounded-full bg-primary/12 text-sm font-semibold text-primary">
+    <article className="rounded-[1.5rem] border border-border/80 bg-card px-5 py-6 shadow-[var(--shadow-border)] sm:px-6">
+      <span className="inline-flex size-8 items-center justify-center rounded-full bg-primary/12 text-sm font-semibold text-primary-strong">
         {index + 1}
       </span>
       <h3 className="mt-5 text-xl font-semibold tracking-[-0.03em] text-foreground">
@@ -121,7 +121,11 @@ export function BitcoinUniversitiesBelgradePage() {
               <img
                 alt="Detalj rasvjete u Sava Centru u Beogradu"
                 className="h-full w-full object-cover"
+                decoding="async"
+                height={848}
+                loading="lazy"
                 src="/images/sava-centar-lighting.jpg"
+                width={1280}
               />
             </picture>
             <a
@@ -142,7 +146,7 @@ export function BitcoinUniversitiesBelgradePage() {
         >
           <div className="rounded-[1.8rem] border border-primary/20 bg-primary/8 px-6 py-6 sm:px-10">
             <div className="flex gap-4">
-              <BookOpen className="mt-1 size-6 shrink-0 text-primary" />
+              <BookOpen className="mt-1 size-6 shrink-0 text-primary-strong" />
               <p className="max-w-3xl text-base leading-8 text-foreground">
                 Bitcoin kao novac, tehnologija, štednja, sigurnost i osobne
                 financije — obrazovni program za studente.
@@ -207,10 +211,10 @@ export function BitcoinUniversitiesBelgradePage() {
           <div className="grid gap-5 lg:grid-cols-3">
             {sponsorshipPackages.map((tier) => (
               <article
-                className="rounded-[1.5rem] border border-border/80 bg-card px-5 py-6 shadow-[var(--shadow-border)]"
+                className="rounded-[1.5rem] border border-border/80 bg-card px-5 py-6 shadow-[var(--shadow-border)] sm:px-6"
                 key={tier.title}
               >
-                <p className="text-sm font-medium text-primary">{tier.price}</p>
+                <p className="text-sm font-medium text-primary-strong">{tier.price}</p>
                 <h3 className="mt-2 text-2xl font-semibold tracking-[-0.04em] text-foreground">
                   {tier.title}
                 </h3>
@@ -233,7 +237,7 @@ export function BitcoinUniversitiesBelgradePage() {
 
         <section className="mt-10 rounded-[1.8rem] border border-primary/25 bg-primary/8 px-6 py-8 sm:px-10">
           <div className="flex gap-4">
-            <ShieldCheck className="mt-1 size-6 shrink-0 text-primary" />
+            <ShieldCheck className="mt-1 size-6 shrink-0 text-primary-strong" />
             <div>
               <h2 className="text-4xl font-semibold tracking-[-0.05em] text-foreground sm:text-5xl">
                 Što ovo nije
@@ -280,7 +284,7 @@ export function BitcoinUniversitiesBelgradePage() {
           <div className="grid gap-4">
             {universityProgramFaq.map((item) => (
               <article
-                className="rounded-[1.5rem] border border-border/80 bg-card px-5 py-5"
+                className="rounded-[1.5rem] border border-border/80 bg-card px-5 py-5 sm:px-6"
                 key={item.question}
               >
                 <h3 className="text-xl font-semibold tracking-[-0.03em] text-foreground">
