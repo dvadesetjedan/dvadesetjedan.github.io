@@ -2,9 +2,9 @@ export const siteConfig = {
   siteName: "DvadesetJedan",
   siteUrl: "https://dvadesetjedan.com",
   githubPagesUrl: "https://dvadesetjedan.github.io",
-  defaultTitle: "DvadesetJedan | Bitcoin Zajednica",
+  defaultTitle: "DvadesetJedan | Bitcoin signal i druženja uživo",
   defaultDescription:
-    "Bitcoin signal za ljude koji govore našim jezicima: članci, livestream, događaji i zajednica bez tradinga, tokena i obećanja zarade.",
+    "Bitcoin signal, otvorena zajednica i druženja uživo za ljude koji govore našim jezicima.",
   defaultOgImage: "/social-preview.png",
   locale: "hr_HR",
   languagePolicy:

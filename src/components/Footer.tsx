@@ -69,8 +69,8 @@ export function Footer() {
             DvadesetJedan
           </h2>
           <p className="mt-3 max-w-3xl text-sm leading-7 text-muted-foreground">
-            Regionalni Bitcoin-only signal za Balkan. Lokalni jezik. Otvorena
-            zajednica.
+            Bitcoin signal, otvorena zajednica i druženja uživo za ljude koji
+            govore našim jezicima.
           </p>
           <p className="mt-6 max-w-3xl text-sm leading-7 text-muted-foreground">
             Sadržaj je obrazovne naravi i ne predstavlja financijsko, porezno ni

@@ -104,10 +104,52 @@
   min-height: 100vh;
 }
 
-.hero-copy,
+.hero-copy {
+  overflow-wrap: anywhere;
+}
+
 .hero-copy * {
   max-width: 100%;
   overflow-wrap: anywhere;
+}
+
+.hero-light-fade {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(251, 246, 239, 1) 0%,
+      rgba(251, 246, 239, 0.98) 48%,
+      rgba(251, 246, 239, 0.82) 68%,
+      rgba(251, 246, 239, 0.24) 90%,
+      rgba(251, 246, 239, 0) 100%
+    ),
+    linear-gradient(
+      90deg,
+      rgba(251, 246, 239, 0.98) 0%,
+      rgba(251, 246, 239, 0.78) 70%,
+      rgba(251, 246, 239, 0) 100%
+    );
+}
+
+@media (min-width: 768px) {
+  .hero-light-fade {
+    background:
+      linear-gradient(
+        90deg,
+        rgba(251, 246, 239, 1) 0%,
+        rgba(251, 246, 239, 0.99) 34%,
+        rgba(251, 246, 239, 0.88) 48%,
+        rgba(251, 246, 239, 0.44) 62%,
+        rgba(251, 246, 239, 0.1) 76%,
+        rgba(251, 246, 239, 0) 88%
+      ),
+      linear-gradient(
+        180deg,
+        rgba(251, 246, 239, 0.16) 0%,
+        rgba(251, 246, 239, 0) 35%,
+        rgba(251, 246, 239, 0.08) 100%
+      );
+  }
 }
 
 .safe-heading {
