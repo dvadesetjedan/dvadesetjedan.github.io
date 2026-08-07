@@ -722,9 +722,8 @@ function renderHead(route, assetTags, fontPreloads) {
     .join("\n    ")
 
   return `    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" type="image/png" sizes="192x192" href="/favicon.png" />
-    <link rel="apple-touch-icon" href="/favicon.png" />
+    <link rel="icon" type="image/png" sizes="1920x1920" href="/bitcoin-favicon.png" />
+    <link rel="apple-touch-icon" href="/bitcoin-favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>${escapeHtml(route.title)}</title>
     <meta name="description" content="${escapeHtml(route.description)}" />

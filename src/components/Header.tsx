@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react"
-import { Languages, Moon, Sun } from "lucide-react"
+import { Moon, Sun } from "lucide-react"
 
 import { TelegramIcon } from "@/components/Icons"
 import { OptimizedImage } from "@/components/OptimizedImage"
@@ -12,13 +12,6 @@ import {
   storeTheme,
   type ColorTheme,
 } from "@/lib/theme"
-import {
-  getInitialLocale,
-  localeLabels,
-  locales,
-  storeLocale,
-  type Locale,
-} from "@/lib/locale"
 
 function isActiveNavigationItem(route: Route, href: string) {
   if (href.startsWith("http")) return false
@@ -53,30 +46,10 @@ function isActiveNavigationItem(route: Route, href: string) {
 }
 
 const headerCopy = {
-  hr: {
-    navigation: ["O projektu", "Počni ovdje", "Članci", "Livestream", "Događaji", "Gradovi", "Zajednica", "Doprinesi"],
-    chooseLanguage: "Odaberi jezik",
-    telegram: "Uđi u Telegram",
-    light: "Prebaci na svijetli način",
-    dark: "Prebaci na tamni način",
-    navigationLabel: "Glavna navigacija",
-  },
-  sr: {
-    navigation: ["O projektu", "Počni ovde", "Članci", "Prenos uživo", "Događaji", "Gradovi", "Zajednica", "Doprinesi"],
-    chooseLanguage: "Izaberi jezik",
-    telegram: "Uđi u Telegram",
-    light: "Prebaci na svetli prikaz",
-    dark: "Prebaci na tamni prikaz",
-    navigationLabel: "Glavna navigacija",
-  },
-  sl: {
-    navigation: ["O projektu", "Začni tukaj", "Članki", "Prenos v živo", "Dogodki", "Mesta", "Skupnost", "Prispevaj"],
-    chooseLanguage: "Izberi jezik",
-    telegram: "Vstopi v Telegram",
-    light: "Preklopi na svetli način",
-    dark: "Preklopi na temni način",
-    navigationLabel: "Glavna navigacija",
-  },
+  telegram: "Uđi u Telegram",
+  light: "Prebaci na svijetli način",
+  dark: "Prebaci na tamni način",
+  navigationLabel: "Glavna navigacija",
 } as const
 
 export function Header() {
@@ -85,7 +58,6 @@ export function Header() {
     parseRouteFromPath(window.location.pathname),
   )
   const [theme, setTheme] = useState<ColorTheme>(() => getInitialTheme())
-  const [locale, setLocale] = useState<Locale>(() => getInitialLocale())
 
   useEffect(() => {
     const onPopState = () =>
@@ -135,7 +107,6 @@ export function Header() {
 
   const logoUrl =
     theme === "dark" ? "/images/dvadesetjedan-logo-dark.png" : media.logoUrl
-  const copy = headerCopy[locale]
 
   return (
     <header className="sticky top-0 z-40 border-b border-border/70 bg-background/88 backdrop-blur-xl">
@@ -163,7 +134,7 @@ export function Header() {
         </a>
 
         <nav className="hidden items-center gap-4 text-sm text-muted-foreground min-[1160px]:flex xl:gap-6">
-          {navigation.map((item, index) => {
+          {navigation.map((item) => {
             const isActive = isActiveNavigationItem(route, item.href)
 
             return (
@@ -183,36 +154,15 @@ export function Header() {
                 }
                 target={item.href.startsWith("http") ? "_blank" : undefined}
               >
-                {copy.navigation[index]}
+                {item.label}
               </a>
             )
           })}
         </nav>
 
         <div className="flex shrink-0 items-center gap-2">
-          <label className="relative inline-flex size-11 items-center justify-center rounded-full bg-card text-foreground shadow-[var(--shadow-border)] transition-[translate,scale,box-shadow,background-color,color] duration-150 ease-out hover:-translate-y-0.5 hover:bg-background hover:shadow-[var(--shadow-border-hover)] motion-reduce:transition-none motion-reduce:hover:translate-y-0">
-            <Languages aria-hidden="true" className="pointer-events-none absolute size-4" />
-            <select
-              aria-label={copy.chooseLanguage}
-              className="absolute inset-0 cursor-pointer appearance-none bg-transparent text-transparent outline-none"
-              onChange={(event) => {
-                const nextLocale = event.target.value as Locale
-                setLocale(nextLocale)
-                storeLocale(nextLocale)
-              }}
-              value={locale}
-            >
-              {locales.map((item) => (
-                <option key={item} value={item}>
-                  {localeLabels[item]}
-                </option>
-              ))}
-            </select>
-          </label>
           <button
-            aria-label={
-              theme === "dark" ? copy.light : copy.dark
-            }
+            aria-label={theme === "dark" ? headerCopy.light : headerCopy.dark}
             className="relative inline-flex size-11 items-center justify-center rounded-full bg-card text-foreground shadow-[var(--shadow-border)] transition-[translate,scale,box-shadow,background-color,color] duration-150 ease-out hover:-translate-y-0.5 hover:bg-background hover:shadow-[var(--shadow-border-hover)] active:scale-[0.96] motion-reduce:transition-none motion-reduce:hover:translate-y-0 motion-reduce:active:scale-100"
             onClick={toggleTheme}
             type="button"
@@ -240,25 +190,25 @@ export function Header() {
           </button>
 
           <a
-            aria-label={copy.telegram}
+            aria-label={headerCopy.telegram}
             className="inline-flex min-h-11 shrink-0 items-center gap-1.5 rounded-full bg-card py-2 pl-3 pr-3 text-sm font-medium text-foreground shadow-[var(--shadow-border)] transition-[translate,scale,box-shadow,background-color,color] duration-150 ease-out hover:-translate-y-0.5 hover:bg-background hover:shadow-[var(--shadow-border-hover)] active:scale-[0.96] motion-reduce:transition-none motion-reduce:hover:translate-y-0 motion-reduce:active:scale-100 sm:gap-2 sm:pl-3.5 sm:pr-6"
             href={communityHref()}
             rel="noopener noreferrer"
             target="_blank"
           >
             <TelegramIcon />
-            <span className="hidden sm:inline">{copy.telegram}</span>
+            <span className="hidden sm:inline">{headerCopy.telegram}</span>
           </a>
         </div>
       </div>
 
       <div className="border-t border-border/60 min-[1160px]:hidden">
         <nav
-          aria-label={copy.navigationLabel}
+          aria-label={headerCopy.navigationLabel}
           className="mobile-scroll-nav mx-auto flex max-w-7xl gap-5 overflow-x-auto px-5 py-3 text-sm text-muted-foreground sm:px-8"
           ref={mobileNavRef}
         >
-          {navigation.map((item, index) => {
+          {navigation.map((item) => {
             const isActive = isActiveNavigationItem(route, item.href)
 
             return (
@@ -278,7 +228,7 @@ export function Header() {
                 }
                 target={item.href.startsWith("http") ? "_blank" : undefined}
               >
-                {copy.navigation[index]}
+                {item.label}
               </a>
             )
           })}
