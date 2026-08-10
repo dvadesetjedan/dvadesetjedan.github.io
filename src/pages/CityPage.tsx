@@ -1,7 +1,7 @@
 import { ArrowUpRight, MapPinned, Send } from "lucide-react"
 
 import type { CityEntry } from "@/data/cities"
-import type { EventEntry } from "@/data/events"
+import { eventSortTime, getEventStatus, type EventEntry } from "@/data/events"
 import { ActionButton } from "@/components/ActionButton"
 import { BackLink } from "@/components/BackLink"
 import { EventCard } from "@/components/EventCard"
@@ -29,14 +29,14 @@ export function CityPage({
 }) {
   usePageMeta(`${city.name} | DvadesetJedan gradovi`, city.summary)
 
-  const cityEvents = events.filter((event) =>
-    city.eventSlugs?.includes(event.slug),
-  )
+  const cityEvents = events.filter((event) => event.citySlug === city.slug)
   const now = new Date()
-  const upcomingEvents = cityEvents.filter(
-    (event) => new Date(event.end) >= now,
-  )
-  const pastEvents = cityEvents.filter((event) => new Date(event.end) < now)
+  const upcomingEvents = cityEvents
+    .filter((event) => getEventStatus(event, now) === "upcoming")
+    .sort((left, right) => eventSortTime(left) - eventSortTime(right))
+  const pastEvents = cityEvents
+    .filter((event) => getEventStatus(event, now) === "past")
+    .sort((left, right) => eventSortTime(right) - eventSortTime(left))
 
   return (
     <Layout>

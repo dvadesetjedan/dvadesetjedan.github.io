@@ -1,12 +1,14 @@
-import type { EventEntry } from "@/data/events"
-
 import { ArrowUpRight, Send } from "lucide-react"
+import { useState } from "react"
 
 import { ActionButton } from "@/components/ActionButton"
 import { BackLink } from "@/components/BackLink"
+import { CommunityMap } from "@/components/CommunityMap"
 import { EventCard } from "@/components/EventCard"
 import { Layout } from "@/components/Layout"
+import type { CityEntry } from "@/data/cities"
 import { eventMeta } from "@/data/eventMeta"
+import { eventSortTime, getEventStatus, type EventEntry } from "@/data/events"
 import { CONTRIBUTE_URL } from "@/data/site"
 import { communityHref } from "@/lib/content"
 import { usePageMeta } from "@/lib/usePageMeta"
@@ -19,11 +21,6 @@ const eventSteps = [
   "Počni malim druženjem, ne velikim događajem",
 ] as const
 
-function eventStatus(event: EventEntry, now = new Date()) {
-  if (event.status) return event.status
-  return new Date(event.end) >= now ? "upcoming" : "past"
-}
-
 function eventCountLabel(count: number) {
   return count === 1 ? "1 događaj" : `${count} događaja`
 }
@@ -32,39 +29,46 @@ function cityAnchorId(city: string) {
   return `grad-${city.toLowerCase().replace(/\s+/g, "-")}`
 }
 
-export function EventsPage({ events }: { events: EventEntry[] }) {
+export function EventsPage({
+  cities,
+  events,
+}: {
+  cities: CityEntry[]
+  events: EventEntry[]
+}) {
   usePageMeta(
     "Događaji | DvadesetJedan",
     "Nadolazeći Bitcoin događaji, arhiva druženja i način kako predložiti lokalni događaj kroz DvadesetJedan zajednicu.",
   )
 
+  const [activeCitySlug, setActiveCitySlug] = useState<string | null>(null)
   const now = new Date()
   const upcomingEvents = events
-    .filter((event) => eventStatus(event, now) === "upcoming")
-    .sort(
-      (left, right) =>
-        new Date(left.start).getTime() - new Date(right.start).getTime(),
+    .filter((event) => getEventStatus(event, now) === "upcoming")
+    .filter(
+      (event) => activeCitySlug === null || event.citySlug === activeCitySlug,
     )
+    .sort((left, right) => eventSortTime(left) - eventSortTime(right))
   const pastEvents = events
-    .filter((event) => eventStatus(event, now) === "past")
-    .sort(
-      (left, right) =>
-        new Date(right.start).getTime() - new Date(left.start).getTime(),
+    .filter((event) => getEventStatus(event, now) === "past")
+    .filter(
+      (event) => activeCitySlug === null || event.citySlug === activeCitySlug,
     )
+    .sort((left, right) => eventSortTime(right) - eventSortTime(left))
   const cancelledEvents = events.filter(
-    (event) => eventStatus(event, now) === "cancelled",
+    (event) =>
+      getEventStatus(event, now) === "cancelled" &&
+      (activeCitySlug === null || event.citySlug === activeCitySlug),
   )
   const cityAnchorOwners = new Map<string, string>()
-  for (const event of [
-    ...upcomingEvents,
-    ...cancelledEvents,
-    ...pastEvents,
-  ]) {
+  for (const event of [...upcomingEvents, ...cancelledEvents, ...pastEvents]) {
     if (!cityAnchorOwners.has(event.city)) {
       cityAnchorOwners.set(event.city, event.slug)
     }
   }
-  const cityGroups = [...cityAnchorOwners.keys()].sort()
+  const cityGroups = cities
+    .filter((city) => events.some((event) => event.citySlug === city.slug))
+    .sort((left, right) => left.name.localeCompare(right.name, "hr"))
 
   return (
     <Layout>
@@ -79,8 +83,8 @@ export function EventsPage({ events }: { events: EventEntry[] }) {
               Pregled svih događaja na jednom mjestu.
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-muted-foreground">
-              Nadolazeći događaji i arhiva prethodnih druženja, sa zasebnim
-              stranicom za svaki događaj, prijavom, kartom i izvozom u kalendar.
+              Nadolazeći događaji i fotografska arhiva prethodnih druženja, sa
+              zasebnom stranicom za svaki potvrđeni ili dokumentirani događaj.
             </p>
           </div>
 
@@ -115,16 +119,41 @@ export function EventsPage({ events }: { events: EventEntry[] }) {
             ) : null}
           </div>
           <div className="mt-4 flex flex-wrap gap-2">
+            <button
+              className={`inline-flex min-h-11 items-center rounded-full border px-3 py-1 text-xs font-medium transition-colors ${activeCitySlug === null ? "border-primary/50 bg-primary/10 text-foreground" : "border-border/80 text-foreground hover:border-primary/40"}`}
+              onClick={() => setActiveCitySlug(null)}
+              type="button"
+            >
+              Svi gradovi
+            </button>
             {cityGroups.map((city) => (
-              <a
-                className="inline-flex min-h-11 items-center rounded-full border border-border/80 px-3 py-1 text-xs font-medium text-foreground hover:border-primary/40"
-                href={`#${cityAnchorId(city)}`}
-                key={city}
+              <button
+                className={`inline-flex min-h-11 items-center rounded-full border px-3 py-1 text-xs font-medium transition-colors ${activeCitySlug === city.slug ? "border-primary/50 bg-primary/10 text-foreground" : "border-border/80 text-foreground hover:border-primary/40"}`}
+                onClick={() => setActiveCitySlug(city.slug)}
+                type="button"
+                key={city.slug}
               >
-                {city}
-              </a>
+                {city.name}
+              </button>
             ))}
           </div>
+        </section>
+
+        <section className="mt-8">
+          <div className="mb-5">
+            <p className="text-sm uppercase tracking-[0.24em] text-muted-foreground">
+              Lokalna mreža
+            </p>
+            <h2 className="mt-3 text-4xl font-semibold tracking-[-0.04em] text-foreground">
+              Aktivnost po gradovima
+            </h2>
+          </div>
+          <CommunityMap
+            cities={cities}
+            events={events}
+            onSelectCity={setActiveCitySlug}
+            selectedCitySlug={activeCitySlug}
+          />
         </section>
 
         <section className="mt-14">
@@ -247,7 +276,7 @@ export function EventsPage({ events }: { events: EventEntry[] }) {
           </div>
         </section>
 
-        <section className="mt-16">
+        <section className="mt-16 scroll-mt-32" id="arhiva">
           <div className="flex items-end justify-between gap-4">
             <h2 className="text-4xl font-semibold tracking-[-0.04em] text-foreground">
               Arhiva druženja

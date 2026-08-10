@@ -82,6 +82,15 @@ export const cities: CityEntry[] = [
     eventSlugs: ["meetup-rab"],
   },
   {
+    slug: "kraljevica",
+    name: "Kraljevica",
+    country: "Croatia",
+    region: "Kvarner",
+    summary:
+      "Kraljevica je dio fotografski dokumentirane arhive Bitcoin druženja iz 2024. Buduće najave ovise o zajednici i službenim kanalima.",
+    status: "archive",
+  },
+  {
     slug: "zagreb",
     name: "Zagreb",
     country: "Croatia",
@@ -150,8 +159,8 @@ export const cities: CityEntry[] = [
     name: "Podgorica",
     country: "Montenegro",
     summary:
-      "Još nema javno potvrđenih DvadesetJedan događaja u ovom gradu. Ako želiš pokrenuti mali Bitcoin-only susret, javi se u zajednicu.",
-    status: "emerging",
+      "Podgorica je dio fotografski dokumentirane arhive regionalnih Bitcoin događaja iz 2024. Buduće najave ovise o zajednici i službenim kanalima.",
+    status: "archive",
     image: {
       src: "/images/cities/podgorica.jpg",
       alt: "Panorama Podgorice",
@@ -198,8 +207,8 @@ export const cities: CityEntry[] = [
     name: "Maribor",
     country: "Slovenia",
     summary:
-      "Još nema javno potvrđenih DvadesetJedan događaja u ovom gradu. Ako želiš pokrenuti mali Bitcoin-only susret, javi se u zajednicu.",
-    status: "emerging",
+      "Maribor je dio fotografski dokumentirane arhive regionalnih Bitcoin događaja iz 2024. Buduće najave ovise o zajednici i službenim kanalima.",
+    status: "archive",
     image: {
       src: "/images/cities/maribor.jpg",
       alt: "Panorama Maribora uz Dravu",
@@ -277,8 +286,8 @@ export const cities: CityEntry[] = [
     name: "Niš",
     country: "Serbia",
     summary:
-      "Još nema javno potvrđenih DvadesetJedan događaja u ovom gradu. Ako želiš pokrenuti mali Bitcoin-only susret, javi se u zajednicu.",
-    status: "emerging",
+      "Niš ima fotografski dokumentiran Bitcoin susret, ali godina održavanja još treba ljudsku potvrdu. Buduće najave ovise o zajednici i službenim kanalima.",
+    status: "archive",
     image: {
       src: "/images/cities/nis.jpg",
       alt: "Pogled na Niš",

@@ -13,11 +13,13 @@ export function getLocalResponsiveWebpSrcSet(src?: string) {
   if (
     !webpSrc ||
     (!webpSrc.startsWith("/events/") &&
-      !webpSrc.startsWith("/images/cities/"))
+      !webpSrc.startsWith("/images/cities/") &&
+      !webpSrc.startsWith("/images/events/") &&
+      !webpSrc.startsWith("/images/livestream/"))
   ) {
     return undefined
   }
 
-  const base = webpSrc.replace(/\.webp(?=([?#]|$))/i, "")
+  const base = encodeURI(webpSrc.replace(/\.webp(?=([?#]|$))/i, ""))
   return `${base}-480.webp 480w, ${base}-960.webp 960w, ${base}-1440.webp 1440w`
 }

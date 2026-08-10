@@ -3,6 +3,7 @@ import {
   ArrowUpRight,
   CalendarDays,
   Coffee,
+  MapPin,
   MapPinned,
   MessageCircle,
   Network,
@@ -12,20 +13,30 @@ import {
 } from "lucide-react"
 
 import { ActionButton } from "@/components/ActionButton"
+import { CommunityMap } from "@/components/CommunityMap"
 import { OptimizedImage } from "@/components/OptimizedImage"
 import { Layout } from "@/components/Layout"
 import { RegionalCommunityMap } from "@/components/RegionalCommunityMap"
+import { SafeImage } from "@/components/SafeImage"
 import { Section } from "@/components/Section"
 import { TelegramIcon, YouTubeIcon } from "@/components/Icons"
-import type { EventEntry } from "@/data/events"
 import { cities } from "@/data/cities"
 import { episodes } from "@/data/episodes"
-import { events } from "@/data/events"
+import { featuredCommunityPhotos } from "@/data/eventGalleries"
+import {
+  eventSortTime,
+  getEventStatus,
+  isScheduledEvent,
+  events,
+  type EventEntry,
+  type ScheduledEventEntry,
+} from "@/data/events"
 import { featuredArticles } from "@/data/featuredArticles"
 import {
   ARTICLES_URL,
   CITIES_URL,
   CONTRIBUTE_URL,
+  EVENTS_URL,
   LIVESTREAM_URL,
   YOUTUBE_URL,
   media,
@@ -39,6 +50,7 @@ import {
   formatEpisodeDate,
   formatEventDate,
 } from "@/lib/content"
+import { cn } from "@/lib/utils"
 import { usePageMeta } from "@/lib/usePageMeta"
 
 function eventKind(event: EventEntry) {
@@ -95,7 +107,7 @@ function LiveCard({
   )
 }
 
-function MeetupCard({ event }: { event: EventEntry }) {
+function MeetupCard({ event }: { event: ScheduledEventEntry }) {
   return (
     <article className="overflow-hidden rounded-[1.8rem] bg-card shadow-[var(--shadow-border)]">
       <div className="relative">
@@ -186,6 +198,15 @@ const flowSteps = [
   },
 ] as const
 
+const photoWallClasses = [
+  "md:col-span-7 md:row-span-2",
+  "md:col-span-5",
+  "md:col-span-5",
+  "md:col-span-4",
+  "md:col-span-4",
+  "md:col-span-4",
+] as const
+
 export function HomePage() {
   usePageMeta(
     "DvadesetJedan | Bitcoin signal i druženja uživo",
@@ -195,16 +216,11 @@ export function HomePage() {
   const now = new Date()
   const latestEpisode = episodes[0]
   const upcomingEvents = events
-    .filter(
-      (event) =>
-        event.status !== "cancelled" &&
-        new Date(event.end).getTime() >= now.getTime(),
-    )
-    .sort(
-      (left, right) =>
-        new Date(left.start).getTime() - new Date(right.start).getTime(),
-    )
+    .filter(isScheduledEvent)
+    .filter((event) => getEventStatus(event, now) === "upcoming")
+    .sort((left, right) => eventSortTime(left) - eventSortTime(right))
   const nextEvent = upcomingEvents[0]
+  const photoWall = featuredCommunityPhotos.slice(0, 6)
   const visibleCities = [...cities]
     .sort((left, right) => {
       const leftUpcoming = upcomingEvents.some(
@@ -734,29 +750,216 @@ export function HomePage() {
           </div>
         </Section>
 
-        <section className="mx-auto max-w-7xl px-5 pb-8 pt-2 sm:px-8 sm:pb-12">
-          <div className="flex flex-col gap-5 rounded-[1.8rem] bg-card px-6 py-7 shadow-[var(--shadow-border)] sm:flex-row sm:items-center sm:justify-between sm:px-8">
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary-strong">
-                Fotografije zajednice
-              </p>
-              <h2 className="mt-2 text-2xl font-semibold tracking-[-0.04em] text-foreground">
-                Imaš fotografije s prethodnog druženja?
-              </h2>
-              <p className="mt-2 max-w-2xl text-sm leading-7 text-muted-foreground">
-                Repo još nema potvrđenu galeriju stvarnih DvadesetJedan meetupa.
-                Pošalji fotografije uz grad, datum i dopuštenje za objavu — ovaj
-                layout je spreman da ih pokaže ljudima, ne stock vizuale.
-              </p>
+        <section className="border-y border-foreground/10 bg-[#fff8ef] py-16 sm:py-24">
+          <div className="mx-auto max-w-7xl px-5 sm:px-8">
+            <div className="flex flex-wrap items-end justify-between gap-6">
+              <div>
+                <p className="text-sm font-semibold uppercase tracking-[0.16em] text-primary-strong">
+                  Ljudi se pojavljuju
+                </p>
+                <h2 className="mt-3 max-w-3xl text-4xl font-semibold tracking-[-0.055em] text-foreground sm:text-6xl">
+                  Zajednica se događa za istim stolom.
+                </h2>
+                <p className="mt-5 max-w-2xl text-base leading-7 text-muted-foreground sm:text-lg">
+                  DvadesetJedan nastaje kroz razgovore, druženja, konferencije,
+                  kave i ljude koji se pojavljuju.
+                </p>
+              </div>
+              <ActionButton
+                href={`${EVENTS_URL}#arhiva`}
+                icon={<ArrowUpRight className="size-4" />}
+              >
+                Pogledaj prošla druženja
+              </ActionButton>
             </div>
-            <ActionButton
-              external
-              href={communityHref()}
-              icon={<Send className="size-4" />}
-              primary
-            >
-              Pošalji fotografije
-            </ActionButton>
+
+            <div className="-mx-5 mt-9 flex snap-x snap-mandatory gap-3 overflow-x-auto px-5 pb-4 md:mx-0 md:grid md:auto-rows-[14rem] md:grid-cols-12 md:overflow-visible md:px-0 md:pb-0">
+              {photoWall.map((photo, index) => (
+                <figure
+                  className={cn(
+                    "group relative h-72 min-w-[82vw] snap-center overflow-hidden rounded-[1.5rem] bg-[#242022] md:h-auto md:min-w-0",
+                    photoWallClasses[index],
+                  )}
+                  key={photo.src}
+                >
+                  <SafeImage
+                    alt={photo.alt}
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.025] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+                    height={900}
+                    sizes="(min-width: 768px) 50vw, 82vw"
+                    src={photo.src}
+                    width={1400}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent" />
+                  <figcaption className="absolute inset-x-0 bottom-0 p-4 text-sm font-medium text-white sm:p-5">
+                    {photo.caption}
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-[#242022] py-16 text-[#fff8ef] sm:py-24">
+          <div className="mx-auto max-w-7xl px-5 sm:px-8">
+            <div className="mb-8 max-w-3xl">
+              <p className="text-sm font-semibold uppercase tracking-[0.16em] text-[#a9ecd5]">
+                Gdje se družimo
+              </p>
+              <h2 className="mt-4 text-4xl font-semibold tracking-[-0.055em] sm:text-6xl">
+                Lokalna mreža i sljedeća druženja.
+              </h2>
+            </div>
+
+            <div className="grid gap-6 lg:grid-cols-[minmax(0,1.18fr)_minmax(20rem,0.82fr)]">
+              <CommunityMap cities={cities} events={events} />
+
+              <div className="rounded-[1.8rem] border border-white/10 bg-white/[0.04] p-5 sm:p-6">
+                <div className="flex items-center justify-between gap-4">
+                  <h3 className="text-2xl font-semibold tracking-[-0.04em]">
+                    Sljedeća druženja
+                  </h3>
+                  <a
+                    className="inline-flex min-h-11 items-center gap-1 text-sm font-semibold text-[#ffd35f] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffd35f]"
+                    href={EVENTS_URL}
+                  >
+                    Sva <ArrowUpRight className="size-4" />
+                  </a>
+                </div>
+
+                {upcomingEvents.length ? (
+                  <div className="mt-5 space-y-3">
+                    {upcomingEvents.slice(0, 3).map((event, index) => (
+                      <a
+                        className={cn(
+                          "group block rounded-[1.25rem] border p-4 transition-[translate,border-color,background-color] hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffd35f] motion-reduce:transition-none motion-reduce:hover:translate-y-0",
+                          index === 0
+                            ? "border-[#f7931a]/50 bg-[#f7931a]/10"
+                            : "border-white/10 bg-black/15 hover:border-white/25",
+                        )}
+                        href={eventHref(event.slug)}
+                        key={event.slug}
+                      >
+                        <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#ffd35f]">
+                          {formatEventDate(event)}
+                        </p>
+                        <h4 className="mt-2 text-xl font-semibold leading-tight tracking-[-0.035em]">
+                          {event.title}
+                        </h4>
+                        <p className="mt-3 flex items-center gap-2 text-sm text-white/60">
+                          <MapPin className="size-4 shrink-0 text-[#f7931a]" />
+                          {eventCityName(event)} · {event.venue}
+                        </p>
+                      </a>
+                    ))}
+                  </div>
+                ) : (
+                  <p className="mt-5 rounded-[1.25rem] border border-dashed border-white/15 px-4 py-5 text-sm leading-7 text-white/60">
+                    Trenutno nema javno najavljenih događaja. Najave se prvo
+                    pojave u zajednici.
+                  </p>
+                )}
+
+                <div className="mt-6 border-t border-white/10 pt-6">
+                  <p className="font-semibold">Nema druženja u tvom gradu?</p>
+                  <p className="mt-2 text-sm leading-6 text-white/60">
+                    Javi se u Telegram grupi i pokreni ga. Zajednica će se
+                    dogovoriti ručno, a potvrđeni termin možemo dodati ovdje.
+                  </p>
+                  <a
+                    className="mt-4 inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-[#a9ecd5] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffd35f]"
+                    href={communityHref()}
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    Javi se zajednici <ArrowUpRight className="size-4" />
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-24">
+          <div className="grid overflow-hidden rounded-[2rem] border border-foreground/10 bg-card shadow-soft lg:grid-cols-[1.2fr_0.8fr] lg:items-stretch">
+            <div className="relative aspect-video overflow-hidden bg-black lg:aspect-auto lg:min-h-[30rem]">
+              <SafeImage
+                alt="Prikaz stvarnog DvadesetJedan livestreama s više sudionika u razgovoru."
+                className="absolute inset-0 h-full w-full object-cover"
+                height={900}
+                sizes="(min-width: 1024px) 60vw, 100vw"
+                src="/images/livestream/dvadesetjedan-signal-uzivo.png"
+                width={1600}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-black/10" />
+              <span className="absolute bottom-5 left-5 inline-flex min-h-10 items-center gap-2 rounded-full border border-white/20 bg-black/70 px-4 text-xs font-semibold uppercase tracking-[0.14em] text-white backdrop-blur">
+                <span className="size-2 rounded-full bg-red-500" />
+                Stvarni kadar uživo
+              </span>
+            </div>
+
+            <div className="flex flex-col justify-center p-6 sm:p-10 lg:p-12">
+              <p className="text-sm font-semibold uppercase tracking-[0.16em] text-primary-strong">
+                Signal uživo
+              </p>
+              <h2 className="mt-4 text-4xl font-semibold tracking-[-0.055em] text-foreground sm:text-5xl">
+                Nedjeljom razgovaramo, ne emitiramo u prazno.
+              </h2>
+              <p className="mt-5 text-base leading-8 text-muted-foreground">
+                Svake nedjelje razgovaramo o Bitcoinu, vijestima, tehnologiji i
+                idejama koje su obilježile tjedan.
+              </p>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <ActionButton
+                  href={LIVESTREAM_URL}
+                  icon={<Play className="size-4" />}
+                  primary
+                >
+                  Gledaj livestream
+                </ActionButton>
+                <ActionButton
+                  external
+                  href={YOUTUBE_URL}
+                  icon={<ArrowUpRight className="size-4" />}
+                >
+                  YouTube kanal
+                </ActionButton>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="mx-auto max-w-7xl px-5 pb-20 sm:px-8 sm:pb-28">
+          <div className="relative overflow-hidden rounded-[2rem] bg-[#242022] px-6 py-10 text-white sm:px-12 sm:py-14">
+            <SafeImage
+              alt="DvadesetJedan Bitcoin druženje na Rabu."
+              className="absolute inset-0 h-full w-full object-cover opacity-55"
+              height={900}
+              sizes="(min-width: 1280px) 1280px, 100vw"
+              src="/images/events/Rab meetup 2022.37.jpeg"
+              width={1400}
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#171315]/95 via-[#171315]/80 to-[#171315]/30" />
+            <div className="relative max-w-3xl">
+              <MessageCircle className="size-7 text-[#ffd35f]" />
+              <h2 className="mt-5 text-4xl font-semibold leading-[1.02] tracking-[-0.06em] sm:text-6xl">
+                Bitcoin je globalan. Zajednica počinje lokalno.
+              </h2>
+              <p className="mt-5 max-w-2xl text-base leading-7 text-white/75 sm:text-lg">
+                Pronađi ljude iz regije, postavi pitanje i pomozi da se sljedeća
+                dobra ideja dogodi baš u tvom gradu.
+              </p>
+              <div className="mt-8">
+                <ActionButton
+                  external
+                  href={communityHref()}
+                  icon={<ArrowUpRight className="size-4" />}
+                  primary
+                >
+                  Pridruži se zajednici
+                </ActionButton>
+              </div>
+            </div>
           </div>
         </section>
       </main>

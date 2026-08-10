@@ -1,21 +1,34 @@
-import type { EventEntry } from "@/data/events"
+import { CalendarDays, Images, MapPinned, MoveRight } from "lucide-react"
+
 import { SafeImage } from "@/components/SafeImage"
+import { getEventGallery } from "@/data/eventGalleries"
+import type { EventEntry } from "@/data/events"
 import { eventHref, formatEventDate } from "@/lib/content"
-import { CalendarDays, MapPinned, MoveRight } from "lucide-react"
 
 export function EventCard({ event }: { event: EventEntry }) {
+  const gallery = getEventGallery(event.slug)
+  const locationLabel = event.venue
+
   return (
     <a
       className="group overflow-hidden rounded-[1.8rem] bg-card/70 shadow-[var(--shadow-border)] transition-[translate,scale,box-shadow] duration-150 ease-out hover:-translate-y-0.5 hover:shadow-[var(--shadow-border-hover)] active:scale-[0.96] motion-reduce:transition-none motion-reduce:hover:translate-y-0 motion-reduce:active:scale-100"
       href={eventHref(event.slug)}
     >
-      <SafeImage
-        alt={`${event.title} — ${event.venue}`}
-        className="h-60 w-full object-cover"
-        fallbackClassName="h-60 w-full object-cover"
-        sizes="(min-width: 1280px) 33vw, (min-width: 768px) 50vw, 100vw"
-        src={event.coverImage}
-      />
+      <div className="relative">
+        <SafeImage
+          alt={`${event.title} — ${locationLabel ?? event.city}`}
+          className="h-60 w-full object-cover"
+          fallbackClassName="h-60 w-full object-cover"
+          sizes="(min-width: 1280px) 33vw, (min-width: 768px) 50vw, 100vw"
+          src={event.coverImage}
+        />
+        {gallery?.photos.length ? (
+          <span className="absolute bottom-4 right-4 inline-flex min-h-9 items-center gap-2 rounded-full border border-white/20 bg-black/75 px-3 text-xs font-semibold text-white backdrop-blur">
+            <Images className="size-3.5" />
+            Fotografije · {gallery.photos.length}
+          </span>
+        ) : null}
+      </div>
       <div className="space-y-5 px-5 py-5 sm:px-6 sm:py-6">
         <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
           <span className="inline-flex items-center gap-2 tabular-nums">
@@ -38,7 +51,9 @@ export function EventCard({ event }: { event: EventEntry }) {
         </div>
 
         <div className="flex items-center justify-between text-sm">
-          <span className="text-muted-foreground">{event.venue}</span>
+          <span className="text-muted-foreground">
+            {locationLabel ?? "Arhivski zapis"}
+          </span>
           <span className="inline-flex items-center gap-2 text-foreground">
             Detalji
             <MoveRight className="size-4 transition-transform group-hover:translate-x-0.5" />

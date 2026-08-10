@@ -104,8 +104,11 @@ const events = extractObjects(
   "export const events",
 ).map((objectSource, index) => ({
   label: `Događaj ${index + 1}`,
+  kind: readString(objectSource, "kind"),
   slug: readString(objectSource, "slug"),
   title: readString(objectSource, "title"),
+  dateLabel: readString(objectSource, "dateLabel"),
+  coverImage: readString(objectSource, "coverImage"),
   start: readString(objectSource, "start"),
   end: readString(objectSource, "end"),
   city: readString(objectSource, "city"),
@@ -322,19 +325,28 @@ for (const event of events) {
   if (!event.slug || !event.title || !event.city || !event.country) {
     failures.push(`${event.label}: slug, title, city i country su obavezni.`)
   }
-  if (!validDate(event.start) || !validDate(event.end)) {
-    failures.push(`${event.label}: start/end nisu validni datumi.`)
-  } else if (new Date(event.end) <= new Date(event.start)) {
-    failures.push(`${event.label}: end mora biti nakon start.`)
+  if (event.kind === "archive") {
+    if (!event.dateLabel)
+      failures.push(`${event.label}: arhivski događaj treba dateLabel.`)
+    if (event.status !== "past")
+      failures.push(`${event.label}: arhivski događaj mora imati status past.`)
+    if (!validUrl(event.coverImage))
+      failures.push(`${event.label}: coverImage nije validan.`)
+  } else {
+    if (!validDate(event.start) || !validDate(event.end)) {
+      failures.push(`${event.label}: start/end nisu validni datumi.`)
+    } else if (new Date(event.end) <= new Date(event.start)) {
+      failures.push(`${event.label}: end mora biti nakon start.`)
+    }
+    if (!validUrl(event.registrationUrl))
+      failures.push(`${event.label}: registrationUrl nije validan.`)
+    if (!validUrl(event.mapUrl))
+      failures.push(`${event.label}: mapUrl nije validan.`)
+    if (!validUrl(event.sourceUrl))
+      failures.push(`${event.label}: sourceUrl nije validan.`)
+    if (!validUrl(event.meetupUrl))
+      failures.push(`${event.label}: meetupUrl nije validan.`)
   }
-  if (!validUrl(event.registrationUrl))
-    failures.push(`${event.label}: registrationUrl nije validan.`)
-  if (!validUrl(event.mapUrl))
-    failures.push(`${event.label}: mapUrl nije validan.`)
-  if (!validUrl(event.sourceUrl))
-    failures.push(`${event.label}: sourceUrl nije validan.`)
-  if (!validUrl(event.meetupUrl))
-    failures.push(`${event.label}: meetupUrl nije validan.`)
   if (
     event.status &&
     !["upcoming", "past", "cancelled"].includes(event.status)

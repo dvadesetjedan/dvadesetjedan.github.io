@@ -6,13 +6,15 @@
   "scripts": {
     "dev": "vite",
     "generate:artifacts": "node scripts/generate-site-artifacts.mjs",
+    "generate:community-images": "node scripts/generate-community-images.mjs",
     "build": "tsc -b && vite build && npm run generate:artifacts",
     "lint": "eslint .",
     "check:routes": "node scripts/check-routes.mjs",
     "check:content": "node scripts/check-content.mjs",
+    "check:galleries": "node scripts/check-event-galleries.mjs",
     "check:artifacts": "node scripts/check-artifacts.mjs",
     "check:meetup": "node scripts/check-meetup-events.mjs",
-    "check": "npm run lint && npm run check:routes && npm run check:content && npm run build && npm run check:artifacts",
+    "check": "npm run lint && npm run check:routes && npm run check:content && npm run check:galleries && npm run build && npm run check:artifacts",
     "format": "prettier --write .",
     "preview": "vite preview"
   },
@@ -43,6 +45,7 @@
     "prettier": "^3.8.3",
     "typescript": "~6.0.2",
     "typescript-eslint": "^8.58.2",
-    "vite": "^8.0.9"
+    "vite": "^8.0.9",
+    "sharp": "^0.34.3"
   }
 }

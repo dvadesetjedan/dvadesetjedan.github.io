@@ -342,10 +342,12 @@ function loadEvents() {
   return extractObjects(readSource("src/data/events.ts"), "export const events")
     .map((objectSource) => {
       const slug = readString(objectSource, "slug")
+      const kind = readString(objectSource, "kind")
       const title = readString(objectSource, "title")
       const summary = readString(objectSource, "summary")
       const start = readString(objectSource, "start")
       const end = readString(objectSource, "end")
+      const sortDate = readString(objectSource, "sortDate")
       const venue = readString(objectSource, "venue")
       const address = readString(objectSource, "address")
       const city = readString(objectSource, "city")
@@ -359,6 +361,17 @@ function loadEvents() {
       const canonical = `${siteUrl}/dogadaji/${slug}/`
       const startDate = normalizeDate(start)
       const endDate = normalizeDate(end)
+
+      if (slug && title && kind === "archive") {
+        return {
+          path: `/dogadaji/${slug}/`,
+          title: `${title} | DvadesetJedan`,
+          description: truncate(summary || title),
+          type: "page",
+          date: normalizeDate(sortDate),
+          image,
+        }
+      }
 
       return slug && title
         ? {

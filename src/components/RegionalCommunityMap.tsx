@@ -1,5 +1,5 @@
 import type { CityEntry } from "@/data/cities"
-import type { EventEntry } from "@/data/events"
+import { getEventStatus, type EventEntry } from "@/data/events"
 import { regionalMapCountries } from "@/data/regionalMapPaths"
 import { cityHref } from "@/lib/content"
 
@@ -66,9 +66,7 @@ export function RegionalCommunityMap({
   const now = new Date()
   const upcomingCitySlugs = new Set(
     events
-      .filter(
-        (event) => event.status !== "cancelled" && new Date(event.end) >= now,
-      )
+      .filter((event) => getEventStatus(event, now) === "upcoming")
       .map((event) => event.citySlug)
       .filter((slug): slug is string => Boolean(slug)),
   )
@@ -186,7 +184,11 @@ export function RegionalCommunityMap({
             if (!point) return null
 
             const hasUpcomingMeetup = upcomingCitySlugs.has(city.slug)
-            const hasMeetupHistory = Boolean(city.eventSlugs?.length)
+            const hasMeetupHistory = events.some(
+              (event) =>
+                event.citySlug === city.slug &&
+                getEventStatus(event, now) === "past",
+            )
             const label = markerLabel(city, hasUpcomingMeetup, hasMeetupHistory)
 
             return (

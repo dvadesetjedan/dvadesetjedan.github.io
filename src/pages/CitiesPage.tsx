@@ -4,8 +4,8 @@ import type { CityEntry } from "@/data/cities"
 import type { EventEntry } from "@/data/events"
 import { ActionButton } from "@/components/ActionButton"
 import { BackLink } from "@/components/BackLink"
+import { CommunityMap } from "@/components/CommunityMap"
 import { Layout } from "@/components/Layout"
-import { RegionalCommunityMap } from "@/components/RegionalCommunityMap"
 import { CONTRIBUTE_URL } from "@/data/site"
 import { cityHref, communityHref } from "@/lib/content"
 import { usePageMeta } from "@/lib/usePageMeta"
@@ -64,7 +64,7 @@ export function CitiesPage({
             </p>
           </div>
 
-          <RegionalCommunityMap cities={cities} events={events} />
+          <CommunityMap cities={cities} events={events} compact />
         </section>
 
         {groupedCities.map((group) =>
@@ -75,8 +75,8 @@ export function CitiesPage({
               </h2>
               <div className="mt-5 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
                 {group.cities.map((city) => {
-                  const cityEvents = events.filter((event) =>
-                    city.eventSlugs?.includes(event.slug),
+                  const cityEvents = events.filter(
+                    (event) => event.citySlug === city.slug,
                   )
 
                   return (

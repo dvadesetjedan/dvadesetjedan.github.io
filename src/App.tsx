@@ -385,7 +385,7 @@ function App() {
       )
       break
     case "events":
-      page = <EventsPage events={events} />
+      page = <EventsPage cities={cities} events={events} />
       break
     case "event":
       page = selectedEvent ? (

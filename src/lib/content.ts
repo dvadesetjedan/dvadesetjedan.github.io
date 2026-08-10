@@ -1,5 +1,9 @@
 import type { ArticleEntry } from "@/data/articles"
-import type { EventEntry } from "@/data/events"
+import {
+  isArchiveEvent,
+  type EventEntry,
+  type ScheduledEventEntry,
+} from "@/data/events"
 import {
   COMMUNITY_URL,
   COMMUNITY_PROJECTS_URL,
@@ -49,6 +53,7 @@ export function formatEpisodeDate(value: string) {
 }
 
 export function formatEventDate(event: EventEntry) {
+  if (isArchiveEvent(event)) return event.dateLabel
   if (event.displayDate) return event.displayDate
 
   const start = new Date(event.start)
@@ -73,6 +78,7 @@ export function formatEventDate(event: EventEntry) {
 }
 
 export function formatEventTimeRange(event: EventEntry) {
+  if (isArchiveEvent(event)) return event.dateLabel
   if (event.displayDate) return event.displayDate
 
   const start = new Date(event.start)
@@ -110,7 +116,7 @@ export function isTranslatedArticle(article: ArticleEntry) {
   )
 }
 
-export function makeGoogleCalendarUrl(event: EventEntry) {
+export function makeGoogleCalendarUrl(event: ScheduledEventEntry) {
   const toCalendarStamp = (value: string) =>
     new Date(value).toISOString().replace(/[-:]/g, "").replace(".000", "")
   const toAllDayStamp = (value: string) => value.slice(0, 10).replace(/-/g, "")
@@ -129,7 +135,7 @@ export function makeGoogleCalendarUrl(event: EventEntry) {
   return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(event.title)}&dates=${start}/${end}&details=${details}&location=${location}`
 }
 
-export function makeIcsUrl(event: EventEntry) {
+export function makeIcsUrl(event: ScheduledEventEntry) {
   const toUtcStamp = (value: string) =>
     new Date(value).toISOString().replace(/[-:]/g, "").replace(".000", "")
   const toAllDayStamp = (value: string) => value.slice(0, 10).replace(/-/g, "")
