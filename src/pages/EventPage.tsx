@@ -4,6 +4,7 @@ import {
   Clock3,
   Images,
   MapPinned,
+  PlayCircle,
 } from "lucide-react"
 import type { ReactNode } from "react"
 
@@ -71,6 +72,9 @@ export function EventPage({ event }: { event: EventEntry }) {
   const gallery = getEventGallery(event.slug)
   const status = getEventStatus(event)
   const isCancelled = status === "cancelled"
+  const youtubeId = event.videoUrl?.match(
+    /(?:youtu\.be\/|v=)([A-Za-z0-9_-]+)/,
+  )?.[1]
   const location = [event.venue, event.city, event.country]
     .filter(Boolean)
     .join(", ")
@@ -82,17 +86,48 @@ export function EventPage({ event }: { event: EventEntry }) {
 
         <article className="overflow-hidden rounded-[2.2rem] border border-border/80 bg-card/75">
           <div className="relative">
-            <SafeImage
-              alt={`${event.title} — ${location}`}
-              className="h-[22rem] w-full object-cover sm:h-[28rem]"
-              fallbackClassName="h-[22rem] w-full object-cover sm:h-[28rem]"
-              fetchPriority="high"
-              height={1000}
-              loading="eager"
-              sizes="(min-width: 1024px) 1024px, 100vw"
-              src={event.coverImage}
-              width={1600}
-            />
+            {youtubeId ? (
+              <a
+                aria-label={`Pogledaj ${event.title} aftermovie na YouTubeu`}
+                className="group relative block aspect-video overflow-hidden bg-black"
+                href={event.videoUrl}
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                <SafeImage
+                  alt={`${event.title} — kadar iz aftermovie videa`}
+                  className="h-full w-full object-cover transition-transform duration-300 ease-out group-hover:scale-[1.015] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+                  fallbackClassName="h-full w-full object-cover"
+                  fetchPriority="high"
+                  height={1080}
+                  loading="eager"
+                  sizes="(min-width: 1024px) 1024px, 100vw"
+                  src={`https://i.ytimg.com/vi/${youtubeId}/maxresdefault.jpg`}
+                  width={1920}
+                />
+                <span className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/5 to-black/10 transition-colors duration-150 group-hover:from-black/65" />
+                <span className="absolute inset-0 flex items-center justify-center">
+                  <span className="flex size-16 items-center justify-center rounded-full border border-white/30 bg-black/75 text-white shadow-lg backdrop-blur-sm transition-[translate,scale,background-color] duration-150 ease-out group-hover:-translate-y-0.5 group-hover:bg-[#f7931a] group-hover:text-[#160d04] group-active:scale-[0.96] motion-reduce:transition-none motion-reduce:group-hover:translate-y-0 motion-reduce:group-active:scale-100 sm:size-20">
+                    <PlayCircle className="size-8 sm:size-10" />
+                  </span>
+                </span>
+                <span className="absolute bottom-5 left-5 text-sm font-semibold text-white sm:bottom-7 sm:left-8 sm:text-base">
+                  Villa BTC 2026 · aftermovie
+                </span>
+              </a>
+            ) : (
+              <SafeImage
+                alt={`${event.title} — ${location}`}
+                className="h-[22rem] w-full object-cover sm:h-[28rem]"
+                fallbackClassName="h-[22rem] w-full object-cover sm:h-[28rem]"
+                fetchPriority="high"
+                height={1000}
+                loading="eager"
+                sizes="(min-width: 1024px) 1024px, 100vw"
+                src={event.coverImage}
+                width={1600}
+              />
+            )}
             {gallery?.photos.length ? (
               <span className="absolute bottom-5 right-5 inline-flex min-h-10 items-center gap-2 rounded-full border border-white/20 bg-black/75 px-4 text-xs font-semibold text-white backdrop-blur">
                 <Images className="size-4" />
@@ -261,6 +296,16 @@ export function EventPage({ event }: { event: EventEntry }) {
                   icon={<MapPinned className="size-4" />}
                 >
                   Stranica grada
+                </ActionButton>
+              ) : null}
+              {event.videoUrl ? (
+                <ActionButton
+                  className="w-full justify-center"
+                  external
+                  href={event.videoUrl}
+                  icon={<PlayCircle className="size-4" />}
+                >
+                  Pogledaj na YouTubeu
                 </ActionButton>
               ) : null}
             </aside>

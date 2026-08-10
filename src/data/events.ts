@@ -25,6 +25,7 @@ export type ScheduledEventEntry = {
   citySlug?: string
   tags?: string[]
   relatedLinks?: { label: string; href: string }[]
+  videoUrl?: string
 }
 
 export type ArchiveEventEntry = {
@@ -42,6 +43,7 @@ export type ArchiveEventEntry = {
   citySlug?: string
   status: "past"
   tags?: string[]
+  videoUrl?: string
 }
 
 export type EventEntry = ScheduledEventEntry | ArchiveEventEntry
@@ -204,6 +206,7 @@ export const events: EventEntry[] = [
     mapUrl: "https://www.google.com/maps/search/?api=1&query=Split+Croatia",
     sourceName: "Villa BTC",
     sourceUrl: "https://villabtc.net/",
+    videoUrl: "https://www.youtube.com/watch?v=rGLnBylsEjk",
     citySlug: "split",
     tags: ["Bitcoin-only", "Split"],
   },

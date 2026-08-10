@@ -1,4 +1,10 @@
-import { CalendarDays, Images, MapPinned, MoveRight } from "lucide-react"
+import {
+  CalendarDays,
+  Images,
+  MapPinned,
+  MoveRight,
+  PlayCircle,
+} from "lucide-react"
 
 import { SafeImage } from "@/components/SafeImage"
 import { getEventGallery } from "@/data/eventGalleries"
@@ -8,6 +14,12 @@ import { eventHref, formatEventDate } from "@/lib/content"
 export function EventCard({ event }: { event: EventEntry }) {
   const gallery = getEventGallery(event.slug)
   const locationLabel = event.venue
+  const youtubeId = event.videoUrl?.match(
+    /(?:youtu\.be\/|v=)([A-Za-z0-9_-]+)/,
+  )?.[1]
+  const coverImage = youtubeId
+    ? `https://i.ytimg.com/vi/${youtubeId}/maxresdefault.jpg`
+    : event.coverImage
 
   return (
     <a
@@ -20,9 +32,14 @@ export function EventCard({ event }: { event: EventEntry }) {
           className="h-60 w-full object-cover"
           fallbackClassName="h-60 w-full object-cover"
           sizes="(min-width: 1280px) 33vw, (min-width: 768px) 50vw, 100vw"
-          src={event.coverImage}
+          src={coverImage}
         />
-        {gallery?.photos.length ? (
+        {youtubeId ? (
+          <span className="absolute bottom-4 right-4 inline-flex min-h-9 items-center gap-2 rounded-full border border-white/20 bg-black/75 px-3 text-xs font-semibold text-white backdrop-blur">
+            <PlayCircle className="size-3.5" />
+            Aftermovie · 2:03
+          </span>
+        ) : gallery?.photos.length ? (
           <span className="absolute bottom-4 right-4 inline-flex min-h-9 items-center gap-2 rounded-full border border-white/20 bg-black/75 px-3 text-xs font-semibold text-white backdrop-blur">
             <Images className="size-3.5" />
             Fotografije · {gallery.photos.length}

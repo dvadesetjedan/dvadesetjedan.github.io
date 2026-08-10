@@ -1,11 +1,4 @@
-import {
-  ArrowRight,
-  ArrowUpRight,
-  Coffee,
-  MapPinned,
-  Network,
-  Radio,
-} from "lucide-react"
+import { ArrowRight, Coffee, MapPinned, Radio } from "lucide-react"
 
 import { ActionButton } from "@/components/ActionButton"
 import { HomepageCommunityProof } from "@/components/HomepageCommunityProof"
@@ -13,6 +6,7 @@ import { OptimizedImage } from "@/components/OptimizedImage"
 import { Layout } from "@/components/Layout"
 import { Section } from "@/components/Section"
 import { TelegramIcon } from "@/components/Icons"
+import { TwentyOneWorldNetwork } from "@/components/TwentyOneWorldNetwork"
 import { cities } from "@/data/cities"
 import { episodes } from "@/data/episodes"
 import {
@@ -252,54 +246,8 @@ export function HomePage() {
           title="Jedan lokalni čvor. Dio veće mreže."
           intro="DvadesetJedan je lokalna 21 zajednica za ljude koji govore našim jezicima. Slični Bitcoin-only čvorovi postoje drugdje — pa i na putovanju možeš pronaći lokalne bitcoinere."
         >
-          <div className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_22rem] lg:items-center">
-            <div className="relative overflow-hidden rounded-[1.9rem] bg-[#0b0907] px-6 py-9 text-[#fff8ee] shadow-[var(--shadow-border)] sm:px-10 sm:py-12">
-              <div className="flex items-center gap-4">
-                <span className="flex size-12 items-center justify-center rounded-full bg-primary/12 text-primary">
-                  <Network className="size-6" />
-                </span>
-                <div>
-                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">
-                    Network of networks
-                  </p>
-                  <p className="mt-1 text-sm text-[#d9c9b5]">
-                    Lokalni signal, globalno povezana mreža.
-                  </p>
-                </div>
-              </div>
-              <div className="mt-8 grid grid-cols-3 gap-3" aria-hidden="true">
-                {["DvadesetJedan", "21", "Lokalni čvor"].map((label) => (
-                  <div
-                    className="flex aspect-square items-center justify-center rounded-full bg-white/5 p-3 text-center text-xs font-semibold text-[#d9c9b5] shadow-[0_0_0_1px_rgba(255,255,255,0.1)]"
-                    key={label}
-                  >
-                    {label}
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div>
-              <h3 className="text-3xl font-semibold tracking-[-0.045em] text-foreground">
-                Putuješ? Pronađi lokalni 21.
-              </h3>
-              <p className="mt-4 text-sm leading-7 text-muted-foreground">
-                Globalna mreža nije zamjena za lokalnu zajednicu. Ona je most do
-                drugih lokalnih zajednica kada odeš izvan svoje regije.
-              </p>
-              <div className="mt-6">
-                <ActionButton
-                  external
-                  href={media.twentyOneUrl}
-                  icon={<ArrowUpRight className="size-4" />}
-                >
-                  Istraži TwentyOne.World
-                </ActionButton>
-              </div>
-            </div>
-          </div>
+          <TwentyOneWorldNetwork href={media.twentyOneUrl} />
         </Section>
-
       </main>
     </Layout>
   )
