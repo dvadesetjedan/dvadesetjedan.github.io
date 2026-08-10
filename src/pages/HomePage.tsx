@@ -22,15 +22,8 @@ import {
   events,
   type EventEntry,
 } from "@/data/events"
-import { featuredArticles } from "@/data/featuredArticles"
+import { CONTRIBUTE_URL, LIVESTREAM_URL, media } from "@/data/site"
 import {
-  ARTICLES_URL,
-  CONTRIBUTE_URL,
-  LIVESTREAM_URL,
-  media,
-} from "@/data/site"
-import {
-  articleHref,
   communityHref,
   episodeHref,
   eventHref,
@@ -255,37 +248,6 @@ export function HomePage() {
 
         <HomepageCommunityProof upcomingEvents={upcomingEvents} />
 
-        <section className="mx-auto max-w-7xl px-5 py-10 sm:px-8 sm:py-14">
-          <div className="overflow-hidden rounded-[2rem] bg-primary text-primary-foreground shadow-[var(--shadow-border)] sm:rounded-[2.4rem]">
-            <div className="grid lg:grid-cols-[minmax(0,1fr)_20rem] lg:items-end">
-              <div className="px-6 py-9 sm:px-10 sm:py-12">
-                <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary-foreground/70">
-                  Otvorena zajednica
-                </p>
-                <h2 className="mt-3 max-w-4xl text-4xl font-semibold tracking-[-0.05em] sm:text-6xl">
-                  Čuješ signal? Uđi u razgovor.
-                </h2>
-                <p className="mt-5 max-w-2xl text-base leading-8 text-primary-foreground/80 sm:text-lg">
-                  Telegram nije premium članstvo ni zatvoreni klub. Uđi, prati,
-                  pitaj, upoznaj ljude i vidi što se događa u gradovima oko
-                  tebe.
-                </p>
-              </div>
-              <div className="px-6 pb-9 sm:px-10 sm:pb-12 lg:pl-0">
-                <a
-                  className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-[#0b0907] px-6 py-3 text-sm font-semibold text-[#fff8ee] shadow-[0_14px_30px_rgba(64,34,4,0.2)] transition-[translate,scale,background-color] duration-150 ease-out hover:-translate-y-0.5 hover:bg-[#17110c] active:scale-[0.96] motion-reduce:transition-none motion-reduce:hover:translate-y-0 motion-reduce:active:scale-100"
-                  href={communityHref()}
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
-                  <TelegramIcon />
-                  Uđi u Telegram grupu
-                </a>
-              </div>
-            </div>
-          </div>
-        </section>
-
         <Section
           title="Jedan lokalni čvor. Dio veće mreže."
           intro="DvadesetJedan je lokalna 21 zajednica za ljude koji govore našim jezicima. Slični Bitcoin-only čvorovi postoje drugdje — pa i na putovanju možeš pronaći lokalne bitcoinere."
@@ -338,42 +300,6 @@ export function HomePage() {
           </div>
         </Section>
 
-        <Section
-          title="Uči i kopaj dublje."
-          intro="Signal i druženja su na prvom mjestu. Vodiči i članci ostaju ovdje kada želiš razumjeti Bitcoin dublje i mirnije."
-        >
-          <div className="grid gap-4 md:grid-cols-3">
-            {featuredArticles.map((article) => (
-              <a
-                className="group rounded-[1.7rem] bg-card px-5 py-6 shadow-[var(--shadow-border)] transition-[translate,scale,box-shadow] duration-150 ease-out hover:-translate-y-0.5 hover:shadow-[var(--shadow-border-hover)] active:scale-[0.96] motion-reduce:transition-none motion-reduce:hover:translate-y-0 motion-reduce:active:scale-100 sm:px-6"
-                href={articleHref(article.slug)}
-                key={article.slug}
-              >
-                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary-strong">
-                  Bitcoin osnove
-                </p>
-                <h3 className="mt-4 text-2xl font-semibold tracking-[-0.04em] text-foreground">
-                  {article.title}
-                </h3>
-                <p className="mt-4 text-sm leading-7 text-muted-foreground">
-                  {article.description}
-                </p>
-                <span className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-foreground">
-                  Čitaj tekst
-                  <ArrowRight className="size-4 transition-transform duration-150 ease-out group-hover:translate-x-0.5 motion-reduce:transition-none" />
-                </span>
-              </a>
-            ))}
-          </div>
-          <div className="mt-6">
-            <ActionButton
-              href={ARTICLES_URL}
-              icon={<ArrowUpRight className="size-4" />}
-            >
-              Svi članci
-            </ActionButton>
-          </div>
-        </Section>
       </main>
     </Layout>
   )

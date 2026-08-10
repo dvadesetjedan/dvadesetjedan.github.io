@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils"
 type SafeImageProps = Omit<ComponentPropsWithoutRef<"img">, "src"> & {
   src?: string
   fallbackClassName?: string
+  pictureClassName?: string
 }
 
 export function SafeImage({
@@ -14,6 +15,7 @@ export function SafeImage({
   alt,
   className,
   fallbackClassName,
+  pictureClassName,
   loading = "lazy",
   decoding = "async",
   width = 1600,
@@ -59,7 +61,7 @@ export function SafeImage({
         setFailed(true)
         onError?.(event)
       }}
-      pictureClassName="block"
+      pictureClassName={cn("block", pictureClassName)}
       sizes={sizes}
       src={src}
       webpSrcSet={getLocalResponsiveWebpSrcSet(src)}

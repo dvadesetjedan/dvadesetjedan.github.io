@@ -23,7 +23,7 @@ const photoWallClasses = [
 
 function photoObjectPosition(eventSlug?: string) {
   return eventSlug === "beograd-bitcoin-meetup-2024"
-    ? "object-bottom"
+    ? "object-[center_72%]"
     : "object-center"
 }
 
@@ -51,7 +51,7 @@ export function HomepageCommunityProof({
                 Ljudi se pojavljuju
               </p>
               <h2 className="mt-3 max-w-3xl text-balance text-4xl font-semibold tracking-[-0.055em] text-foreground sm:text-6xl">
-                Zajednica se događa za istim stolom.
+                Zajednicu gradimo i druženjima uživo.
               </h2>
               <p className="mt-5 max-w-2xl text-pretty text-base leading-7 text-muted-foreground sm:text-lg">
                 DvadesetJedan nastaje kroz razgovore, druženja, konferencije,
@@ -90,6 +90,7 @@ export function HomepageCommunityProof({
                       photoObjectPosition(photo.eventSlug),
                     )}
                     height={900}
+                    pictureClassName="absolute inset-0 h-full w-full"
                     sizes="(min-width: 768px) 50vw, 82vw"
                     src={photo.src}
                     width={1400}
@@ -209,7 +210,7 @@ export function HomepageCommunityProof({
               width={1600}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-black/10" />
-            <span className="absolute bottom-5 left-5 inline-flex min-h-10 items-center gap-2 rounded-full border border-white/20 bg-black/70 px-4 text-xs font-semibold uppercase tracking-[0.14em] text-white backdrop-blur">
+            <span className="absolute bottom-5 left-5 inline-flex min-h-10 items-center gap-2 rounded-full border border-white/20 bg-black/70 px-4 text-xs font-semibold uppercase tracking-[0.14em] text-white backdrop-blur sm:bottom-6 sm:left-6">
               <span className="size-2 rounded-full bg-red-500" />
               Stvarni kadar uživo
             </span>
