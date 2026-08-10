@@ -449,8 +449,8 @@ const allGalleryPhotos = Object.values(eventGalleries).flatMap(
 )
 
 const featuredSources = [
-  "/images/events/Bridging Bitcoin Belgrade October 2024 89.jpeg",
   "/images/events/Rab meetup 2022.37.jpeg",
+  "/images/events/Bridging Bitcoin Belgrade October 2024 89.jpeg",
   "/images/events/belgrade bitcoin meetup 2024.jpeg",
   "/images/events/btc van visit belgrade 2023.23.jpeg",
   "/images/events/podgorica conference 2024 3.jpeg",
