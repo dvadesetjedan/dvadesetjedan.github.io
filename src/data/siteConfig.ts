@@ -12,7 +12,7 @@ export const siteConfig = {
   socials: {
     youtube: "https://www.youtube.com/@dvadesetjedan/streams",
     telegram: "https://t.me/+ud6ARwb7rX5lZjU0",
-    meetupsTelegram: "https://t.me/c/dvadesetjedan21/9382",
+    meetupsTelegram: "https://t.me/dvadesetjedan21/9382",
     github: "https://github.com/dvadesetjedan/dvadesetjedan.github.io",
     meetup: "https://www.meetup.com/dvadeset-jedan/",
     twentyOneWorld: "https://twentyone.world/",

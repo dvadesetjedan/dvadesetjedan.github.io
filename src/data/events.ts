@@ -110,7 +110,7 @@ export const events: EventEntry[] = [
     relatedLinks: [
       {
         label: "Telegram koordinacija",
-        href: "https://t.me/c/dvadesetjedan21/9382",
+        href: "https://t.me/dvadesetjedan21/9382",
       },
       {
         label: "YouTube podcast",
