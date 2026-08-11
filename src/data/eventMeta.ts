@@ -1,3 +1,5 @@
+import { siteConfig } from "@/data/siteConfig"
+
 export type EventMeta = {
   lastManualCheck?: string
   primarySourceName: string
@@ -7,8 +9,8 @@ export type EventMeta = {
 
 export const eventMeta: EventMeta = {
   lastManualCheck: "2026-06-25",
-  primarySourceName: "Meetup",
-  primarySourceUrl: "https://www.meetup.com/dvadeset-jedan/",
+  primarySourceName: "Telegram najave",
+  primarySourceUrl: siteConfig.socials.meetupsTelegram,
   freshnessNote:
-    "Događaji se održavaju prema službenim najavama. Za zadnje promjene provjeri RSVP/Meetup link i Telegram zajednicu.",
+    "Događaji se održavaju prema službenim najavama. Za zadnje promjene provjeri povezanu stranicu događaja ili Telegram najave zajednice.",
 } as const

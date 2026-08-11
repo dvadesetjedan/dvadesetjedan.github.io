@@ -142,7 +142,7 @@ export function makeGoogleCalendarUrl(event: ScheduledEventEntry) {
   return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(event.title)}&dates=${start}/${end}&details=${details}&location=${location}`
 }
 
-export function makeIcsUrl(event: ScheduledEventEntry) {
+export function makeIcsUrl(event: ScheduledEventEntry, eventUrl?: string) {
   const toUtcStamp = (value: string) =>
     new Date(value).toISOString().replace(/[-:]/g, "").replace(".000", "")
   const toAllDayStamp = (value: string) => value.slice(0, 10).replace(/-/g, "")
@@ -166,7 +166,7 @@ export function makeIcsUrl(event: ScheduledEventEntry) {
     `SUMMARY:${event.title}`,
     `DESCRIPTION:${event.description.join("\\n\\n")}`,
     `LOCATION:${event.venue}, ${event.address}, ${event.city}, ${event.country}`,
-    `URL:${event.registrationUrl}`,
+    `URL:${eventUrl ?? event.registrationUrl}`,
     "END:VEVENT",
     "END:VCALENDAR",
   ].join("\n")

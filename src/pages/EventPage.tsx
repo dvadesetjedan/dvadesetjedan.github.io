@@ -5,6 +5,7 @@ import {
   Images,
   MapPinned,
   PlayCircle,
+  Send,
 } from "lucide-react"
 import type { ReactNode } from "react"
 
@@ -22,7 +23,7 @@ import {
   isScheduledEvent,
   type EventEntry,
 } from "@/data/events"
-import { EVENTS_URL } from "@/data/site"
+import { EVENTS_URL, MEETUPS_TELEGRAM_URL } from "@/data/site"
 import {
   cityHref,
   formatEventTimeRange,
@@ -78,6 +79,20 @@ export function EventPage({ event }: { event: EventEntry }) {
   const location = [event.venue, event.city, event.country]
     .filter(Boolean)
     .join(", ")
+  const isMeetupListing = isScheduledEvent(event) && Boolean(event.meetupUrl)
+  const registrationAction = isScheduledEvent(event)
+    ? isMeetupListing
+      ? {
+          href: MEETUPS_TELEGRAM_URL,
+          icon: <Send className="size-4" />,
+          label: "Informacije u Telegramu",
+        }
+      : {
+          href: event.registrationUrl,
+          icon: <ArrowUpRight className="size-4" />,
+          label: "Otvori prijavu",
+        }
+    : null
 
   return (
     <Layout>
@@ -199,15 +214,15 @@ export function EventPage({ event }: { event: EventEntry }) {
                 />
               </div>
 
-              {isScheduledEvent(event) && !isCancelled ? (
+              {registrationAction && !isCancelled ? (
                 <ActionButton
                   className="mt-6 w-full justify-center lg:hidden"
                   external
-                  href={event.registrationUrl}
-                  icon={<ArrowUpRight className="size-4" />}
+                  href={registrationAction.href}
+                  icon={registrationAction.icon}
                   primary
                 >
-                  Otvori prijavu
+                  {registrationAction.label}
                 </ActionButton>
               ) : null}
 
@@ -227,8 +242,8 @@ export function EventPage({ event }: { event: EventEntry }) {
                 <>
                   <p className="mt-8 rounded-[1.4rem] border border-primary/20 bg-primary/8 px-5 py-4 text-sm leading-7 text-foreground sm:px-6">
                     Početnici su dobrodošli gdje je to u skladu s najavom
-                    događaja. Zadnje promjene provjeri kroz službenu prijavu ili
-                    Telegram koordinaciju navedenu u opisu događaja.
+                    događaja. Zadnje promjene provjeri na povezanoj službenoj
+                    stranici ili u Telegram najavama zajednice.
                   </p>
                   <p className="mt-4 rounded-[1.4rem] border border-border/80 bg-background/70 px-5 py-4 text-sm leading-7 text-muted-foreground sm:px-6">
                     {eventMeta.freshnessNote}
@@ -240,16 +255,16 @@ export function EventPage({ event }: { event: EventEntry }) {
             <aside className="space-y-4 lg:sticky lg:top-40 lg:self-start">
               {isScheduledEvent(event) ? (
                 <>
-                  {!isCancelled ? (
+                  {registrationAction && !isCancelled ? (
                     <div className="hidden lg:block">
                       <ActionButton
                         className="w-full justify-center"
                         external
-                        href={event.registrationUrl}
-                        icon={<ArrowUpRight className="size-4" />}
+                        href={registrationAction.href}
+                        icon={registrationAction.icon}
                         primary
                       >
-                        Otvori prijavu
+                        {registrationAction.label}
                       </ActionButton>
                     </div>
                   ) : null}
@@ -272,12 +287,12 @@ export function EventPage({ event }: { event: EventEntry }) {
                   <a
                     className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full bg-card py-3 pl-[1.125rem] pr-5 text-sm font-medium text-foreground shadow-[var(--shadow-border)] transition-[translate,scale,box-shadow,background-color,color] duration-150 ease-out hover:-translate-y-0.5 hover:bg-background hover:shadow-[var(--shadow-border-hover)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary active:scale-[0.96] motion-reduce:transition-none motion-reduce:hover:translate-y-0 motion-reduce:active:scale-100 sm:pr-6"
                     download={`${event.slug}.ics`}
-                    href={makeIcsUrl(event)}
+                    href={makeIcsUrl(event, registrationAction?.href)}
                   >
                     <CalendarDays className="size-4" />
                     Preuzmi ICS
                   </a>
-                  {event.sourceUrl ? (
+                  {event.sourceUrl && !event.meetupUrl ? (
                     <ActionButton
                       className="w-full justify-center"
                       external

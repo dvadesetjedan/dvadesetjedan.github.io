@@ -85,8 +85,7 @@ export const events: EventEntry[] = [
       "Format je otvoreno Bitcoin-only druženje: razgovor o Bitcoinu, ekonomiji, tehnologiji, filozofiji, projektima i zajednici.",
       "Beogradska Bitcoin zajednica okuplja se svake treće srijede u mjesecu. Datum 30. 9. 2026. označava samo posljednji termin trenutačno objavljen na izvornoj stranici, a ne kraj druženja. Ovaj zapis odnosi se na susret 19. 8. 2026.",
       "Govori se srpski i engleski. Dobrodošli su svi bez obzira na razinu znanja o Bitcoinu, a početnici su posebno dobrodošli.",
-      "Ako ne možeš prepoznati ekipu po Bitcoin majicama ili merchu, provjeri Telegram grupu za točan broj stola.",
-      "RSVP, broj slobodnih mjesta i eventualne zadnje promjene provjeri na Meetup stranici događaja.",
+      "Za točan broj stola, više informacija i eventualne zadnje promjene provjeri Telegram kanal za druženja.",
       "Cover fotografija: Docker Brewery & Beer Garden.",
     ],
     coverImage: "/events/docker-brewery-belgrade.png",
@@ -104,13 +103,14 @@ export const events: EventEntry[] = [
     meetupUrl: "https://www.meetup.com/dvadeset-jedan/events/314211200/",
     organizer: "Plumski",
     language: "srpski i engleski",
-    capacityNote: "Meetup najava navodi 29 slobodnih mjesta u trenutku unosa.",
+    capacityNote:
+      "Aktualne informacije provjeri u Telegram kanalu za druženja.",
     citySlug: "beograd",
     tags: ["Bitcoin-only", "Meetup", "Beograd"],
     relatedLinks: [
       {
         label: "Telegram koordinacija",
-        href: "https://t.me/dvadesetjedan21",
+        href: "https://t.me/c/dvadesetjedan21/9382",
       },
       {
         label: "YouTube podcast",
@@ -160,7 +160,7 @@ export const events: EventEntry[] = [
       "Format je otvoreno Bitcoin-only druženje: razgovor o Bitcoinu, ekonomiji, tehnologiji, filozofiji, projektima i zajednici.",
       "Beogradska Bitcoin zajednica okuplja se svake treće srijede u mjesecu. Datum 30. 9. 2026. označava samo posljednji termin trenutačno objavljen na izvornoj stranici, a ne kraj druženja. Ovaj zapis odnosi se na susret 17. 6. 2026.",
       "Govori se srpski i engleski. Dobrodošli su svi bez obzira na razinu znanja o Bitcoinu, a početnici su posebno dobrodošli.",
-      "RSVP, broj slobodnih mjesta i eventualne zadnje promjene provjeri na Meetup stranici događaja.",
+      "Za više informacija i eventualne zadnje promjene provjeri Telegram kanal za druženja.",
       "Cover fotografija: Docker Brewery & Beer Garden.",
     ],
     coverImage: "/events/docker-brewery-belgrade.png",
@@ -220,8 +220,7 @@ export const events: EventEntry[] = [
       "Dvadeset Jedan je grupa Bitcoin maksimalista s ex-yu prostora. Okupljamo se kako bismo razgovarali o Bitcoinu, ekonomiji, tehnologiji, filozofiji i povezanim temama. Ponekad predstavljamo projekte, organiziramo radionice i snimamo podcast.",
       "Druženje se održava 30. svibnja u 16:00 u restoranu Druga Kuća na Adi Ciganliji u Beogradu.",
       "Govorimo srpski i engleski. Dobrodošli su svi, bez obzira na razinu znanja o Bitcoinu. Početnici su posebno dobrodošli.",
-      "Ako nas ne pronađete po Bitcoin majicama, provjerite Telegram grupu za točnu lokaciju kod restorana Druga Kuća: https://t.me/dvadesetjedan21",
-      "RSVP i detalji događaja dostupni su na Meetup stranici.",
+      "Za točnu lokaciju kod restorana Druga Kuća, više informacija i eventualne zadnje promjene provjerite Telegram kanal za druženja.",
       "Cover fotografija: Beogradski izlet.",
     ],
     coverImage:

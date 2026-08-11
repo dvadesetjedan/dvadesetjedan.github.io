@@ -2,6 +2,7 @@ import { siteConfig } from "@/data/siteConfig"
 
 export const YOUTUBE_URL = siteConfig.socials.youtube
 export const COMMUNITY_URL = siteConfig.socials.telegram
+export const MEETUPS_TELEGRAM_URL = siteConfig.socials.meetupsTelegram
 export const ABOUT_URL = "/o-projektu/"
 export const TOPICS_URL = "/teme/"
 export const FAQ_URL = "/faq/"
