@@ -81,9 +81,9 @@ export const events: EventEntry[] = [
     summary:
       "Otvoreno DvadesetJedan druženje u Docker Brewery & Beer Garden u Beogradu za razgovor o Bitcoinu, ekonomiji, tehnologiji, filozofiji i zajednici.",
     description: [
-      "DvadesetJedan meetup u Beogradu održava se u srijedu, 19. kolovoza 2026. od 19:00 do 22:00 u Docker Brewery & Beer Garden.",
+      "DvadesetJedan meetup u Beogradu održava se u srijedu, 19. 8. 2026. od 19:00 do 22:00 u Docker Brewery & Beer Garden.",
       "Format je otvoreno Bitcoin-only druženje: razgovor o Bitcoinu, ekonomiji, tehnologiji, filozofiji, projektima i zajednici.",
-      "Najava navodi da se grupa okuplja svake treće srijede u mjesecu do 30. rujna 2026., ali ovaj unos se odnosi na javno najavljeni termin 19. kolovoza.",
+      "Beogradska Bitcoin zajednica okuplja se svake treće srijede u mjesecu. Datum 30. 9. 2026. označava samo posljednji termin trenutačno objavljen na izvornoj stranici, a ne kraj druženja. Ovaj zapis odnosi se na susret 19. 8. 2026.",
       "Govori se srpski i engleski. Dobrodošli su svi bez obzira na razinu znanja o Bitcoinu, a početnici su posebno dobrodošli.",
       "Ako ne možeš prepoznati ekipu po Bitcoin majicama ili merchu, provjeri Telegram grupu za točan broj stola.",
       "RSVP, broj slobodnih mjesta i eventualne zadnje promjene provjeri na Meetup stranici događaja.",
@@ -136,7 +136,7 @@ export const events: EventEntry[] = [
     coverImage: "/images/events/revolution rocks belgrade june 2026 3.jpeg",
     start: "2026-06-19T18:00:00+02:00",
     end: "2026-06-21T00:00:00+02:00",
-    displayDate: "19. – 20. lipnja 2026.",
+    displayDate: "19. – 20. 6. 2026.",
     venue: "Zappa Barka",
     address: "Bulevar vojvode Bojovića, kod Nebojšine kule",
     city: "Belgrade",
@@ -156,9 +156,9 @@ export const events: EventEntry[] = [
     summary:
       "Otvoreno DvadesetJedan druženje u Docker Brewery & Beer Garden u Beogradu za razgovor o Bitcoinu, ekonomiji, tehnologiji, filozofiji i zajednici.",
     description: [
-      "DvadesetJedan meetup u Beogradu održava se u srijedu, 17. lipnja 2026. od 19:00 do 22:00 u Docker Brewery & Beer Garden.",
+      "DvadesetJedan meetup u Beogradu održava se u srijedu, 17. 6. 2026. od 19:00 do 22:00 u Docker Brewery & Beer Garden.",
       "Format je otvoreno Bitcoin-only druženje: razgovor o Bitcoinu, ekonomiji, tehnologiji, filozofiji, projektima i zajednici.",
-      "Najava navodi da se grupa okuplja svake treće srijede u mjesecu do 30. rujna 2026., ali ovaj unos se odnosi na javno najavljeni termin 17. lipnja.",
+      "Beogradska Bitcoin zajednica okuplja se svake treće srijede u mjesecu. Datum 30. 9. 2026. označava samo posljednji termin trenutačno objavljen na izvornoj stranici, a ne kraj druženja. Ovaj zapis odnosi se na susret 17. 6. 2026.",
       "Govori se srpski i engleski. Dobrodošli su svi bez obzira na razinu znanja o Bitcoinu, a početnici su posebno dobrodošli.",
       "RSVP, broj slobodnih mjesta i eventualne zadnje promjene provjeri na Meetup stranici događaja.",
       "Cover fotografija: Docker Brewery & Beer Garden.",
@@ -196,7 +196,7 @@ export const events: EventEntry[] = [
     coverImage: "/events/villa-btc-split-podstrana.jpg",
     start: "2026-06-05T00:00:00+02:00",
     end: "2026-06-08T00:00:00+02:00",
-    displayDate: "5. – 7. lipnja 2026.",
+    displayDate: "5. – 7. 6. 2026.",
     allDay: true,
     venue: "Villa BTC",
     address: "Split",

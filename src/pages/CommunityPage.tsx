@@ -3,7 +3,6 @@ import { ArrowUpRight, PlayCircle, Send, ShieldCheck } from "lucide-react"
 import { ActionButton } from "@/components/ActionButton"
 import { BackLink } from "@/components/BackLink"
 import { Layout } from "@/components/Layout"
-import { siteConfig } from "@/data/siteConfig"
 import {
   COMMUNITY_PROJECT_ISSUE_URL,
   COMMUNITY_PROJECTS_URL,
@@ -107,11 +106,12 @@ export function CommunityPage() {
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
             <ActionButton
-              href={siteConfig.socials.meetup}
-              icon={<ArrowUpRight className="size-4" />}
+              href={communityHref()}
+              icon={<Send className="size-4" />}
               external
+              primary
             >
-              Meetup stranica
+              Pitaj u Telegramu
             </ActionButton>
             <ActionButton
               href={GITHUB_URL}

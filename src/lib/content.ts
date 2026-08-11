@@ -62,7 +62,7 @@ export function formatEventDate(event: EventEntry) {
   const sameDay = start.toDateString() === end.toDateString()
   const dateFormatter = new Intl.DateTimeFormat("hr-HR", {
     day: "numeric",
-    month: "long",
+    month: "numeric",
     year: "numeric",
   })
   const timeFormatter = new Intl.DateTimeFormat("hr-HR", {
@@ -83,15 +83,22 @@ export function formatEventTimeRange(event: EventEntry) {
 
   const start = new Date(event.start)
   const end = new Date(event.end)
-  const formatter = new Intl.DateTimeFormat("hr-HR", {
+  const sameDay = start.toDateString() === end.toDateString()
+  const dateFormatter = new Intl.DateTimeFormat("hr-HR", {
     day: "numeric",
-    month: "long",
+    month: "numeric",
     year: "numeric",
+  })
+  const timeFormatter = new Intl.DateTimeFormat("hr-HR", {
     hour: "2-digit",
     minute: "2-digit",
   })
 
-  return `${formatter.format(start)} – ${formatter.format(end)}`
+  if (sameDay) {
+    return `${dateFormatter.format(start)} • ${timeFormatter.format(start)} – ${timeFormatter.format(end)}`
+  }
+
+  return `${dateFormatter.format(start)} ${timeFormatter.format(start)} – ${dateFormatter.format(end)} ${timeFormatter.format(end)}`
 }
 
 export function getArticleCuration(slug: string) {

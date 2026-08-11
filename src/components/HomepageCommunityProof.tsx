@@ -43,7 +43,7 @@ export function HomepageCommunityProof({
 
   return (
     <>
-      <section className="border-y border-foreground/10 bg-[#fff8ef] py-16 sm:py-24">
+      <section className="border-y border-foreground/10 bg-[#fff8ef] py-16 dark:bg-background sm:py-24">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <div className="flex flex-wrap items-end justify-between gap-6">
             <div>
