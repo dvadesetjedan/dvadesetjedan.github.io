@@ -444,23 +444,10 @@ export const generalCommunityPhotos: GalleryPhoto[] = [
   },
 ]
 
-const allGalleryPhotos = Object.values(eventGalleries).flatMap(
-  (gallery) => gallery.photos,
-)
-
-const featuredSources = [
-  "/images/events/Rab meetup 2022.37.jpeg",
-  "/images/events/Bridging Bitcoin Belgrade October 2024 89.jpeg",
-  "/images/events/belgrade bitcoin meetup 2024.jpeg",
-  "/images/events/btc van visit belgrade 2023.23.jpeg",
-  "/images/events/podgorica conference 2024 3.jpeg",
-  "/images/events/kraljevica meetup august 2024.jpeg",
-  "/images/events/revolution rocks belgrade june 2026 3.jpeg",
-] as const
-
-export const featuredCommunityPhotos = featuredSources
-  .map((src) => allGalleryPhotos.find((photo) => photo.src === src))
-  .filter((photo): photo is GalleryPhoto => Boolean(photo))
+export const communityArchivePhotos = [
+  ...Object.values(eventGalleries).flatMap((gallery) => gallery.photos),
+  ...generalCommunityPhotos,
+]
 
 export function getEventGallery(eventSlug: string) {
   return eventGalleries[eventSlug]

@@ -82,7 +82,7 @@ export function GalleryLightbox({
     <div
       aria-label="Pregled fotografije"
       aria-modal="true"
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-black/92 p-3 backdrop-blur-sm sm:p-6"
+      className="fixed inset-0 z-[100] flex items-center justify-center bg-black/92 p-4 backdrop-blur-sm sm:p-6"
       onMouseDown={(event) => {
         if (event.target === event.currentTarget) onClose()
       }}
@@ -102,7 +102,7 @@ export function GalleryLightbox({
       {photos.length > 1 ? (
         <button
           aria-label="Prethodna fotografija"
-          className="absolute left-3 z-10 inline-flex size-12 items-center justify-center rounded-full border border-white/20 bg-black/65 text-white transition-colors hover:bg-white hover:text-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffd35f] sm:left-6"
+          className="absolute left-4 z-10 inline-flex size-12 items-center justify-center rounded-full border border-white/20 bg-black/65 text-white transition-colors hover:bg-white hover:text-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffd35f] sm:left-6"
           onClick={() =>
             onChange((activeIndex - 1 + photos.length) % photos.length)
           }
@@ -135,7 +135,7 @@ export function GalleryLightbox({
       {photos.length > 1 ? (
         <button
           aria-label="Sljedeća fotografija"
-          className="absolute right-3 z-10 inline-flex size-12 items-center justify-center rounded-full border border-white/20 bg-black/65 text-white transition-colors hover:bg-white hover:text-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffd35f] sm:right-6"
+          className="absolute right-4 z-10 inline-flex size-12 items-center justify-center rounded-full border border-white/20 bg-black/65 text-white transition-colors hover:bg-white hover:text-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffd35f] sm:right-6"
           onClick={() => onChange((activeIndex + 1) % photos.length)}
           type="button"
         >

@@ -6,7 +6,10 @@ import { CommunityMap } from "@/components/CommunityMap"
 import { GalleryLightbox } from "@/components/GalleryLightbox"
 import { SafeImage } from "@/components/SafeImage"
 import { cities } from "@/data/cities"
-import { featuredCommunityPhotos } from "@/data/eventGalleries"
+import {
+  communityArchivePhotos,
+  type GalleryPhoto,
+} from "@/data/eventGalleries"
 import { events, type ScheduledEventEntry } from "@/data/events"
 import { EVENTS_URL, LIVESTREAM_URL, YOUTUBE_URL } from "@/data/site"
 import { communityHref, eventHref, formatEventDate } from "@/lib/content"
@@ -20,6 +23,41 @@ const photoWallClasses = [
   "md:col-span-4",
   "md:col-span-4",
 ] as const
+
+function shuffleItems<T>(items: readonly T[]) {
+  const shuffled = [...items]
+
+  for (let index = shuffled.length - 1; index > 0; index -= 1) {
+    const randomIndex = Math.floor(Math.random() * (index + 1))
+    const currentItem = shuffled[index]
+    shuffled[index] = shuffled[randomIndex]
+    shuffled[randomIndex] = currentItem
+  }
+
+  return shuffled
+}
+
+function createCommunitySlideshow(): GalleryPhoto[] {
+  const photosByEvent = new Map<string, GalleryPhoto[]>()
+
+  communityArchivePhotos.forEach((photo) => {
+    if (!photo.eventSlug) return
+    const eventPhotos = photosByEvent.get(photo.eventSlug) ?? []
+    eventPhotos.push(photo)
+    photosByEvent.set(photo.eventSlug, eventPhotos)
+  })
+
+  const leadPhotos = shuffleItems([...photosByEvent.values()])
+    .slice(0, photoWallClasses.length)
+    .map((photos) => shuffleItems(photos)[0])
+    .filter((photo): photo is GalleryPhoto => Boolean(photo))
+  const leadSources = new Set(leadPhotos.map((photo) => photo.src))
+  const remainingPhotos = shuffleItems(
+    communityArchivePhotos.filter((photo) => !leadSources.has(photo.src)),
+  )
+
+  return [...leadPhotos, ...remainingPhotos]
+}
 
 function photoObjectPosition(eventSlug?: string) {
   return eventSlug === "beograd-bitcoin-meetup-2024"
@@ -39,7 +77,8 @@ export function HomepageCommunityProof({
   upcomingEvents: ScheduledEventEntry[]
 }) {
   const [activePhotoIndex, setActivePhotoIndex] = useState<number | null>(null)
-  const photoWall = featuredCommunityPhotos.slice(0, 6)
+  const [photoSlideshow] = useState(createCommunitySlideshow)
+  const photoWall = photoSlideshow.slice(0, photoWallClasses.length)
 
   return (
     <>
@@ -289,7 +328,7 @@ export function HomepageCommunityProof({
           activeIndex={activePhotoIndex}
           onChange={setActivePhotoIndex}
           onClose={() => setActivePhotoIndex(null)}
-          photos={photoWall}
+          photos={photoSlideshow}
         />
       ) : null}
     </>
