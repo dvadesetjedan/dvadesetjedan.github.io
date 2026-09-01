@@ -26,6 +26,16 @@ export type ScheduledEventEntry = {
   tags?: string[]
   relatedLinks?: { label: string; href: string }[]
   videoUrl?: string
+  recurrence?: MonthlyWeekdayRecurrence
+}
+
+export type MonthlyWeekdayRecurrence = {
+  frequency: "monthly"
+  ordinal: 1 | 2 | 3 | 4 | 5
+  weekday: 0 | 1 | 2 | 3 | 4 | 5 | 6
+  timeZone: string
+  startTime: string
+  endTime: string
 }
 
 export type ArchiveEventEntry = {
@@ -74,7 +84,137 @@ export function getEventStatus(
   return new Date(event.end) >= now ? "upcoming" : "past"
 }
 
-export const events: EventEntry[] = [
+function timeZoneOffset(date: Date, timeZone: string) {
+  const offsetLabel = new Intl.DateTimeFormat("en-US", {
+    timeZone,
+    timeZoneName: "shortOffset",
+  })
+    .formatToParts(date)
+    .find((part) => part.type === "timeZoneName")?.value
+  const match = offsetLabel?.match(/^GMT([+-])(\d{1,2})(?::(\d{2}))?$/)
+
+  if (!match) return "+00:00"
+
+  return `${match[1]}${match[2].padStart(2, "0")}:${match[3] ?? "00"}`
+}
+
+function datePartsInTimeZone(date: Date, timeZone: string) {
+  const parts = new Intl.DateTimeFormat("en-CA", {
+    timeZone,
+    year: "numeric",
+    month: "numeric",
+    day: "numeric",
+  }).formatToParts(date)
+  const value = (type: Intl.DateTimeFormatPartTypes) =>
+    Number(parts.find((part) => part.type === type)?.value)
+
+  return { year: value("year"), month: value("month"), day: value("day") }
+}
+
+function nthWeekdayOfMonth(
+  year: number,
+  month: number,
+  weekday: MonthlyWeekdayRecurrence["weekday"],
+  ordinal: MonthlyWeekdayRecurrence["ordinal"],
+) {
+  const firstWeekday = new Date(Date.UTC(year, month - 1, 1)).getUTCDay()
+  return 1 + ((weekday - firstWeekday + 7) % 7) + (ordinal - 1) * 7
+}
+
+function monthlyOccurrence(recurrence: MonthlyWeekdayRecurrence, now: Date) {
+  let { year, month } = datePartsInTimeZone(now, recurrence.timeZone)
+
+  const occurrenceForMonth = () => {
+    const day = nthWeekdayOfMonth(
+      year,
+      month,
+      recurrence.weekday,
+      recurrence.ordinal,
+    )
+    const datePart = `${year}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`
+    const offset = timeZoneOffset(
+      new Date(Date.UTC(year, month - 1, day, 12)),
+      recurrence.timeZone,
+    )
+
+    return {
+      start: `${datePart}T${recurrence.startTime}:00${offset}`,
+      end: `${datePart}T${recurrence.endTime}:00${offset}`,
+    }
+  }
+
+  let occurrence = occurrenceForMonth()
+  if (new Date(occurrence.end) < now) {
+    month += 1
+    if (month === 13) {
+      month = 1
+      year += 1
+    }
+    occurrence = occurrenceForMonth()
+  }
+
+  return occurrence
+}
+
+export function resolveRecurringEvent(
+  event: ScheduledEventEntry,
+  now = new Date(),
+): ScheduledEventEntry {
+  if (!event.recurrence) return event
+  return { ...event, ...monthlyOccurrence(event.recurrence, now) }
+}
+
+export const eventDefinitions: EventEntry[] = [
+  {
+    slug: "bitcoin-only-meetup-belgrade",
+    title: "Bitcoin-only meetup u Beogradu",
+    summary:
+      "Redovno DvadesetJedan druženje u Docker Brewery & Beer Gardenu u Beogradu, svake treće srijede u mjesecu.",
+    description: [
+      "Beogradska Bitcoin zajednica okuplja se svake treće srijede u mjesecu od 19:00 do 22:00 u Docker Brewery & Beer Gardenu.",
+      "Format je otvoreno Bitcoin-only druženje: razgovor o Bitcoinu, ekonomiji, tehnologiji, filozofiji, projektima i zajednici.",
+      "Govori se srpski i engleski. Dobrodošli su svi bez obzira na razinu znanja o Bitcoinu, a početnici su posebno dobrodošli.",
+      "Za točan broj stola, više informacija i eventualne zadnje promjene provjeri Telegram kanal za druženja.",
+      "Cover fotografija: Docker Brewery & Beer Garden.",
+    ],
+    coverImage: "/events/docker-brewery-belgrade.png",
+    start: "2026-09-16T19:00:00+02:00",
+    end: "2026-09-16T22:00:00+02:00",
+    venue: "Docker Brewery & Beer Garden",
+    address: "Žorža Klemansoa 27b",
+    city: "Belgrade",
+    country: "Serbia",
+    registrationUrl: "https://www.meetup.com/dvadeset-jedan/events/314211200/",
+    mapUrl:
+      "https://www.google.com/maps/search/?api=1&query=Docker+Brewery+Beer+Garden+Zorza+Klemansoa+27b+Belgrade+Serbia",
+    sourceName: "Meetup",
+    sourceUrl: "https://www.meetup.com/dvadeset-jedan/events/314211200/",
+    meetupUrl: "https://www.meetup.com/dvadeset-jedan/events/314211200/",
+    organizer: "DvadesetJedan",
+    language: "srpski i engleski",
+    capacityNote:
+      "Aktualne informacije provjeri u Telegram kanalu za druženja.",
+    citySlug: "beograd",
+    tags: ["Bitcoin-only", "Meetup", "Beograd"],
+    relatedLinks: [
+      {
+        label: "Telegram koordinacija",
+        href: "https://t.me/dvadesetjedan21/9382",
+      },
+      {
+        label: "YouTube podcast",
+        href: "https://www.youtube.com/@dvadesetjedan/streams",
+      },
+    ],
+    recurrence: {
+      frequency: "monthly",
+      ordinal: 3,
+      weekday: 3,
+      timeZone: "Europe/Belgrade",
+      startTime: "19:00",
+      endTime: "22:00",
+    },
+  },
   {
     slug: "bitcoin-only-meetup-belgrade-2026-08-19",
     title: "Bitcoin-only meetup u Beogradu",
@@ -777,3 +917,7 @@ export const events: EventEntry[] = [
     tags: ["Bitcoin-only", "Meetup", "Beograd"],
   },
 ]
+
+export const events: EventEntry[] = eventDefinitions.map((event) =>
+  isScheduledEvent(event) ? resolveRecurringEvent(event) : event,
+)

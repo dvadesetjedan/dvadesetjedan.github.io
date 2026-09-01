@@ -101,7 +101,7 @@ const articles = extractObjects(
 
 const events = extractObjects(
   readSource("src/data/events.ts"),
-  "export const events",
+  "export const eventDefinitions",
 ).map((objectSource, index) => ({
   label: `Događaj ${index + 1}`,
   kind: readString(objectSource, "kind"),

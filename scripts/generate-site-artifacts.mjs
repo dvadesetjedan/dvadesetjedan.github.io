@@ -339,7 +339,10 @@ function loadArticles() {
 }
 
 function loadEvents() {
-  return extractObjects(readSource("src/data/events.ts"), "export const events")
+  return extractObjects(
+    readSource("src/data/events.ts"),
+    "export const eventDefinitions",
+  )
     .map((objectSource) => {
       const slug = readString(objectSource, "slug")
       const kind = readString(objectSource, "kind")

@@ -1,6 +1,11 @@
 # Event maintenance
 
-Događaji se održavaju ručno iz javnih izvora. Nema runtime Meetup API ovisnosti.
+Događaji se održavaju iz javnih izvora. Nema runtime Meetup API ovisnosti.
+
+Redovni beogradski meetup iznimka je od ručnog upisivanja datuma. Zapis
+`bitcoin-only-meetup-belgrade` u `src/data/events.ts` automatski prikazuje
+sljedeću treću srijedu u mjesecu, od 19:00 do 22:00 po vremenu u Beogradu.
+Stari, datirani zapisi ostaju u arhivi.
 
 ## Tjedni workflow
 
@@ -25,6 +30,8 @@ Skripta samo ispisuje razlike. Ne mijenja `src/data/events.ts`.
 ## Pravila
 
 - Ne izmišljati venue, vrijeme, program, organizatore ili RSVP linkove.
+- Ne dodavati novi datirani zapis za redovni beogradski meetup. Promijeni
+  pravilo `recurrence` samo ako se promijene stalni termin ili vrijeme.
 - Ako događaj nije potvrđen, ne dodavati ga.
 - Ako je događaj otkazan, koristi `status: "cancelled"` i smanji istaknutost RSVP CTA-a.
 - Za zadnje promjene korisnike uputi na službenu najavu, RSVP/Meetup link i Telegram zajednicu.

@@ -85,7 +85,7 @@ function getSourceEvents(value) {
 
 const repoEvents = extractObjects(
   readSource("src/data/events.ts"),
-  "export const events",
+  "export const eventDefinitions",
 ).map((objectSource) => ({
   title: readString(objectSource, "title"),
   start: readString(objectSource, "start"),
