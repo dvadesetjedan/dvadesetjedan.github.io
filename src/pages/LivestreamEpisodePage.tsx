@@ -14,10 +14,56 @@ function youtubeEmbedUrl(url: string) {
   return match ? `https://www.youtube.com/embed/${match[1]}` : null
 }
 
+function chapterUrl(url: string, time: string) {
+  const seconds = time
+    .split(":")
+    .reduce((total, part) => total * 60 + Number(part), 0)
+  const target = new URL(url)
+  target.searchParams.set("t", `${seconds}s`)
+  return target.href
+}
+
+function DescriptionText({ text }: { text: string }) {
+  // Chapter lines appear once, as timestamp links below the description.
+  const paragraphs = text
+    .split("\n")
+    .filter((line) => !/^\s*\d{1,2}:\d{2}(?::\d{2})?\s+/.test(line))
+    .join("\n")
+    .split(/\n\s*\n/)
+    .filter((paragraph) => paragraph.trim())
+
+  return (
+    <div className="mt-8 space-y-4 text-base leading-8 text-muted-foreground">
+      {paragraphs.map((paragraph, index) => (
+        <p className="whitespace-pre-line break-words" key={index}>
+          {paragraph.split(/(https?:\/\/[^\s]+)/).map((part, partIndex) =>
+            /^https?:\/\//.test(part) ? (
+              <a
+                className="[overflow-wrap:anywhere] underline underline-offset-4 hover:text-primary-strong"
+                href={part}
+                key={partIndex}
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                {part}
+              </a>
+            ) : (
+              part
+            ),
+          )}
+        </p>
+      ))}
+    </div>
+  )
+}
+
 export function LivestreamEpisodePage({ episode }: { episode: EpisodeEntry }) {
   usePageMeta(`${episode.title} | DvadesetJedan`, episode.summary)
 
   const embedUrl = youtubeEmbedUrl(episode.youtubeUrl)
+  const showSummary = Boolean(
+    episode.summaryBullets?.length || episode.needsShownotes,
+  )
 
   return (
     <Layout>
@@ -50,9 +96,11 @@ export function LivestreamEpisodePage({ episode }: { episode: EpisodeEntry }) {
             </div>
           ) : null}
 
-          <p className="mt-8 text-base leading-8 text-muted-foreground">
-            {episode.summary || "Sažetak će biti dodan."}
-          </p>
+          <DescriptionText
+            text={
+              episode.description || episode.summary || "Sažetak će biti dodan."
+            }
+          />
 
           <div className="mt-6 flex flex-wrap gap-3">
             <ActionButton
@@ -103,27 +151,31 @@ export function LivestreamEpisodePage({ episode }: { episode: EpisodeEntry }) {
             </section>
           ) : null}
 
-          <section className="mt-10 grid gap-6 md:grid-cols-2">
-            <div className="rounded-[1.5rem] border border-border/80 bg-background/70 px-5 py-5 sm:px-6">
-              <h2 className="text-2xl font-semibold tracking-[-0.04em] text-foreground">
-                Sažetak
-              </h2>
-              {episode.summaryBullets?.length ? (
-                <ul className="mt-4 space-y-2 text-sm leading-7 text-muted-foreground">
-                  {episode.summaryBullets.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-              ) : episode.needsShownotes ? (
-                <p className="mt-4 text-sm leading-7 text-muted-foreground">
-                  Sažetak treba dodati.
-                </p>
-              ) : (
-                <p className="mt-4 text-sm leading-7 text-muted-foreground">
-                  Sažetak nije dostupan.
-                </p>
-              )}
-            </div>
+          <section
+            className={`mt-10 grid gap-6 ${showSummary ? "md:grid-cols-2" : ""}`}
+          >
+            {showSummary ? (
+              <div className="rounded-[1.5rem] border border-border/80 bg-background/70 px-5 py-5 sm:px-6">
+                <h2 className="text-2xl font-semibold tracking-[-0.04em] text-foreground">
+                  Sažetak
+                </h2>
+                {episode.summaryBullets?.length ? (
+                  <ul className="mt-4 space-y-2 text-sm leading-7 text-muted-foreground">
+                    {episode.summaryBullets.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                ) : episode.needsShownotes ? (
+                  <p className="mt-4 text-sm leading-7 text-muted-foreground">
+                    Sažetak treba dodati.
+                  </p>
+                ) : (
+                  <p className="mt-4 text-sm leading-7 text-muted-foreground">
+                    Sažetak nije dostupan.
+                  </p>
+                )}
+              </div>
+            ) : null}
 
             <div className="rounded-[1.5rem] border border-border/80 bg-background/70 px-5 py-5 sm:px-6">
               <h2 className="text-2xl font-semibold tracking-[-0.04em] text-foreground">
@@ -133,7 +185,17 @@ export function LivestreamEpisodePage({ episode }: { episode: EpisodeEntry }) {
                 <ul className="mt-4 space-y-2 text-sm leading-7 text-muted-foreground">
                   {episode.chapters.map((chapter) => (
                     <li key={`${chapter.time}-${chapter.title}`}>
-                      {chapter.time} — {chapter.title}
+                      <a
+                        className="block break-words rounded-sm underline decoration-border underline-offset-4 transition-colors hover:text-primary-strong focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
+                        href={chapterUrl(episode.youtubeUrl, chapter.time)}
+                        rel="noopener noreferrer"
+                        target="_blank"
+                      >
+                        <span className="font-medium tabular-nums text-primary-strong">
+                          {chapter.time}
+                        </span>{" "}
+                        — {chapter.title}
+                      </a>
                     </li>
                   ))}
                 </ul>

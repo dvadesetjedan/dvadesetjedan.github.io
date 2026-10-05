@@ -1,5 +1,6 @@
 import fs from "node:fs"
 import path from "node:path"
+import { readSourceString } from "./read-source-string.mjs"
 
 const root = process.cwd()
 const distDir = path.join(root, "dist")
@@ -254,8 +255,7 @@ function youtubeVideoId(value) {
 }
 
 function readString(objectSource, key) {
-  const match = objectSource.match(new RegExp(`${key}:\\s*"([^"]*)"`, "s"))
-  return match?.[1]
+  return readSourceString(objectSource, key)
 }
 
 function readStringArray(objectSource, key) {

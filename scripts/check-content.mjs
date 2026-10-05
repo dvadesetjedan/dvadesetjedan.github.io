@@ -1,4 +1,5 @@
 import fs from "node:fs"
+import { readSourceString } from "./read-source-string.mjs"
 
 const failures = []
 
@@ -7,8 +8,7 @@ function readSource(filePath) {
 }
 
 function readString(objectSource, key) {
-  const match = objectSource.match(new RegExp(`${key}:\\s*"([^"]*)"`, "s"))
-  return match?.[1]
+  return readSourceString(objectSource, key)
 }
 
 function readStringArray(objectSource, key) {

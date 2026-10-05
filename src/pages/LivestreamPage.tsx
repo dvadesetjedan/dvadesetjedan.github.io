@@ -69,7 +69,7 @@ export function LivestreamPage() {
             </p>
             {latestEpisode ? (
               <>
-                <h2 className="mt-3 text-3xl font-semibold tracking-[-0.04em] text-foreground">
+                <h2 className="safe-heading mt-3 text-3xl font-semibold tracking-[-0.04em] text-foreground">
                   <a
                     className="hover:text-primary-strong"
                     href={episodeHref(latestEpisode.slug)}
@@ -160,7 +160,7 @@ export function LivestreamPage() {
                         {formatEpisodeDate(episode.publishedAt)}
                       </p>
                     ) : null}
-                    <h3 className="text-xl font-semibold tracking-[-0.03em] text-foreground">
+                    <h3 className="safe-heading text-xl font-semibold tracking-[-0.03em] text-foreground">
                       <a
                         className="hover:text-primary-strong"
                         href={episodeHref(episode.slug)}
