@@ -18,6 +18,204 @@ export type EpisodeEntry = {
 
 export const episodes: EpisodeEntry[] = [
   {
+    slug: "dvadesetjedan-livestream-2026-10-18",
+    title:
+      "Tko može zaustaviti Bitcoin? Mining, cenzura i sigurnost | DvadesetJedan Uživo #220",
+    summary:
+      "Nakon pregleda cijene i dugoročnih trendova, momci raspravljaju o razlici između Bitcoina i kriptoindustrije te o ekonomici mininga i otpornosti na cenzuru. U središtu razgovora su i rizici hardverskih novčanika, self-custody nasuprot skrbništvu mjenjačnica i ETF-ova te odgovornost koju nosi kontrola nad vlastitim ključevima. Prolazimo tjedne vijesti i pitanja o Bitcoin Coreu, privatnosti i pruned nodeovima.",
+    description:
+      "Nakon pregleda cijene i dugoročnih trendova, momci raspravljaju o razlici između Bitcoina i kriptoindustrije te o ekonomici mininga i otpornosti na cenzuru. U središtu razgovora su i rizici hardverskih novčanika, self-custody nasuprot skrbništvu mjenjačnica i ETF-ova te odgovornost koju nosi kontrola nad vlastitim ključevima. Prolazimo tjedne vijesti i pitanja o Bitcoin Coreu, privatnosti i pruned nodeovima.\n\n00:00 Uvod i pozdravi\n02:30 Cijena Bitcoina i tržišni sentiment\n03:59 Hashrate i usporedba s prošlim ciklusima\n05:58 Petogodišnji prinosi i dugoročni trend\n09:46 Rane cijene Bitcoina i graf vremena po blokovima\n15:12 Halving, ciklusi i projekcije rasta\n24:58 Pridružuje se Arvin: veličina Bitcoin tržišta\n26:42 ETF-ovi, likvidnost i fiat inflacija\n32:45 Što zapravo znači da smo još rano?\n37:04 Bitcoin i kriptoindustrija nisu ista priča\n40:32 Kultovi ličnosti, narativi i samostalno razmišljanje\n45:37 Stefan o Bitcoinu, tickeru BTC i alternativnim coinima\n52:19 Mining i otpornost na cenzuru\n57:20 Naknade izvan javnog mempoola i ekonomski poticaji\n1:04:42 Rasprava o Ledgeru i rizicima lanca dobave\n1:08:22 Trezor, prodajni kanali i odgovornost proizvođača\n1:10:47 Kraken, banke i institucionalno usvajanje\n1:13:33 MSCI, Strategy i Bitcoin treasury kompanije\n1:16:13 Liquid: vijesti o povratu sredstava\n1:17:15 Blockstream, Jade i povjerenje u sigurnosne proizvode\n1:21:22 Francuska, prosvjedi i rasprava o fiatu\n1:24:21 Povratak na MSCI i pasivno ulaganje\n1:27:43 SeedSigner, Raspberry Pi i BIP39\n1:32:39 Bitcoin Core i izbor sigurnosnih standarda\n1:35:18 Čuvanje na mjenjačnici: vlasništvo, ključevi i rizik\n1:39:38 Rasprava o ruskim pravilima za P2P trgovanje\n1:42:14 Rizici mjenjačnica i osobni model rizika\n1:45:17 Electrum, privatnost i vlastita provjera transakcija\n1:49:56 Brzina pristupa nasuprot sinkronizaciji čvora\n1:52:06 Edukacija, self-custody i razvoj boljih praksi\n1:56:01 ETF-ovi i teret osobne odgovornosti\n1:59:54 Tko čuva bitcoin i s kojim rizicima?\n2:03:12 Najave meetupa u Beogradu i konferencije u Sofiji\n2:04:14 Pruned node, kopije blockchaina i najava Core alata\n2:07:36 Učenje i isprobavanje s malim iznosima\n2:10:10 Završni komentari i pozdravi\n\nDvadesetJedan:\nWeb: https://dvadesetjedan.com/\nTelegram: https://t.me/dvadesetjedan21\nX: https://x.com/dvadesetjedan21",
+    youtubeUrl: "https://www.youtube.com/watch?v=xeoMXTzPdoM",
+    publishedAt: "2026-10-18",
+    chapters: [
+      { time: "00:00", title: "Uvod i pozdravi" },
+      { time: "02:30", title: "Cijena Bitcoina i tržišni sentiment" },
+      { time: "03:59", title: "Hashrate i usporedba s prošlim ciklusima" },
+      { time: "05:58", title: "Petogodišnji prinosi i dugoročni trend" },
+      {
+        time: "09:46",
+        title: "Rane cijene Bitcoina i graf vremena po blokovima",
+      },
+      { time: "15:12", title: "Halving, ciklusi i projekcije rasta" },
+      { time: "24:58", title: "Pridružuje se Arvin: veličina Bitcoin tržišta" },
+      { time: "26:42", title: "ETF-ovi, likvidnost i fiat inflacija" },
+      { time: "32:45", title: "Što zapravo znači da smo još rano?" },
+      { time: "37:04", title: "Bitcoin i kriptoindustrija nisu ista priča" },
+      {
+        time: "40:32",
+        title: "Kultovi ličnosti, narativi i samostalno razmišljanje",
+      },
+      {
+        time: "45:37",
+        title: "Stefan o Bitcoinu, tickeru BTC i alternativnim coinima",
+      },
+      { time: "52:19", title: "Mining i otpornost na cenzuru" },
+      {
+        time: "57:20",
+        title: "Naknade izvan javnog mempoola i ekonomski poticaji",
+      },
+      { time: "1:04:42", title: "Rasprava o Ledgeru i rizicima lanca dobave" },
+      {
+        time: "1:08:22",
+        title: "Trezor, prodajni kanali i odgovornost proizvođača",
+      },
+      { time: "1:10:47", title: "Kraken, banke i institucionalno usvajanje" },
+      { time: "1:13:33", title: "MSCI, Strategy i Bitcoin treasury kompanije" },
+      { time: "1:16:13", title: "Liquid: vijesti o povratu sredstava" },
+      {
+        time: "1:17:15",
+        title: "Blockstream, Jade i povjerenje u sigurnosne proizvode",
+      },
+      { time: "1:21:22", title: "Francuska, prosvjedi i rasprava o fiatu" },
+      { time: "1:24:21", title: "Povratak na MSCI i pasivno ulaganje" },
+      { time: "1:27:43", title: "SeedSigner, Raspberry Pi i BIP39" },
+      { time: "1:32:39", title: "Bitcoin Core i izbor sigurnosnih standarda" },
+      {
+        time: "1:35:18",
+        title: "Čuvanje na mjenjačnici: vlasništvo, ključevi i rizik",
+      },
+      {
+        time: "1:39:38",
+        title: "Rasprava o ruskim pravilima za P2P trgovanje",
+      },
+      { time: "1:42:14", title: "Rizici mjenjačnica i osobni model rizika" },
+      {
+        time: "1:45:17",
+        title: "Electrum, privatnost i vlastita provjera transakcija",
+      },
+      {
+        time: "1:49:56",
+        title: "Brzina pristupa nasuprot sinkronizaciji čvora",
+      },
+      {
+        time: "1:52:06",
+        title: "Edukacija, self-custody i razvoj boljih praksi",
+      },
+      { time: "1:56:01", title: "ETF-ovi i teret osobne odgovornosti" },
+      { time: "1:59:54", title: "Tko čuva bitcoin i s kojim rizicima?" },
+      {
+        time: "2:03:12",
+        title: "Najave meetupa u Beogradu i konferencije u Sofiji",
+      },
+      {
+        time: "2:04:14",
+        title: "Pruned node, kopije blockchaina i najava Core alata",
+      },
+      { time: "2:07:36", title: "Učenje i isprobavanje s malim iznosima" },
+      { time: "2:10:10", title: "Završni komentari i pozdravi" },
+    ],
+    needsShownotes: false,
+  },
+  {
+    slug: "dvadesetjedan-livestream-2026-10-11",
+    title:
+      "Hardverski novčanici: kome zapravo vjerujemo? | DvadesetJedan Uživo #219",
+    summary:
+      "Raspravljamo o vijestima o kompromitiranim hardverskim novčanicima i povjerenju u proizvođače, dobavljače i softver. Pavao uživo pokazuje izradu i backup novčanika u Bitcoin Coreu, a razgovor se širi na privatnost, multisig, nasljeđivanje i osobnu odgovornost. Dotičemo se iskustava iz Kanade, AI-ja, open-source razvoja i budućnosti softverskih pretplata.",
+    description:
+      "Raspravljamo o vijestima o kompromitiranim hardverskim novčanicima i povjerenju u proizvođače, dobavljače i softver. Pavao uživo pokazuje izradu i backup novčanika u Bitcoin Coreu, a razgovor se širi na privatnost, multisig, nasljeđivanje i osobnu odgovornost. Dotičemo se iskustava iz Kanade, AI-ja, open-source razvoja i budućnosti softverskih pretplata.\n\n00:00 Uvod i pozdravi\n02:02 Tržišni pregled: cijena, ciklusi i hashrate\n07:08 Power law i dugoročni trend Bitcoina\n13:54 Pridružuje se Arvin: vrijeme iznad i ispod trenda\n20:13 Pridružuje se Stefan\n21:08 Robinhood, Bitcoin u bilanci i povjerenje u brokere\n28:26 Ark, Bark i rasprava o sigurnosnom incidentu\n29:25 Kvantna računala, AI i kriptografija\n38:56 Cash App i plaćanje računa Bitcoinom\n42:42 Vijesti o zaposlenosti u Kanadi\n44:02 Rasprava o Ledgeru i lancu dobave\n53:08 Namjenski uređaji kao meta napada\n1:06:55 Povjerenje u proizvođače i provjera uređaja\n1:15:09 Generički hardver, Linux i Bitcoin Core\n1:22:05 DIY novčanici i pitanje neovisnih komponenti\n1:29:33 Jugo se pridružuje: sigurnost i iskustva iz Bull Bitcoina\n1:39:30 Midwest Bitcoin Summit i širenje u SAD\n1:40:56 Jugo o životu, troškovima i politici u Kanadi\n1:52:06 Otvoreni hardver i gradnja novih sustava\n1:58:02 Fiat, mirovine i uloga države\n2:07:54 Privatnost nasuprot komforu\n2:09:04 Blokirane kartice i iskustva s plaćanjem\n2:14:28 Jugo o tužbi u Francuskoj i zaštiti osobnih podataka\n2:21:09 Demonstracija: izrada novčanika u Bitcoin Coreu\n2:24:08 Self-custody i rizici skrbništva\n2:25:54 Šifrirani wallet.dat i sigurnosne kopije\n2:40:15 Nasljeđivanje i razvoj Bull Walleta\n2:42:23 Ulaganje u Bitcoin Core i njegovo sučelje\n2:50:17 Najava novih alata za Bitcoin Core\n2:58:29 Pridružuje se Plumski: zaštita pakiranja i uređaja\n3:02:30 Sigurnost, strpljenje i sinkronizacija čvora\n3:06:04 Lightning i svakodnevna plaćanja\n3:10:18 AI, open source i budućnost softvera\n3:14:04 Softverske pretplate, cijene i korisničko iskustvo\n3:23:10 AI, subvencije i regulacija\n3:26:42 Navike korisnika i izbor AI modela\n3:32:31 Najave Sofije i beogradskog meetupa\n3:34:05 Prijenosni signer, USB i slanje transakcija\n3:39:51 Yeti: multisig, fizički mediji i backup\n3:45:32 Od koga se štitimo? Vlastiti model prijetnji\n3:48:02 Nasljeđivanje, multisig i vremenski uvjeti potrošnje\n3:51:27 Core Explorer i tri odvojena radna okruženja\n3:55:34 Kućna mreža, pametni uređaji i sigurnost\n4:01:13 Ekonomika napada i obrane\n4:07:12 Odgovornost proizvođača nakon sigurnosnih incidenata\n4:16:39 Čuvanje lozinki i odvojene sigurnosne kopije\n4:19:31 Entropija za sljedeći put i završni pozdravi\n\nDvadesetJedan:\nWeb: https://dvadesetjedan.com/\nTelegram: https://t.me/dvadesetjedan21\nX: https://x.com/dvadesetjedan21",
+    youtubeUrl: "https://www.youtube.com/watch?v=563dQR8hDVI",
+    publishedAt: "2026-10-11",
+    chapters: [
+      { time: "00:00", title: "Uvod i pozdravi" },
+      { time: "02:02", title: "Tržišni pregled: cijena, ciklusi i hashrate" },
+      { time: "07:08", title: "Power law i dugoročni trend Bitcoina" },
+      {
+        time: "13:54",
+        title: "Pridružuje se Arvin: vrijeme iznad i ispod trenda",
+      },
+      { time: "20:13", title: "Pridružuje se Stefan" },
+      {
+        time: "21:08",
+        title: "Robinhood, Bitcoin u bilanci i povjerenje u brokere",
+      },
+      { time: "28:26", title: "Ark, Bark i rasprava o sigurnosnom incidentu" },
+      { time: "29:25", title: "Kvantna računala, AI i kriptografija" },
+      { time: "38:56", title: "Cash App i plaćanje računa Bitcoinom" },
+      { time: "42:42", title: "Vijesti o zaposlenosti u Kanadi" },
+      { time: "44:02", title: "Rasprava o Ledgeru i lancu dobave" },
+      { time: "53:08", title: "Namjenski uređaji kao meta napada" },
+      { time: "1:06:55", title: "Povjerenje u proizvođače i provjera uređaja" },
+      { time: "1:15:09", title: "Generički hardver, Linux i Bitcoin Core" },
+      {
+        time: "1:22:05",
+        title: "DIY novčanici i pitanje neovisnih komponenti",
+      },
+      {
+        time: "1:29:33",
+        title: "Jugo se pridružuje: sigurnost i iskustva iz Bull Bitcoina",
+      },
+      { time: "1:39:30", title: "Midwest Bitcoin Summit i širenje u SAD" },
+      {
+        time: "1:40:56",
+        title: "Jugo o životu, troškovima i politici u Kanadi",
+      },
+      { time: "1:52:06", title: "Otvoreni hardver i gradnja novih sustava" },
+      { time: "1:58:02", title: "Fiat, mirovine i uloga države" },
+      { time: "2:07:54", title: "Privatnost nasuprot komforu" },
+      { time: "2:09:04", title: "Blokirane kartice i iskustva s plaćanjem" },
+      {
+        time: "2:14:28",
+        title: "Jugo o tužbi u Francuskoj i zaštiti osobnih podataka",
+      },
+      {
+        time: "2:21:09",
+        title: "Demonstracija: izrada novčanika u Bitcoin Coreu",
+      },
+      { time: "2:24:08", title: "Self-custody i rizici skrbništva" },
+      { time: "2:25:54", title: "Šifrirani wallet.dat i sigurnosne kopije" },
+      { time: "2:40:15", title: "Nasljeđivanje i razvoj Bull Walleta" },
+      { time: "2:42:23", title: "Ulaganje u Bitcoin Core i njegovo sučelje" },
+      { time: "2:50:17", title: "Najava novih alata za Bitcoin Core" },
+      {
+        time: "2:58:29",
+        title: "Pridružuje se Plumski: zaštita pakiranja i uređaja",
+      },
+      {
+        time: "3:02:30",
+        title: "Sigurnost, strpljenje i sinkronizacija čvora",
+      },
+      { time: "3:06:04", title: "Lightning i svakodnevna plaćanja" },
+      { time: "3:10:18", title: "AI, open source i budućnost softvera" },
+      {
+        time: "3:14:04",
+        title: "Softverske pretplate, cijene i korisničko iskustvo",
+      },
+      { time: "3:23:10", title: "AI, subvencije i regulacija" },
+      { time: "3:26:42", title: "Navike korisnika i izbor AI modela" },
+      { time: "3:32:31", title: "Najave Sofije i beogradskog meetupa" },
+      { time: "3:34:05", title: "Prijenosni signer, USB i slanje transakcija" },
+      { time: "3:39:51", title: "Yeti: multisig, fizički mediji i backup" },
+      {
+        time: "3:45:32",
+        title: "Od koga se štitimo? Vlastiti model prijetnji",
+      },
+      {
+        time: "3:48:02",
+        title: "Nasljeđivanje, multisig i vremenski uvjeti potrošnje",
+      },
+      {
+        time: "3:51:27",
+        title: "Core Explorer i tri odvojena radna okruženja",
+      },
+      { time: "3:55:34", title: "Kućna mreža, pametni uređaji i sigurnost" },
+      { time: "4:01:13", title: "Ekonomika napada i obrane" },
+      {
+        time: "4:07:12",
+        title: "Odgovornost proizvođača nakon sigurnosnih incidenata",
+      },
+      {
+        time: "4:16:39",
+        title: "Čuvanje lozinki i odvojene sigurnosne kopije",
+      },
+      {
+        time: "4:19:31",
+        title: "Entropija za sljedeći put i završni pozdravi",
+      },
+    ],
+    needsShownotes: false,
+  },
+  {
     slug: "dvadesetjedan-livestream-2026-10-04",
     title:
       "Bitcoin ili zlato? Štednja, trendovi i self-custody | DvadesetJedan Uživo #218",
