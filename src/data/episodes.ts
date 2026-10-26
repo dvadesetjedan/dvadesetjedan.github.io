@@ -18,6 +18,64 @@ export type EpisodeEntry = {
 
 export const episodes: EpisodeEntry[] = [
   {
+    slug: "dvadesetjedan-livestream-2026-10-25",
+    title:
+      "Tko čuva tvoj Bitcoin? Novčanici i vlastita provjera | DvadesetJedan Uživo #221",
+    summary:
+      "Prolazimo Power Law model, akumulaciju i trošenje Bitcoina te koristi i rizike AI alata. Glavnina razgovora posvećena je samostalnom čuvanju: Bitcoin Core, multisig, entropija, šifrirani backup i privatnost, uz pitanja zajednice.",
+    description:
+      "Prolazimo Power Law model, akumulaciju i trošenje Bitcoina te koristi i rizike AI alata. Glavnina razgovora posvećena je samostalnom čuvanju: Bitcoin Core, multisig, entropija, šifrirani backup i privatnost, uz pitanja zajednice.\n\nPoglavlja:\n00:00 Uvod i pozdrav zajednici\n01:43 Bitcoin tržište, hashrate i sentiment\n07:25 Power Law i dugoročni trend cijene\n12:16 Akumulacija, trošenje i Bitcoin kao novac\n23:09 Sigurnost novčanika i vlastita validacija\n29:33 Tjedne vijesti: institucije i financijska represija\n32:33 PHP i AI: napadi, podaci i privatnost\n41:35 AI agenti i produktivnost\n46:29 Electrum i provjera adresa\n48:30 Coldcard, odgovornost i vlastita entropija\n56:33 Bitcoin Core: sigurnosne zakrpe i objave\n1:05:04 Bitcoin Core novčanik: funkcionalnost i sučelje\n1:10:05 Multisig, koordinatori i provjera adresa\n1:18:37 Brže zakrpe i alternativne implementacije\n1:41:44 Hardverski novčanici: navodi o krađi i odgovornost\n1:53:12 Model prijetnji i ekonomika napada\n2:05:29 Seed riječi, enkripcija i backup\n2:18:52 Entropija novčanika i Bitcoin adresa\n2:26:50 Brute force i Bitcoin puzzle primjeri\n2:32:27 Šifrirani backup i privatnost multisiga\n2:36:50 Razgovor o izborima u Srbiji\n2:39:30 Grijanje rudarenjem i centralizacija\n2:44:15 Offline uređaji, malware i privatnost\n2:53:34 BIP39, Bitcoin Core i praktični self-custody\n3:22:11 Namjensko računalo i Bitcoin Core\n3:27:08 Poticaji influencera i sigurnosne preporuke\n3:35:29 Bitcoin Core kao zajednički projekt\n3:42:38 Trošak sigurnosti multisiga i dobavnog lanca\n3:47:37 Završne poruke zajednici\n\nDvadesetJedan:\nWeb: https://dvadesetjedan.com/\nTelegram: https://t.me/dvadesetjedan21\nX: https://x.com/dvadesetjedan21",
+    youtubeUrl: "https://www.youtube.com/watch?v=B1YMv28YvS8",
+    publishedAt: "2026-10-25",
+    chapters: [
+      { time: "00:00", title: "Uvod i pozdrav zajednici" },
+      { time: "01:43", title: "Bitcoin tržište, hashrate i sentiment" },
+      { time: "07:25", title: "Power Law i dugoročni trend cijene" },
+      { time: "12:16", title: "Akumulacija, trošenje i Bitcoin kao novac" },
+      { time: "23:09", title: "Sigurnost novčanika i vlastita validacija" },
+      {
+        time: "29:33",
+        title: "Tjedne vijesti: institucije i financijska represija",
+      },
+      { time: "32:33", title: "PHP i AI: napadi, podaci i privatnost" },
+      { time: "41:35", title: "AI agenti i produktivnost" },
+      { time: "46:29", title: "Electrum i provjera adresa" },
+      { time: "48:30", title: "Coldcard, odgovornost i vlastita entropija" },
+      { time: "56:33", title: "Bitcoin Core: sigurnosne zakrpe i objave" },
+      {
+        time: "1:05:04",
+        title: "Bitcoin Core novčanik: funkcionalnost i sučelje",
+      },
+      { time: "1:10:05", title: "Multisig, koordinatori i provjera adresa" },
+      { time: "1:18:37", title: "Brže zakrpe i alternativne implementacije" },
+      {
+        time: "1:41:44",
+        title: "Hardverski novčanici: navodi o krađi i odgovornost",
+      },
+      { time: "1:53:12", title: "Model prijetnji i ekonomika napada" },
+      { time: "2:05:29", title: "Seed riječi, enkripcija i backup" },
+      { time: "2:18:52", title: "Entropija novčanika i Bitcoin adresa" },
+      { time: "2:26:50", title: "Brute force i Bitcoin puzzle primjeri" },
+      { time: "2:32:27", title: "Šifrirani backup i privatnost multisiga" },
+      { time: "2:36:50", title: "Razgovor o izborima u Srbiji" },
+      { time: "2:39:30", title: "Grijanje rudarenjem i centralizacija" },
+      { time: "2:44:15", title: "Offline uređaji, malware i privatnost" },
+      {
+        time: "2:53:34",
+        title: "BIP39, Bitcoin Core i praktični self-custody",
+      },
+      { time: "3:22:11", title: "Namjensko računalo i Bitcoin Core" },
+      { time: "3:27:08", title: "Poticaji influencera i sigurnosne preporuke" },
+      { time: "3:35:29", title: "Bitcoin Core kao zajednički projekt" },
+      {
+        time: "3:42:38",
+        title: "Trošak sigurnosti multisiga i dobavnog lanca",
+      },
+      { time: "3:47:37", title: "Završne poruke zajednici" },
+    ],
+    needsShownotes: false,
+  },
+  {
     slug: "dvadesetjedan-livestream-2026-10-18",
     title:
       "Tko može zaustaviti Bitcoin? Mining, cenzura i sigurnost | DvadesetJedan Uživo #220",
