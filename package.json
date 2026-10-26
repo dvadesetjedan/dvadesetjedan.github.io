@@ -14,7 +14,8 @@
     "check:galleries": "node scripts/check-event-galleries.mjs",
     "check:artifacts": "node scripts/check-artifacts.mjs",
     "check:meetup": "node scripts/check-meetup-events.mjs",
-    "check": "npm run lint && npm run check:routes && npm run check:content && npm run check:galleries && npm run build && npm run check:artifacts",
+    "check:recurrence": "node scripts/check-event-recurrence.mjs",
+    "check": "npm run lint && npm run check:routes && npm run check:content && npm run check:galleries && npm run check:recurrence && npm run build && npm run check:artifacts",
     "format": "prettier --write .",
     "preview": "vite preview"
   },

@@ -7,6 +7,14 @@ Redovni beogradski meetup iznimka je od ručnog upisivanja datuma. Zapis
 sljedeću treću srijedu u mjesecu, od 19:00 do 22:00 po vremenu u Beogradu.
 Stari, datirani zapisi ostaju u arhivi.
 
+Jednokratne iznimke upisuju se u `recurrence.overrides`, pod ključem `YYYY-MM`,
+s danom u tom mjesecu i obavijesti `notice`. Za studeni 2026. potvrđen je
+subotnji termin 21. 11. od 19:00 do 22:00. Nakon njegova završetka sljedeći
+termin automatski postaje srijeda, 16. 12. 2026.; obavijest o iznimci više se
+ne prikazuje. Redovno pravilo ostaje treća srijeda.
+
+Statični metapodaci koriste isti izračun kao stranica, za datum izrade builda.
+
 ## Tjedni workflow
 
 1. Otvori službeni Meetup ili drugi javni izvor događaja.
@@ -32,6 +40,8 @@ Skripta samo ispisuje razlike. Ne mijenja `src/data/events.ts`.
 - Ne izmišljati venue, vrijeme, program, organizatore ili RSVP linkove.
 - Ne dodavati novi datirani zapis za redovni beogradski meetup. Promijeni
   pravilo `recurrence` samo ako se promijene stalni termin ili vrijeme.
+- Za jednokratnu promjenu koristi `recurrence.overrides`, bez promjene
+  redovnog dana u tjednu. Pokreni `npm run check:recurrence` za provjeru prijelaza.
 - Ako događaj nije potvrđen, ne dodavati ga.
 - Ako je događaj otkazan, koristi `status: "cancelled"` i smanji istaknutost RSVP CTA-a.
 - Za zadnje promjene korisnike uputi na službenu najavu, RSVP/Meetup link i Telegram zajednicu.

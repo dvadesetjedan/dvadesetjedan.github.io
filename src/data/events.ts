@@ -36,6 +36,7 @@ export type MonthlyWeekdayRecurrence = {
   timeZone: string
   startTime: string
   endTime: string
+  overrides?: Record<string, { day: number; notice: string }>
 }
 
 export type ArchiveEventEntry = {
@@ -125,13 +126,12 @@ function monthlyOccurrence(recurrence: MonthlyWeekdayRecurrence, now: Date) {
   let { year, month } = datePartsInTimeZone(now, recurrence.timeZone)
 
   const occurrenceForMonth = () => {
-    const day = nthWeekdayOfMonth(
-      year,
-      month,
-      recurrence.weekday,
-      recurrence.ordinal,
-    )
-    const datePart = `${year}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`
+    const monthKey = `${year}-${String(month).padStart(2, "0")}`
+    const override = recurrence.overrides?.[monthKey]
+    const day =
+      override?.day ??
+      nthWeekdayOfMonth(year, month, recurrence.weekday, recurrence.ordinal)
+    const datePart = `${monthKey}-${String(day).padStart(2, "0")}`
     const offset = timeZoneOffset(
       new Date(Date.UTC(year, month - 1, day, 12)),
       recurrence.timeZone,
@@ -140,6 +140,7 @@ function monthlyOccurrence(recurrence: MonthlyWeekdayRecurrence, now: Date) {
     return {
       start: `${datePart}T${recurrence.startTime}:00${offset}`,
       end: `${datePart}T${recurrence.endTime}:00${offset}`,
+      notice: override?.notice,
     }
   }
 
@@ -161,7 +162,14 @@ export function resolveRecurringEvent(
   now = new Date(),
 ): ScheduledEventEntry {
   if (!event.recurrence) return event
-  return { ...event, ...monthlyOccurrence(event.recurrence, now) }
+  const { notice, ...occurrence } = monthlyOccurrence(event.recurrence, now)
+  return {
+    ...event,
+    ...occurrence,
+    ...(notice
+      ? { summary: notice, description: [notice, ...event.description] }
+      : {}),
+  }
 }
 
 export const eventDefinitions: EventEntry[] = [
@@ -178,8 +186,8 @@ export const eventDefinitions: EventEntry[] = [
       "Cover fotografija: Docker Brewery & Beer Garden.",
     ],
     coverImage: "/events/docker-brewery-belgrade.png",
-    start: "2026-09-16T19:00:00+02:00",
-    end: "2026-09-16T22:00:00+02:00",
+    start: "2026-11-21T19:00:00+01:00",
+    end: "2026-11-21T22:00:00+01:00",
     venue: "Docker Brewery & Beer Garden",
     address: "Žorža Klemansoa 27b",
     city: "Belgrade",
@@ -213,6 +221,13 @@ export const eventDefinitions: EventEntry[] = [
       timeZone: "Europe/Belgrade",
       startTime: "19:00",
       endTime: "22:00",
+      overrides: {
+        "2026-11": {
+          day: 21,
+          notice:
+            "Druženje u studenome iznimno se održava u subotu, 21. 11. 2026., od 19:00 do 22:00 u Docker Brewery & Beer Gardenu. Od prosinca se vraćamo na svaku treću srijedu u mjesecu.",
+        },
+      },
     },
   },
   {

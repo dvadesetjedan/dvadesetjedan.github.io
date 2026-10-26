@@ -1,5 +1,6 @@
 import fs from "node:fs"
 import path from "node:path"
+import { eventData } from "./load-event-data.mjs"
 import { readSourceString } from "./read-source-string.mjs"
 
 const root = process.cwd()
@@ -339,28 +340,27 @@ function loadArticles() {
 }
 
 function loadEvents() {
-  return extractObjects(
-    readSource("src/data/events.ts"),
-    "export const eventDefinitions",
-  )
-    .map((objectSource) => {
-      const slug = readString(objectSource, "slug")
-      const kind = readString(objectSource, "kind")
-      const title = readString(objectSource, "title")
-      const summary = readString(objectSource, "summary")
-      const start = readString(objectSource, "start")
-      const end = readString(objectSource, "end")
-      const sortDate = readString(objectSource, "sortDate")
-      const venue = readString(objectSource, "venue")
-      const address = readString(objectSource, "address")
-      const city = readString(objectSource, "city")
-      const country = readString(objectSource, "country")
-      const registrationUrl = readString(objectSource, "registrationUrl")
-      const image = readString(objectSource, "coverImage")
-      const organizer = readString(objectSource, "organizer")
-      const language = readString(objectSource, "language")
-      const status = readString(objectSource, "status")
-      const tags = readStringArray(objectSource, "tags")
+  return eventData.events
+    .map((event) => {
+      const {
+        slug,
+        kind,
+        title,
+        summary,
+        start,
+        end,
+        sortDate,
+        venue,
+        address,
+        city,
+        country,
+        registrationUrl,
+        coverImage: image,
+        organizer,
+        language,
+        status,
+        tags = [],
+      } = event
       const canonical = `${siteUrl}/dogadaji/${slug}/`
       const startDate = normalizeDate(start)
       const endDate = normalizeDate(end)
