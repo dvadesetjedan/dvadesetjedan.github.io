@@ -28,8 +28,8 @@ import {
   cityHref,
   formatEventTimeRange,
   makeGoogleCalendarUrl,
-  makeIcsUrl,
 } from "@/lib/content"
+import { makeIcsUrl } from "@/lib/event-calendar"
 import { truncateText } from "@/lib/text"
 import { usePageMeta } from "@/lib/usePageMeta"
 
@@ -284,10 +284,11 @@ export function EventPage({ event }: { event: EventEntry }) {
                   >
                     Dodaj u Google kalendar
                   </ActionButton>
+                  {/* Let Safari hand the HTTP calendar file to Calendar instead of forcing a download. */}
                   <a
                     className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full bg-card py-3 pl-[1.125rem] pr-5 text-sm font-medium text-foreground shadow-[var(--shadow-border)] transition-[translate,scale,box-shadow,background-color,color] duration-150 ease-out hover:-translate-y-0.5 hover:bg-background hover:shadow-[var(--shadow-border-hover)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary active:scale-[0.96] motion-reduce:transition-none motion-reduce:hover:translate-y-0 motion-reduce:active:scale-100 sm:pr-6"
-                    download={`${event.slug}.ics`}
-                    href={makeIcsUrl(event, registrationAction?.href)}
+                    href={makeIcsUrl(event)}
+                    type="text/calendar"
                   >
                     <CalendarDays className="size-4" />
                     Preuzmi ICS

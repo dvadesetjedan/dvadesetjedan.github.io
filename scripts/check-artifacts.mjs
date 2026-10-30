@@ -1,5 +1,7 @@
 import fs from "node:fs"
 import path from "node:path"
+import { calendarData, eventData } from "./load-event-data.mjs"
+import { calendarEvents } from "./event-calendars.mjs"
 
 const distDir = path.join(process.cwd(), "dist")
 const failures = []
@@ -25,6 +27,32 @@ function walkFiles(directory) {
 
 function toWebpPath(filePath) {
   return filePath.replace(/\.(png|jpe?g)$/i, ".webp")
+}
+
+for (const event of eventData.events.filter(eventData.isScheduledEvent)) {
+  if (!exists(calendarData.makeIcsUrl(event))) {
+    failures.push(`Nedostaje ICS datoteka za ${event.slug}.`)
+  }
+}
+for (const event of calendarEvents()) {
+  const relativePath = calendarData.makeIcsUrl(event)
+  if (!exists(relativePath)) {
+    failures.push(`Nedostaje dist${relativePath}.`)
+    continue
+  }
+  const content = fs.readFileSync(path.join(distDir, relativePath), "utf8")
+  if (
+    !content.startsWith("BEGIN:VCALENDAR\r\n") ||
+    !content.endsWith("END:VCALENDAR\r\n")
+  ) {
+    failures.push(`Neispravna ICS datoteka: ${relativePath}.`)
+  }
+  if (
+    content.replace(/\r\n/g, "").match(/[\r\n]/) ||
+    content.split("\r\n").some((line) => Buffer.byteLength(line) > 75)
+  ) {
+    failures.push(`Neispravni ICS redci: ${relativePath}.`)
+  }
 }
 
 for (const file of [
@@ -134,7 +162,9 @@ for (const requiredSnippet of [
   "<img",
 ]) {
   if (!optimizedImageSource.includes(requiredSnippet)) {
-    failures.push("OptimizedImage ne čuva očekivani WebP + img fallback markup.")
+    failures.push(
+      "OptimizedImage ne čuva očekivani WebP + img fallback markup.",
+    )
   }
 }
 

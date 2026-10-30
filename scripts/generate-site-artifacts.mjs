@@ -1,6 +1,7 @@
 import fs from "node:fs"
 import path from "node:path"
 import { eventData } from "./load-event-data.mjs"
+import { writeEventCalendars } from "./event-calendars.mjs"
 import { readSourceString } from "./read-source-string.mjs"
 
 const root = process.cwd()
@@ -966,7 +967,8 @@ fs.writeFileSync(
 )
 writeSitemap(routes)
 writeFeeds(routes)
+const calendarCount = writeEventCalendars(distDir)
 
 console.log(
-  `Generated ${routes.length} static routes, ${legacyRedirects.length} legacy redirects, sitemap, RSS, JSON feed, robots and 404.`,
+  `Generated ${routes.length} static routes, ${legacyRedirects.length} legacy redirects, ${calendarCount} event calendars, sitemap, RSS, JSON feed, robots and 404.`,
 )
