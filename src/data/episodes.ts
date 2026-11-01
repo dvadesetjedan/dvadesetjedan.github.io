@@ -18,6 +18,46 @@ export type EpisodeEntry = {
 
 export const episodes: EpisodeEntry[] = [
   {
+    slug: "dvadesetjedan-livestream-2026-11-01",
+    title:
+      "Bitcoin Core, šifrirani backup i offline potpisivanje | DvadesetJedan Uživo #222",
+    summary:
+      "Kako preuzeti kontrolu nad svojim bitcoinom i sačuvati pristup novčaniku? Razgovaramo o rizicima držanja na burzama, hardware walletima, seed frazama i slojevima zaštite. Uz tržišni osvrt prikazujemo backup u Bitcoin Coreu, šifriranje GPG-om i rad s watch-only novčanikom te otvaramo pitanja privatnosti i digitalne pismenosti.",
+    description:
+      "Kako preuzeti kontrolu nad svojim bitcoinom i sačuvati pristup novčaniku? Razgovaramo o rizicima držanja na burzama, hardware walletima, seed frazama i slojevima zaštite. Uz tržišni osvrt prikazujemo backup u Bitcoin Coreu, šifriranje GPG-om i rad s watch-only novčanikom te otvaramo pitanja privatnosti i digitalne pismenosti.\n\n00:00 Uvod i teme emisije\n02:07 Cijena Bitcoina i tržišni sentiment\n08:17 Dugoročni trend i model cijene\n17:18 Novčanik za svakodnevno korištenje i štednju\n24:14 Burze, Binance i skrbništvo nad bitcoinom\n31:35 Vlastiti ključevi i hardware walleti\n36:39 Backup datoteke i slojevi šifriranja\n43:08 Curenje podataka i ciljani phishing\n53:38 Bitcoin Core i sigurnosne zakrpe\n57:26 Seed fraza i podaci za obnovu novčanika\n1:05:29 Odvojeni uređaji i Electrum\n1:15:03 Demonstracija: backup novčanika i GPG\n1:20:57 Drugi sloj šifriranja i povrat datoteke\n1:25:46 Čisti Linux i namjenski uređaj\n1:35:16 Multisig: privatnost i poslovna primjena\n1:40:03 Digitalna pismenost i edukacija\n1:56:35 Watch-only novčanik i offline potpisivanje\n2:02:37 AI, lažna podrška i phishing\n2:09:08 Bitcoin Core: mreža, peerovi i privatnost\n2:18:38 Završne poruke i planovi\n\nDvadesetJedan:\nWeb: https://dvadesetjedan.com/\nTelegram: https://t.me/dvadesetjedan21\nX: https://x.com/dvadesetjedan21",
+    youtubeUrl: "https://www.youtube.com/watch?v=ghP9uAW1rTk",
+    publishedAt: "2026-11-01",
+    chapters: [
+      { time: "00:00", title: "Uvod i teme emisije" },
+      { time: "02:07", title: "Cijena Bitcoina i tržišni sentiment" },
+      { time: "08:17", title: "Dugoročni trend i model cijene" },
+      {
+        time: "17:18",
+        title: "Novčanik za svakodnevno korištenje i štednju",
+      },
+      { time: "24:14", title: "Burze, Binance i skrbništvo nad bitcoinom" },
+      { time: "31:35", title: "Vlastiti ključevi i hardware walleti" },
+      { time: "36:39", title: "Backup datoteke i slojevi šifriranja" },
+      { time: "43:08", title: "Curenje podataka i ciljani phishing" },
+      { time: "53:38", title: "Bitcoin Core i sigurnosne zakrpe" },
+      { time: "57:26", title: "Seed fraza i podaci za obnovu novčanika" },
+      { time: "1:05:29", title: "Odvojeni uređaji i Electrum" },
+      { time: "1:15:03", title: "Demonstracija: backup novčanika i GPG" },
+      { time: "1:20:57", title: "Drugi sloj šifriranja i povrat datoteke" },
+      { time: "1:25:46", title: "Čisti Linux i namjenski uređaj" },
+      { time: "1:35:16", title: "Multisig: privatnost i poslovna primjena" },
+      { time: "1:40:03", title: "Digitalna pismenost i edukacija" },
+      {
+        time: "1:56:35",
+        title: "Watch-only novčanik i offline potpisivanje",
+      },
+      { time: "2:02:37", title: "AI, lažna podrška i phishing" },
+      { time: "2:09:08", title: "Bitcoin Core: mreža, peerovi i privatnost" },
+      { time: "2:18:38", title: "Završne poruke i planovi" },
+    ],
+    needsShownotes: false,
+  },
+  {
     slug: "dvadesetjedan-livestream-2026-10-25",
     title:
       "Tko čuva tvoj Bitcoin? Novčanici i vlastita provjera | DvadesetJedan Uživo #221",
