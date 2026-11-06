@@ -36,20 +36,16 @@ export function communityProjectHref(slug: string) {
   return `${COMMUNITY_PROJECTS_URL}${slug}/`
 }
 
+function numericDate(value: Date) {
+  return `${value.getDate()}. ${value.getMonth() + 1}. ${value.getFullYear()}.`
+}
+
 export function formatArticleDate(value: string) {
-  return new Intl.DateTimeFormat("hr-HR", {
-    day: "numeric",
-    month: "numeric",
-    year: "numeric",
-  }).format(new Date(value))
+  return numericDate(new Date(value))
 }
 
 export function formatEpisodeDate(value: string) {
-  return new Intl.DateTimeFormat("hr-HR", {
-    day: "numeric",
-    month: "numeric",
-    year: "numeric",
-  }).format(new Date(value))
+  return numericDate(new Date(value))
 }
 
 export function formatEventDate(event: EventEntry) {
@@ -60,11 +56,7 @@ export function formatEventDate(event: EventEntry) {
   const end = new Date(event.end)
 
   const sameDay = start.toDateString() === end.toDateString()
-  const dateFormatter = new Intl.DateTimeFormat("hr-HR", {
-    day: "numeric",
-    month: "numeric",
-    year: "numeric",
-  })
+  const dateFormatter = { format: numericDate }
   const timeFormatter = new Intl.DateTimeFormat("hr-HR", {
     hour: "2-digit",
     minute: "2-digit",
@@ -84,11 +76,7 @@ export function formatEventTimeRange(event: EventEntry) {
   const start = new Date(event.start)
   const end = new Date(event.end)
   const sameDay = start.toDateString() === end.toDateString()
-  const dateFormatter = new Intl.DateTimeFormat("hr-HR", {
-    day: "numeric",
-    month: "numeric",
-    year: "numeric",
-  })
+  const dateFormatter = { format: numericDate }
   const timeFormatter = new Intl.DateTimeFormat("hr-HR", {
     hour: "2-digit",
     minute: "2-digit",
