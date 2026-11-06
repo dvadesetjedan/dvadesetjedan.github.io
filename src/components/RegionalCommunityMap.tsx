@@ -3,14 +3,6 @@ import { getEventStatus, type EventEntry } from "@/data/events"
 import { regionalMapCountries } from "@/data/regionalMapPaths"
 import { cityHref } from "@/lib/content"
 
-const kosovoMapPath = regionalMapCountries.find(
-  (country) => country.code === "-99",
-)?.d
-
-
-const kosovoExternalBoundaryPath =
-  "M472.6 315.3L472.6 318.6L469.1 320L469.8 324.4L467.5 326.3L464.7 325.8L461.7 327L458.6 331L458.8 334L455.8 333.3L453 330L450.5 328.5L447.7 330.4L444.8 331.7L441.8 332.6L437.7 333.9L435.4 336.5L434.8 340.3L435.2 343.4L433.6 346.1L430.5 345.3L427.2 345.4L428.2 342.4L428.2 339.1L426.9 335.9L426.5 332.3L424.4 327.7L417.2 322.1L413.5 322.1L412.2 319.3L411.4 316.4L409.4 313L406.5 311.1L405.6 310.2"
-
 const mapCities: Record<string, { x: number; y: number }> = {
   ljubljana: { x: 165.7, y: 127 },
   zagreb: { x: 229.4, y: 139.6 },
@@ -38,10 +30,7 @@ const networkLinks = [
 ] as const
 
 function isRegionalFocusCountry(code: string) {
-  return (
-    code === "-99" ||
-    regionalMapCountries.find((country) => country.code === code)?.focus
-  )
+  return regionalMapCountries.find((country) => country.code === code)?.focus
 }
 
 function markerLabel(
@@ -122,36 +111,6 @@ export function RegionalCommunityMap({
           ))}
         </g>
 
-        {kosovoMapPath ? (
-          <path
-            d={kosovoMapPath}
-            fill="#17130f"
-            stroke="#17130f"
-            strokeWidth="10"
-            vectorEffect="non-scaling-stroke"
-          />
-        ) : null}
-
-        <path
-          d={kosovoExternalBoundaryPath}
-          fill="none"
-          stroke="#4a3b2d"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeOpacity="0.58"
-          strokeWidth="1.25"
-          vectorEffect="non-scaling-stroke"
-        />
-
-        <path
-          d={regionalMapCountries.find((country) => country.code === "ME")?.d}
-          fill="none"
-          stroke="#3a3027"
-          strokeLinejoin="round"
-          strokeWidth="1.15"
-          vectorEffect="non-scaling-stroke"
-        />
-
         <g
           aria-hidden="true"
           stroke="#f7931a"
@@ -186,7 +145,11 @@ export function RegionalCommunityMap({
                 getEventStatus(event, now) === "past",
             )
             const label = markerLabel(city, hasUpcomingMeetup, hasMeetupHistory)
-            const highlighted = hasUpcomingMeetup || hasMeetupHistory || city.slug === "zagreb" || city.slug === "beograd"
+            const highlighted =
+              hasUpcomingMeetup ||
+              hasMeetupHistory ||
+              city.slug === "zagreb" ||
+              city.slug === "beograd"
 
             return (
               <a aria-label={label} href={cityHref(city.slug)} key={city.slug}>

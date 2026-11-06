@@ -31,19 +31,8 @@ const mapCities: Record<string, MapPoint> = {
 }
 
 function isRegionalFocusCountry(code: string) {
-  return (
-    code === "-99" ||
-    regionalMapCountries.find((country) => country.code === code)?.focus
-  )
+  return regionalMapCountries.find((country) => country.code === code)?.focus
 }
-
-const kosovoMapPath = regionalMapCountries.find(
-  (country) => country.code === "-99",
-)?.d
-
-
-const kosovoExternalBoundaryPath =
-  "M472.6 315.3L472.6 318.6L469.1 320L469.8 324.4L467.5 326.3L464.7 325.8L461.7 327L458.6 331L458.8 334L455.8 333.3L453 330L450.5 328.5L447.7 330.4L444.8 331.7L441.8 332.6L437.7 333.9L435.4 336.5L434.8 340.3L435.2 343.4L433.6 346.1L430.5 345.3L427.2 345.4L428.2 342.4L428.2 339.1L426.9 335.9L426.5 332.3L424.4 327.7L417.2 322.1L413.5 322.1L412.2 319.3L411.4 316.4L409.4 313L406.5 311.1L405.6 310.2"
 
 function eventCountLabel(count: number) {
   if (count === 0) return "Nema dokumentiranih događaja"
@@ -207,35 +196,6 @@ export function CommunityMap({
           })}
         </g>
 
-        {kosovoMapPath ? (
-          <path
-            d={kosovoMapPath}
-            fill="#f7931a"
-            stroke="#f7931a"
-            strokeWidth="10"
-            vectorEffect="non-scaling-stroke"
-          />
-        ) : null}
-        <path
-          d={kosovoExternalBoundaryPath}
-          fill="none"
-          stroke="#0a0a0a"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeOpacity="0.86"
-          strokeWidth="1.65"
-          vectorEffect="non-scaling-stroke"
-        />
-
-        <path
-          d={regionalMapCountries.find((country) => country.code === "ME")?.d}
-          fill="none"
-          stroke="#0f0f0f"
-          strokeLinejoin="round"
-          strokeWidth="1.35"
-          vectorEffect="non-scaling-stroke"
-        />
-
         <g filter="url(#community-marker-glow)">
           {cities.map((city) => {
             const point = mapCities[city.slug]
@@ -243,7 +203,11 @@ export function CommunityMap({
             const cityMetrics = metrics.get(city.slug)
             const hasUpcoming = Boolean(cityMetrics?.nextEvent)
             const hasHistory = (cityMetrics?.pastCount ?? 0) > 0
-            const highlighted = hasUpcoming || hasHistory || city.slug === "zagreb" || city.slug === "beograd"
+            const highlighted =
+              hasUpcoming ||
+              hasHistory ||
+              city.slug === "zagreb" ||
+              city.slug === "beograd"
             const isSelected = activeSlug === city.slug
             const accessibleStatus = hasUpcoming
               ? "ima nadolazeći događaj"
@@ -274,16 +238,16 @@ export function CommunityMap({
                   fill="none"
                   r={isSelected ? 16 : hasUpcoming ? 13 : hasHistory ? 11 : 8}
                   stroke={highlighted || isSelected ? "#fff6e8" : "#f7931a"}
-                  strokeOpacity={isSelected || hasUpcoming ? 1 : highlighted ? 0.72 : 0.32}
+                  strokeOpacity={
+                    isSelected || hasUpcoming ? 1 : highlighted ? 0.72 : 0.32
+                  }
                   strokeWidth={isSelected ? 3 : 2}
                   vectorEffect="non-scaling-stroke"
                 />
                 <circle
                   cx={point.x}
                   cy={point.y}
-                  fill={
-                    highlighted ? "#fff6e8" : "#f7931a"
-                  }
+                  fill={highlighted ? "#fff6e8" : "#f7931a"}
                   fillOpacity={highlighted ? 1 : 0.62}
                   r={hasUpcoming ? 7 : highlighted ? 5.5 : 4}
                   stroke="#f7931a"
