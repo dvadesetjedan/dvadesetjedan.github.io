@@ -127,7 +127,7 @@ export function RegionalCommunityMap({
             d={kosovoMapPath}
             fill="#17130f"
             stroke="#17130f"
-            strokeWidth="4"
+            strokeWidth="10"
             vectorEffect="non-scaling-stroke"
           />
         ) : null}
