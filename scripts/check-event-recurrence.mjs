@@ -30,7 +30,7 @@ for (const [nowString, day, offset, exception] of cases) {
   assert.equal(result.summary.includes("subotu, 21. 11. 2026."), exception)
   if (exception) {
     assert.equal(result.description[0], result.summary)
-    assert.ok(result.summary.includes("Od prosinca"))
+    assert.ok(result.summary.includes("Od 12. mjeseca"))
   } else {
     assert.equal(result.summary, meetup.summary)
     assert.deepEqual(result.description, meetup.description)

@@ -39,7 +39,7 @@ export function communityProjectHref(slug: string) {
 export function formatArticleDate(value: string) {
   return new Intl.DateTimeFormat("hr-HR", {
     day: "numeric",
-    month: "long",
+    month: "numeric",
     year: "numeric",
   }).format(new Date(value))
 }
@@ -47,7 +47,7 @@ export function formatArticleDate(value: string) {
 export function formatEpisodeDate(value: string) {
   return new Intl.DateTimeFormat("hr-HR", {
     day: "numeric",
-    month: "long",
+    month: "numeric",
     year: "numeric",
   }).format(new Date(value))
 }

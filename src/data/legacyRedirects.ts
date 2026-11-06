@@ -38,7 +38,7 @@ export const legacyRedirects: LegacyRedirect[] = [
     from: "/dogadaji/bitcoin-only-meetup-belgrade-2026-05-23/",
     to: "/dogadaji/bitcoin-only-meetup-belgrade-2026-05-30/",
     reason:
-      "Datum beogradskog Meetup događaja promijenjen je s 23. na 30. svibnja 2026.",
+      "Datum beogradskog Meetup događaja promijenjen je s 23. na 30. 5. 2026.",
   },
   {
     from: "/never-stop-learning/",

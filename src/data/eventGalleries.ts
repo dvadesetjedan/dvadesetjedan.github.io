@@ -49,7 +49,7 @@ const galleryDefinitions: GalleryDefinition[] = [
     eventSlug: "bridging-bitcoin-beograd-2024",
     eventLabel: "Bridging Bitcoin",
     location: "Beograd",
-    dateLabel: "listopad 2024.",
+    dateLabel: "10. 2024.",
     files: [
       "Bridging Bitcoin Belgrade October 2024 15.jpeg",
       "Bridging Bitcoin Belgrade October 2024 21.JPG",
@@ -134,7 +134,7 @@ const galleryDefinitions: GalleryDefinition[] = [
     eventSlug: "halving-meetup-beograd-2024",
     eventLabel: "Halving meetup",
     location: "Beograd",
-    dateLabel: "travanj 2024.",
+    dateLabel: "4. 2024.",
     files: [
       "belgrade meetup halving 2.jpeg",
       "belgrade meetup halving 2024.jpeg",
@@ -144,7 +144,7 @@ const galleryDefinitions: GalleryDefinition[] = [
     eventSlug: "beograd-meetup-svibanj-2022",
     eventLabel: "Bitcoin meetup",
     location: "Beograd",
-    dateLabel: "svibanj 2022.",
+    dateLabel: "5. 2022.",
     files: [
       "belgrade meetup may 2022 .08.jpeg",
       "belgrade meetup may 2022.01.jpeg",
@@ -159,7 +159,7 @@ const galleryDefinitions: GalleryDefinition[] = [
     eventSlug: "beograd-meetup-svibanj-2023",
     eventLabel: "Bitcoin meetup",
     location: "Beograd",
-    dateLabel: "svibanj 2023.",
+    dateLabel: "5. 2023.",
     files: [
       "belgrade meetup may 2023.12.jpeg",
       "belgrade meetup may 2023.18.jpeg",
@@ -183,21 +183,21 @@ const galleryDefinitions: GalleryDefinition[] = [
     eventSlug: "rab-meetup-srpanj-2025",
     eventLabel: "Bitcoin druženje",
     location: "Rab",
-    dateLabel: "srpanj 2025.",
+    dateLabel: "7. 2025.",
     files: ["bitko rab juli.jpeg", "rab meetup juli 2025.jpg"],
   },
   {
     eventSlug: "meetup-rab",
     eventLabel: "DvadesetJedan druženje",
     location: "Rab",
-    dateLabel: "kolovoz 2025.",
+    dateLabel: "8. 2025.",
     files: ["rab meetup august 2025.jpeg"],
   },
   {
     eventSlug: "btc-prague-2026",
     eventLabel: "BTC Prague",
     location: "Prag",
-    dateLabel: "lipanj 2026.",
+    dateLabel: "6. 2026.",
     files: ["btc prague june 2026.jpeg"],
   },
   {
@@ -238,7 +238,7 @@ const galleryDefinitions: GalleryDefinition[] = [
     eventSlug: "btc-prague-2024",
     eventLabel: "BTC Prague",
     location: "Prag",
-    dateLabel: "lipanj 2024.",
+    dateLabel: "6. 2024.",
     files: [
       "BTC prague june 2024.jpeg",
       "btcprague 2024 2.jpeg",
@@ -260,7 +260,7 @@ const galleryDefinitions: GalleryDefinition[] = [
     eventSlug: "kraljevica-meetup-ozujak-2024",
     eventLabel: "Bitcoin meetup",
     location: "Kraljevica",
-    dateLabel: "ožujak 2024.",
+    dateLabel: "3. 2024.",
     files: [
       "kraljevica meetup 2024 2.jpeg",
       "kraljevica meetup 2024 4.jpeg",
@@ -273,7 +273,7 @@ const galleryDefinitions: GalleryDefinition[] = [
     eventSlug: "kraljevica-meetup-kolovoz-2024",
     eventLabel: "Bitcoin meetup",
     location: "Kraljevica",
-    dateLabel: "kolovoz 2024.",
+    dateLabel: "8. 2024.",
     files: ["kraljevica meetup august 2024.jpeg"],
     featuredFiles: ["kraljevica meetup august 2024.jpeg"],
   },
@@ -318,7 +318,7 @@ const galleryDefinitions: GalleryDefinition[] = [
     eventSlug: "revolution-rocks-belgrade-2026",
     eventLabel: "Revolution.Rocks",
     location: "Beograd",
-    dateLabel: "lipanj 2026.",
+    dateLabel: "6. 2026.",
     files: [
       "revolution rocks belgrade june 2026 3.jpeg",
       "revolution rocks belgrade june 2026 5.jpeg",
@@ -356,7 +356,7 @@ const galleryDefinitions: GalleryDefinition[] = [
     eventSlug: "sofia-bitcoin-2025",
     eventLabel: "Bitcoin događaj",
     location: "Sofija",
-    dateLabel: "listopad 2025.",
+    dateLabel: "10. 2025.",
     files: ["sofia btc october 2025.jpeg"],
   },
   {
@@ -430,7 +430,7 @@ export const generalCommunityPhotos: GalleryPhoto[] = [
   {
     src: eventImagePath("heatbit presentation belgrade august 2023.jpeg"),
     alt: "Najava Heatbit prezentacije u beogradskom Hub21 prostoru.",
-    caption: "Arhivska najava, kolovoz 2023.",
+    caption: "Arhivska najava, 8. 2023.",
   },
   {
     src: eventImagePath("home mining bitaxe.jpeg"),

@@ -225,7 +225,7 @@ export const eventDefinitions: EventEntry[] = [
         "2026-11": {
           day: 21,
           notice:
-            "Druženje u studenome iznimno se održava u subotu, 21. 11. 2026., od 19:00 do 22:00 u Docker Brewery & Beer Gardenu. Od prosinca se vraćamo na svaku treću srijedu u mjesecu.",
+            "Druženje u 11. mjesecu iznimno se održava u subotu, 21. 11. 2026., od 19:00 do 22:00 u Docker Brewery & Beer Gardenu. Od 12. mjeseca se vraćamo na svaku treću srijedu u mjesecu.",
         },
       },
     },
@@ -279,7 +279,7 @@ export const eventDefinitions: EventEntry[] = [
     summary:
       "Dvodnevni glazbeno-edukacijski događaj na Zappa Barki u Beogradu: koncertna večer, paneli, razgovori i value-for-value model uz Bitcoin Lightning.",
     description: [
-      "Revolution.Rocks je dvodnevni događaj u Beogradu, 19. i 20. lipnja 2026., na Zappa Barki, plutajućem klubu na Dunavu kod Nebojšine kule.",
+      "Revolution.Rocks je dvodnevni događaj u Beogradu, 19. i 20. 6. 2026., na Zappa Barki, plutajućem klubu na Dunavu kod Nebojšine kule.",
       "Prva večer je glazbena: nastupaju The Higher Low, Joe Martin, Longy, Scardust, Roger 9000 i još jedan izvođač koji će biti potvrđen naknadno, uz DJ after-party nakon ponoći.",
       "Drugi dan donosi panele, razgovore i networking o budućnosti glazbe, neovisnosti kreatora i tehnologiji koja umjetnicima može dati izravniji odnos s publikom.",
       "Brief događaja: ovo nije klasična tehnološka konferencija s glazbom u pozadini, nego glazbeni događaj s idejama o tome kako publika, umjetnici i platforme mogu graditi drukčiji model vrijednosti.",
@@ -342,7 +342,7 @@ export const eventDefinitions: EventEntry[] = [
     summary:
       "Bitcoin iskustvo u srcu Mediterana: ograničen privatni događaj u Splitu s druženjem, predavanjima, izletima i prostorom za povezivanje bitcoinera.",
     description: [
-      "Villa BTC je Bitcoin događaj u srcu Mediterana, od 5. do 7. lipnja 2026. u Splitu.",
+      "Villa BTC je Bitcoin događaj u srcu Mediterana, od 5. do 7. 6. 2026. u Splitu.",
       "Događaj je privatnog karaktera i ima ograničen broj sudionika. Fokus je na kvalitetnom umrežavanju, razgovorima i iskustvima s ljudima koji ozbiljno pristupaju Bitcoinu.",
       "Program uključuje pristup vili tijekom događaja, panel rasprave, radionice i dodatna iskustva poput izleta brodom, ovisno o odabranoj ulaznici.",
       "Dostupne su Networking, Experience i Villa ulaznice. Broj mjesta je ograničen, a detalji i kupnja ulaznica dostupni su na službenoj Villa BTC stranici.",
@@ -373,7 +373,7 @@ export const eventDefinitions: EventEntry[] = [
     description: [
       "Ovog mjeseca događaj se održava na posebnoj novoj lokaciji na Adi Ciganliji.",
       "Dvadeset Jedan je grupa Bitcoin maksimalista s ex-yu prostora. Okupljamo se kako bismo razgovarali o Bitcoinu, ekonomiji, tehnologiji, filozofiji i povezanim temama. Ponekad predstavljamo projekte, organiziramo radionice i snimamo podcast.",
-      "Druženje se održava 30. svibnja u 16:00 u restoranu Druga Kuća na Adi Ciganliji u Beogradu.",
+      "Druženje se održava 30. 5. u 16:00 u restoranu Druga Kuća na Adi Ciganliji u Beogradu.",
       "Govorimo srpski i engleski. Dobrodošli su svi, bez obzira na razinu znanja o Bitcoinu. Početnici su posebno dobrodošli.",
       "Za točnu lokaciju kod restorana Druga Kuća, više informacija i eventualne zadnje promjene provjerite Telegram kanal za druženja.",
       "Cover fotografija: Beogradski izlet.",
@@ -403,12 +403,12 @@ export const eventDefinitions: EventEntry[] = [
     slug: "meetup-rab",
     title: "Druženje na Rabu",
     summary:
-      "Pozivamo sve bitcoinere na neformalno druženje na otoku Rabu! Dio ekipe stiže već 13. kolovoza i ostaje do 15. kolovoza – planiramo kupanje, druženje, možda ribolov, kajak... sve ovisi o vremenu i raspoloženju. Pridruži se kad možeš i koliko možeš.",
+      "Pozivamo sve bitcoinere na neformalno druženje na otoku Rabu! Dio ekipe stiže već 13. 8. i ostaje do 15. 8. – planiramo kupanje, druženje, možda ribolov, kajak... sve ovisi o vremenu i raspoloženju. Pridruži se kad možeš i koliko možeš.",
     description: [
       "Bitcoin druženje na Rabu u organizaciji DvadesetJedan i Bull Bitcoin.",
       "Pridruži se DvadesetJedan događaju na Rabu uz opušten razgovor o Bitcoinu, zajednici i lokalnom povezivanju.",
-      "Dio ekipe stiže već 13. kolovoza i ostaje do 15. kolovoza, pa su planirani kupanje, druženje i spontana okupljanja ovisno o vremenu i raspoloženju.",
-      "Glavno druženje održava se 14. kolovoza u 19:30 na lokaciji navedenoj u detaljima događaja. Za eventualne zadnje promjene i koordinaciju prati Telegram grupu događaja.",
+      "Dio ekipe stiže već 13. 8. i ostaje do 15. 8., pa su planirani kupanje, druženje i spontana okupljanja ovisno o vremenu i raspoloženju.",
+      "Glavno druženje održava se 14. 8. u 19:30 na lokaciji navedenoj u detaljima događaja. Za eventualne zadnje promjene i koordinaciju prati Telegram grupu događaja.",
       "Telegram grupa za koordinaciju: https://t.me/+EFNsWuB8lV1mODlk",
     ],
     coverImage: "/images/events/rab meetup august 2025.jpeg",
@@ -437,11 +437,11 @@ export const eventDefinitions: EventEntry[] = [
     summary:
       "Dokumentirano Bitcoin okupljanje u Beogradu s predavanjima, razgovorima i lokalnom zajednicom.",
     description: [
-      "Fotografije i sačuvani programski materijali potvrđuju Bridging Bitcoin događaj u Beogradu tijekom listopada 2024.",
+      "Fotografije i sačuvani programski materijali potvrđuju Bridging Bitcoin događaj u Beogradu tijekom 10. 2024.",
       "Arhivski unos namjerno ne navodi lokaciju ni točno vrijeme izvan onoga što je vidljivo u izvornoj dokumentaciji.",
     ],
     coverImage: "/images/events/Bridging Bitcoin Belgrade October 2024 89.jpeg",
-    dateLabel: "listopad 2024.",
+    dateLabel: "10. 2024.",
     sortDate: "2024-10-01",
     venue: "Hub21",
     city: "Beograd",
@@ -532,7 +532,7 @@ export const eventDefinitions: EventEntry[] = [
       "Nazivi fotografija i vidljivi detalji prostora povezuju ovu skupinu s halving meetupom u Beogradu 2024.",
     ],
     coverImage: "/images/events/belgrade meetup halving 2.jpeg",
-    dateLabel: "travanj 2024.",
+    dateLabel: "4. 2024.",
     sortDate: "2024-04-01",
     venue: "Hub21",
     city: "Beograd",
@@ -544,14 +544,14 @@ export const eventDefinitions: EventEntry[] = [
   {
     kind: "archive",
     slug: "beograd-meetup-svibanj-2022",
-    title: "Bitcoin meetup u Beogradu, svibanj 2022",
+    title: "Bitcoin meetup u Beogradu, 5. 2022.",
     summary:
       "Jedno od ranijih dokumentiranih okupljanja beogradske Bitcoin zajednice.",
     description: [
-      "Skupina fotografija u repozitoriju označena je kao beogradski meetup iz svibnja 2022. Točna lokacija nije potvrđena.",
+      "Skupina fotografija u repozitoriju označena je kao beogradski meetup iz 5. 2022. Točna lokacija nije potvrđena.",
     ],
     coverImage: "/images/events/belgrade meetup may 2022.01.jpeg",
-    dateLabel: "svibanj 2022.",
+    dateLabel: "5. 2022.",
     sortDate: "2022-05-01",
     city: "Beograd",
     country: "Srbija",
@@ -562,14 +562,14 @@ export const eventDefinitions: EventEntry[] = [
   {
     kind: "archive",
     slug: "beograd-meetup-svibanj-2023",
-    title: "Bitcoin meetup u Beogradu, svibanj 2023",
+    title: "Bitcoin meetup u Beogradu, 5. 2023.",
     summary:
-      "Druženje beogradske Bitcoin zajednice na otvorenom u svibnju 2023.",
+      "Druženje beogradske Bitcoin zajednice na otvorenom u 5. 2023.",
     description: [
       "Nazivi fotografija pouzdano određuju grad, mjesec i godinu. Točna lokacija nije navedena.",
     ],
     coverImage: "/images/events/belgrade meetup may 2023.12.jpeg",
-    dateLabel: "svibanj 2023.",
+    dateLabel: "5. 2023.",
     sortDate: "2023-05-01",
     city: "Beograd",
     country: "Srbija",
@@ -598,14 +598,14 @@ export const eventDefinitions: EventEntry[] = [
   {
     kind: "archive",
     slug: "rab-meetup-srpanj-2025",
-    title: "Bitcoin druženje na Rabu, srpanj 2025",
+    title: "Bitcoin druženje na Rabu, 7. 2025.",
     summary:
       "Ljetno Bitcoin druženje na Rabu dokumentirano fotografijama zajednice i lokalnog Bitko motiva.",
     description: [
-      "Nazivi fotografija ovu skupinu povezuju s Rabom i srpnjem 2025. Dodatni detalji susreta nisu navedeni.",
+      "Nazivi fotografija ovu skupinu povezuju s Rabom i 7. 2025. Dodatni detalji susreta nisu navedeni.",
     ],
     coverImage: "/images/events/rab meetup juli 2025.jpg",
-    dateLabel: "srpanj 2025.",
+    dateLabel: "7. 2025.",
     sortDate: "2025-07-01",
     city: "Rab",
     country: "Hrvatska",
@@ -623,7 +623,7 @@ export const eventDefinitions: EventEntry[] = [
       "Arhivski unos temelji se na nazivu fotografije. Ne navodimo osobe ni dodatni program koji nije dokumentiran u repozitoriju.",
     ],
     coverImage: "/images/events/btc prague june 2026.jpeg",
-    dateLabel: "lipanj 2026.",
+    dateLabel: "6. 2026.",
     sortDate: "2026-06-01",
     city: "Prag",
     country: "Češka",
@@ -694,7 +694,7 @@ export const eventDefinitions: EventEntry[] = [
       "Skupina je povezana s BTC Prague 2024 nazivima fotografija i metapodacima. Jedna datoteka s proturječnim metapodacima ostavljena je izvan galerije.",
     ],
     coverImage: "/images/events/BTC prague june 2024.jpeg",
-    dateLabel: "lipanj 2024.",
+    dateLabel: "6. 2024.",
     sortDate: "2024-06-01",
     city: "Prag",
     country: "Češka",
@@ -723,14 +723,14 @@ export const eventDefinitions: EventEntry[] = [
   {
     kind: "archive",
     slug: "kraljevica-meetup-ozujak-2024",
-    title: "Bitcoin meetup u Kraljevici, ožujak 2024",
+    title: "Bitcoin meetup u Kraljevici, 3. 2024.",
     summary:
       "Druženje uz more, razgovor, hranu i lokalne Bitcoin detalje u Kraljevici.",
     description: [
-      "Nazivi fotografija i metapodaci pouzdano povezuju skupinu s Kraljevicom u ožujku 2024.",
+      "Nazivi fotografija i metapodaci pouzdano povezuju skupinu s Kraljevicom u 3. 2024.",
     ],
     coverImage: "/images/events/kraljevica meetup 2024 5.jpeg",
-    dateLabel: "ožujak 2024.",
+    dateLabel: "3. 2024.",
     sortDate: "2024-03-01",
     city: "Kraljevica",
     country: "Hrvatska",
@@ -741,14 +741,14 @@ export const eventDefinitions: EventEntry[] = [
   {
     kind: "archive",
     slug: "kraljevica-meetup-kolovoz-2024",
-    title: "Bitcoin meetup u Kraljevici, kolovoz 2024",
+    title: "Bitcoin meetup u Kraljevici, 8. 2024.",
     summary:
       "Ljetno okupljanje Bitcoin zajednice u Kraljevici dokumentirano zajedničkom fotografijom.",
     description: [
       "Grad, mjesec i godina proizlaze iz naziva fotografije. Ostala logistika nije potvrđena.",
     ],
     coverImage: "/images/events/kraljevica meetup august 2024.jpeg",
-    dateLabel: "kolovoz 2024.",
+    dateLabel: "8. 2024.",
     sortDate: "2024-08-01",
     city: "Kraljevica",
     country: "Hrvatska",
@@ -832,12 +832,12 @@ export const eventDefinitions: EventEntry[] = [
     slug: "sofia-bitcoin-2025",
     title: "Bitcoin događaj u Sofiji 2025",
     summary:
-      "Arhivska fotografija s Bitcoin događaja u Sofiji u listopadu 2025.",
+      "Arhivska fotografija s Bitcoin događaja u Sofiji u 10. 2025.",
     description: [
       "Grad, mjesec i godina proizlaze iz naziva fotografije. Naziv samog događaja nije potvrđen.",
     ],
     coverImage: "/images/events/sofia btc october 2025.jpeg",
-    dateLabel: "listopad 2025.",
+    dateLabel: "10. 2025.",
     sortDate: "2025-10-01",
     city: "Sofija",
     country: "Bugarska",
