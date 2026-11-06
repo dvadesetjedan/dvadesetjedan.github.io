@@ -199,7 +199,7 @@ export function CommunityMap({
               <path
                 d={country.d}
                 fill={isFocus ? "#f7931a" : "#303030"}
-                fillOpacity={isFocus ? 0.92 : 0.95}
+                fillOpacity={isFocus ? 1 : 0.95}
                 key={country.code}
                 vectorEffect="non-scaling-stroke"
               />
@@ -211,9 +211,8 @@ export function CommunityMap({
           <path
             d={kosovoMapPath}
             fill="#f7931a"
-            fillOpacity="0.92"
             stroke="#f7931a"
-            strokeWidth="3"
+            strokeWidth="4"
             vectorEffect="non-scaling-stroke"
           />
         ) : null}

@@ -115,7 +115,7 @@ export function RegionalCommunityMap({
               fill={
                 isRegionalFocusCountry(country.code) ? "#17130f" : "#0d0c0b"
               }
-              fillOpacity="0.98"
+              fillOpacity={isRegionalFocusCountry(country.code) ? 1 : 0.98}
               key={country.code}
               vectorEffect="non-scaling-stroke"
             />
@@ -126,8 +126,8 @@ export function RegionalCommunityMap({
           <path
             d={kosovoMapPath}
             fill="#17130f"
-            stroke="#3a3027"
-            strokeWidth="1.15"
+            stroke="#17130f"
+            strokeWidth="4"
             vectorEffect="non-scaling-stroke"
           />
         ) : null}
