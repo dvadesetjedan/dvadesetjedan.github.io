@@ -143,6 +143,15 @@ export function RegionalCommunityMap({
           vectorEffect="non-scaling-stroke"
         />
 
+        <path
+          d={regionalMapCountries.find((country) => country.code === "ME")?.d}
+          fill="none"
+          stroke="#3a3027"
+          strokeLinejoin="round"
+          strokeWidth="1.15"
+          vectorEffect="non-scaling-stroke"
+        />
+
         <g
           aria-hidden="true"
           stroke="#f7931a"
@@ -177,6 +186,7 @@ export function RegionalCommunityMap({
                 getEventStatus(event, now) === "past",
             )
             const label = markerLabel(city, hasUpcomingMeetup, hasMeetupHistory)
+            const highlighted = hasUpcomingMeetup || hasMeetupHistory || city.slug === "zagreb" || city.slug === "beograd"
 
             return (
               <a aria-label={label} href={cityHref(city.slug)} key={city.slug}>
@@ -215,13 +225,13 @@ export function RegionalCommunityMap({
                   cy={point.y}
                   fill={
                     hasUpcomingMeetup
-                      ? "#f7931a"
-                      : hasMeetupHistory
+                      ? "#fff8ee"
+                      : highlighted
                         ? "#f8ecdc"
                         : "#b86c1a"
                   }
-                  fillOpacity={hasMeetupHistory || hasUpcomingMeetup ? 1 : 0.62}
-                  r={hasUpcomingMeetup ? 6 : hasMeetupHistory ? 4.5 : 3.5}
+                  fillOpacity={highlighted ? 1 : 0.62}
+                  r={hasUpcomingMeetup ? 6 : highlighted ? 4.5 : 3.5}
                 />
                 {hasUpcomingMeetup ? (
                   <text

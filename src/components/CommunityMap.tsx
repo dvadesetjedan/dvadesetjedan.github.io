@@ -227,6 +227,15 @@ export function CommunityMap({
           vectorEffect="non-scaling-stroke"
         />
 
+        <path
+          d={regionalMapCountries.find((country) => country.code === "ME")?.d}
+          fill="none"
+          stroke="#0f0f0f"
+          strokeLinejoin="round"
+          strokeWidth="1.35"
+          vectorEffect="non-scaling-stroke"
+        />
+
         <g filter="url(#community-marker-glow)">
           {cities.map((city) => {
             const point = mapCities[city.slug]
@@ -234,6 +243,7 @@ export function CommunityMap({
             const cityMetrics = metrics.get(city.slug)
             const hasUpcoming = Boolean(cityMetrics?.nextEvent)
             const hasHistory = (cityMetrics?.pastCount ?? 0) > 0
+            const highlighted = hasUpcoming || hasHistory || city.slug === "zagreb" || city.slug === "beograd"
             const isSelected = activeSlug === city.slug
             const accessibleStatus = hasUpcoming
               ? "ima nadolazeći događaj"
@@ -263,8 +273,8 @@ export function CommunityMap({
                   cy={point.y}
                   fill="none"
                   r={isSelected ? 16 : hasUpcoming ? 13 : hasHistory ? 11 : 8}
-                  stroke={hasUpcoming || isSelected ? "#fff6e8" : "#f7931a"}
-                  strokeOpacity={isSelected ? 1 : hasHistory ? 0.72 : 0.32}
+                  stroke={highlighted || isSelected ? "#fff6e8" : "#f7931a"}
+                  strokeOpacity={isSelected || hasUpcoming ? 1 : highlighted ? 0.72 : 0.32}
                   strokeWidth={isSelected ? 3 : 2}
                   vectorEffect="non-scaling-stroke"
                 />
@@ -272,10 +282,10 @@ export function CommunityMap({
                   cx={point.x}
                   cy={point.y}
                   fill={
-                    hasUpcoming ? "#f7931a" : hasHistory ? "#fff6e8" : "#f7931a"
+                    highlighted ? "#fff6e8" : "#f7931a"
                   }
-                  fillOpacity={hasHistory || hasUpcoming ? 1 : 0.62}
-                  r={hasUpcoming ? 7 : hasHistory ? 5.5 : 4}
+                  fillOpacity={highlighted ? 1 : 0.62}
+                  r={hasUpcoming ? 7 : highlighted ? 5.5 : 4}
                   stroke="#f7931a"
                   strokeWidth="2"
                   vectorEffect="non-scaling-stroke"
@@ -289,7 +299,7 @@ export function CommunityMap({
       <div className="border-t border-white/10 px-5 py-5 sm:px-6">
         <div className="flex flex-wrap gap-x-5 gap-y-2 text-xs text-white/65">
           <span className="inline-flex items-center gap-2">
-            <span className="size-2.5 rounded-full bg-[#f7931a] ring-2 ring-white" />
+            <span className="size-2.5 rounded-full bg-[#fff6e8] ring-2 ring-white" />
             Nadolazeće
           </span>
           <span className="inline-flex items-center gap-2">
